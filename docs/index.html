@@ -6,9 +6,13 @@
 
     <title>arc42 &amp; LASR — Architecture Documentation that Works</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Karla:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="dist/reset.css">
     <link rel="stylesheet" href="dist/reveal.css">
-    <link rel="stylesheet" href="dist/theme/black.css">
+    <link rel="stylesheet" href="dist/theme/white.css">
     <link rel="stylesheet" href="dist/plugin/highlight/monokai.css">
     <link rel="stylesheet" href="css/custom.css">
 </head>
@@ -16,11 +20,24 @@
 <div class="reveal">
     <div class="slides">
 
-        <!-- Slide 1: Title -->
-        <section data-auto-animate>
-            <h3>arc42 &amp; LASR</h3>
-            <h4>Architecture Documentation that Actually Works</h4>
-            <small><small>by Mariano Mertinat</small></small>
+        <!-- Slide 1: Title
+             data-background-image puts the photo in the reveal background layer (always sized correctly).
+             The white-to-transparent gradient overlay lives in ::before (CSS).
+             Text content uses normal document flow (no position:absolute height:100% chains).
+        -->
+        <section class="slide-title"
+                 data-background-image="./img/title-bg.jpeg"
+                 data-background-position="right center"
+                 data-background-size="58% auto">
+            <div class="title-content">
+                <p class="title-date" id="slide-date"></p>
+                <h1>arc42 &amp; LASR</h1>
+                <p class="title-subtitle">Playful system insights for sustainable improvements</p>
+                <div class="title-author-block">
+                    <p class="title-author">by Mariano Mertinat</p>
+                    <p class="title-role">software-solution-architect, trainer, nerd, father</p>
+                </div>
+            </div>
             <aside aria-label="speaker notes" class="notes">
                 <!-- TODO: speaker notes from original -->
             </aside>
@@ -29,6 +46,13 @@
     </div>
 </div>
 
+<!-- Fixed teal accent line at bottom-right (matches original slide master decoration) -->
+<div class="slide-footer-accent"></div>
+
+<script>
+    document.getElementById('slide-date').textContent =
+        new Date().toLocaleDateString('en-CA'); // YYYY-MM-DD
+</script>
 <script src="dist/reveal.js"></script>
 <script src="dist/plugin/notes.js"></script>
 <script src="dist/plugin/markdown.js"></script>
