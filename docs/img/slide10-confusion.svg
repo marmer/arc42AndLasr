@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" width="320" height="320">
+  <!-- White circle background -->
+  <circle cx="160" cy="160" r="130" fill="white" stroke="none"/>
+
+  <!-- Wavy lines (5 rows, teal-ish strokes) -->
+  <!-- Row 1 -->
+  <path d="M 55 105 q 15 -10 30 0 q 15 10 30 0 q 15 -10 30 0 q 15 10 30 0 q 15 -10 30 0 q 15 10 30 0" fill="none" stroke="#1B1B1B" stroke-width="7" stroke-linecap="round"/>
+  <!-- Row 2 -->
+  <path d="M 45 130 q 15 -10 30 0 q 15 10 30 0 q 15 -10 30 0 q 15 10 30 0 q 15 -10 30 0 q 15 10 30 0 q 15 -10 30 0" fill="none" stroke="#1B1B1B" stroke-width="7" stroke-linecap="round"/>
+  <!-- Row 3 -->
+  <path d="M 45 155 q 15 -10 30 0 q 15 10 30 0 q 15 -10 30 0 q 15 10 30 0 q 15 -10 30 0 q 15 10 30 0 q 15 -10 30 0" fill="none" stroke="#1B1B1B" stroke-width="7" stroke-linecap="round"/>
+  <!-- Row 4 -->
+  <path d="M 45 180 q 15 -10 30 0 q 15 10 30 0 q 15 -10 30 0 q 15 10 30 0 q 15 -10 30 0 q 15 10 30 0 q 15 -10 30 0" fill="none" stroke="#1B1B1B" stroke-width="7" stroke-linecap="round"/>
+  <!-- Row 5 -->
+  <path d="M 55 205 q 15 -10 30 0 q 15 10 30 0 q 15 -10 30 0 q 15 10 30 0 q 15 -10 30 0 q 15 10 30 0" fill="none" stroke="#1B1B1B" stroke-width="7" stroke-linecap="round"/>
+
+  <!-- Question mark body (teal) -->
+  <!-- Arc top of question mark -->
+  <path d="M 140 90 a 30 30 0 1 1 30 52 L 160 155" fill="none" stroke="#6CCBB2" stroke-width="22" stroke-linecap="round"/>
+  <!-- Dot of question mark -->
+  <circle cx="160" cy="175" r="11" fill="#6CCBB2"/>
+
+  <!-- Lightning bolt LEFT (black, outside circle) -->
+  <polygon points="82,52 68,80 80,80 66,108 88,72 75,72" fill="#1B1B1B"/>
+
+  <!-- Lightning bolt RIGHT (black, outside circle) -->
+  <polygon points="238,52 224,80 236,80 222,108 244,72 231,72" fill="#1B1B1B"/>
+
+  <!-- Outer ring / border dots bottom -->
+  <circle cx="100" cy="272" r="7" fill="#1B1B1B"/>
+  <circle cx="130" cy="282" r="7" fill="#1B1B1B"/>
+  <circle cx="160" cy="286" r="7" fill="#1B1B1B"/>
+  <circle cx="190" cy="282" r="7" fill="#1B1B1B"/>
+  <circle cx="220" cy="272" r="7" fill="#1B1B1B"/>
+
+  <!-- Outer ring / border dots top sides -->
+  <circle cx="55" cy="110" r="7" fill="#1B1B1B"/>
+  <circle cx="55" cy="210" r="7" fill="#1B1B1B"/>
+  <circle cx="265" cy="110" r="7" fill="#1B1B1B"/>
+  <circle cx="265" cy="210" r="7" fill="#1B1B1B"/>
+</svg>

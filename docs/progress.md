@@ -30,3 +30,4 @@
 - [x] Slide 7: Warm Up case 3 — BBC "US prisoners released early by software bug"; PPTX source = slide11.xml; adds warmup-img-3 (image31.png, -22.6°); speaker notes from notesSlide8.xml
 - [x] Slide 8: Warm Up case 4 — Wired "Software Glitch Cripples Ambulance Service"; PPTX source = slide12.xml; adds warmup-img-4 (image32.png, -30.9°); closing question "what do all cases have in common?"; speaker notes from notesSlide9.xml
 - [x] Slide 9: Warm Up — further collection; PPTX source = slide13.xml; adds warmup-img-5 (image33.png, "Humans vs Computers" book cover by Gojko Adzic, no rotation, portrait); speaker notes from notesSlide10.xml
+- [x] Slide 10: Warm Up – Now what?; PPTX source = slide14.xml; single centered question-mark icon (image34.png → slide10-image34.png); .slide-body.slide-centered; two note groups (can't prevent everything / key questions); speaker notes from notesSlide11.xml
