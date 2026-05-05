@@ -373,3 +373,61 @@
     font-size: 0.6em;
     color: #1B1B1B;
 }
+
+/* Vertically and horizontally centered body (section-intro slides) */
+.slide-body.slide-centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slide-section-question {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1.8em;
+    color: #1B1B1B;
+    text-align: center;
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* Warm Up collage (slides 5+) — images positioned absolutely within .slide-body */
+.warmup-img {
+    position: absolute;
+    box-shadow: 0 8px 28px rgba(51, 51, 51, 0.65);
+    transform-origin: left top;
+}
+
+.warmup-img-1 {
+    top: 1%;
+    left: 1%;
+    width: 75%;
+    transform: rotate(-11.6deg);
+}
+
+.warmup-img-2 {
+    top: 25%;
+    left: 11%;
+    width: 50%;
+    transform: rotate(-17.9deg);
+}
+
+.warmup-img-3 {
+    top: 34%;
+    left: 22%;
+    width: 52%;
+    transform: rotate(-22.6deg);
+}
+
+.warmup-img-4 {
+    top: 39%;
+    left: 38%;
+    width: 52%;
+    transform: rotate(-30.9deg);
+}
+
+.warmup-img-5 {
+    top: -5%;
+    left: 32%;
+    width: 27%;
+}
