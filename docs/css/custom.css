@@ -260,22 +260,6 @@
     margin-bottom: 0.25em;
 }
 
-/* Fixed bottom-right teal accent line (matches slide master decoration) */
-.slide-footer-accent {
-    position: fixed;
-    bottom: 3.2%;
-    right: 0;
-    width: 11%;
-    height: 4px;
-    background: #6CCBB2;
-    z-index: 100;
-    pointer-events: none;
-}
-
-/* Print/export — hide fixed overlay */
-@media print {
-    .slide-footer-accent { display: none; }
-}
 
 /* === Slide 3: Badge + QR wrapper === */
 .intro-badge-wrap {
