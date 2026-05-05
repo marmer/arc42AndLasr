@@ -8,6 +8,7 @@
 .reveal .slides section {
     text-align: left;
     box-sizing: border-box;
+    height: 100%;
 }
 
 /* === Headings === */
@@ -192,6 +193,20 @@
     right: 2.5%;
     bottom: 12%;
     box-sizing: border-box;
+}
+
+/* Two full-height photos side by side (e.g. "Who is this talk for?" slide) */
+.slide-two-photos {
+    display: flex;
+    gap: 2%;
+    height: 100%;
+    align-items: center;
+}
+
+.slide-two-photos img {
+    width: 49%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* ====================================================

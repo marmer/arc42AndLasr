@@ -21,5 +21,5 @@
 
 ## Slides
 
-- [~] Slide 1: Title — layout redesigned to match original; speaker notes + teal accent verified pending
-- [ ] Slide 2: (next — read original PDF/PPTX to determine content)
+- [x] Slide 1: Title — layout redesigned to match original; speaker notes + teal accent verified
+- [x] Slide 2: Who is this talk for? — two-photo layout (slide2-who-left.png / slide2-who-right.png from PPTX image21/22); standard slide-header + slide-two-photos CSS; speaker notes translated from German; PPTX source = slide5.xml (slide5 is visible; slide6 hidden/alternate variant ignored)
