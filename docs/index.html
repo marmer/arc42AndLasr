@@ -20,11 +20,7 @@
 <div class="reveal">
     <div class="slides">
 
-        <!-- Slide 1: Title
-             data-background-image puts the photo in the reveal background layer (always sized correctly).
-             The white-to-transparent gradient overlay lives in ::before (CSS).
-             Text content uses normal document flow (no position:absolute height:100% chains).
-        -->
+        <!-- Slide 1: Title (kept inline so the first slide is visible immediately) -->
         <section class="slide-title"
                  data-background-image="./img/title-bg.jpeg"
                  data-background-position="right center"
@@ -42,348 +38,6 @@
             </aside>
         </section>
 
-        <!-- Slide 2: Who is this talk for? -->
-        <section>
-            <div class="slide-header">
-                <h2>Who is this talk for?</h2>
-            </div>
-            <div class="slide-body slide-two-photos">
-                <img src="./img/slide2-who-left.png" alt="">
-                <img src="./img/slide2-who-right.png" alt="">
-            </div>
-            <aside aria-label="speaker notes" class="notes">
-                <ul>
-                    <li>Tired joke opener
-                        <ul>
-                            <li>Who works on systems with problems — domain, technology, communication, or just the documentation?
-                                <ul>
-                                    <li>People with hands raised: You still enjoy the work, right?</li>
-                                    <li>People without hands raised: Isn't that boring?</li>
-                                </ul>
-                            </li>
-                            <li>Have you ever had a bad day at work? Overslept, lazy, unprepared?</li>
-                            <li>Maybe I can inspire you a little!</li>
-                        </ul>
-                    </li>
-                </ul>
-            </aside>
-        </section>
-
-        <!-- Slide 3: Who am I? — Speaker Introduction -->
-        <section>
-            <div class="slide-header">
-                <h2>Who am I?</h2>
-            </div>
-            <div class="intro-badge-wrap">
-                <div class="hello-badge-outer">
-                    <div class="hello-badge">
-                        <div class="hello-badge-top">HELLO</div>
-                        <div class="hello-badge-body">
-                            <img src="./img/MertinatMariano_1000x1000_web_transparent.png" alt="Mariano Mertinat" class="intro-photo">
-                            <div class="intro-qr-group">
-                                <img src="./img/slide3-qr.png" alt="QR code — marmer.online" class="intro-card">
-                            </div>
-                            <p class="intro-url-label">
-                                <a href="https://marmer.online">https://marmer.online</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <aside aria-label="speaker notes" class="notes">
-                <ul>
-                    <li>At home
-                        <ul>
-                            <li>Cross-functional agile team in the role of… father of two wonderful kids, with a wonderful wife — and once they're older, hobbies again</li>
-                        </ul>
-                    </li>
-                    <li>At work — nearly 14 years
-                        <ul>
-                            <li>Roles: Consultant, SW-Architect, Trainer
-                                <ul>
-                                    <li>SW-Architects (iSAQB — International Software Architecture Qualification Board, software documentation)</li>
-                                    <li>Developers (TDD)</li>
-                                </ul>
-                            </li>
-                            <li>Therefore: teaching, planning, evaluating, communicating — and occasionally coding…</li>
-                            <li>QR code → marmer.online → LinkedIn — feel free to connect</li>
-                        </ul>
-                    </li>
-                </ul>
-            </aside>
-        </section>
-
-        <!-- Slide 4: Warm Up — section intro (PPTX slide 8) -->
-        <section>
-            <div class="slide-header">
-                <h2>Warm Up – What can possibly happen?</h2>
-            </div>
-            <aside aria-label="speaker notes" class="notes">
-                <ul>
-                    <li>Poor or missing risk and problem assessments — what could possibly happen?
-                        <ul>
-                            <li>Other than losing money…</li>
-                            <li>… or losing the entire business</li>
-                        </ul>
-                    </li>
-                    <li>A few real-life cases
-                        <ul>
-                            <li>Risks and/or problems were known</li>
-                            <li>But nobody was able to do anything about it</li>
-                        </ul>
-                    </li>
-                </ul>
-            </aside>
-        </section>
-
-        <!-- Slide 5: Warm Up — case 1: COBOL / NY unemployment (PPTX slide 9) -->
-        <section>
-            <div class="slide-header">
-                <h2>Warm Up – What can possibly happen?</h2>
-            </div>
-            <div class="slide-body warmup-collage">
-                <img src="./img/slide4-warmup-img.png"
-                     data-id="warmup-img-cobol"
-                     alt="CNN: Wanted urgently — people who know COBOL so states can process unemployment claims"
-                     class="warmup-img warmup-img-1">
-            </div>
-            <aside aria-label="speaker notes" class="notes">
-                <ul>
-                    <li>Quality of Life
-                        <ul>
-                            <li>Unemployment applications in New York during COVID could not be processed</li>
-                            <li>Old technologies (COBOL), resources underestimated — technical and personnel</li>
-                        </ul>
-                    </li>
-                </ul>
-            </aside>
-        </section>
-
-        <!-- Slide 6: Warm Up — case 2: Healthcare.gov (PPTX slide 10) -->
-        <section>
-            <div class="slide-header">
-                <h2>Warm Up – What can possibly happen?</h2>
-            </div>
-            <div class="slide-body warmup-collage">
-                <img src="./img/slide4-warmup-img.png"
-                     data-id="warmup-img-cobol"
-                     alt="CNN: COBOL and NY unemployment"
-                     class="warmup-img warmup-img-1">
-                <img src="./img/slide6-case2.png"
-                     data-id="warmup-img-healthcare"
-                     alt="Medium: The Big Bang Launch Failure of Healthcare.gov"
-                     class="warmup-img warmup-img-2">
-            </div>
-            <aside aria-label="speaker notes" class="notes">
-                <ul>
-                    <li>Health
-                        <ul>
-                            <li>Healthcare.gov — no Obamacare for poorly or uninsured Americans</li>
-                            <li>Problems with integration, processes, communication</li>
-                        </ul>
-                    </li>
-                </ul>
-            </aside>
-        </section>
-
-        <!-- Slide 7: Warm Up — case 3: BBC prisoners (PPTX slide 11) -->
-        <section>
-            <div class="slide-header">
-                <h2>Warm Up – What can possibly happen?</h2>
-            </div>
-            <div class="slide-body warmup-collage">
-                <img src="./img/slide4-warmup-img.png"
-                     alt="CNN: COBOL and NY unemployment"
-                     class="warmup-img warmup-img-1">
-                <img src="./img/slide6-case2.png"
-                     alt="Medium: Healthcare.gov launch failure"
-                     class="warmup-img warmup-img-2">
-                <img src="./img/slide-warmup-image31.png"
-                     alt="BBC: US prisoners released early by software bug"
-                     class="warmup-img warmup-img-3">
-            </div>
-            <aside aria-label="speaker notes" class="notes">
-                <ul>
-                    <li>Safety
-                        <ul>
-                            <li>US prisoners released up to 600 days early due to a software bug</li>
-                            <li>Missing quality assurance</li>
-                        </ul>
-                    </li>
-                </ul>
-            </aside>
-        </section>
-
-        <!-- Slide 8: Warm Up — case 4: London Ambulance Service (PPTX slide 12) -->
-        <section>
-            <div class="slide-header">
-                <h2>Warm Up – What can possibly happen?</h2>
-            </div>
-            <div class="slide-body warmup-collage">
-                <img src="./img/slide4-warmup-img.png"
-                     alt="CNN: COBOL and NY unemployment"
-                     class="warmup-img warmup-img-1">
-                <img src="./img/slide6-case2.png"
-                     alt="Medium: Healthcare.gov launch failure"
-                     class="warmup-img warmup-img-2">
-                <img src="./img/slide-warmup-image31.png"
-                     alt="BBC: US prisoners released early by software bug"
-                     class="warmup-img warmup-img-3">
-                <img src="./img/slide-warmup-image32.png"
-                     alt="Wired: 1992 software glitch cripples London Ambulance Service"
-                     class="warmup-img warmup-img-4">
-            </div>
-            <aside aria-label="speaker notes" class="notes">
-                <ul>
-                    <li>Life
-                        <ul>
-                            <li>Emergency calls delayed 11 hours in the system — at least 30 preventable deaths</li>
-                            <li>Problems with performance, scalability, architecture</li>
-                        </ul>
-                    </li>
-                    <li>What do all of these cases have in common?
-                        <ul>
-                            <li>There were people who knew about the risks and problems</li>
-                            <li>But they were not able to do anything about it</li>
-                        </ul>
-                    </li>
-                </ul>
-            </aside>
-        </section>
-
-        <!-- Slide 9: Warm Up — further collection / "Humans vs Computers" (PPTX slide 13) -->
-        <section>
-            <div class="slide-header">
-                <h2>Warm Up – What can possibly happen?</h2>
-            </div>
-            <div class="slide-body warmup-collage">
-                <img src="./img/slide4-warmup-img.png"
-                     alt="CNN: COBOL and NY unemployment"
-                     class="warmup-img warmup-img-1">
-                <img src="./img/slide6-case2.png"
-                     alt="Medium: Healthcare.gov launch failure"
-                     class="warmup-img warmup-img-2">
-                <img src="./img/slide-warmup-image31.png"
-                     alt="BBC: US prisoners released early by software bug"
-                     class="warmup-img warmup-img-3">
-                <img src="./img/slide-warmup-image32.png"
-                     alt="Wired: 1992 software glitch cripples London Ambulance Service"
-                     class="warmup-img warmup-img-4">
-                <img src="./img/slide-warmup-image33.png"
-                     alt="Book: Humans vs Computers by Gojko Adzic"
-                     class="warmup-img warmup-img-5">
-            </div>
-            <aside aria-label="speaker notes" class="notes">
-                <ul>
-                    <li>Close to off-topic — but too good to skip
-                        <ul>
-                            <li>"Humans vs Computers" by Gojko Adzic — a huge humorous collection of further cases</li>
-                        </ul>
-                    </li>
-                </ul>
-            </aside>
-        </section>
-
-        <!-- Slide 10: Warm Up – Now what? (PPTX slide 14) -->
-        <section>
-            <div class="slide-header">
-                <h2>Warm Up – Now what?</h2>
-            </div>
-            <div class="slide-body slide-centered">
-                <style>
-                    @keyframes floatA { 0%,100%{transform:translateY(0) rotate(-12deg)} 50%{transform:translateY(-18px) rotate(-12deg)} }
-                    @keyframes floatB { 0%,100%{transform:translateY(0) rotate(8deg)} 50%{transform:translateY(-22px) rotate(8deg)} }
-                    @keyframes floatC { 0%,100%{transform:translateY(0) rotate(-5deg)} 50%{transform:translateY(-14px) rotate(-5deg)} }
-                    @keyframes floatD { 0%,100%{transform:translateY(0) rotate(18deg)} 50%{transform:translateY(-20px) rotate(18deg)} }
-                    @keyframes floatE { 0%,100%{transform:translateY(0) rotate(-20deg)} 50%{transform:translateY(-16px) rotate(-20deg)} }
-                    @keyframes floatF { 0%,100%{transform:translateY(0) rotate(25deg)} 50%{transform:translateY(-12px) rotate(25deg)} }
-                    @keyframes floatG { 0%,100%{transform:translateY(0) rotate(-8deg)} 50%{transform:translateY(-20px) rotate(-8deg)} }
-                    @keyframes floatH { 0%,100%{transform:translateY(0) rotate(14deg)} 50%{transform:translateY(-16px) rotate(14deg)} }
-                    @keyframes floatI { 0%,100%{transform:translateY(0) rotate(-30deg)} 50%{transform:translateY(-19px) rotate(-30deg)} }
-                    @keyframes floatJ { 0%,100%{transform:translateY(0) rotate(5deg)} 50%{transform:translateY(-15px) rotate(5deg)} }
-                    @keyframes floatK { 0%,100%{transform:translateY(0) rotate(-16deg)} 50%{transform:translateY(-21px) rotate(-16deg)} }
-                    .confusion-marks { position:relative; width:560px; height:340px; }
-                    .confusion-marks span {
-                        position:absolute;
-                        font-family:'DM Sans',sans-serif;
-                        font-weight:700;
-                        color:#6CCBB2;
-                        line-height:1;
-                        animation-timing-function: ease-in-out;
-                        animation-iteration-count: infinite;
-                    }
-                    .cm1 { font-size:5rem;  top:30px;  left:20px;  opacity:.55; animation:floatA 2.8s infinite; }
-                    .cm2 { font-size:9rem;  top:60px;  left:140px; opacity:1;   animation:floatB 3.2s infinite; color:#1B1B1B; }
-                    .cm3 { font-size:4rem;  top:10px;  left:310px; opacity:.45; animation:floatC 2.5s infinite; }
-                    .cm4 { font-size:7rem;  top:120px; left:400px; opacity:.75; animation:floatD 3.6s infinite; }
-                    .cm5 { font-size:3.5rem;top:210px; left:50px;  opacity:.4;  animation:floatE 2.2s infinite; }
-                    .cm6 { font-size:6rem;  top:170px; left:240px; opacity:.6;  animation:floatF 3.0s infinite; color:#1B1B1B; }
-                    .cm7 { font-size:3rem;  top:50px;  left:460px; opacity:.35; animation:floatG 2.6s infinite; }
-                    .cm8 { font-size:4.5rem;top:230px; left:440px; opacity:.5;  animation:floatH 2.9s infinite; }
-                    .cm9 { font-size:2.8rem;top:280px; left:180px; opacity:.35; animation:floatI 3.3s infinite; }
-                    .cm10{ font-size:5.5rem;top:10px;  left:390px; opacity:.5;  animation:floatJ 2.7s infinite; color:#1B1B1B; }
-                    .cm11{ font-size:3.2rem;top:270px; left:340px; opacity:.4;  animation:floatK 3.1s infinite; }
-                </style>
-                <div class="confusion-marks">
-                    <span class="cm1">!?</span>
-                    <span class="cm2">?</span>
-                    <span class="cm3">!?</span>
-                    <span class="cm4">?</span>
-                    <span class="cm5">?</span>
-                    <span class="cm6">!?</span>
-                    <span class="cm7">?</span>
-                    <span class="cm8">!?</span>
-                    <span class="cm9">?</span>
-                    <span class="cm10">?</span>
-                    <span class="cm11">!?</span>
-                </div>
-            </div>
-            <aside aria-label="speaker notes" class="notes">
-                <ul>
-                    <li>Can't prevent everything</li>
-                    <li>Make goals and risks conscious and communicate them!</li>
-                    <li>Point out known problems</li>
-                    <li>Align decisions with the most important goals</li>
-                </ul>
-                <ul>
-                    <li>And what questions are important here?</li>
-                    <li>How do I get the answers?</li>
-                    <li>How do I communicate the results?</li>
-                </ul>
-            </aside>
-        </section>
-
-        <!-- Slide 11: Warm Up – use proven methods (PPTX slide 15) -->
-        <section>
-            <div class="slide-header">
-                <h2>Warm Up – use proven methods</h2>
-            </div>
-            <div class="slide-body slide-centered">
-                <div class="arch-review-diagram">
-                    <img src="./img/slide11-arch-review.svg"
-                         class="arch-review-svg"
-                         alt="Circle split: Business and Domain (left), Technical and Quality (right), unified as Architecture and System Reviews">
-                    <div class="arch-review-title">Architecture &amp; System Reviews</div>
-                </div>
-            </div>
-            <aside aria-label="speaker notes" class="notes">
-                <ul>
-                    <li>Helpful approaches we won't cover now (even though I'd love to):
-                        <ul>
-                            <li>Technical side: Code Reviews, BDD or TDD with example mapping, Static Code Analysis, Security…</li>
-                            <li>Domain/business side: Collaborative modelling methods like Event Storming, Domain Storytelling or User-Story Mapping, good ol' Knowledge crunching, pre-mortem</li>
-                            <li>Also not covered in detail: classical software review methods
-                                <ul>
-                                    <li>ATAM, DCAR (Decision Centric Architecture Review), CBAM (Cost Benefit Analysis Method)…</li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </aside>
-        </section>
-
-
     </div>
 </div>
 
@@ -398,15 +52,36 @@
 <script src="dist/plugin/zoom.js"></script>
 <script src="dist/plugin/highlight.js"></script>
 <script>
-    Reveal.initialize({
-        hash: true,
-        slideNumber: "c/t",
-        history: true,
-        mouseWheel: true,
-        transition: 'fade',
-        navigationMode: "linear",
-        plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealSearch, RevealZoom ]
-    });
+    const SLIDES = [
+        './slides/slide-02.html',
+        './slides/slide-03.html',
+        './slides/slide-04.html',
+        './slides/slide-05.html',
+        './slides/slide-06.html',
+        './slides/slide-07.html',
+        './slides/slide-08.html',
+        './slides/slide-09.html',
+        './slides/slide-10.html',
+        './slides/slide-11.html',
+    ];
+
+    async function loadSlides() {
+        const container = document.querySelector('.slides');
+        const fragments = await Promise.all(SLIDES.map(url => fetch(url).then(r => r.text())));
+        fragments.forEach(html => container.insertAdjacentHTML('beforeend', html));
+
+        Reveal.initialize({
+            hash: true,
+            slideNumber: "c/t",
+            history: true,
+            mouseWheel: true,
+            transition: 'fade',
+            navigationMode: "linear",
+            plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealSearch, RevealZoom ]
+        });
+    }
+
+    loadSlides();
 </script>
 </body>
 </html>
