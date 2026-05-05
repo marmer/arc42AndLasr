@@ -415,3 +415,26 @@
     left: 32%;
     height: 100%;
 }
+
+/* === Slide 11: Architecture & System Reviews diagram === */
+.arch-review-diagram {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.arch-review-svg {
+    width: 100%;
+    height: auto;
+    max-height: 60vh;
+}
+
+.arch-review-title {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #6CCBB2;
+    text-align: center;
+}

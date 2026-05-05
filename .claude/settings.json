@@ -1,3 +1,9 @@
 {
-  "enableAllProjectMcpServers": true
+  "enableAllProjectMcpServers": true,
+  "permissions": {
+    "allow": [
+      "Bash(cd C:/Users/MarianoMertinat/IdeaProjects/arc42AndLasr/docs && npm start)",
+      "Bash(sleep *)"
+    ]
+  }
 }

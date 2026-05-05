@@ -1,0 +1,11 @@
+{
+  "name": "arc42-lasr-slides",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "serve . -l 8000"
+  },
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}
