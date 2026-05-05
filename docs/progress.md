@@ -23,4 +23,4 @@
 
 - [x] Slide 1: Title — layout redesigned to match original; speaker notes + teal accent verified
 - [x] Slide 2: Who is this talk for? — two-photo layout (slide2-who-left.png / slide2-who-right.png from PPTX image21/22); standard slide-header + slide-two-photos CSS; speaker notes translated from German; PPTX source = slide5.xml (slide5 is visible; slide6 hidden/alternate variant ignored)
-- [x] Slide 3: Me — Speaker introduction + LinkedIn QR code; PPTX source = slide7.xml; background = slide3-bg.png (HELLO badge icon, clean/no branding); LinkedIn card = slide3-photo.jpg (contains profile photo, name, roles, and QR code pointing to marmer.online); ink annotations not replicated; `.slide-intro` flex layout added to custom.css; speaker notes adapted from German project-domain examples
+- [x] Slide 3: Who am I? — Speaker introduction + LinkedIn QR code; PPTX source = slide7.xml; badge redrawn in HTML/CSS (`.hello-badge`); photo = MertinatMariano_1000x1000_web_transparent_head_only.png; QR code generated for marmer.online; speaker notes from notesSlide4.xml ("At work nearly 14 years…")
