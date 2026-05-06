@@ -3,3 +3,5 @@ node_modules/
 Thumbs.db
 .claude/settings.local.json
 .idea
+pptx_extracted
+.playwright-mcp

@@ -32,7 +32,7 @@
 - [x] Slide 9: Warm Up — further collection; PPTX source = slide13.xml; adds warmup-img-5 (image33.png, "Humans vs Computers" book cover by Gojko Adzic, no rotation, portrait); speaker notes from notesSlide10.xml
 - [x] Slide 10: Warm Up – Now what?; PPTX source = slide14.xml; single centered question-mark icon (image34.png → slide10-image34.png); .slide-body.slide-centered; two note groups (can't prevent everything / key questions); speaker notes from notesSlide11.xml
 - [x] Slide 11: Warm Up – use proven methods; PPTX source = slide15.xml; main visual = inline SVG (replaces extracted slide11-image35.png); circle split blue-left / teal-right with tinted halves, teal ring, center divider; left icons: document, speech bubble, people (blue #3390C3); right icons: gear, </>, shield+checkmark (teal #6CCBB2); text labels "Business & Domain" / "Technical & Quality" outside ring; "Architecture & System Reviews" below as .arch-review-title; speaker notes from notesSlide12.xml (approaches not covered: Code Reviews, Event Storming, ATAM…)
-- [ ] Slide 12: [WIP] — PPTX slide 16; speaker notes transferred (arc42 goals: simplicity, quality, agility, fun, laziness); content pending
+- [x] Slide 12: Today is about — arc42 & LASR — PPTX slide 16; inline SVG pentagon diagram with 5 goals (Simplicity/Quality/Fun/Agility/Laziness); notes updated with translated PPTX notes + goal list
 - [ ] Slide 13: [WIP] — PPTX slide 17; speaker notes transferred (arc42 intro: lightweight template by Starke & Hruschka); content pending
 - [ ] Slide 14: [WIP] — PPTX slide 19; speaker notes transferred (arc42 ch.1: requirements & goals); content pending
 - [ ] Slide 15: [WIP] — PPTX slide 20; speaker notes transferred (arc42 ch.2: constraints); content pending

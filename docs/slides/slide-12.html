@@ -1,21 +1,70 @@
-<!-- Slide 12: [WIP] (PPTX slide 16) -->
+<!-- Slide 12: Today is about (PPTX slide 16) -->
 <section>
     <div class="slide-header">
-        <h2>[Work in Progress]</h2>
+        <h2>Today is about</h2>
     </div>
     <div class="slide-body slide-centered">
-        <p style="font-size:1.2em; color:#aaa;">
-            &#x1F6A7; Slide not yet implemented<br>
-            <small>PPTX source: slide <strong>16</strong></small>
-        </p>
+        <svg viewBox="0 0 900 590" xmlns="http://www.w3.org/2000/svg"
+             style="width:100%; max-height:70vh; display:block; margin:auto;">
+
+            <!-- "arc42 & LASR" vertical label on left, reading bottom to top -->
+            <text transform="translate(55, 300) rotate(-90)"
+                  text-anchor="middle" fill="#6CCBB2"
+                  font-size="52" font-weight="bold" font-family="DM Sans, sans-serif">arc42 &amp; LASR</text>
+
+            <!-- Concentric rings ×1.3 (outermost first = painter's algorithm)       -->
+            <!-- r: 55→72, 95→124, 138→179, 181→235, 225→293 … rounded to nice nums -->
+            <circle cx="450" cy="300" r="285" fill="#3390C3"/><!-- Laziness  -->
+            <circle cx="450" cy="300" r="229" fill="#6CCBB2"/><!-- Fun       -->
+            <circle cx="450" cy="300" r="175" fill="#3390C3"/><!-- Agility   -->
+            <circle cx="450" cy="300" r="120" fill="#6CCBB2"/><!-- Quality   -->
+            <circle cx="450" cy="300" r="70"  fill="#3390C3"/><!-- Simplicity-->
+
+            <!-- White ring separators -->
+            <circle cx="450" cy="300" r="285" fill="none" stroke="white" stroke-width="2"/>
+            <circle cx="450" cy="300" r="229" fill="none" stroke="white" stroke-width="2"/>
+            <circle cx="450" cy="300" r="175" fill="none" stroke="white" stroke-width="2"/>
+            <circle cx="450" cy="300" r="120" fill="none" stroke="white" stroke-width="2"/>
+            <circle cx="450" cy="300" r="70"  fill="none" stroke="white" stroke-width="2"/>
+
+            <!-- Labels at top of each ring area (12-o'clock, mid-radius)        -->
+            <!-- mid-radii: Simplicity=0, Quality=95, Agility=148, Fun=202, Laziness=257 -->
+            <text x="450" y="300" text-anchor="middle" dominant-baseline="middle"
+                  fill="white" font-size="25" font-weight="bold"
+                  font-family="DM Sans, sans-serif">Laziness</text>
+
+            <text x="450" y="205" text-anchor="middle" dominant-baseline="middle"
+                  fill="white" font-size="25" font-weight="bold"
+                  font-family="DM Sans, sans-serif">Fun</text>
+
+            <text x="450" y="152" text-anchor="middle" dominant-baseline="middle"
+                  fill="white" font-size="25" font-weight="bold"
+                  font-family="DM Sans, sans-serif">Agility</text>
+
+            <text x="450" y="98" text-anchor="middle" dominant-baseline="middle"
+                  fill="white" font-size="25" font-weight="bold"
+                  font-family="DM Sans, sans-serif">Quality</text>
+
+            <text x="450" y="43" text-anchor="middle" dominant-baseline="middle"
+                  fill="white" font-size="25" font-weight="bold"
+                  font-family="DM Sans, sans-serif">Simplicity</text>
+        </svg>
     </div>
     <aside aria-label="speaker notes" class="notes">
         <ul>
-          <li>Simplicity (for you)</li>
-          <li>Quality (for the customer)</li>
-          <li>Agility (for the project)</li>
-          <li>Fun (for everyone)</li>
-          <li>Laziness (for you again)</li>
+            <li>Often already a major deficiency here — teams lack clear requirements</li>
+            <li>To know <em>how</em> to build it, you first need the <em>what</em></li>
+            <li>How can you expect to develop the right thing without this?</li>
+            <li>Relying on the PO alone is not the solution</li>
+            <li>arc42 &amp; LASR address exactly this gap — their shared goals:
+                <ul>
+                    <li>Simplicity (for you)</li>
+                    <li>Quality (for the customer)</li>
+                    <li>Agility (for the project)</li>
+                    <li>Fun (for everyone)</li>
+                    <li>Laziness (for you again)</li>
+                </ul>
+            </li>
         </ul>
     </aside>
 </section>
