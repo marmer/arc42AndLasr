@@ -4,55 +4,9 @@
         <h2>Today is about</h2>
     </div>
     <div class="slide-body slide-centered">
-        <svg viewBox="0 0 900 590" xmlns="http://www.w3.org/2000/svg"
-             style="width:100%; max-height:70vh; display:block; margin:auto;">
-            <defs>
-                <!-- Top-arc paths at mid-radius of each ring for curved labels -->
-                <!-- cx=450 cy=300; each arc: M (cx-r) cy A r r 0 0 1 (cx+r) cy -->
-                <path id="arc-simplicity" d="M 193 300 A 257 257 0 0 1 707 300"/><!-- mid-r 257 -->
-                <path id="arc-quality"    d="M 248 300 A 202 202 0 0 1 652 300"/><!-- mid-r 202 -->
-                <path id="arc-agility"    d="M 302 300 A 148 148 0 0 1 598 300"/><!-- mid-r 148 -->
-                <path id="arc-fun"        d="M 355 300 A  95  95 0 0 1 545 300"/><!-- mid-r  95 -->
-            </defs>
-
-            <!-- "arc42 & LASR" vertical label on left, reading bottom to top -->
-            <text transform="translate(55, 300) rotate(-90)"
-                  text-anchor="middle" fill="#6CCBB2"
-                  font-size="52" font-weight="bold" font-family="DM Sans, sans-serif">arc42 &amp; LASR</text>
-
-            <!-- Concentric rings (outermost first = painter's algorithm) -->
-            <circle cx="450" cy="300" r="285" fill="#3390C3"/><!-- Simplicity -->
-            <circle cx="450" cy="300" r="229" fill="#6CCBB2"/><!-- Quality    -->
-            <circle cx="450" cy="300" r="175" fill="#3390C3"/><!-- Agility    -->
-            <circle cx="450" cy="300" r="120" fill="#6CCBB2"/><!-- Fun        -->
-            <circle cx="450" cy="300" r="70"  fill="#3390C3"/><!-- Laziness   -->
-
-            <!-- White ring separators -->
-            <circle cx="450" cy="300" r="285" fill="none" stroke="white" stroke-width="2"/>
-            <circle cx="450" cy="300" r="229" fill="none" stroke="white" stroke-width="2"/>
-            <circle cx="450" cy="300" r="175" fill="none" stroke="white" stroke-width="2"/>
-            <circle cx="450" cy="300" r="120" fill="none" stroke="white" stroke-width="2"/>
-            <circle cx="450" cy="300" r="70"  fill="none" stroke="white" stroke-width="2"/>
-
-            <!-- Curved labels: baseline follows the top arc of each ring's mid-radius -->
-            <text fill="white" font-size="25" font-weight="bold" font-family="DM Sans, sans-serif">
-                <textPath href="#arc-simplicity" startOffset="50%" text-anchor="middle">Simplicity</textPath>
-            </text>
-            <text fill="white" font-size="25" font-weight="bold" font-family="DM Sans, sans-serif">
-                <textPath href="#arc-quality" startOffset="50%" text-anchor="middle">Quality</textPath>
-            </text>
-            <text fill="white" font-size="25" font-weight="bold" font-family="DM Sans, sans-serif">
-                <textPath href="#arc-agility" startOffset="50%" text-anchor="middle">Agility</textPath>
-            </text>
-            <text fill="white" font-size="25" font-weight="bold" font-family="DM Sans, sans-serif">
-                <textPath href="#arc-fun" startOffset="50%" text-anchor="middle">Fun</textPath>
-            </text>
-
-            <!-- Laziness: centre circle, horizontal text -->
-            <text x="450" y="300" text-anchor="middle" dominant-baseline="middle"
-                  fill="white" font-size="25" font-weight="bold"
-                  font-family="DM Sans, sans-serif">Laziness</text>
-        </svg>
+        <img src="./img/slide12-dartboard.svg"
+             style="width:100%; max-height:70vh; display:block; margin:auto;"
+             alt="Dartboard showing arc42 &amp; LASR goals from outside in: Simplicity, Quality, Agility, Fun, Laziness">
     </div>
     <aside aria-label="speaker notes" class="notes">
         <ul>

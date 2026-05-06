@@ -75,6 +75,16 @@ When starting a new session without a progress file, create it first before touc
 5. Add speaker notes from the original where available (from arc42AndLasr_talk - envite_original.pptx).
 6. Update `docs/progress.md`.
 
+## SVG Diagrams
+
+Complex slide diagrams must be extracted as standalone SVG files in `docs/img/` (e.g. `slide12-dartboard.svg`) and referenced from the slide HTML via an `<img>` tag — do **not** inline large SVGs directly in the slide. Simple one-off icons or tiny decorative shapes may stay inline.
+
+```html
+<img src="./img/slideNN-name.svg"
+     style="width:100%; max-height:70vh; display:block; margin:auto;"
+     alt="…description…">
+```
+
 ## Browser / Playwright Screenshots
 
 When taking screenshots with the Playwright MCP tool, always save them to the `screenshots/` directory:
