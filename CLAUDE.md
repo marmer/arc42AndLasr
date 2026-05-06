@@ -75,6 +75,16 @@ When starting a new session without a progress file, create it first before touc
 5. Add speaker notes from the original where available (from arc42AndLasr_talk - envite_original.pptx).
 6. Update `docs/progress.md`.
 
+## Browser / Playwright Screenshots
+
+When taking screenshots with the Playwright MCP tool, always save them to the `screenshots/` directory:
+
+```
+filename: "screenshots/<descriptive-name>.png"
+```
+
+`screenshots/` is listed in `.gitignore` and must never be committed. Never save screenshots to the project root or any other tracked location.
+
 ## GitHub Pages Setup
 
 - The repository must have a `docs/CNAME` file containing `arc42AndLasr.marmer.online`.
