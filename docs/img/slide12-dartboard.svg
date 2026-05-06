@@ -2,10 +2,12 @@
   <defs>
     <!-- Top-arc paths at mid-radius of each ring for curved labels.        -->
     <!-- cx=450 cy=300; M (cx-r) cy A r r 0 0 1 (cx+r) cy = top semicircle -->
-    <path id="arc-simplicity" d="M 193 300 A 257 257 0 0 1 707 300"/><!-- mid-r 257 -->
-    <path id="arc-quality"    d="M 248 300 A 202 202 0 0 1 652 300"/><!-- mid-r 202 -->
-    <path id="arc-agility"    d="M 302 300 A 148 148 0 0 1 598 300"/><!-- mid-r 148 -->
-    <path id="arc-fun"        d="M 355 300 A  95  95 0 0 1 545 300"/><!-- mid-r  95 -->
+    <!-- arc radii chosen so text baseline sits at ring's geometric centre:        -->
+    <!-- r = cy − (ring_centre_y + cap_height/2) ≈ mid_r − 8                     -->
+    <path id="arc-simplicity" d="M 201 300 A 249 249 0 0 1 699 300"/><!-- r 249 -->
+    <path id="arc-quality"    d="M 257 300 A 193 193 0 0 1 643 300"/><!-- r 193 -->
+    <path id="arc-agility"    d="M 311 300 A 139 139 0 0 1 589 300"/><!-- r 139 -->
+    <path id="arc-fun"        d="M 364 300 A  86  86 0 0 1 536 300"/><!-- r  86 -->
   </defs>
 
   <!-- "arc42 & LASR" vertical label on left, reading bottom to top -->
@@ -27,18 +29,18 @@
   <circle cx="450" cy="300" r="120" fill="none" stroke="white" stroke-width="2"/>
   <circle cx="450" cy="300" r="70"  fill="none" stroke="white" stroke-width="2"/>
 
-  <!-- Curved labels: dy="9" shifts baseline ~9px toward centre for vertical centering -->
+  <!-- Curved labels: dy="20" shifts baseline ~9px toward centre for vertical centering -->
   <text fill="white" font-size="25" font-weight="bold" font-family="DM Sans, sans-serif">
-    <textPath href="#arc-simplicity" startOffset="50%" text-anchor="middle" dy="9">Simplicity</textPath>
+    <textPath href="#arc-simplicity" startOffset="50%" text-anchor="middle" dy="20">Simplicity</textPath>
   </text>
   <text fill="white" font-size="25" font-weight="bold" font-family="DM Sans, sans-serif">
-    <textPath href="#arc-quality" startOffset="50%" text-anchor="middle" dy="9">Quality</textPath>
+    <textPath href="#arc-quality" startOffset="50%" text-anchor="middle" dy="20">Quality</textPath>
   </text>
   <text fill="white" font-size="25" font-weight="bold" font-family="DM Sans, sans-serif">
-    <textPath href="#arc-agility" startOffset="50%" text-anchor="middle" dy="9">Agility</textPath>
+    <textPath href="#arc-agility" startOffset="50%" text-anchor="middle" dy="20">Agility</textPath>
   </text>
   <text fill="white" font-size="25" font-weight="bold" font-family="DM Sans, sans-serif">
-    <textPath href="#arc-fun" startOffset="50%" text-anchor="middle" dy="9">Fun</textPath>
+    <textPath href="#arc-fun" startOffset="50%" text-anchor="middle" dy="20">Fun</textPath>
   </text>
 
   <!-- Laziness: centre circle, horizontal text -->
