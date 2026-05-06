@@ -1,19 +1,47 @@
-<!-- Slide 44: [WIP] (PPTX slide 50) -->
+<!-- Slide 44: Quality-focused analysis (PPTX slide 50) -->
 <section>
     <div class="slide-header">
-        <h2>Quality-focused analysis — NFR prioritization</h2>
+        <h2>Quality-focused analysis</h2>
     </div>
-    <div class="slide-body slide-centered">
-        <p style="font-size:1.2em; color:#aaa;">
-            &#x1F6A7; Slide not yet implemented<br>
-            <small>PPTX source: slide <strong>50</strong></small>
-        </p>
+    <div class="slide-body">
+        <div style="display:flex;gap:1.5rem;align-items:center;justify-content:flex-start;height:100%;">
+            <div class="priority-matrix">
+                <div class="priority-cell high-high" title="Business: High, Technical Risk: High">
+                    <div>B: <strong>High</strong></div>
+                    <div>T: <strong>High</strong></div>
+                    <div style="font-size:0.8em;margin-top:0.2em;">⚡ Start here</div>
+                </div>
+                <div class="priority-cell high-med" title="Business: High, Technical Risk: Medium">
+                    <div>B: <strong>High</strong></div>
+                    <div>T: <strong>Med</strong></div>
+                </div>
+                <div class="priority-cell low-high" title="Business: Low, Technical Risk: High">
+                    <div>B: <strong>Low</strong></div>
+                    <div>T: <strong>High</strong></div>
+                </div>
+                <div class="priority-cell med-low" title="Business: Medium, Technical Risk: Low">
+                    <div>B: <strong>Med</strong></div>
+                    <div>T: <strong>Low</strong></div>
+                    <div style="font-size:0.8em;margin-top:0.2em;">⏭️ Later</div>
+                </div>
+            </div>
+            <div style="font-size:0.78em;color:#444;max-width:42%;">
+                <p style="margin:0 0 0.5rem;font-weight:700;">Prioritize quality statements by:</p>
+                <ul style="margin:0;padding-left:1.1em;">
+                    <li><strong>B</strong> = Business importance</li>
+                    <li><strong>T</strong> = Technical risk</li>
+                </ul>
+                <p style="margin:0.6rem 0 0;font-size:0.9em;color:#888;">Only care about / start with High importance + High risk.*</p>
+                <p style="margin:0.4rem 0 0;font-size:0.85em;color:#aaa;">* Also called non-functional requirements</p>
+            </div>
+        </div>
     </div>
+    <div class="wip-ribbon" data-pptx="50"></div>
     <aside aria-label="speaker notes" class="notes">
         <ul>
           <li>Also called non-functional requirements</li>
-          <li>Business importance vs. technical risk</li>
-          <li>Only focus on — and start with — high importance <em>and</em> high risk</li>
+          <li>Business Importance × Technical Risk</li>
+          <li>Only focus on High Importance + High Risk first</li>
         </ul>
     </aside>
 </section>

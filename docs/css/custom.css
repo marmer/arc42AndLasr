@@ -438,3 +438,184 @@
     color: #6CCBB2;
     text-align: center;
 }
+
+/* ====================================================
+   WIP RIBBON — diagonal stamp in bottom-right corner
+   Usage: <div class="wip-ribbon" data-pptx="42"></div>
+   inside a <section>
+   ==================================================== */
+.wip-ribbon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 110px;
+    height: 110px;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 99;
+}
+
+.wip-ribbon::after {
+    content: '🚧 PPTX ' attr(data-pptx);
+    position: absolute;
+    bottom: 24px;
+    right: -36px;
+    width: 160px;
+    padding: 4px 0;
+    background: rgba(255, 160, 0, 0.75);
+    color: #fff;
+    text-align: center;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.42em;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    transform: rotate(-45deg);
+    transform-origin: center;
+}
+
+/* ====================================================
+   ARC42 TEMPLATE GRID (slides 14-23)
+   ==================================================== */
+.arc42-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.35rem 1.2rem;
+    width: 100%;
+    font-size: 0.72em;
+    line-height: 1.35;
+}
+
+.arc42-grid-item {
+    padding: 0.3rem 0.5rem;
+    border-left: 3px solid #e0e0e0;
+    color: #888;
+}
+
+.arc42-grid-item.highlighted {
+    border-left-color: #6CCBB2;
+    color: #1B1B1B;
+    font-weight: 700;
+    background: rgba(108, 203, 178, 0.08);
+    border-radius: 0 4px 4px 0;
+}
+
+.arc42-grid-item .sub {
+    font-weight: 400;
+    font-size: 0.85em;
+    color: #aaa;
+    margin-left: 0.3em;
+}
+
+.arc42-grid-item.highlighted .sub {
+    color: #555;
+}
+
+/* ====================================================
+   LASR OVERVIEW (slide 29)
+   ==================================================== */
+.lasr-overview {
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+    height: 100%;
+    align-items: stretch;
+}
+
+.lasr-col {
+    flex: 1;
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.lasr-col-core {
+    background: rgba(108, 203, 178, 0.12);
+    border: 2px solid #6CCBB2;
+}
+
+.lasr-col-plus {
+    background: rgba(51, 144, 195, 0.08);
+    border: 2px solid #3390C3;
+}
+
+.lasr-col h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1em !important;
+    color: #1B1B1B !important;
+}
+
+.lasr-col ul {
+    margin: 0;
+    padding-left: 1.2em;
+    font-size: 0.8em;
+    color: #333;
+}
+
+.lasr-col-core h3 { color: #35977D !important; }
+.lasr-col-plus h3 { color: #3390C3 !important; }
+
+/* ====================================================
+   PRIORITY MATRIX (slide 44)
+   ==================================================== */
+.priority-matrix {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0.6rem;
+    width: 55%;
+    height: 80%;
+}
+
+.priority-cell {
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.75em;
+    text-align: center;
+    padding: 0.4rem;
+}
+
+.priority-cell.high-high {
+    background: #d4edda;
+    border: 2px solid #28a745;
+    color: #155724;
+}
+.priority-cell.high-med {
+    background: #fff3cd;
+    border: 2px solid #ffc107;
+    color: #856404;
+}
+.priority-cell.med-low {
+    background: #f8d7da;
+    border: 2px solid #dc3545;
+    color: #721c24;
+}
+.priority-cell.low-high {
+    background: #d1ecf1;
+    border: 2px solid #17a2b8;
+    color: #0c5460;
+}
+
+/* Big centered text for transition slides */
+.slide-big-text {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 2.8em;
+    color: #1B1B1B;
+    text-align: center;
+    line-height: 1.1;
+}
+
+.slide-big-sub {
+    font-family: 'Karla', sans-serif;
+    font-size: 1em;
+    color: #555;
+    text-align: center;
+    margin-top: 0.6em;
+}
