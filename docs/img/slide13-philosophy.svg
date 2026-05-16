@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 190">
+  <!-- Outer bezel -->
+  <circle cx="110" cy="95" r="82" fill="#1B1B1B"/>
+  <circle cx="110" cy="95" r="78" fill="#f8f8f8"/>
+
+  <!-- Compass face -->
+  <circle cx="110" cy="95" r="70" fill="white"/>
+
+  <!-- Degree ring -->
+  <circle cx="110" cy="95" r="64" fill="none" stroke="#e0e0e0" stroke-width="1"/>
+
+  <!-- Major tick marks (N,E,S,W) -->
+  <line x1="110" y1="25" x2="110" y2="40" stroke="#1B1B1B" stroke-width="3"/>
+  <line x1="110" y1="150" x2="110" y2="165" stroke="#1B1B1B" stroke-width="3"/>
+  <line x1="40"  y1="95" x2="55"  y2="95" stroke="#1B1B1B" stroke-width="3"/>
+  <line x1="165" y1="95" x2="180" y2="95" stroke="#1B1B1B" stroke-width="3"/>
+
+  <!-- Minor tick marks (NE, SE, SW, NW) -->
+  <line x1="155" y1="50" x2="148" y2="57" stroke="#1B1B1B" stroke-width="1.5"/>
+  <line x1="155" y1="140" x2="148" y2="133" stroke="#1B1B1B" stroke-width="1.5"/>
+  <line x1="65"  y1="140" x2="72"  y2="133" stroke="#1B1B1B" stroke-width="1.5"/>
+  <line x1="65"  y1="50"  x2="72"  y2="57"  stroke="#1B1B1B" stroke-width="1.5"/>
+
+  <!-- Cardinal labels -->
+  <text x="110" y="22" font-family="DM Sans,Helvetica Neue,sans-serif" font-size="15" font-weight="700" fill="#6CCBB2" text-anchor="middle">N</text>
+  <text x="110" y="181" font-family="DM Sans,Helvetica Neue,sans-serif" font-size="13" font-weight="700" fill="#1B1B1B" text-anchor="middle" opacity="0.5">S</text>
+  <text x="190" y="100" font-family="DM Sans,Helvetica Neue,sans-serif" font-size="13" font-weight="700" fill="#1B1B1B" text-anchor="middle" opacity="0.5">E</text>
+  <text x="30"  y="100" font-family="DM Sans,Helvetica Neue,sans-serif" font-size="13" font-weight="700" fill="#1B1B1B" text-anchor="middle" opacity="0.5">W</text>
+
+  <!-- Inner decorative ring -->
+  <circle cx="110" cy="95" r="28" fill="none" stroke="#e8e8e8" stroke-width="1.2"/>
+
+  <!-- Compass needle (north = teal, south = dark) -->
+  <!-- North pointer -->
+  <polygon points="110,95 106,95 110,32 114,95" fill="#6CCBB2"/>
+  <!-- South pointer -->
+  <polygon points="110,95 106,95 110,152 114,95" fill="#1B1B1B" opacity="0.55"/>
+
+  <!-- Center cap -->
+  <circle cx="110" cy="95" r="9" fill="white" stroke="#1B1B1B" stroke-width="2"/>
+  <circle cx="110" cy="95" r="4" fill="#6CCBB2"/>
+</svg>

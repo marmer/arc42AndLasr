@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 190">
+  <!-- Background circle -->
+  <circle cx="110" cy="98" r="78" fill="#f0faf8" stroke="#6CCBB2" stroke-width="2"/>
+  <circle cx="110" cy="98" r="60" fill="white" stroke="#e0e0e0" stroke-width="1"/>
+
+  <!-- WRENCH (top-left area) -->
+  <g transform="translate(74,62) rotate(-35)">
+    <!-- handle -->
+    <rect x="-5" y="0" width="10" height="42" rx="4" fill="#1B1B1B"/>
+    <!-- head ring -->
+    <circle cx="0" cy="0" r="14" fill="#1B1B1B"/>
+    <circle cx="0" cy="0" r="8" fill="#6CCBB2"/>
+    <circle cx="0" cy="0" r="3.5" fill="#1B1B1B"/>
+    <!-- jaw opening -->
+    <rect x="-7" y="-18" width="6" height="14" rx="2" fill="#f0faf8"/>
+    <rect x="1" y="-18" width="6" height="14" rx="2" fill="#f0faf8"/>
+  </g>
+
+  <!-- RULER (right area) -->
+  <g transform="translate(152,90) rotate(90)">
+    <rect x="-44" y="-8" width="88" height="17" rx="3" fill="#1B1B1B"/>
+    <rect x="-42" y="-6" width="84" height="13" rx="2" fill="#e8f5f3"/>
+    <!-- tick marks -->
+    <line x1="-30" y1="-6" x2="-30" y2="-2" stroke="#1B1B1B" stroke-width="1.2"/>
+    <line x1="-18" y1="-6" x2="-18" y2="-1" stroke="#1B1B1B" stroke-width="1.5"/>
+    <line x1="-6"  y1="-6" x2="-6"  y2="-2" stroke="#1B1B1B" stroke-width="1.2"/>
+    <line x1="6"   y1="-6" x2="6"   y2="-1" stroke="#1B1B1B" stroke-width="1.5"/>
+    <line x1="18"  y1="-6" x2="18"  y2="-2" stroke="#1B1B1B" stroke-width="1.2"/>
+    <line x1="30"  y1="-6" x2="30"  y2="-1" stroke="#1B1B1B" stroke-width="1.5"/>
+  </g>
+
+  <!-- GEAR (bottom area) -->
+  <g transform="translate(110,148)">
+    <!-- outer gear ring via polygon approximation (12 teeth) -->
+    <polygon points="
+      -8,-30  8,-30
+      18,-22  22,-8
+      22,8    18,22
+      8,30    -8,30
+      -22,22  -22,8
+      -22,-8  -18,-22
+    " fill="#6CCBB2" opacity="0.15"/>
+    <!-- main gear disc -->
+    <circle cx="0" cy="0" r="22" fill="#6CCBB2"/>
+    <!-- teeth (8 rectangles rotated) -->
+    <rect x="-4" y="-30" width="8" height="10" rx="2" fill="#6CCBB2"/>
+    <rect x="-4" y="20"  width="8" height="10" rx="2" fill="#6CCBB2"/>
+    <rect x="-30" y="-4" width="10" height="8" rx="2" fill="#6CCBB2"/>
+    <rect x="20"  y="-4" width="10" height="8" rx="2" fill="#6CCBB2"/>
+    <g transform="rotate(45)">
+      <rect x="-4" y="-30" width="8" height="10" rx="2" fill="#6CCBB2"/>
+      <rect x="-4" y="20"  width="8" height="10" rx="2" fill="#6CCBB2"/>
+      <rect x="-30" y="-4" width="10" height="8" rx="2" fill="#6CCBB2"/>
+      <rect x="20"  y="-4" width="10" height="8" rx="2" fill="#6CCBB2"/>
+    </g>
+    <circle cx="0" cy="0" r="22" fill="#6CCBB2"/>
+    <!-- hub -->
+    <circle cx="0" cy="0" r="10" fill="white" stroke="#1B1B1B" stroke-width="1.5"/>
+    <circle cx="0" cy="0" r="4"  fill="#1B1B1B"/>
+    <!-- teeth outlines -->
+    <rect x="-4" y="-30" width="8" height="10" rx="2" fill="none" stroke="#1B1B1B" stroke-width="1"/>
+    <rect x="-4" y="20"  width="8" height="10" rx="2" fill="none" stroke="#1B1B1B" stroke-width="1"/>
+    <rect x="-30" y="-4" width="10" height="8" rx="2" fill="none" stroke="#1B1B1B" stroke-width="1"/>
+    <rect x="20"  y="-4" width="10" height="8" rx="2" fill="none" stroke="#1B1B1B" stroke-width="1"/>
+  </g>
+
+  <!-- Center dot -->
+  <circle cx="110" cy="98" r="5" fill="#6CCBB2"/>
+  <circle cx="110" cy="98" r="2.5" fill="white"/>
+</svg>
