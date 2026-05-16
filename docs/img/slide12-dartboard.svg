@@ -8,6 +8,7 @@
     <path id="arc-quality"    d="M 257 300 A 193 193 0 0 1 643 300"/><!-- r 193 -->
     <path id="arc-agility"    d="M 311 300 A 139 139 0 0 1 589 300"/><!-- r 139 -->
     <path id="arc-fun"        d="M 364 300 A  86  86 0 0 1 536 300"/><!-- r  86 -->
+    <path id="arc-laziness"  d="M 410 300 A  40  40 0 0 1 490 300"/><!-- r  40 -->
   </defs>
 
   <!-- "arc42 & LASR" vertical label on left, reading bottom to top -->
@@ -43,8 +44,7 @@
     <textPath href="#arc-fun" startOffset="50%" text-anchor="middle" dy="20">Fun</textPath>
   </text>
 
-  <!-- Laziness: centre circle, horizontal text -->
-  <text x="450" y="300" text-anchor="middle" dominant-baseline="middle"
-        fill="white" font-size="25" font-weight="bold"
-        font-family="DM Sans, sans-serif">Laziness</text>
+  <text fill="white" font-size="25" font-weight="bold" font-family="DM Sans, sans-serif">
+    <textPath href="#arc-laziness" startOffset="50%" text-anchor="middle" dy="35">Laziness</textPath>
+  </text>
 </svg>
