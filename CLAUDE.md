@@ -68,11 +68,23 @@ When starting a new session without a progress file, create it first before touc
 
 ## Workflow for Each Slide
 
+### Automated (preferred)
+
+Say **"build the next slide"** — the `slide-builder` agent in `.claude/agents/` handles the full pipeline:
+reads `docs/progress.md` → reads the PDF → writes `docs/slides/slide-NN.html` → runs SVG extraction → runs quality gate → updates `docs/progress.md`.
+
+The Docker image used by the pipeline must be built once before first use:
+```bash
+docker build -t arc42-scripts scripts/
+```
+
+### Manual (fallback)
+
 1. Read `docs/progress.md` to find the next slide to work on.
-2. Read the corresponding page(s) in the rendered PDF (`arc42AndLasr_talk - envite_original_rendered.pdf` for layout and content.
-3. Extract / create content in `index.html` — one `<section>` at a time.
+2. Read the corresponding page(s) in the rendered PDF (`arc42AndLasr_talk - envite_original_rendered.pdf`) for layout and content.
+3. Write `docs/slides/slide-NN.html` — one `<section>` fragment per file.
 4. Strip any company/conference references.
-5. Add speaker notes from the original where available (from arc42AndLasr_talk - envite_original.pptx).
+5. Add speaker notes from the original where available (from `arc42AndLasr_talk - envite_original.pptx`).
 6. Update `docs/progress.md`.
 
 ## SVG Diagrams

@@ -1,42 +1,37 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 190">
-  <!-- Outer bezel -->
-  <circle cx="110" cy="95" r="82" fill="#1B1B1B"/>
-  <circle cx="110" cy="95" r="78" fill="#f8f8f8"/>
+  <!-- base / stand -->
+  <rect x="95" y="162" width="30" height="7" rx="3.5" fill="#1B1B1B"/>
+  <rect x="82" y="168" width="56" height="8" rx="4" fill="#1B1B1B"/>
 
-  <!-- Compass face -->
-  <circle cx="110" cy="95" r="70" fill="white"/>
+  <!-- vertical pole -->
+  <rect x="108" y="90" width="4" height="75" rx="2" fill="#1B1B1B"/>
 
-  <!-- Degree ring -->
-  <circle cx="110" cy="95" r="64" fill="none" stroke="#e0e0e0" stroke-width="1"/>
+  <!-- horizontal beam -->
+  <rect x="56" y="86" width="108" height="7" rx="3.5" fill="#1B1B1B"/>
 
-  <!-- Major tick marks (N,E,S,W) -->
-  <line x1="110" y1="25" x2="110" y2="40" stroke="#1B1B1B" stroke-width="3"/>
-  <line x1="110" y1="150" x2="110" y2="165" stroke="#1B1B1B" stroke-width="3"/>
-  <line x1="40"  y1="95" x2="55"  y2="95" stroke="#1B1B1B" stroke-width="3"/>
-  <line x1="165" y1="95" x2="180" y2="95" stroke="#1B1B1B" stroke-width="3"/>
+  <!-- pivot circle -->
+  <circle cx="110" cy="89" r="7" fill="#6CCBB2"/>
+  <circle cx="110" cy="89" r="3" fill="white"/>
 
-  <!-- Minor tick marks (NE, SE, SW, NW) -->
-  <line x1="155" y1="50" x2="148" y2="57" stroke="#1B1B1B" stroke-width="1.5"/>
-  <line x1="155" y1="140" x2="148" y2="133" stroke="#1B1B1B" stroke-width="1.5"/>
-  <line x1="65"  y1="140" x2="72"  y2="133" stroke="#1B1B1B" stroke-width="1.5"/>
-  <line x1="65"  y1="50"  x2="72"  y2="57"  stroke="#1B1B1B" stroke-width="1.5"/>
+  <!-- LEFT pan suspension string -->
+  <line x1="62" y1="93" x2="54" y2="122" stroke="#1B1B1B" stroke-width="1.5"/>
+  <line x1="62" y1="93" x2="74" y2="122" stroke="#1B1B1B" stroke-width="1.5"/>
 
-  <!-- Cardinal labels -->
-  <text x="110" y="22" font-family="DM Sans,Helvetica Neue,sans-serif" font-size="15" font-weight="700" fill="#6CCBB2" text-anchor="middle">N</text>
-  <text x="110" y="181" font-family="DM Sans,Helvetica Neue,sans-serif" font-size="13" font-weight="700" fill="#1B1B1B" text-anchor="middle" opacity="0.5">S</text>
-  <text x="190" y="100" font-family="DM Sans,Helvetica Neue,sans-serif" font-size="13" font-weight="700" fill="#1B1B1B" text-anchor="middle" opacity="0.5">E</text>
-  <text x="30"  y="100" font-family="DM Sans,Helvetica Neue,sans-serif" font-size="13" font-weight="700" fill="#1B1B1B" text-anchor="middle" opacity="0.5">W</text>
+  <!-- RIGHT pan suspension string (slightly tilted — scales not in perfect balance) -->
+  <line x1="158" y1="93" x2="148" y2="115" stroke="#1B1B1B" stroke-width="1.5"/>
+  <line x1="158" y1="93" x2="168" y2="115" stroke="#1B1B1B" stroke-width="1.5"/>
 
-  <!-- Inner decorative ring -->
-  <circle cx="110" cy="95" r="28" fill="none" stroke="#e8e8e8" stroke-width="1.2"/>
+  <!-- LEFT pan (lower) -->
+  <path d="M44,122 Q64,136 84,122" fill="#f0faf8" stroke="#6CCBB2" stroke-width="2"/>
 
-  <!-- Compass needle (north = teal, south = dark) -->
-  <!-- North pointer -->
-  <polygon points="110,95 106,95 110,32 114,95" fill="#6CCBB2"/>
-  <!-- South pointer -->
-  <polygon points="110,95 106,95 110,152 114,95" fill="#1B1B1B" opacity="0.55"/>
+  <!-- RIGHT pan (higher) -->
+  <path d="M138,115 Q158,129 178,115" fill="#f0faf8" stroke="#6CCBB2" stroke-width="2"/>
 
-  <!-- Center cap -->
-  <circle cx="110" cy="95" r="9" fill="white" stroke="#1B1B1B" stroke-width="2"/>
-  <circle cx="110" cy="95" r="4" fill="#6CCBB2"/>
+  <!-- question mark on left pan — "a question worth weighing" -->
+  <text x="64" y="134" font-family="DM Sans,Helvetica Neue,sans-serif" font-size="14" font-weight="700" fill="#6CCBB2" text-anchor="middle">?</text>
+
+  <!-- small dots on right pan — "principles" -->
+  <circle cx="152" cy="122" r="3" fill="#6CCBB2"/>
+  <circle cx="158" cy="124" r="3" fill="#1B1B1B" opacity="0.4"/>
+  <circle cx="164" cy="122" r="3" fill="#6CCBB2"/>
 </svg>

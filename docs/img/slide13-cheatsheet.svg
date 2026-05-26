@@ -9,11 +9,9 @@
     <!-- card body -->
     <rect x="34" y="14" width="138" height="170" rx="6" fill="white" stroke="#d0d0d0" stroke-width="1.2"/>
 
-    <!-- teal header bar -->
+    <!-- teal header bar — blank, no text -->
     <rect x="34" y="14" width="138" height="32" rx="6" fill="#6CCBB2"/>
     <rect x="34" y="34" width="138" height="12" fill="#6CCBB2"/>
-    <!-- "Quick Ref" label -->
-    <text x="103" y="34" font-family="DM Sans,Helvetica Neue,sans-serif" font-size="11" font-weight="700" fill="white" text-anchor="middle">Quick Reference</text>
 
     <!-- corner fold -->
     <polygon points="148,14 172,14 172,38" fill="#4aab93"/>

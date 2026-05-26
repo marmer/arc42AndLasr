@@ -3,47 +3,36 @@
   <rect x="24" y="14" width="154" height="162" rx="7" fill="rgba(0,0,0,0.10)"/>
   <!-- page body -->
   <rect x="20" y="10" width="154" height="162" rx="7" fill="white" stroke="#e0e0e0" stroke-width="1.2"/>
-  <!-- header bar -->
-  <rect x="20" y="10" width="154" height="30" rx="7" fill="#1B1B1B"/>
-  <rect x="20" y="28" width="154" height="12" fill="#1B1B1B"/>
-  <!-- header label -->
-  <text x="97" y="29" font-family="DM Sans,Helvetica Neue,sans-serif" font-size="12" font-weight="700" fill="white" text-anchor="middle">arc42</text>
-  <!-- teal underline in header -->
-  <rect x="74" y="31" width="46" height="3" rx="1.5" fill="#6CCBB2"/>
+  <!-- header bar — plain teal, no arc42 branding -->
+  <rect x="20" y="10" width="154" height="28" rx="7" fill="#6CCBB2"/>
+  <rect x="20" y="28" width="154" height="10" fill="#6CCBB2"/>
 
-  <!-- 12 chapter boxes — 3 cols × 4 rows -->
-  <!-- col x: 28 | 78 | 128   width: 42 -->
-  <!-- row y: 46 | 78 | 110 | 142   height: 24 -->
+  <!-- [Title] placeholder in header -->
+  <rect x="52" y="18" width="88" height="12" rx="3" fill="rgba(255,255,255,0.30)" stroke="rgba(255,255,255,0.6)" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="96" y="28" font-family="DM Sans,Helvetica Neue,sans-serif" font-size="9" fill="white" opacity="0.85" text-anchor="middle">[ Title ]</text>
 
-  <!-- Row 1 -->
-  <rect x="28" y="46" width="42" height="24" rx="3" fill="#f0faf8" stroke="#6CCBB2" stroke-width="1.4"/>
-  <rect x="78" y="46" width="42" height="24" rx="3" fill="#f0faf8" stroke="#6CCBB2" stroke-width="1.4"/>
-  <rect x="128" y="46" width="42" height="24" rx="3" fill="#f0faf8" stroke="#6CCBB2" stroke-width="1.4"/>
-  <text x="49" y="63" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#6CCBB2" text-anchor="middle">1</text>
-  <text x="99" y="63" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#6CCBB2" text-anchor="middle">2</text>
-  <text x="149" y="63" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#6CCBB2" text-anchor="middle">3</text>
+  <!-- Section 1 -->
+  <rect x="28" y="46" width="136" height="28" rx="4" fill="#f9f9f9" stroke="#ccc" stroke-width="1" stroke-dasharray="4,2"/>
+  <text x="36" y="57" font-family="DM Sans,sans-serif" font-size="8" fill="#aaa">[ § 1 ]</text>
+  <rect x="36" y="61" width="80" height="4" rx="2" fill="#ddd"/>
+  <rect x="36" y="67" width="55" height="3" rx="1.5" fill="#e8e8e8"/>
 
-  <!-- Row 2 -->
-  <rect x="28" y="78" width="42" height="24" rx="3" fill="#f0faf8" stroke="#6CCBB2" stroke-width="1.4"/>
-  <rect x="78" y="78" width="42" height="24" rx="3" fill="#f0faf8" stroke="#6CCBB2" stroke-width="1.4"/>
-  <rect x="128" y="78" width="42" height="24" rx="3" fill="#f0faf8" stroke="#6CCBB2" stroke-width="1.4"/>
-  <text x="49" y="95" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#6CCBB2" text-anchor="middle">4</text>
-  <text x="99" y="95" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#6CCBB2" text-anchor="middle">5</text>
-  <text x="149" y="95" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#6CCBB2" text-anchor="middle">6</text>
+  <!-- Section 2 -->
+  <rect x="28" y="80" width="136" height="28" rx="4" fill="#f9f9f9" stroke="#ccc" stroke-width="1" stroke-dasharray="4,2"/>
+  <text x="36" y="91" font-family="DM Sans,sans-serif" font-size="8" fill="#aaa">[ § 2 ]</text>
+  <rect x="36" y="95" width="90" height="4" rx="2" fill="#ddd"/>
+  <rect x="36" y="101" width="62" height="3" rx="1.5" fill="#e8e8e8"/>
 
-  <!-- Row 3 -->
-  <rect x="28" y="110" width="42" height="24" rx="3" fill="#f0faf8" stroke="#6CCBB2" stroke-width="1.4"/>
-  <rect x="78" y="110" width="42" height="24" rx="3" fill="#f0faf8" stroke="#6CCBB2" stroke-width="1.4"/>
-  <rect x="128" y="110" width="42" height="24" rx="3" fill="#f0faf8" stroke="#6CCBB2" stroke-width="1.4"/>
-  <text x="49" y="127" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#6CCBB2" text-anchor="middle">7</text>
-  <text x="99" y="127" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#6CCBB2" text-anchor="middle">8</text>
-  <text x="149" y="127" font-family="DM Sans,sans-serif" font-size="11" font-weight="700" fill="#6CCBB2" text-anchor="middle">9</text>
+  <!-- Section 3 — two columns -->
+  <rect x="28" y="114" width="65" height="28" rx="4" fill="#f9f9f9" stroke="#ccc" stroke-width="1" stroke-dasharray="4,2"/>
+  <text x="36" y="125" font-family="DM Sans,sans-serif" font-size="8" fill="#aaa">[ § 3 ]</text>
+  <rect x="36" y="129" width="40" height="4" rx="2" fill="#ddd"/>
 
-  <!-- Row 4 -->
-  <rect x="28" y="142" width="42" height="24" rx="3" fill="#f0faf8" stroke="#6CCBB2" stroke-width="1.4"/>
-  <rect x="78" y="142" width="42" height="24" rx="3" fill="#f0faf8" stroke="#6CCBB2" stroke-width="1.4"/>
-  <rect x="128" y="142" width="42" height="24" rx="3" fill="#f0faf8" stroke="#6CCBB2" stroke-width="1.4"/>
-  <text x="49" y="159" font-family="DM Sans,sans-serif" font-size="10" font-weight="700" fill="#6CCBB2" text-anchor="middle">10</text>
-  <text x="99" y="159" font-family="DM Sans,sans-serif" font-size="10" font-weight="700" fill="#6CCBB2" text-anchor="middle">11</text>
-  <text x="149" y="159" font-family="DM Sans,sans-serif" font-size="10" font-weight="700" fill="#6CCBB2" text-anchor="middle">12</text>
+  <rect x="99" y="114" width="65" height="28" rx="4" fill="#f9f9f9" stroke="#ccc" stroke-width="1" stroke-dasharray="4,2"/>
+  <text x="107" y="125" font-family="DM Sans,sans-serif" font-size="8" fill="#aaa">[ § 4 ]</text>
+  <rect x="107" y="129" width="44" height="4" rx="2" fill="#ddd"/>
+
+  <!-- Section 4 — full width footer -->
+  <rect x="28" y="148" width="136" height="18" rx="4" fill="#f0faf8" stroke="#6CCBB2" stroke-width="1" stroke-dasharray="4,2"/>
+  <text x="96" y="161" font-family="DM Sans,sans-serif" font-size="8" fill="#6CCBB2" opacity="0.7" text-anchor="middle">[ § 5 ]</text>
 </svg>
