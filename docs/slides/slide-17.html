@@ -1,17 +1,117 @@
-<!-- Slide 17: [WIP] (PPTX slide 22) -->
+<!-- Slide 17: arc42 Template — Ch.4 Solution Strategy highlighted (PPTX slide 22) -->
 <section>
     <div class="slide-header">
-        <h2>[Work in Progress]</h2>
+        <h2>arc42 Template</h2>
     </div>
-    <div class="slide-body slide-centered">
-        <p style="font-size:1.2em; color:#aaa;">
-            &#x1F6A7; Slide not yet implemented<br>
-            <small>PPTX source: slide <strong>22</strong></small>
-        </p>
-    </div>
+
+    <!--
+        Layout: 65% chapter grid (2-col, ch1-6 left, ch7-12 right) + 32% chapter icon.
+        bottom:4% gives extra vertical room for the dense 12-chapter table.
+        Ch.4 "Solution Strategy" is highlighted; all other chapters are non-highlighted.
+    -->
+    <div class="slide-body" style="display:flex; gap:3%; align-items:stretch; bottom:4%; padding-top:0.1rem; overflow:hidden;">
+
+        <!-- ── 12-chapter reference grid ── -->
+        <div style="
+            flex: 0 0 63%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: repeat(6, auto);
+            gap: 0.35em;
+            font-size: 0.42em;
+            line-height: 1.18;
+            font-family: 'DM Sans', sans-serif;
+            align-content: start;
+        ">
+
+            <!-- Row 1 ─ Ch1 | Ch7 -->
+            <div style="padding:0.22em 0.45em; border-left:2px solid #c5e6dd; background:#f5fcfa; border-radius:3px;">
+                <div style="font-weight:700; color:#1B1B1B;">1. Introduction &amp; Goals</div>
+                <div style="color:#666; padding-left:0.6em; font-size:0.94em;">1.1 Fundamental requirements</div>
+                <div style="color:#666; padding-left:0.6em; font-size:0.94em;">1.2 Quality goals</div>
+                <div style="color:#666; padding-left:0.6em; font-size:0.94em;">1.3 Stakeholder</div>
+            </div>
+            <div style="padding:0.22em 0.45em; border-left:2px solid #c5e6dd; background:#f5fcfa; border-radius:3px;">
+                <div style="font-weight:700; color:#1B1B1B;">7. Deployment View</div>
+                <div style="color:#666; padding-left:0.6em; font-size:0.94em;">7.1 Infrastructure level 1</div>
+                <div style="color:#666; padding-left:0.6em; font-size:0.94em;">7.2 Infrastructure level 2</div>
+            </div>
+
+            <!-- Row 2 ─ Ch2 | Ch8 -->
+            <div style="padding:0.22em 0.45em; border-left:2px solid #c5e6dd; background:#f5fcfa; border-radius:3px;">
+                <div style="font-weight:700; color:#1B1B1B;">2. Constraints</div>
+                <div style="color:#666; padding-left:0.6em; font-size:0.94em;">2.1 Technical constraints</div>
+                <div style="color:#666; padding-left:0.6em; font-size:0.94em;">2.2 Organizational constraints</div>
+                <div style="color:#666; padding-left:0.6em; font-size:0.94em;">2.3 Regulatory constraints</div>
+            </div>
+            <div style="padding:0.22em 0.45em; border-left:2px solid #c5e6dd; background:#f5fcfa; border-radius:3px;">
+                <div style="font-weight:700; color:#1B1B1B;">8. Crosscutting Concepts</div>
+                <div style="color:#666; padding-left:0.6em; font-size:0.94em;">8.1 Domain Model</div>
+                <div style="color:#666; padding-left:0.6em; font-size:0.94em;">8.2 Design Patterns</div>
+                <div style="color:#666; padding-left:0.6em; font-size:0.94em;">8.3 Persistence</div>
+                <div style="color:#666; padding-left:0.6em; font-size:0.94em;">8.4 UI/UX</div>
+            </div>
+
+            <!-- Row 3 ─ Ch3 | Ch9 -->
+            <div style="padding:0.22em 0.45em; border-left:2px solid #c5e6dd; background:#f5fcfa; border-radius:3px;">
+                <div style="font-weight:700; color:#1B1B1B;">3. System Context &amp; Scope</div>
+                <div style="color:#666; padding-left:0.6em; font-size:0.94em;">3.1 Business context</div>
+                <div style="color:#666; padding-left:0.6em; font-size:0.94em;">3.2 Technical context</div>
+            </div>
+            <div style="padding:0.22em 0.45em; border-left:2px solid #c5e6dd; background:#f5fcfa; border-radius:3px;">
+                <div style="font-weight:700; color:#1B1B1B;">9. Architectural Decisions</div>
+                <div style="color:#666; padding-left:0.6em; font-size:0.94em;">9.1 Architectural decision 1</div>
+                <div style="color:#666; padding-left:0.6em; font-size:0.94em;">9.2 Architectural decision 2</div>
+            </div>
+
+            <!-- Row 4 ─ Ch4 [HIGHLIGHTED] | Ch10 -->
+            <div style="background:linear-gradient(135deg,#6CCBB2,#90C5E2); border-radius:4px; padding:0.28em 0.5em; color:#fff;">
+                <div style="font-weight:700;">4. Solution Strategy</div>
+            </div>
+            <div style="padding:0.22em 0.45em; border-left:2px solid #c5e6dd; background:#f5fcfa; border-radius:3px;">
+                <div style="font-weight:700; color:#1B1B1B;">10. Quality Requirements</div>
+                <div style="color:#666; padding-left:0.6em; font-size:0.94em;">10.1 Quality Requirements</div>
+                <div style="color:#666; padding-left:0.6em; font-size:0.94em;">10.2 Quality Scenarios</div>
+            </div>
+
+            <!-- Row 5 ─ Ch5 | Ch11 -->
+            <div style="padding:0.22em 0.45em; border-left:2px solid #c5e6dd; background:#f5fcfa; border-radius:3px;">
+                <div style="font-weight:700; color:#1B1B1B;">5. Building Block View</div>
+                <div style="color:#666; padding-left:0.6em; font-size:0.94em;">5.1 Level 1</div>
+                <div style="color:#666; padding-left:0.6em; font-size:0.94em;">5.2 Level 2</div>
+            </div>
+            <div style="padding:0.22em 0.45em; border-left:2px solid #c5e6dd; background:#f5fcfa; border-radius:3px;">
+                <div style="font-weight:700; color:#1B1B1B;">11. Risks and Technical Debt</div>
+            </div>
+
+            <!-- Row 6 ─ Ch6 | Ch12 -->
+            <div style="padding:0.22em 0.45em; border-left:2px solid #c5e6dd; background:#f5fcfa; border-radius:3px;">
+                <div style="font-weight:700; color:#1B1B1B;">6. Runtime View</div>
+                <div style="color:#666; padding-left:0.6em; font-size:0.94em;">6.1 Runtime Scenario 1</div>
+                <div style="color:#666; padding-left:0.6em; font-size:0.94em;">6.2 Runtime Scenario 2</div>
+            </div>
+            <div style="padding:0.22em 0.45em; border-left:2px solid #c5e6dd; background:#f5fcfa; border-radius:3px;">
+                <div style="font-weight:700; color:#1B1B1B;">12. Glossary</div>
+            </div>
+
+        </div><!-- /.chapter-grid -->
+
+        <!-- ── Chapter icon: chess knight = Solution Strategy ── -->
+        <div style="flex:0 0 32%; display:flex; align-items:flex-end; justify-content:center; padding:0.4em 0;">
+            <img src="./img/slide17-arc42ch4.png"
+                 style="
+                     max-width:100%;
+                     max-height:100%;
+                     object-fit:contain;
+                 "
+                 alt="Chess knight icon representing Solution Strategy">
+        </div>
+
+    </div><!-- /.slide-body -->
+
     <aside aria-label="speaker notes" class="notes">
         <ul>
-          <li>Strategy for achieving goals</li>
+            <li>Strategy for achieving goals</li>
         </ul>
     </aside>
 </section>
