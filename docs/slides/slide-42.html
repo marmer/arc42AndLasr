@@ -1,18 +1,150 @@
-<!-- Slide 42: [WIP] (PPTX slide 48) -->
+<!-- Slide 42: Quality-focused analysis &mdash; Pro-Tip: Utility-Tree / Quality-Tree (extended) (PPTX slide 48) -->
 <section>
     <div class="slide-header">
-        <h2>[Work in Progress]</h2>
+        <h2>Quality-focused analysis</h2>
     </div>
-    <div class="slide-body slide-centered">
-        <p style="font-size:1.2em; color:#aaa;">
-            &#x1F6A7; Slide not yet implemented<br>
-            <small>PPTX source: slide <strong>48</strong></small>
-        </p>
+
+    <!--
+        PPTX slide 48 continues the progressive reveal of slide 41 / slide 47.
+        The numbered step list is identical:
+            1. Define the focus-topic
+            2. Sharpen the results
+               Pro-Tip: Use a Utility-Tree / Quality-Tree
+        The visual progression: slide 41 showed an already-completed
+        Utility-Tree (image69) with the LASR cards baked into the tree
+        branches. Slide 48 (this slide) goes one step deeper &mdash; the
+        underlying tree (PPTX media/image70.png &rarr; slide42-utility-tree.png)
+        now expands the level-2 quality categories (Confidentiality,
+        Authenticity, Operability, User Errorprotection, Availability) under
+        Security / Usability / Reliability, AND the three LASR "Sharpen the
+        results" cards (PPTX media/image71.png &rarr; slide42-cards-stack.png)
+        sit on TOP of the tree as a separate diagonal zigzag overlay,
+        visually anchoring the sharpened-results activity to the tree
+        structure on the left. The "you are here" LASR Core thumbnail
+        bottom-right still highlights the lower-LEFT "Quality-focused
+        Analysis" card of the LASR Core diagram (matching the PPTX srcRect
+        l=36 t=66984 r=57340 b=-2).
+    -->
+    <div class="slide-body" style="display:flex; flex-direction:column; gap:0.5rem; padding:0.3rem 1.5% 0.6rem; top:14%; bottom:6%; overflow:hidden;">
+
+        <!-- &mdash;&mdash; Numbered step list (mirrors PPTX Textplatzhalter 9, idx=26) &mdash;&mdash; -->
+        <ol style="
+            font-family:'Karla', sans-serif;
+            color:#1B1B1B;
+            font-size:0.7em;
+            line-height:1.25;
+            margin:0;
+            padding-left:1.4em;
+            flex:0 0 auto;
+        ">
+            <li style="margin-bottom:0.15em;">Define the focus-topic</li>
+            <li>Sharpen the results
+                <ul style="list-style:none; padding-left:0; margin-top:0.18em;">
+                    <li style="display:flex; align-items:flex-start; gap:0.55rem; font-size:0.85em;">
+                        <span style="flex:0 0 0.55rem; width:0.55rem; height:0.55rem; border-radius:50%; background:#6CCBB2; margin-top:0.42em;"></span>
+                        <span><strong>Pro-Tip:</strong> Use a Utility-Tree / Quality-Tree</span>
+                    </li>
+                </ul>
+            </li>
+        </ol>
+
+        <!-- &mdash;&mdash; Main content row: Utility-Tree + cards overlay + LASR thumb &mdash;&mdash; -->
+        <div style="flex:1 1 auto; position:relative; min-height:0;">
+
+            <!--
+                Underlying Utility-Tree mindmap (PPTX Inhaltsplatzhalter 5,
+                rId3 = media/image70.png). Positioned to mirror the PPTX EMU
+                coords (off x=341809 y=2345779, ext cx=6384925 cy=2344737 on
+                a 9144000-wide slide): left ~3.7%, width ~70%, vertically
+                roughly the middle band of the body region.
+            -->
+            <img src="./img/slide42-utility-tree.png"
+                 alt="Detailed Utility-Tree example with deeper level-2 quality categories: the root 'Flying Spaghetti-Monster Client' branches into three quality attributes (Security, Usability, Reliability). Security splits into Confidentiality (leaf: 'Encryption of data in transit') and Authenticity. Usability splits into Operability (leaves: 'Every functionality max 2 noodels or clicks away', 'Screen Reader for all inputs') and User Errorprotection (leaf: 'Hints for wrong inputs'). Reliability splits into Availability."
+                 style="position:absolute;
+                        left:0;
+                        top:6%;
+                        width:74%;
+                        max-height:88%;
+                        object-fit:contain;
+                        object-position:left top;
+                        filter: drop-shadow(4px 4px 8px rgba(51,51,51,0.20));">
+
+            <!--
+                Three LASR "Sharpen the results" cards (PPTX Grafik 13,
+                rId5 = media/image71.png) stacked diagonally on top of the
+                tree's left/root region. PPTX EMU coords: off x=1806080
+                y=2037414, ext cx=1728192 cy=3009648 (a 9144000-wide,
+                5143500-tall slide). Translated to body-local %: starts
+                roughly at left ~17% of the tree image, portrait-oriented
+                strip overlapping the root and primary branches. CSS
+                drop-shadow recreates the implicit raster shadow.
+            -->
+            <img src="./img/slide42-cards-stack.png"
+                 alt="Three LASR 'Sharpen the results' quality cards (Security, Usability, Reliability) arranged as a vertical diagonal zigzag overlay sitting on top of the underlying Utility-Tree. Each card has a colored header, an illustrative photo, and ruled lines where sharpened quality scenarios are written."
+                 style="position:absolute;
+                        left:14%;
+                        top:0;
+                        width:20%;
+                        height:100%;
+                        object-fit:contain;
+                        object-position:center top;
+                        filter: drop-shadow(4px 4px 8px rgba(51,51,51,0.35));
+                        pointer-events:none;">
+
+            <!--
+                "You are here" mini LASR Core diagram, bottom-right.
+                PPTX places a duotoned full image of the LASR Core diagram
+                at lower-right (id=7) plus a smaller cropped overlay (id=8,
+                srcRect l=36, t=66984, r=57340, b=-2 in 1/1000 %) with a
+                drop shadow. The overlay highlights the lower-LEFT
+                "Quality-focused Analysis" card &mdash; the LASR step that
+                this slide is focused on.
+            -->
+            <div style="position:absolute; right:0; bottom:0; width:28%;">
+                <!-- Faded base image &mdash; recreates PPTX duotone recolor -->
+                <img src="./img/slide40-overview-thumb.png"
+                     alt="LASR Core Review overview thumbnail: the highlighted step is the 'Quality-focused Analysis' card (lower-left of the diagram), corresponding to sharpening quality scenarios via a Utility-Tree / Quality-Tree"
+                     style="display:block; width:100%; opacity:0.35; filter:grayscale(0.4) sepia(0.2) hue-rotate(120deg);">
+                <!-- Highlight strip: lower-left 'Quality-focused Analysis' card at full opacity with drop shadow -->
+                <div aria-hidden="true"
+                     style="position:absolute; inset:0;
+                            clip-path: inset(66.98% 57.34% 0% 0.04%);
+                            filter: drop-shadow(4px 4px 6px rgba(51,51,51,0.55));">
+                    <img src="./img/slide40-overview-thumb.png"
+                         alt=""
+                         style="display:block; width:100%;">
+                </div>
+            </div>
+
+        </div>
+
+        <!-- &mdash;&mdash; Card-set attribution footer (PPTX Textfeld 1) &mdash;&mdash; -->
+        <div style="
+            flex:0 0 auto;
+            text-align:center;
+            font-family:'Verdana', sans-serif;
+            font-size:0.32em;
+            color:#666;
+            line-height:1;
+            margin-top:0.2em;
+        ">
+            Cards from:
+            <a href="https://www.lasr-reviews.org/community"
+               style="color:#3390C3; text-decoration:none;">
+                https://www.lasr-reviews.org/community
+            </a>
+        </div>
+
     </div>
+
     <aside aria-label="speaker notes" class="notes">
         <ul>
-          <li>Pro tip: this is actually part of LASR+, when done in more detail</li>
-          <li>But visualization helps even at this level</li>
+            <li>Pro tip: actually it&rsquo;s part of LASR+
+                <ul>
+                    <li>when you do it in more detail</li>
+                    <li>But visualization helps</li>
+                </ul>
+            </li>
         </ul>
     </aside>
 </section>

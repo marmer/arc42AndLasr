@@ -1,18 +1,109 @@
-<!-- Slide 43: [WIP] (PPTX slide 49) -->
+<!-- Slide 43: Quality-focused analysis &mdash; Pro-Tip: Utility-Tree / Quality-Tree (expanded tree) (PPTX slide 49) -->
 <section>
     <div class="slide-header">
-        <h2>[Work in Progress]</h2>
+        <h2>Quality-focused analysis</h2>
     </div>
-    <div class="slide-body slide-centered">
-        <p style="font-size:1.2em; color:#aaa;">
-            &#x1F6A7; Slide not yet implemented<br>
-            <small>PPTX source: slide <strong>49</strong></small>
-        </p>
-    </div>
+
+    <!--
+        PPTX slide 49 is the next progressive-reveal step of the LASR Core
+        Review &ldquo;Quality-focused analysis&rdquo; Pro-Tip sub-flow.
+        Slide 41 (PPTX 47) introduced the Pro-Tip with a worked
+        Utility-Tree example whose leaves were decorated with the LASR
+        quality cards (Security / Usability / Reliability).
+        On this slide the same root node "Flying Spagetti-Monster Client"
+        branches into the same three top-level qualities, but the tree
+        now has an **intermediate level** &mdash;
+            Security      &rarr; Confidentiality, Authenticity
+            Usability     &rarr; Operability, User Errorprotection
+            Reliability   &rarr; Availability
+        &mdash; and the concrete sharpened quality scenarios hang off
+        those intermediate nodes. This represents the deeper, fully
+        unfolded Utility-Tree the speaker would walk through during a
+        LASR+ Quality-focused analysis.
+
+        Layout mirrors PPTX slide 49 EMU positioning:
+            image70 (utility-tree): left=3.74%, top=45.61%, width=69.83%
+            image58 (LASR Core thumbnail): right side, ~76% left, ~70% top
+                with cropped overlay highlighting the lower-LEFT
+                "Quality-focused Analysis" card.
+    -->
+    <div class="slide-body" style="padding:0.2rem 1.5%; bottom:4%; overflow:hidden;">
+
+        <!-- ── Numbered step list (PPTX Textplatzhalter 9, idx=26) ────── -->
+        <ol style="
+            margin:0 0 0.4rem 0;
+            padding-left:1.6em;
+            font-family:'Karla', sans-serif;
+            color:#1B1B1B;
+            font-size:0.78em;
+            line-height:1.35;
+        ">
+            <li>Define the focus-topic</li>
+            <li>Sharpen the results
+                <ul style="list-style:none; padding-left:0; margin-top:0.15em;">
+                    <li style="display:flex; align-items:flex-start; gap:0.55rem; font-size:0.9em;">
+                        <span style="flex:0 0 0.55rem; width:0.55rem; height:0.55rem; border-radius:50%; background:#6CCBB2; margin-top:0.42em;"></span>
+                        <span><strong>Pro-Tip:</strong> Use a Utility-Tree / Quality-Tree</span>
+                    </li>
+                </ul>
+            </li>
+        </ol>
+
+        <!-- ── Main Utility-Tree image (PPTX Inhaltsplatzhalter 5 / image70.png) ── -->
+        <!--
+            Expanded Utility-Tree showing the intermediate quality
+            categories between top-level qualities and the concrete
+            sharpened scenarios.
+        -->
+        <img src="./img/slide43-utility-tree.png"
+             alt="Expanded Utility-Tree (Quality-Tree): root node 'Flying Spagetti-Monster Client' branches into three top-level qualities &mdash; Security, Usability, Reliability. Security splits into Confidentiality (leaf: 'Encryption of data in transit') and Authenticity (leaf: '...'). Usability splits into Operability (leaves: 'Every functionality max 2 noodels or clicks away' and 'Screen Reader for all inputs') and User Errorprotection (leaf: 'Hints for wrong inputs'). Reliability has Availability (leaf: '...')."
+             style="position:absolute;
+                    left:3.74%;
+                    top:45.6%;
+                    width:69.83%;
+                    height:auto;
+                    object-fit:contain;
+                    filter: drop-shadow(4px 4px 8px rgba(51,51,51,0.25));">
+
+        <!-- ── &ldquo;You are here&rdquo; mini LASR Core diagram, bottom-right ── -->
+        <!--
+            PPTX places a duotoned full image of slide29-lasr-core.png at
+            lower-right (image58 with <a:duotone>) plus a smaller cropped
+            overlay (srcRect l=36 t=66984 r=57340 b=-2 in 1/1000 %) with
+            a drop shadow &mdash; the cropped overlay highlights the
+            lower-LEFT &ldquo;Quality-focused Analysis&rdquo; card of the
+            LASR Core diagram. Same "you are here" pattern as slides 40
+            and 41.
+        -->
+        <div style="position:absolute; right:0.5%; bottom:1%; width:22.2%;">
+            <!-- Faded base image: full LASR Core diagram, duotone teal -->
+            <img src="./img/slide40-overview-thumb.png"
+                 alt="LASR Core Review overview thumbnail: the highlighted area is the lower-left 'Quality-focused Analysis' card, the current step in the LASR flow"
+                 style="display:block;
+                        width:100%;
+                        opacity:0.35;
+                        filter: grayscale(0.4) sepia(0.2) hue-rotate(120deg);">
+            <!-- Highlight overlay: lower-LEFT "Quality-focused Analysis" card at full opacity -->
+            <div aria-hidden="true"
+                 style="position:absolute; inset:0;
+                        clip-path: inset(66.98% 57.34% 0% 0.04%);
+                        filter: drop-shadow(4px 4px 6px rgba(51,51,51,0.55));">
+                <img src="./img/slide40-overview-thumb.png"
+                     alt=""
+                     style="display:block; width:100%;">
+            </div>
+        </div>
+
+    </div><!-- /.slide-body -->
+
     <aside aria-label="speaker notes" class="notes">
         <ul>
-          <li>Pro tip: this is actually part of LASR+, when done in more detail</li>
-          <li>But visualization helps even at this level</li>
+            <li>Pro Tip: Actually it&rsquo;s part of LASR plus
+                <ul>
+                    <li>when you do it in more details</li>
+                    <li>But visualization helps</li>
+                </ul>
+            </li>
         </ul>
     </aside>
 </section>
