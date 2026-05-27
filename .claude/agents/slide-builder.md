@@ -132,14 +132,12 @@ Slides 15–23 each show the same 12-chapter two-column reference grid as slide 
 <div class="slide-body" style="display:flex; gap:3%; align-items:stretch; bottom:4%; padding-top:0.1rem; overflow:hidden;">
 ```
 
-**arc42 book image** — reused unchanged on every arc42-chapter slide:
+**arc42 dartboard logo** — SVG recreation, reused unchanged on every arc42-chapter slide (no CSS filter needed):
 ```html
 <div style="flex:0 0 32%; display:flex; align-items:center; justify-content:center; padding:0.4em 0;">
-    <img src="./img/slide14-arc42book.png"
-         style="max-width:100%; max-height:100%; object-fit:contain; object-position:center 30%;
-                filter: grayscale(1) sepia(0.65) saturate(5) hue-rotate(128deg) brightness(1.08)
-                        drop-shadow(0 4px 18px rgba(0,0,0,0.28));"
-         alt="arc42 template book cover">
+    <img src="./img/slide14-arc42book.svg"
+         style="max-width:100%; max-height:100%; object-fit:contain;"
+         alt="arc42 dartboard logo">
 </div>
 ```
 

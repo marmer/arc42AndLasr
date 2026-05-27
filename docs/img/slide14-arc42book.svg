@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+
+    <!--
+      Teal ring gradient — radialGradient in userSpaceOnUse so it applies
+      identically across all concentric circles, simulating a light source
+      from the upper-left (creating the 3D sphere illusion).
+      Gradient center (90,85) is upper-left of the dartboard center (200,200).
+    -->
+    <radialGradient id="tg" cx="90" cy="85" r="295" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#70CAD6"/>  <!-- bright highlight -->
+      <stop offset="30%"  stop-color="#2E8DA0"/>  <!-- mid teal       -->
+      <stop offset="65%"  stop-color="#195F72"/>  <!-- shadow teal    -->
+      <stop offset="100%" stop-color="#0D3B49"/>  <!-- deep shadow    -->
+    </radialGradient>
+
+    <!--
+      Second, slightly desaturated gradient used for the thin inner ring so it
+      reads as darker/recessed compared to the larger rings.
+    -->
+    <radialGradient id="tg2" cx="90" cy="85" r="295" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#55A8B5"/>
+      <stop offset="50%"  stop-color="#1A6070"/>
+      <stop offset="100%" stop-color="#0A2D38"/>
+    </radialGradient>
+
+    <!--
+      Drop shadow on the whole board — offset down-right to match the
+      original's 3D presentation look.
+    -->
+    <filter id="ds" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="3" dy="16" stdDeviation="22" flood-color="#000000" flood-opacity="0.42"/>
+    </filter>
+
+    <!--
+      Soft inner rim on cream rings — darkens the edge where cream meets teal,
+      giving each separator ring a slight inset groove look.
+    -->
+    <radialGradient id="creamRim1" cx="50%" cy="50%" r="50%" gradientUnits="objectBoundingBox">
+      <stop offset="82%" stop-color="transparent"/>
+      <stop offset="100%" stop-color="#A09070" stop-opacity="0.35"/>
+    </radialGradient>
+    <radialGradient id="creamRim2" cx="50%" cy="50%" r="50%" gradientUnits="objectBoundingBox">
+      <stop offset="75%" stop-color="transparent"/>
+      <stop offset="100%" stop-color="#A09070" stop-opacity="0.30"/>
+    </radialGradient>
+
+  </defs>
+
+  <!-- ═══════════════════════════════════════════════════════
+       DARTBOARD RINGS
+       Painted back-to-front (outermost first).
+       Each cream circle covers the center of the previous teal circle,
+       then a new teal circle covers the center of that cream circle, etc.
+       ═══════════════════════════════════════════════════════ -->
+  <g filter="url(#ds)">
+
+    <!-- 1. Outer teal ring (r = 165) -->
+    <circle cx="200" cy="200" r="165" fill="url(#tg)"/>
+
+    <!-- 2. Cream separator 1 (r = 128) — covers outer ring center -->
+    <circle cx="200" cy="200" r="128" fill="#EDE5C3"/>
+    <!-- inner-rim groove effect -->
+    <circle cx="200" cy="200" r="128" fill="url(#creamRim1)"/>
+
+    <!-- 3. Middle teal ring (r = 99) -->
+    <circle cx="200" cy="200" r="99" fill="url(#tg)"/>
+
+    <!-- 4. Cream separator 2 (r = 65) -->
+    <circle cx="200" cy="200" r="65" fill="#EDE5C3"/>
+    <circle cx="200" cy="200" r="65" fill="url(#creamRim2)"/>
+
+    <!-- 5. Inner thin teal ring (r = 39) — distinctly narrow -->
+    <circle cx="200" cy="200" r="39" fill="url(#tg2)"/>
+
+    <!-- 6. Cream bullseye area (r = 30) -->
+    <circle cx="200" cy="200" r="30" fill="#EDE5C3"/>
+
+    <!-- 7. Center teal cap (r = 17) — dark, almost the "pin" -->
+    <circle cx="200" cy="200" r="17" fill="#0D3B49"/>
+
+  </g>
+
+  <!-- ═══════════════════════════════════════════════════════
+       DART / ARROW
+       Enters from upper-right at ~45°, tip at bullseye (200,200).
+
+       Direction from tail (330,70) toward tip (200,200):
+         uf = normalize(-130, 130) = (-0.7071, 0.7071)   [toward tip]
+         ur = (0.7071, 0.7071)                            [right of travel]
+
+       Shaft half-width: 5.5 px
+       Arrowhead half-width: 10 px, length: 26 px
+       ═══════════════════════════════════════════════════════ -->
+
+  <!--
+    Computed geometry:
+      Arrowhead back-center: (200 + 26·0.7071, 200 − 26·0.7071) = (218.4, 181.6) ≈ (218,182)
+      Arrowhead right shoulder: (218 + 10·0.7071, 182 + 10·0.7071) = (225,189)
+      Arrowhead left shoulder:  (218 − 10·0.7071, 182 − 10·0.7071) = (211,175)
+
+      Shaft right at head: (218 + 5.5·0.7071, 182 + 5.5·0.7071) = (222,186)
+      Shaft left at head:  (218 − 5.5·0.7071, 182 − 5.5·0.7071) = (214,178)
+      Shaft right at tail: (330 + 5.5·0.7071, 70 + 5.5·0.7071)  = (334,74)
+      Shaft left at tail:  (330 − 5.5·0.7071, 70 − 5.5·0.7071)  = (326,66)
+
+      Dart tail back-tip (12 px further from center):
+        (330 + 12·0.7071, 70 − 12·0.7071) = (338.5, 61.5) ≈ (339,62)
+
+      Right flight tip (18 px in +ur from back-tip):
+        (339 + 18·0.7071, 62 + 18·0.7071) = (352,75)
+      Left flight tip  (18 px in −ur from back-tip):
+        (339 − 18·0.7071, 62 − 18·0.7071) = (326,49)
+  -->
+
+  <!-- Shaft body -->
+  <polygon points="222,186 334,74 326,66 214,178"
+           fill="#182A34"/>
+
+  <!-- Arrowhead -->
+  <polygon points="200,200 225,189 211,175"
+           fill="#182A34"/>
+
+  <!-- Right flight (extends to lower-right of shaft tail) -->
+  <polygon points="334,74 339,62 352,75"
+           fill="#182A34"/>
+
+  <!-- Left flight (extends to upper-left of shaft tail) -->
+  <polygon points="326,66 339,62 326,49"
+           fill="#182A34"/>
+
+</svg>
