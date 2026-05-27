@@ -53,10 +53,45 @@ The sub-agents (svg-agent, quality-gate) handle Docker invocation internally —
     </div>
     <aside aria-label="speaker notes" class="notes">
         <ul>
-            <li>Note point 1</li>
+            <li>Top-level note (PPTX lvl=0)
+                <ul>
+                    <li>Sub-point (PPTX lvl=1)</li>
+                </ul>
+            </li>
+            <li>Another top-level note</li>
         </ul>
     </aside>
 </section>
+```
+
+**Speaker notes nesting rule (critical):** Speaker notes MUST mirror the PPTX `lvl` attribute on each `<a:pPr>` element:
+- `lvl="0"` (or absent) → top-level `<li>` in the outer `<ul>`
+- `lvl="1"` → nested `<li>` inside a `<ul>` appended inside the parent `<li>`
+- Never flatten all bullets to the same level — always extract `lvl` from the XML before writing notes.
+
+To extract speaker notes with levels, use Python:
+```python
+import zipfile, xml.etree.ElementTree as ET
+PPTX = "arc42AndLasr_talk - envite_original.pptx"
+A = 'http://schemas.openxmlformats.org/drawingml/2006/main'
+P = 'http://schemas.openxmlformats.org/presentationml/2006/main'
+with zipfile.ZipFile(PPTX) as z:
+    # find notesSlide for PPTX slide M via ppt/slides/_rels/slideM.xml.rels
+    rels = ET.fromstring(z.read(f'ppt/slides/_rels/slide{M}.xml.rels'))
+    notes_path = next(
+        r.get('Target').lstrip('../')
+        for r in rels if 'notesSlide' in r.get('Type','')
+    )
+    root = ET.fromstring(z.read('ppt/' + notes_path))
+    for sp in root.iter(f'{{{P}}}sp'):
+        ph = sp.find(f'.//{{{P}}}ph')
+        if ph is not None and ph.get('type') == 'body':
+            for para in sp.findall(f'.//{{{A}}}p'):
+                pPr = para.find(f'{{{A}}}pPr')
+                lvl = int(pPr.get('lvl', 0)) if pPr is not None else 0
+                text = ''.join(r.text for r in para.findall(f'.//{{{A}}}t') if r.text).strip()
+                if text:
+                    print(f"lvl={lvl}: {text}")
 ```
 
 For SVG diagrams:
@@ -65,6 +100,62 @@ For SVG diagrams:
      style="width:100%; max-height:70vh; display:block; margin:auto;"
      alt="...description...">
 ```
+
+## arc42 chapter table (slides 15–23)
+
+Slides 15–23 each show the same 12-chapter two-column reference grid as slide 14, with **only the highlighted chapter changing**. Do NOT redesign the table — copy the grid HTML from `docs/slides/slide-14.html` and swap exactly one cell's style.
+
+**Highlighted cell** (the chapter this slide focuses on):
+```html
+<div style="background:linear-gradient(135deg,#6CCBB2,#90C5E2); border-radius:4px; padding:0.28em 0.5em; color:#fff;">
+    <div style="font-weight:700;">N. Chapter Name</div>
+    <div style="padding-left:0.6em; font-size:0.94em; opacity:0.93;">N.1 Sub-section</div>
+    <!-- more sub-sections if any -->
+</div>
+```
+
+**Non-highlighted cell** (all other chapters):
+```html
+<div style="padding:0.22em 0.45em; border-left:2px solid #c5e6dd; background:#f5fcfa; border-radius:3px;">
+    <div style="font-weight:700; color:#1B1B1B;">N. Chapter Name</div>
+    <div style="color:#666; padding-left:0.6em; font-size:0.94em;">N.1 Sub-section</div>
+</div>
+```
+
+**Grid wrapper** — keep these values unchanged across all slides:
+- `flex: 0 0 63%`
+- `display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(6, auto)`
+- `gap: 0.35em; font-size: 0.42em; line-height: 1.18; align-content: start`
+
+**`.slide-body` override** — add `bottom: 4%` to gain extra vertical room for the dense table:
+```html
+<div class="slide-body" style="display:flex; gap:3%; align-items:stretch; bottom:4%; padding-top:0.1rem; overflow:hidden;">
+```
+
+**arc42 book image** — reused unchanged on every arc42-chapter slide:
+```html
+<div style="flex:0 0 32%; display:flex; align-items:center; justify-content:center; padding:0.4em 0;">
+    <img src="./img/slide14-arc42book.png"
+         style="max-width:100%; max-height:100%; object-fit:contain; object-position:center 30%;
+                filter: grayscale(1) sepia(0.65) saturate(5) hue-rotate(128deg) brightness(1.08)
+                        drop-shadow(0 4px 18px rgba(0,0,0,0.28));"
+         alt="arc42 template book cover">
+</div>
+```
+
+**Chapter → slide mapping** (which chapter is highlighted on which presentation slide):
+| Presentation slide | PPTX slide | Highlighted chapter |
+|---|---|---|
+| 14 | 19 | Ch.1 Introduction & Goals |
+| 15 | 20 | Ch.2 Constraints |
+| 16 | 21 | Ch.3 System Context & Scope |
+| 17 | 22 | Ch.4 Solution Strategy |
+| 18 | 23 | Ch.5 Building Block View |
+| 19 | 24 | Ch.8 Crosscutting Concepts |
+| 20 | 25 | Ch.9 Architectural Decisions |
+| 21 | 26 | Ch.10 Quality Requirements |
+| 22 | 27 | Ch.11 Risks and Technical Debt |
+| 23 | 28 | Ch.12 Glossary |
 
 ## Workflow
 

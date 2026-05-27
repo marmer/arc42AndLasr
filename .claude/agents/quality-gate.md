@@ -66,6 +66,20 @@ Return exactly one line:
 
 If the screenshot shows visible layout problems (broken layout, invisible text, missing images) even if static checks passed, add those as FAIL reasons.
 
+## Additional manual checks (visual)
+
+After the static checks, visually inspect the screenshot for these slide-specific issues:
+
+### arc42 chapter table (slides 14–23)
+- All 12 chapters must be **fully visible** — no overflow, no cutoff at the bottom.
+- Exactly **one** chapter cell should have the teal gradient background (`linear-gradient(135deg,#6CCBB2,#90C5E2)`); all others should have `#f5fcfa` background.
+- The arc42 book image (`slide14-arc42book.png`) must be visible on the right side.
+- If any chapter row is clipped, report `FAIL: chapter table overflows`.
+
+### Speaker notes nesting
+- Notes with mixed `lvl` values in the PPTX must render as nested `<ul>` in HTML — a `lvl=1` note must be a child `<li>` inside a `<ul>` inside a `lvl=0` `<li>`, not a flat sibling.
+- If all `<li>` elements are siblings at the same depth but the PPTX has multiple levels, report `FAIL: speaker notes not properly nested`.
+
 ## Maintaining the script
 `scripts/quality_check.py` is the authoritative source of quality rules.
 
