@@ -132,28 +132,22 @@ Slides 15–23 each show the same 12-chapter two-column reference grid as slide 
 <div class="slide-body" style="display:flex; gap:3%; align-items:stretch; bottom:4%; padding-top:0.1rem; overflow:hidden;">
 ```
 
-**arc42 dartboard logo** — SVG recreation, reused unchanged on every arc42-chapter slide (no CSS filter needed):
-```html
-<div style="flex:0 0 32%; display:flex; align-items:center; justify-content:center; padding:0.4em 0;">
-    <img src="./img/slide14-arc42book.svg"
-         style="max-width:100%; max-height:100%; object-fit:contain;"
-         alt="arc42 dartboard logo">
-</div>
-```
-
 **Chapter → slide mapping** (which chapter is highlighted on which presentation slide):
-| Presentation slide | PPTX slide | Highlighted chapter |
-|---|---|---|
-| 14 | 19 | Ch.1 Introduction & Goals |
-| 15 | 20 | Ch.2 Constraints |
-| 16 | 21 | Ch.3 System Context & Scope |
-| 17 | 22 | Ch.4 Solution Strategy |
-| 18 | 23 | Ch.5 Building Block View |
-| 19 | 24 | Ch.8 Crosscutting Concepts |
-| 20 | 25 | Ch.9 Architectural Decisions |
-| 21 | 26 | Ch.10 Quality Requirements |
-| 22 | 27 | Ch.11 Risks and Technical Debt |
-| 23 | 28 | Ch.12 Glossary |
+
+| Presentation slide | PPTX slide | Highlighted chapter            |
+|--------------------|------------|--------------------------------|
+| 14                 | 19         | Ch.1 Introduction & Goals      |
+| 15                 | 20         | Ch.2 Constraints               |
+| 16                 | 21         | Ch.3 System Context & Scope    |
+| 17                 | 22         | Ch.4 Solution Strategy         |
+| 18                 | 23         | Ch.5, Ch. 6 and Ch. 7          |
+| 19                 | 24         | Ch.8 Crosscutting Concepts     |
+| 20                 | 25         | Ch.9 Architectural Decisions   |
+| 21                 | 26         | Ch.10 Quality Requirements     |
+| 22                 | 27         | Ch.11 Risks and Technical Debt |
+| 23                 | 28         | Ch.12 Glossary                 |
+
+The bottom boarder of the images should align with the bottom border of the table.
 
 ## Workflow
 
