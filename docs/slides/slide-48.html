@@ -1,21 +1,138 @@
-<!-- Slide 48: [WIP] (PPTX slide 54) -->
+<!-- Slide 48: You got some results – What now? (PPTX slide 54) -->
 <section>
     <div class="slide-header">
-        <h2>[Work in Progress]</h2>
+        <h2>You got some results &ndash; What now?</h2>
     </div>
-    <div class="slide-body slide-centered">
-        <p style="font-size:1.2em; color:#aaa;">
-            &#x1F6A7; Slide not yet implemented<br>
-            <small>PPTX source: slide <strong>54</strong></small>
-        </p>
-    </div>
+    <!--
+        PPTX slide 54 — transition slide at the end of the Quality-focused
+        analysis phase. The LASR+ spider chart (image67 / slide45-lasr-plus-detail.png)
+        is reused as the central visual, showing the five-axis quality radar
+        (Security, Installability, Compatibility, Functional Suitability,
+        Portability with target vs. actual overlapping pentagons) as a
+        representative outcome. Three action items float as teal-circle bullets
+        on the left, matching the PPTX text box at ~5.4%,17.1%:
+        Derive next steps / Communicate the results / Improve.
+        The "you are here" LASR Core thumbnail uses the same srcRect crop as
+        slides 39-45 (lower-left Quality-focused Analysis card,
+        clip-path inset(66.98% 57.34% 0% 0.04%)).
+        Footer attribution: "Cards from: https://www.lasr-reviews.org/community"
+    -->
+    <div class="slide-body" style="padding:0; bottom:5%;">
+
+        <!-- LASR+ spider chart (image67 / slide45-lasr-plus-detail.png)
+             PPTX Grafik 5: x=29.27% y=9.38% w=51.34% h=61.43% -->
+        <div style="
+            position:absolute;
+            left:29.27%;
+            top:9.38%;
+            width:51.34%;
+            filter: drop-shadow(6px 6px 10px rgba(51,51,51,0.45));
+        ">
+            <img src="./img/slide45-lasr-plus-detail.png"
+                 alt="LASR+ quality spider chart with five axes: Security, Installability, Compatibility, Functional Suitability, Portability — showing target versus actual overlapping pentagons"
+                 style="display:block; width:100%; height:auto;">
+        </div>
+
+        <!-- Three action items (PPTX text box at 5.4%,17.1% 83.1%x18.7%)
+             Bullets are at lvl=1 in PPTX — rendered as teal-circle bullet list -->
+        <ul style="
+            position:absolute;
+            left:5.4%;
+            top:17.1%;
+            width:25%;
+            margin:0;
+            padding:0;
+            list-style:none;
+            font-family:'Karla', sans-serif;
+            font-size:0.88em;
+            line-height:1.5;
+        ">
+            <li style="display:flex; align-items:flex-start; gap:0.55rem; margin-bottom:0.5em; font-weight:600;">
+                <span style="flex:0 0 0.6rem; width:0.6rem; height:0.6rem; border-radius:50%; background:#6CCBB2; margin-top:0.42em;"></span>
+                <span>Derive next steps</span>
+            </li>
+            <li style="display:flex; align-items:flex-start; gap:0.55rem; margin-bottom:0.5em; font-weight:600;">
+                <span style="flex:0 0 0.6rem; width:0.6rem; height:0.6rem; border-radius:50%; background:#6CCBB2; margin-top:0.42em;"></span>
+                <span>Communicate the results</span>
+            </li>
+            <li style="display:flex; align-items:flex-start; gap:0.55rem; font-weight:600;">
+                <span style="flex:0 0 0.6rem; width:0.6rem; height:0.6rem; border-radius:50%; background:#6CCBB2; margin-top:0.42em;"></span>
+                <span>Improve</span>
+            </li>
+        </ul>
+
+        <!-- "You are here" mini LASR Core diagram, bottom-right
+             PPTX places full duotoned image58 at ~76% left, ~52% top,
+             then a cropped overlay (srcRect l=36 t=66984 r=57340 b=-2)
+             highlighting the lower-left "Quality-focused Analysis" card. -->
+        <div style="position:absolute; right:0.5%; bottom:1%; width:24%;">
+            <!-- Faded base image -->
+            <img src="./img/slide30-overview-thumb.png"
+                 alt="LASR Core Review overview thumbnail showing the Quality-focused Analysis step (lower-left card) as the current step"
+                 style="display:block; width:100%; opacity:0.35;
+                        filter:grayscale(0.4) sepia(0.2) hue-rotate(120deg);">
+            <!-- Highlight strip: lower-left Quality-focused Analysis card at full opacity with drop shadow -->
+            <div aria-hidden="true"
+                 style="position:absolute; inset:0;
+                        clip-path: inset(66.98% 57.34% 0% 0.04%);
+                        filter: drop-shadow(4px 4px 6px rgba(51,51,51,0.55));">
+                <img src="./img/slide30-overview-thumb.png"
+                     alt=""
+                     style="display:block; width:100%;">
+            </div>
+        </div>
+
+        <!-- Footer attribution (PPTX Textfeld 1 at 0%,70.1%) -->
+        <div style="
+            position:absolute;
+            bottom:0;
+            left:0;
+            width:100%;
+            text-align:center;
+            font-family:'Karla', sans-serif;
+            font-size:0.32em;
+            color:#888;
+        ">
+            Cards from: <a href="https://www.lasr-reviews.org/community"
+                           style="color:#3390C3; text-decoration:none;"
+                           target="_blank">https://www.lasr-reviews.org/community</a>
+        </div>
+
+    </div><!-- /.slide-body -->
+
     <aside aria-label="speaker notes" class="notes">
         <ul>
-          <li>Derive next steps: stay as-is, work out solution approaches, dig deeper if necessary (→ LASR+)</li>
-          <li>Communicate the results: update the graphic, close gaps, create new ones</li>
-          <li>Think about overfulfilled goals — they're expensive and create trade-offs against other important goals</li>
-          <li>Bring it to management — to get budgets and approvals</li>
-          <li>Plan and carry out improvements — of course</li>
+            <li>Derive next steps
+                <ul>
+                    <li>Stay as is</li>
+                    <li>Work out solution approaches</li>
+                    <li>Dig deeper if necessary &hellip; LASR+</li>
+                </ul>
+            </li>
+            <li>Communicate the results
+                <ul>
+                    <li>Update the graphic
+                        <ul>
+                            <li>Close gaps, Create new Gaps</li>
+                        </ul>
+                    </li>
+                    <li>Think about Overfulfilled Goals
+                        <ul>
+                            <li>Expensive and tradeoffs for other important goals</li>
+                        </ul>
+                    </li>
+                    <li>Throw it to the management
+                        <ul>
+                            <li>To get Budgets/Approvals</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>Plan and do improvements
+                <ul>
+                    <li>Of course</li>
+                </ul>
+            </li>
         </ul>
     </aside>
 </section>

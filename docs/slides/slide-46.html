@@ -1,18 +1,93 @@
-<!-- Slide 46: [WIP] (PPTX slide 52) -->
+<!-- Slide 46: Quality-focused analysis — Analyses (PPTX slide 52) -->
 <section>
     <div class="slide-header">
-        <h2>[Work in Progress]</h2>
+        <h2>Quality-focused analysis</h2>
     </div>
-    <div class="slide-body slide-centered">
-        <p style="font-size:1.2em; color:#aaa;">
-            &#x1F6A7; Slide not yet implemented<br>
-            <small>PPTX source: slide <strong>52</strong></small>
-        </p>
-    </div>
+    <!--
+        PPTX slide 52 shows the "Analyses" step of the Quality-focused analysis sub-flow
+        (step 4 of the LASR Core Review bottom-left card). The main visual is a large
+        LASR quality-analysis worksheet template (image72.png) showing five sections:
+          - Quality-Goal / Analyzed quality statement(s)
+          - Architectural approaches (positively/negatively related patterns, technologies)
+          - Tradeoffs (side effects with contradictory effects)
+          - Risks and problems
+          - TODOS (derived from risks and open points)
+        The gamepad icon (image55.png / slide40-gamepad.png) sits at the top-right,
+        mirrored horizontally (PPTX flipH=1), recreating the duotone teal accent effect.
+        The "you are here" LASR Core thumbnail at bottom-right highlights the same
+        lower-left "Quality-focused Analysis" card as slides 39-45
+        (srcRect l=36 t=66984 r=57340 b=-2 -> clip-path: inset(66.98% 57.34% 0% 0.04%)).
+    -->
+    <div class="slide-body" style="padding:0; bottom:5%;">
+
+        <!-- Large quality-analysis worksheet (PPTX Grafik 5, rId6=image72.png)
+             PPTX EMU: x=1835696 (20.08%), y=37145 (0.72%), cx=4866995 (53.23%), cy=5106355 (99.28%)
+             The template spans the full slide height, positioned slightly right of centre. -->
+        <div style="
+            position:absolute;
+            left:20.1%;
+            top:0.7%;
+            width:53.2%;
+            filter: drop-shadow(3px 3px 8px rgba(51,51,51,0.25));
+        ">
+            <img src="./img/slide46-image72.png"
+                 alt="LASR quality-analysis worksheet: sections for Quality-Goal, Architectural approaches, Tradeoffs, Risks and problems, and TODOS filled with example sticky notes"
+                 style="display:block; width:100%; height:auto;">
+        </div>
+
+        <!-- Gamepad icon (PPTX Grafik 1, rId4=image55.png, flipH=1)
+             PPTX EMU: x=6804678 (74.42%), y=-308570 (-6.00%), cx=2314467 (25.31%), cy=2314467 (25.31%)
+             Mirrored horizontally to match PPTX flipH attribute.
+             Duotone teal accent recreated via filter chain. -->
+        <div style="
+            position:absolute;
+            left:74.4%;
+            top:-6%;
+            width:25.3%;
+            transform: scaleX(-1);
+            filter: sepia(1) hue-rotate(120deg) saturate(2.5) drop-shadow(3px 3px 6px rgba(51,51,51,0.35));
+        ">
+            <img src="./img/slide40-gamepad.png"
+                 alt="Game controller icon representing gamified analysis approach"
+                 style="display:block; width:100%; height:auto;">
+        </div>
+
+        <!-- "You are here" mini LASR Core diagram, bottom-right
+             Same lower-left "Quality-focused Analysis" card highlight as slides 39-45.
+             PPTX: full image58 at x=75.99% y=69.57% + cropped overlay srcRect l=36 t=66984 r=57340 b=-2
+             clip-path: inset(66.98% 57.34% 0% 0.04%) -->
+        <div style="position:absolute; right:0.5%; bottom:1%; width:24%;">
+            <!-- Faded base image -->
+            <img src="./img/slide30-overview-thumb.png"
+                 alt="LASR Core Review overview thumbnail: the highlighted step is Quality-focused Analysis (lower-left card)"
+                 style="display:block; width:100%; opacity:0.35;
+                        filter:grayscale(0.4) sepia(0.2) hue-rotate(120deg);">
+            <!-- Highlight strip: lower-left Quality-focused Analysis card at full opacity with drop shadow -->
+            <div aria-hidden="true"
+                 style="position:absolute; inset:0;
+                        clip-path: inset(66.98% 57.34% 0% 0.04%);
+                        filter: drop-shadow(4px 4px 6px rgba(51,51,51,0.55));">
+                <img src="./img/slide30-overview-thumb.png"
+                     alt=""
+                     style="display:block; width:100%;">
+            </div>
+        </div>
+
+    </div><!-- /.slide-body -->
+
     <aside aria-label="speaker notes" class="notes">
         <ul>
-          <li>Bottom-up approach works too if you know the system: check existing metrics — test coverage, static code analysis, performance profiling, logs</li>
-          <li>Top-down: time for Miro (or your collaborative whiteboard of choice)</li>
+            <li>Bottom Up works as well if you know</li>
+            <li>Check EXISTING Metrics
+                <ul>
+                    <li>Test Coverage</li>
+                    <li>Static code analysis</li>
+                    <li>Performance Profiling</li>
+                    <li>Logs</li>
+                </ul>
+            </li>
+            <li>Top Down</li>
+            <li>Time for Miro</li>
         </ul>
     </aside>
 </section>

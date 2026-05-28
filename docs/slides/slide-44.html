@@ -1,36 +1,39 @@
-<!-- Slide 44: Quality-focused analysis &mdash; Priorize by Business importance / Technical Risk (PPTX slide 50) -->
+<!-- Slide 44: Quality-focused analysis &mdash; Prioritize by Business Importance &amp; Technical Risk (PPTX slide 50) -->
 <section>
     <div class="slide-header">
         <h2>Quality-focused analysis</h2>
     </div>
 
     <!--
-        PPTX slide 50 lives in the LASR Core Review &ldquo;Quality-focused
-        analysis&rdquo; phase. It is the fourth progressive-reveal slide in
-        the Quality-focused analysis sub-flow:
+        PPTX slide 50 is the fourth progressive-reveal slide in the LASR Core
+        Review "Quality-focused analysis" sub-flow:
             1. Define the focus-topic
             2. Sharpen the results
                Pro-Tip: Use a Utility-Tree / Quality-Tree
-            3. Priorize quality-statements / -requirements by
+            3. Prioritize quality-statements / -requirements by
                   - Business importance
                   - Technical Risk
-        The slide reuses the worked Utility-Tree example introduced in slide 41
-        (root "Flying Spagetti-Monster Client" branching to Security /
-        Usability / Reliability) &mdash; here in its sharpened form, with
-        sub-categories (Confidentiality / Authenticity / Operability / User
-        Errorprotection / Availability) and concrete quality scenarios on the
-        right. Four rotated gradient badges (B:H/T:M, B:H/T:H, B:L/T:H,
-        B:M/T:L) are stuck next to the rightmost leaves to demonstrate the
-        Business-importance / Technical-Risk priorization.
+        The slide reuses the expanded Utility-Tree (image70.png /
+        slide44-utility-tree.png) from slide 43, now annotated with four
+        rotated gradient badge cards (Rechteck shapes, gradient teal→blue,
+        rotated ~-24.7°) showing B (Business importance) and T (Technical
+        Risk) ratings (H/M/L) next to the leaf scenarios.
 
-        A small "you are here" LASR Core thumbnail in the bottom-right
-        highlights the lower-left "Quality-focused Analysis" card of the LASR
-        Core diagram (the step this slide focuses on), matching the PPTX
-        srcRect overlay (l=36, t=66984, r=57340, b=-2 in 1/1000 %).
+        PPTX image positions (EMU relative to 9144000 x 5143500 slide):
+          image70 full (duotone): left=3.74%, top=45.61%, w=69.83%, h=45.59%
+          image70 cropped (srcRect l=74.168%, r=-0.001%): left=55.58%, top=45.55%, w=18.03%, h=45.61%
+          image58 LASR thumbnail (duotone): left=76%, top=69.57%, w=22.17%, h=20.95%
+          image58 highlight overlay (srcRect l=0.036%, t=66.984%, r=57.34%, b=0%):
+              left=76%, top=83.60%, w=9.45%, h=6.92%
+        Rectangles (rot=20115526 = -24.74 deg):
+          Rechteck 1:  left=72.1%, top=43.8%, texts=B:H / T:M
+          Rechteck 10: left=68.8%, top=58.6%, texts=B:H / T:H
+          Rechteck 11: left=70.5%, top=69.0%, texts=B:L / T:H
+          Rechteck 14: left=72.7%, top=76.9%, texts=B:M / T:L
     -->
     <div class="slide-body" style="display:flex; flex-direction:column; gap:0.4rem; padding:0.3rem 1.5% 0.6rem; top:14%; bottom:5%; overflow:hidden;">
 
-        <!-- Numbered step list (mirrors PPTX Textplatzhalter 9, idx=26) -->
+        <!-- ── Numbered step list (PPTX Textplatzhalter 9, idx=26) ── -->
         <ol style="
             font-family:'Karla', sans-serif;
             color:#1B1B1B;
@@ -43,7 +46,7 @@
             <li style="opacity:0.55;">Define the focus-topic</li>
             <li style="opacity:0.55;">Sharpen the results</li>
             <li style="font-weight:700; color:#1B1B1B;">
-                Priorize quality-statements/-requirements by
+                Prioritize quality-statements / -requirements by
                 <ul style="list-style:none; padding-left:0; margin-top:0.18em; font-weight:400;">
                     <li style="display:flex; align-items:center; gap:0.55rem; font-size:0.92em; margin-bottom:0.1em;">
                         <span style="flex:0 0 0.5rem; width:0.5rem; height:0.5rem; border-radius:50%; background:#6CCBB2;"></span>
@@ -57,22 +60,18 @@
             </li>
         </ol>
 
-        <!-- Main content row: Utility-Tree example with B:?/T:? priority badges + LASR "you are here" thumbnail -->
+        <!-- ── Main content row: Utility-Tree + B/T priority badges + LASR "you are here" ── -->
         <div style="flex:1 1 auto; position:relative; min-height:0;">
 
             <!--
-                Large Utility-Tree example image (PPTX Inhaltsplatzhalter 5
-                id=14, image70.png).
-
-                The PPTX renders a duotone-teal version of the tree underneath
-                and a full-colour cropped overlay (image23) restoring the
-                right portion. We render the colour image directly &mdash; the
-                duotone treatment was largely a visual effect to push the
-                priority badges to the foreground, which we accomplish here
-                via z-index.
+                Expanded Utility-Tree (PPTX image70.png → slide44-utility-tree.png).
+                The PPTX renders a duotone-teal full copy plus a full-colour
+                cropped overlay for the right ~26% (srcRect l=74.168%). We render
+                the image once at a reduced opacity to approximate the duotone
+                effect; the priority badges above it draw the eye.
             -->
             <img src="./img/slide44-utility-tree.png"
-                 alt="Sharpened Utility-Tree example: root node 'Flying Spagetti-Monster Client' branches into three LASR quality categories (Security, Usability, Reliability), each with sub-aspects: Security &rarr; Confidentiality (Encryption of data in transit) and Authenticity (...); Usability &rarr; Operability (Every functionality max 2 noodels or clicks away, Screen Reader for all inputs) and User Errorprotection (Hints for wrong inputs); Reliability &rarr; Availability (...)"
+                 alt="Expanded Utility-Tree (Quality-Tree): root node 'Flying Spagetti-Monster Client' branches into Security (Confidentiality &rarr; 'Encryption of data in transit'; Authenticity &rarr; '...'), Usability (Operability &rarr; 'Every functionality max 2 noodels or clicks away', 'Screen Reader for all inputs'; User Errorprotection &rarr; 'Hints for wrong inputs'), Reliability (Availability &rarr; '...'). Priority tags show Business importance and Technical Risk ratings (H/M/L) for each leaf."
                  style="position:absolute;
                         left:3.6%;
                         top:0;
@@ -83,21 +82,18 @@
                         filter: drop-shadow(2px 2px 6px rgba(51,51,51,0.18));">
 
             <!--
-                Four priority badges (B:?/T:?) anchored to the rightmost
-                leaves of the tree. Positions and rotation mirror the PPTX
-                Rechteck shapes (rot=20115526 &rarr; about &minus;22&deg; from
-                horizontal). Coordinates are expressed as percentages of the
-                tree-row area:
-                  badge 1 (B:H / T:M)  PPTX off (6589797, 2252822) &rarr; near top leaf
-                  badge 2 (B:H / T:H)  PPTX off (6295538, 3014748)
-                  badge 3 (B:L / T:H)  PPTX off (6448994, 3549179)
-                  badge 4 (B:M / T:L)  PPTX off (6650829, 3956386) &rarr; near bottom leaf
-                B = Business importance, T = Technical risk
-                H = High, M = Medium, L = Low.
+                Priority badge cards (Rechteck shapes).
+                Positions match PPTX EMU coordinates converted to slide %.
+                Each badge is a small rotated card (gradient teal→blue, ~-24.7°)
+                bearing the B (Business importance) and T (Technical Risk)
+                rating for the adjacent quality scenario leaf.
+                B = Business importance, T = Technical risk; H = High, M = Medium, L = Low.
             -->
             <div aria-hidden="true" style="position:absolute; inset:0; pointer-events:none;">
-                <!-- badge 1: B:H / T:M  (anchored near 'Encryption of data in transit') -->
-                <div style="position:absolute; left:65.5%; top:-2%; width:5.6%; transform:rotate(-22deg);
+
+                <!-- Badge 1: B:H / T:M — top scenario (Encryption of data in transit) -->
+                <div style="position:absolute; left:65.5%; top:-2%; width:5.6%;
+                            transform:rotate(-24.74deg); transform-origin:center center;
                             background:linear-gradient(135deg, #6CCBB2 0%, #90C5E2 100%);
                             color:#fff; border-radius:3px; padding:0.18em 0.35em;
                             font-family:'Verdana', sans-serif; font-size:0.34em;
@@ -105,8 +101,10 @@
                             box-shadow:1px 1px 3px rgba(0,0,0,0.4);">
                     B:H<br>T:M
                 </div>
-                <!-- badge 2: B:H / T:H  (anchored near 'Every functionality max 2 noodels…') -->
-                <div style="position:absolute; left:62.5%; top:17%; width:5.6%; transform:rotate(-22deg);
+
+                <!-- Badge 2: B:H / T:H — second scenario (Every functionality max 2 clicks) -->
+                <div style="position:absolute; left:62.5%; top:17%; width:5.6%;
+                            transform:rotate(-24.74deg); transform-origin:center center;
                             background:linear-gradient(135deg, #6CCBB2 0%, #90C5E2 100%);
                             color:#fff; border-radius:3px; padding:0.18em 0.35em;
                             font-family:'Verdana', sans-serif; font-size:0.34em;
@@ -114,8 +112,10 @@
                             box-shadow:1px 1px 3px rgba(0,0,0,0.4);">
                     B:H<br>T:H
                 </div>
-                <!-- badge 3: B:L / T:H  (anchored near 'Screen Reader for all inputs') -->
-                <div style="position:absolute; left:64%; top:34%; width:5.6%; transform:rotate(-22deg);
+
+                <!-- Badge 3: B:L / T:H — third scenario (Screen Reader for all inputs) -->
+                <div style="position:absolute; left:64%; top:34%; width:5.6%;
+                            transform:rotate(-24.74deg); transform-origin:center center;
                             background:linear-gradient(135deg, #6CCBB2 0%, #90C5E2 100%);
                             color:#fff; border-radius:3px; padding:0.18em 0.35em;
                             font-family:'Verdana', sans-serif; font-size:0.34em;
@@ -123,8 +123,10 @@
                             box-shadow:1px 1px 3px rgba(0,0,0,0.4);">
                     B:L<br>T:H
                 </div>
-                <!-- badge 4: B:M / T:L  (anchored near bottom 'Availability …' leaf) -->
-                <div style="position:absolute; left:66%; top:48%; width:5.6%; transform:rotate(-22deg);
+
+                <!-- Badge 4: B:M / T:L — fourth scenario (Availability leaf) -->
+                <div style="position:absolute; left:66%; top:48%; width:5.6%;
+                            transform:rotate(-24.74deg); transform-origin:center center;
                             background:linear-gradient(135deg, #6CCBB2 0%, #90C5E2 100%);
                             color:#fff; border-radius:3px; padding:0.18em 0.35em;
                             font-family:'Verdana', sans-serif; font-size:0.34em;
@@ -132,24 +134,23 @@
                             box-shadow:1px 1px 3px rgba(0,0,0,0.4);">
                     B:M<br>T:L
                 </div>
+
             </div>
 
             <!--
                 "You are here" mini LASR Core diagram, bottom-right.
-
-                PPTX places a duotoned full image of the LASR Core diagram at
-                lower-right plus a smaller cropped overlay
-                (srcRect l=0.036%, t=66.984%, r=57.34%, b&asymp;0%) with a drop
+                PPTX places a duotoned full LASR Core overview image (image58)
+                at lower-right plus a smaller cropped overlay
+                (srcRect l=0.036%, t=66.984%, r=57.34%, b≈0%) with a drop
                 shadow. The overlay highlights the lower-LEFT "Quality-focused
-                Analysis" card of the LASR Core diagram &mdash; the LASR step
-                whose findings are sharpened &amp; prioritised in this slide.
+                Analysis" card — the current LASR step.
             -->
-            <div style="position:absolute; right:0; bottom:0; width:24%;">
-                <!-- Faded base image -->
+            <div style="position:absolute; right:0; bottom:0; width:30%;">
+                <!-- Faded base image: full LASR Core diagram, duotone teal -->
                 <img src="./img/slide40-overview-thumb.png"
-                     alt="LASR Core Review overview thumbnail: the highlighted step is the 'Quality-focused Analysis' card (lower-left of the diagram), corresponding to prioritising sharpened quality scenarios by business importance and technical risk"
+                     alt="LASR Core Review overview thumbnail: the highlighted step is the lower-left 'Quality-focused Analysis' card, showing the prioritization of sharpened quality scenarios by business importance and technical risk"
                      style="display:block; width:100%; opacity:0.35; filter:grayscale(0.4) sepia(0.2) hue-rotate(120deg);">
-                <!-- Highlight strip: the lower-left "Quality-focused Analysis" card at full opacity with a drop shadow -->
+                <!-- Highlight strip at full opacity with drop shadow -->
                 <div aria-hidden="true"
                      style="position:absolute; inset:0;
                             clip-path: inset(66.98% 57.34% 0% 0.04%);
@@ -166,7 +167,7 @@
 
     <aside aria-label="speaker notes" class="notes">
         <ul>
-            <li>*Also called non-functional requirements</li>
+            <li>Also called non-functional requirements</li>
             <li>Business Importance</li>
             <li>Technical Risk</li>
             <li>Only care / start with High Importance <em>and</em> Risk</li>
