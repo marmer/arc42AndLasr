@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 960 700" xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+
+    <!-- ── Text arc: 55 px rise over 800 px span ─────────────── -->
+    <path id="text-arc" d="M 70,460 Q 480,285 890,460"/>
+
+    <!-- ── Drop-shadow for the text ───────────────────────────── -->
+    <filter id="text-shadow" x="-10%" y="-15%" width="130%" height="150%">
+      <feDropShadow dx="4" dy="5" stdDeviation="2.5"
+                    flood-color="#111c24" flood-opacity="0.85"/>
+    </filter>
+
+    <!-- ── Radial gradients that simulate each white ring casting
+             a slight shadow onto the next inner coloured ring.
+             objectBoundingBox means r="50%" always = circle radius,
+             so one gradient definition works for every circle size. ── -->
+    <radialGradient id="g-blue" cx="50%" cy="50%" r="50%"
+                    gradientUnits="objectBoundingBox">
+      <stop offset="0%"   stop-color="#3390C3"/>
+      <stop offset="78%"  stop-color="#3390C3"/>
+      <stop offset="100%" stop-color="#1a5880"/>
+    </radialGradient>
+
+    <radialGradient id="g-teal" cx="50%" cy="50%" r="50%"
+                    gradientUnits="objectBoundingBox">
+      <stop offset="0%"   stop-color="#6CCBB2"/>
+      <stop offset="78%"  stop-color="#6CCBB2"/>
+      <stop offset="100%" stop-color="#3d8a7a"/>
+    </radialGradient>
+
+  </defs>
+
+  <!-- No background rect → fully transparent outside the rings -->
+
+  <!-- ── Concentric circles centred at (480, 580) ────────────────
+       Ring layout (outside → centre):
+         outer teal 80 px | cream 20 px | blue 80 px | cream 20 px
+       | teal 80 px | cream 20 px | blue 80 px | cream 20 px
+       | dark centre r=110
+
+       Blue and inner teal circles use gradient fills so their outer
+       edge appears darker — simulating the shadow cast by the white
+       ring sitting above each one.
+       ─────────────────────────────────────────────────────────── -->
+
+  <!-- Outer cream ring: the new outermost white band -->
+  <circle cx="480" cy="580" r="530" fill="#f2ede5"/>
+  <!-- Outer teal: now uses gradient because the cream ring above casts shadow -->
+  <circle cx="480" cy="580" r="510" fill="url(#g-teal)"/>
+  <!-- Cream gap -->
+  <circle cx="480" cy="580" r="430" fill="#f2ede5"/>
+  <!-- Blue — gradient shadow at outer edge -->
+  <circle cx="480" cy="580" r="410" fill="url(#g-blue)"/>
+  <!-- Cream gap -->
+  <circle cx="480" cy="580" r="330" fill="#f2ede5"/>
+  <!-- Teal — gradient shadow at outer edge -->
+  <circle cx="480" cy="580" r="310" fill="url(#g-teal)"/>
+  <!-- Cream gap -->
+  <circle cx="480" cy="580" r="230" fill="#f2ede5"/>
+  <!-- Blue inner — gradient shadow at outer edge -->
+  <circle cx="480" cy="580" r="210" fill="url(#g-blue)"/>
+  <!-- Cream gap -->
+  <circle cx="480" cy="580" r="130" fill="#f2ede5"/>
+  <!-- Dark centre -->
+  <circle cx="480" cy="580" r="110" fill="#111c24"/>
+
+  <!-- ── "That's all Folks!" curved along the arc ─────────────── -->
+  <text font-family="'Brush Script MT', 'Segoe Script', 'Monotype Corsiva', cursive"
+        font-size="90"
+        font-weight="bold"
+        fill="#fff8ef"
+        filter="url(#text-shadow)">
+    <textPath xlink:href="#text-arc" href="#text-arc"
+              startOffset="50%" text-anchor="middle">
+      That&#8217;s all Folks!
+    </textPath>
+  </text>
+
+</svg>
