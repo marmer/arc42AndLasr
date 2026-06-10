@@ -4,47 +4,658 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>arc42 &amp; LASR — Architecture Documentation that Works</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Karla:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <title>arc42 and LASR — Understand and improve systems in a playful way</title>
 
     <link rel="stylesheet" href="dist/reset.css">
     <link rel="stylesheet" href="dist/reveal.css">
     <link rel="stylesheet" href="dist/theme/white.css">
-    <link rel="stylesheet" href="dist/plugin/highlight/monokai.css">
     <link rel="stylesheet" href="css/custom.css">
 </head>
 <body>
 <div class="reveal">
     <div class="slides">
 
-        <!-- Slide 1: Title (kept inline so the first slide is visible immediately) -->
-        <section class="slide-title"
-                 data-background-image="./img/title-bg.jpeg"
-                 data-background-position="right center"
-                 data-background-size="95% auto">
-            <div class="title-content">
-                <p class="title-date" id="slide-date"></p>
-                <h1>arc42 &amp; LASR</h1>
-                <p class="title-subtitle">Playful system insights for sustainable improvements</p>
-                <div class="title-author-block">
-                    <p class="title-author">by Mariano Mertinat</p>
-                    <p class="title-role">software-solution-architect, trainer, nerd, father</p>
-                </div>
-            </div>
+        <!-- Slide 1: arc42 and LASR -->
+        <section aria-label="arc42 and LASR">
+            <img src="./img/slide-01.svg" class="slide-img" alt="arc42 and LASR">
             <aside aria-label="speaker notes" class="notes">
+                
+            </aside>
+        </section>
+
+        <!-- Slide 2: Who is this talk for? -->
+        <section aria-label="Who is this talk for?">
+            <img data-src="./img/slide-02.svg" class="slide-img" alt="Who is this talk for?">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Verschlafen Witz</p>
+                <p>Wer arbeitet an Systemen mit Problemen? Fachlichkeit, Technik, Kommunikation oder auch nur die Dokumentation?</p>
+                <p>Leute Mit Hände: Aber Euch macht die Arbeit schon noch spaß oder?</p>
+                <p>Leute ohne Hände: Ist das nicht langweilig?</p>
+                <p>Hattet Ihr je &#x27;nen schlechten Tag auf der Arbeit? Verschlafen, faul, unvorbereitet?</p>
+                <p>Vlt. kann ich ein wenig inspirieren!</p>
+            </aside>
+        </section>
+
+        <!-- Slide 3: ME -->
+        <section aria-label="ME">
+            <img data-src="./img/slide-03.svg" class="slide-img" alt="ME">
+            <aside aria-label="speaker notes" class="notes">
+                <p>At home:</p>
+                <p>Habe ein kross-funktionales agiles Team in der Rolle als…</p>
+                <p>Familienvater von zwei tollen Kindern, mit toller Frau und wenn sie älter sind auch wieder Hobbies</p>
+                <p>At work nearly 14 years:</p>
+                <p>Roles are: Consultant, SW-Architekt, Trainer, u.a. SW-Architects((iSAQB) International Software Architecture Qualification Board, Softwaredokumentation), Developers (TDD)</p>
+                <p>Therefore: Lehren, Planen, Bewerten, Kommunizieren und hin und wieder coden …</p>
+            </aside>
+        </section>
+
+        <!-- Slide 4: Warm Up - What can possibly happen? -->
+        <section aria-label="Warm Up - What can possibly happen?">
+            <img data-src="./img/slide-04.svg" class="slide-img" alt="Warm Up - What can possibly happen?">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Schlechte oder fehlende Risiko oder Problemabschätzungen – was soll schon passieren</p>
+                <p>Außer Geld-Verlust</p>
+                <p>… oder Unternehmensverlust</p>
+                <p>Einige Fälle aus der Praxis</p>
+                <p>Risiken und/oder Probleme waren bekannt</p>
+            </aside>
+        </section>
+
+        <!-- Slide 5: Warm Up - What can possibly happen? -->
+        <section aria-label="Warm Up - What can possibly happen?">
+            <img data-src="./img/slide-05.svg" class="slide-img" alt="Warm Up - What can possibly happen?">
+            <aside aria-label="speaker notes" class="notes">
+                <p># Lebensqualität/Leben</p>
+                <p>Old Technologies. No ressources (tech &amp; people)</p>
+                <p>Arbeitslosenanträge in new York zur Corona Zeit nicht verarbeitbar</p>
+                <p>Alte Technologien (Cobol), Ressourcen verschätzt (Techn. &amp; Personell)</p>
+            </aside>
+        </section>
+
+        <!-- Slide 6: Warm Up - What can possibly happen? -->
+        <section aria-label="Warm Up - What can possibly happen?">
+            <img data-src="./img/slide-06.svg" class="slide-img" alt="Warm Up - What can possibly happen?">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Gesundheit</p>
+                <p>Kein Obamacare für schlecht oder nicht versicherte Amerikaner</p>
+                <p>Probleme mit Integration, Prozesse, Kommunikation</p>
+            </aside>
+        </section>
+
+        <!-- Slide 7: Warm Up - What can possibly happen? -->
+        <section aria-label="Warm Up - What can possibly happen?">
+            <img data-src="./img/slide-07.svg" class="slide-img" alt="Warm Up - What can possibly happen?">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Gefahr</p>
+                <p>Straftäter bis zu 600 Tage zu früh entlassen</p>
+                <p>Fehlende Qualitätssicherung</p>
+            </aside>
+        </section>
+
+        <!-- Slide 8: Warm Up - What can possibly happen? -->
+        <section aria-label="Warm Up - What can possibly happen?">
+            <img data-src="./img/slide-08.svg" class="slide-img" alt="Warm Up - What can possibly happen?">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Leben</p>
+                <p>Notrufe mit 11h Verspätung im System. Min 30 vermeidbare Todesfälle</p>
+                <p>Probleme mit Performance, Skalierbarkeit, Architektur</p>
+                <p>What do all of those cases have in common?</p>
+                <p>There have been People who knew about the risks and Problems</p>
+                <p>Not able to do something aobut it</p>
+            </aside>
+        </section>
+
+        <!-- Slide 9: Warm Up - What can possibly happen? -->
+        <section aria-label="Warm Up - What can possibly happen?">
+            <img data-src="./img/slide-09.svg" class="slide-img" alt="Warm Up - What can possibly happen?">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Nah an „off topic“</p>
+                <p>Riesige humorvolle weitere Sammlung</p>
+            </aside>
+        </section>
+
+        <!-- Slide 10: Warm Up - Now what? -->
+        <section aria-label="Warm Up - Now what?">
+            <img data-src="./img/slide-10.svg" class="slide-img" alt="Warm Up - Now what?">
+            <aside aria-label="speaker notes" class="notes">
+                <p>(Können nicht alles verhindern)</p>
+                <p>(Ziele und Risiken bewusst zu machen und kommunizieren!)</p>
+                <p>(Bekannte Probleme aufzeigen)</p>
+                <p>(Entscheidungen an Wichtigsten Zielen ausrichten)</p>
+                <p>Und welche Fragen sind hier wichtig?</p>
+                <p>Wie komme ich an die Antworten?</p>
+                <p>Wie kommuniziere ich die Ergebnisse?</p>
+            </aside>
+        </section>
+
+        <!-- Slide 11: Warm Up – use proven methods -->
+        <section aria-label="Warm Up – use proven methods">
+            <img data-src="./img/slide-11.svg" class="slide-img" alt="Warm Up – use proven methods">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Hilfreiche Ansätze, über die wir nun nicht sprechen: (auch wenn ich es gern mache)</p>
+                <p>Aus techn. Sicht: Code Reviews, BDD or TDD with example mapping, Static Code Aalysis, Security…</p>
+                <p>Aus fachl. Sicht: Collaborative Modelling Methoden wie Event Storming, Domain Storytelling or User-Story Mapping, good ol‘ Knowledge crunching, pre-mortem</p>
+                <p>Auch nicht detailliert: klassische Software Review Verfahren</p>
+                <p>ATAM, DCAR(Decission Centric Architecture Review), CBAM (Cost Benefit Analysis Method)…</p>
+            </aside>
+        </section>
+
+        <!-- Slide 12: ARC42 & LASR -->
+        <section aria-label="ARC42 &amp; LASR">
+            <img data-src="./img/slide-12.svg" class="slide-img" alt="ARC42 &amp; LASR">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Simplicity (for you)</p>
+                <p>Quality (for the customer)</p>
+                <p>Agility (for the project</p>
+                <p>Fun (for everyone)</p>
+                <p>Lazyness (for you again)</p>
+            </aside>
+        </section>
+
+        <!-- Slide 13: Template for documentation -->
+        <section aria-label="Template for documentation">
+            <img data-src="./img/slide-13.svg" class="slide-img" alt="Template for documentation">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Leichtgewichtiges Dokumentationstemplate</p>
+                <p>Von Gernot Starke und Peter Hruschka</p>
+                <p>Auch Methode, Philosophy und Tipps für</p>
+                <p>Dokumentation, Kommunikation, Herangehensweise, Fragestellungen</p>
+                <p>Aggregiertes, geballtes methodisches Wissen</p>
+                <p>Für mich: Spicker für die wichtigsten Fragen zu Software Systemen</p>
+                <p>Beratung, Entwicklung, Analyse &amp; kleine Reviews</p>
+                <p>Glaube, einige von Euch machen das auch</p>
+            </aside>
+        </section>
+
+        <!-- Slide 14: arc42 Template -->
+        <section aria-label="arc42 Template">
+            <img data-src="./img/slide-14.svg" class="slide-img" alt="arc42 Template">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Hier oft schon großer Mangel</p>
+                <p>(Um Zu wissen, &quot;wie&quot;, braucht man das &quot;was&quot;)</p>
+                <p>(Wie kann man erwarten, das Richtige zu entwickeln?)</p>
+                <p>(Auf PO verlassen ist nicht die Lösung)</p>
+            </aside>
+        </section>
+
+        <!-- Slide 15: arc42 Template -->
+        <section aria-label="arc42 Template">
+            <img data-src="./img/slide-15.svg" class="slide-img" alt="arc42 Template">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Randbedingungen? (Folie 42 ar42)</p>
+                <p>Gesetze, Funktional, Budgets und Personal, … sonst schnell dagegen verstoßen</p>
+            </aside>
+        </section>
+
+        <!-- Slide 16: arc42 Template -->
+        <section aria-label="arc42 Template">
+            <img data-src="./img/slide-16.svg" class="slide-img" alt="arc42 Template">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Einfache Visualisierung und Beschreibung, wo das System techn. Oder fachl. …</p>
+                <p>Nutzer (System oder Menschen)</p>
+                <p>Vererbung von Problemen oder SLAs</p>
+                <p>Mit wen spricht man wann?</p>
+            </aside>
+        </section>
+
+        <!-- Slide 17: arc42 Template -->
+        <section aria-label="arc42 Template">
+            <img data-src="./img/slide-17.svg" class="slide-img" alt="arc42 Template">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Strategie zur Zielerfüllung</p>
+            </aside>
+        </section>
+
+        <!-- Slide 18: arc42 Template -->
+        <section aria-label="arc42 Template">
+            <img data-src="./img/slide-18.svg" class="slide-img" alt="arc42 Template">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Verschiedene Sichten</p>
+                <p>Statische Schnitte und Verteilung</p>
+                <p>Dynamische für laufzeit</p>
+                <p>Jeweils &quot;Zoombar&quot; wie Google Maps</p>
+            </aside>
+        </section>
+
+        <!-- Slide 19: arc42 Template -->
+        <section aria-label="arc42 Template">
+            <img data-src="./img/slide-19.svg" class="slide-img" alt="arc42 Template">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Querschnittliche Konzepte</p>
+                <p>Die viel betreffen, um Zielen zu dienen</p>
+            </aside>
+        </section>
+
+        <!-- Slide 20: arc42 Template -->
+        <section aria-label="arc42 Template">
+            <img data-src="./img/slide-20.svg" class="slide-img" alt="arc42 Template">
+            <aside aria-label="speaker notes" class="notes">
+                <p>WICHTIGE Entwurfsentscheidungen</p>
+                <p>Kontext, Warum, welches Ziel, Tradeoffs, alternativen…</p>
+            </aside>
+        </section>
+
+        <!-- Slide 21: arc42 Template -->
+        <section aria-label="arc42 Template">
+            <img data-src="./img/slide-21.svg" class="slide-img" alt="arc42 Template">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Qualitätsanforderungen und Szenarien</p>
+                <p>Hier auch die Dinge, die es nicht in die Ziele geschafft haben.</p>
+            </aside>
+        </section>
+
+        <!-- Slide 22: arc42 Template -->
+        <section aria-label="arc42 Template">
+            <img data-src="./img/slide-22.svg" class="slide-img" alt="arc42 Template">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Bekannte und Bewusst in Kauf genommene techn. Schulen oder auch einfach nur Risiken aufgrund der Entscheidungen</p>
+            </aside>
+        </section>
+
+        <!-- Slide 23: arc42 Template -->
+        <section aria-label="arc42 Template">
+            <img data-src="./img/slide-23.svg" class="slide-img" alt="arc42 Template">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Wer hier hat nicht hin und wieder mit unklaren Abkürzungen zutun?</p>
+                <p>Aber auch wichtige techn. Oder fachl. begriffe.</p>
+            </aside>
+        </section>
+
+        <!-- Slide 24: THAT‘s it! -->
+        <section aria-label="THAT‘s it!">
+            <img data-src="./img/slide-24.svg" class="slide-img" alt="THAT‘s it!">
+            <aside aria-label="speaker notes" class="notes">
+                <p>If you think about all the chapters, ask questions and dig</p>
+                <p>=&gt; Answers lead to improvements</p>
+                <p>When to document?</p>
+                <p>Whenever you get an answer that fits in</p>
+                <p>Add it to the chapter</p>
+                <p>When it brings some value</p>
+                <p>When not?</p>
+                <p>If it‘s just about documentation!</p>
+                <p>Pretty simple, isn‘t it?</p>
+            </aside>
+        </section>
+
+        <!-- Slide 25: THAT‘s it? -->
+        <section aria-label="THAT‘s it?">
+            <img data-src="./img/slide-25.svg" class="slide-img" alt="THAT‘s it?">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Nobody said the talk will be fun!?</p>
+                <p>I assure you, using it will be fun!</p>
+                <p>It works in nearly every kind of situation.</p>
+                <p>Development</p>
+                <p>Consulting Customers/Managerment</p>
+                <p>System Reviews</p>
+                <p>And using LASR will be fun too.</p>
+                <p>It has a cool name and is about</p>
+                <p>Cards</p>
+                <p>Spider webs</p>
+                <p>Imagination</p>
+                <p>We come closer to a little hands on ;)</p>
+            </aside>
+        </section>
+
+        <!-- Slide 26: What is LASR -->
+        <section aria-label="What is LASR">
+            <img data-src="./img/slide-26.svg" class="slide-img" alt="What is LASR">
+            <aside aria-label="speaker notes" class="notes">
+                <p>LASR - Lightweight Approach for Software Reviews</p>
+                <p>Von Steffan Zörner und Steffan Toth</p>
+                <p>Auch hier geballtes Wissen mit Extrakten verschiedener Review Methoden</p>
+                <p>Extrem leichtgewichtig</p>
+                <p>Abbrechenbar</p>
+                <p>Wenig Beteiligte</p>
+                <p>Teamintern wie extern</p>
+                <p>Liefert schnelle managementtaugliche Ergebnisse</p>
+                <p>Gamification!</p>
+                <p>Funktioniert wunderbar online und offline</p>
+                <p>Passt in agile Prozesse</p>
+                <p>Assign steps to springs</p>
+                <p>Jeweils 1-2h Pro Sprint einplanen</p>
+            </aside>
+        </section>
+
+        <!-- Slide 27: As many stakeholders as possible -->
+        <section aria-label="As many stakeholders as possible">
+            <img data-src="./img/slide-27.svg" class="slide-img" alt="As many stakeholders as possible">
+            <aside aria-label="speaker notes" class="notes">
+                <p>As much stakeholders as possible – at least you</p>
+                <p>It‘s about breaking up the silos - Getting differen POV</p>
+                <p>Whiteboard/Flipchart/Paper and pens – or an online Whiteboard</p>
+                <p>Visualization and collaboration is important - Your Notes are important</p>
+                <p>A fancy LASR Card set – not really, but it‘s more fun</p>
+                <p>You‘ll see it soon - Can do it manually</p>
+                <p>About 4h budget per Stakeholder – or guerilla budget</p>
+                <p>The more time the better - Investment is justified by results</p>
+                <p>Notes Notes Notes</p>
+                <p>„Read between the spoken lines“ and verify</p>
+            </aside>
+        </section>
+
+        <!-- Slide 28: As many stakeholders as possible – at least you,  -->
+        <section aria-label="As many stakeholders as possible – at least you, ">
+            <img data-src="./img/slide-28.svg" class="slide-img" alt="As many stakeholders as possible – at least you, ">
+            <aside aria-label="speaker notes" class="notes">
+                <p>As much stakeholders as possible – at least you</p>
+                <p>It‘s about breaking up the silos - Getting differen POV</p>
+                <p>Whiteboard/Flipchart/Paper and pens – or an online Whiteboard</p>
+                <p>Visualization and collaboration is important - Your Notes are important</p>
+                <p>A fancy LASR Card set – not really, but it‘s more fun</p>
+                <p>You‘ll see it soon - Can do it manually</p>
+                <p>About 4h budget per Stakeholder – or guerilla budget</p>
+                <p>The more time the better - Investment is justified by results</p>
+                <p>Notes Notes Notes</p>
+                <p>„Read between the spoken lines“ and verify</p>
+            </aside>
+        </section>
+
+        <!-- Slide 29: LASR - Overview -->
+        <section aria-label="LASR - Overview">
+            <img data-src="./img/slide-29.svg" class="slide-img" alt="LASR - Overview">
+            <aside aria-label="speaker notes" class="notes">
+                <p>LASR Kernreview (core review)</p>
+                <p>Ergebnisse schnell und Zielgerichtet</p>
+                <p>Verstehe, was Dich speziell macht</p>
+                <p>Erkunde die Architektur</p>
+                <p>#LASR+ Konfidenzerhöhung (Optional Deep Dive) (Nicht Fokus heut)</p>
+                <p>Methoden &amp; um Problemen auf den Grund zu gehen</p>
+                <p>Tauche nach Perlen</p>
+                <p>Umgebung erkunden</p>
+                <p>Primär für kleine Reviews gedacht</p>
+                <p>Auch für große geeignet</p>
+                <p>Manchmal andere Methoden sinnvoller</p>
+                <p>Politik, Komplexität, Ziel des Reviews</p>
+                <p>Nicht Qualitätsorientiert sondern</p>
+                <p>Entscheidungen, Muster, Kosten, Domäne</p>
+                <p>Alternativen im Buch</p>
+            </aside>
+        </section>
+
+        <!-- Slide 30: Why is your system better than others -->
+        <section aria-label="Why is your system better than others">
+            <img data-src="./img/slide-30.svg" class="slide-img" alt="Why is your system better than others">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Key features</p>
+                <p>Unique selling points</p>
+            </aside>
+        </section>
+
+        <!-- Slide 31: System slogans and lean mission statement -->
+        <section aria-label="System slogans and lean mission statement">
+            <img data-src="./img/slide-31.svg" class="slide-img" alt="System slogans and lean mission statement">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Notes Notes Notes</p>
+                <p>#Netflix</p>
+                <p>#Deepl</p>
+                <p>#Prometheus</p>
+                <p>#Threema</p>
+                <p># es kommt noch viel mehr bei rum</p>
+                <p># alles zu lean mission statement verarbeiten.</p>
+                <p>Was drin bleibt, ist wohl besonders wichtig</p>
+            </aside>
+        </section>
+
+        <!-- Slide 32: System slogans and lean mission statement -->
+        <section aria-label="System slogans and lean mission statement">
+            <img data-src="./img/slide-32.svg" class="slide-img" alt="System slogans and lean mission statement">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Notes Notes Notes</p>
+                <p>#Netflix</p>
+                <p>#Deepl</p>
+                <p>#Prometheus</p>
+                <p>#Threema</p>
+                <p># es kommt noch viel mehr bei rum</p>
+                <p># alles zu lean mission statement verarbeiten.</p>
+                <p>Was drin bleibt, ist wohl besonders wichtig</p>
+            </aside>
+        </section>
+
+        <!-- Slide 33: Where to document? -->
+        <section aria-label="Where to document?">
+            <img data-src="./img/slide-33.svg" class="slide-img" alt="Where to document?">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Know about the fundamental requirements.</p>
+                <p>A little about Quality goals</p>
+                <p>A lot of Stakeholder POV</p>
+                <p>Also some constraints</p>
+                <p>Context,</p>
+            </aside>
+        </section>
+
+        <!-- Slide 34: Find the 3-5 most important quality attributes -->
+        <section aria-label="Find the 3-5 most important quality attributes">
+            <img data-src="./img/slide-34.svg" class="slide-img" alt="Find the 3-5 most important quality attributes">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Notes Notes Notes</p>
+                <p>Bestimmen der 3-5 wichtigsten Ziele</p>
+                <p>Gewichten der Ziele</p>
+                <p>Managementtauglichkeit</p>
+            </aside>
+        </section>
+
+        <!-- Slide 35: Where to document? -->
+        <section aria-label="Where to document?">
+            <img data-src="./img/slide-35.svg" class="slide-img" alt="Where to document?">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Hier oft schon großer Mangel</p>
+                <p>(Um Zu wissen, &quot;wie&quot;, braucht man das &quot;was&quot;)</p>
+                <p>(Wie kann man erwarten, das Richtige zu entwickeln?)</p>
+                <p>(Auf PO verlassen ist nicht die Lösung)</p>
+            </aside>
+        </section>
+
+        <!-- Slide 36: Explore the architecture -->
+        <section aria-label="Explore the architecture">
+            <img data-src="./img/slide-36.svg" class="slide-img" alt="Explore the architecture">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Explore the architecture</p>
+                <p>What is known by</p>
+                <p>SOMEONE</p>
+                <p>Tradeoffs</p>
+                <p>Problems</p>
+            </aside>
+        </section>
+
+        <!-- Slide 37: Risk-based review -->
+        <section aria-label="Risk-based review">
+            <img data-src="./img/slide-37.svg" class="slide-img" alt="Risk-based review">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Pints are percent of the number before</p>
+            </aside>
+        </section>
+
+        <!-- Slide 38: Where to document? -->
+        <section aria-label="Where to document?">
+            <img data-src="./img/slide-38.svg" class="slide-img" alt="Where to document?">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Hier oft schon großer Mangel</p>
+                <p>(Um Zu wissen, &quot;wie&quot;, braucht man das &quot;was&quot;)</p>
+                <p>(Wie kann man erwarten, das Richtige zu entwickeln?)</p>
+                <p>(Auf PO verlassen ist nicht die Lösung)</p>
+            </aside>
+        </section>
+
+        <!-- Slide 39: Quality-focused analysis -->
+        <section aria-label="Quality-focused analysis">
+            <img data-src="./img/slide-39.svg" class="slide-img" alt="Quality-focused analysis">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Define the focus Topic</p>
+                <p>By Gap to big/to small</p>
+                <p>Conflicting oppinions</p>
+                <p>No no gap &amp; no strength</p>
+                <p>Big gab but &amp; few weaknesses</p>
+            </aside>
+        </section>
+
+        <!-- Slide 40: Quality-focused analysis -->
+        <section aria-label="Quality-focused analysis">
+            <img data-src="./img/slide-40.svg" class="slide-img" alt="Quality-focused analysis">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Sharpen the results</p>
+            </aside>
+        </section>
+
+        <!-- Slide 41: Quality-focused analysis -->
+        <section aria-label="Quality-focused analysis">
+            <img data-src="./img/slide-41.svg" class="slide-img" alt="Quality-focused analysis">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Pro Tip: Actually it‘s part of LASR plus</p>
+                <p>when you do it in more details</p>
+                <p>But visualization hepls</p>
+            </aside>
+        </section>
+
+        <!-- Slide 42: Quality-focused analysis -->
+        <section aria-label="Quality-focused analysis">
+            <img data-src="./img/slide-42.svg" class="slide-img" alt="Quality-focused analysis">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Pro Tip: Actually it‘s part of LASR plus</p>
+                <p>when you do it in more details</p>
+                <p>But visualization hepls</p>
+            </aside>
+        </section>
+
+        <!-- Slide 43: Quality-focused analysis -->
+        <section aria-label="Quality-focused analysis">
+            <img data-src="./img/slide-43.svg" class="slide-img" alt="Quality-focused analysis">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Pro Tip: Actually it‘s part of LASR plus</p>
+                <p>when you do it in more details</p>
+                <p>But visualization hepls</p>
+            </aside>
+        </section>
+
+        <!-- Slide 44: Quality-focused analysis -->
+        <section aria-label="Quality-focused analysis">
+            <img data-src="./img/slide-44.svg" class="slide-img" alt="Quality-focused analysis">
+            <aside aria-label="speaker notes" class="notes">
+                <p>*Also called non functional requirements</p>
+                <p>Business Importance</p>
+                <p>Rechnical Risk</p>
+                <p>Only care/start with High Importance and Risk</p>
+            </aside>
+        </section>
+
+        <!-- Slide 45: Quality-focused analysis -->
+        <section aria-label="Quality-focused analysis">
+            <img data-src="./img/slide-45.svg" class="slide-img" alt="Quality-focused analysis">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Bottom Up works as well if you know</p>
+                <p>Check EXISTING Metrics</p>
+                <p>Test Coverage</p>
+                <p>Static code analysis</p>
+                <p>Performance Profiling</p>
+                <p>Logs</p>
+                <p>Top Down</p>
+                <p>Time for Miro</p>
+            </aside>
+        </section>
+
+        <!-- Slide 46: Quality-focused analysis -->
+        <section aria-label="Quality-focused analysis">
+            <img data-src="./img/slide-46.svg" class="slide-img" alt="Quality-focused analysis">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Bottom Up works as well if you know</p>
+                <p>Check EXISTING Metrics</p>
+                <p>Test Coverage</p>
+                <p>Static code analysis</p>
+                <p>Performance Profiling</p>
+                <p>Logs</p>
+                <p>Top Down</p>
+                <p>Time for Miro</p>
+            </aside>
+        </section>
+
+        <!-- Slide 47: Quality-focused analysis -->
+        <section aria-label="Quality-focused analysis">
+            <img data-src="./img/slide-47.svg" class="slide-img" alt="Quality-focused analysis">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Bottom Up works as well if you know</p>
+                <p>Check EXISTING Metrics</p>
+                <p>Test Coverage</p>
+                <p>Static code analysis</p>
+                <p>Performance Profiling</p>
+                <p>Logs</p>
+                <p>Top Down</p>
+                <p>Time for Miro</p>
+            </aside>
+        </section>
+
+        <!-- Slide 48: You got some results – What now? -->
+        <section aria-label="You got some results – What now?">
+            <img data-src="./img/slide-48.svg" class="slide-img" alt="You got some results – What now?">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Derive next steps</p>
+                <p>Stay as is</p>
+                <p>Work out solution approaches</p>
+                <p>Dig deeper if necessary … LASR+</p>
+                <p>Communicate the results</p>
+                <p>Update the graphic</p>
+                <p>Close gaps, Create new Gaps</p>
+                <p>Think about Overfulfilled Goals</p>
+                <p>Expensive and tradeoffs for other important goals</p>
+                <p>Thow it to the management</p>
+                <p>To get Budgets/Approvals</p>
+                <p>Plan and do improvements</p>
+                <p>Of course</p>
+            </aside>
+        </section>
+
+        <!-- Slide 49: Where to document? -->
+        <section aria-label="Where to document?">
+            <img data-src="./img/slide-49.svg" class="slide-img" alt="Where to document?">
+            <aside aria-label="speaker notes" class="notes">
+                <p>You‘ll have learned a little about everything ...</p>
+                <p>Just document it</p>
+            </aside>
+        </section>
+
+        <!-- Slide 50: THAT‘s it! -->
+        <section aria-label="THAT‘s it!">
+            <img data-src="./img/slide-50.svg" class="slide-img" alt="THAT‘s it!">
+            <aside aria-label="speaker notes" class="notes">
+                
+            </aside>
+        </section>
+
+        <!-- Slide 51: Start doing and keep on learning! -->
+        <section aria-label="Start doing and keep on learning!">
+            <img data-src="./img/slide-51.svg" class="slide-img" alt="Start doing and keep on learning!">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Dare to</p>
+                <p>Ask Questions</p>
+                <p>Analyze</p>
+                <p>Document</p>
+                <p>Read the awesome unfinished book</p>
+                <p>(german only)</p>
+                <p>Take a look at tha architecture Cheat sheet</p>
+            </aside>
+        </section>
+
+        <!-- Slide 52: ME -->
+        <section aria-label="ME">
+            <img data-src="./img/slide-52.svg" class="slide-img" alt="ME">
+            <aside aria-label="speaker notes" class="notes">
+                <p>Fragen und Feedback gern über</p>
+                <p>LinkedIn</p>
+                <p>andere Kanäle</p>
+                <p>I‘m always happy to help with any of the mentioned methods</p>
+                <p>And my colleagues as well</p>
+            </aside>
+        </section>
+
+        <!-- Slide 53: That‘s it folks -->
+        <section aria-label="That‘s it folks">
+            <img data-src="./img/slide-53.svg" class="slide-img" alt="That‘s it folks">
+            <aside aria-label="speaker notes" class="notes">
+                
             </aside>
         </section>
 
     </div>
 </div>
 
-<script>
-    document.getElementById('slide-date').textContent =
-        new Date().toLocaleDateString('en-CA'); // YYYY-MM-DD
-</script>
 <script src="dist/reveal.js"></script>
 <script src="dist/plugin/notes.js"></script>
 <script src="dist/plugin/markdown.js"></script>
@@ -52,78 +663,20 @@
 <script src="dist/plugin/zoom.js"></script>
 <script src="dist/plugin/highlight.js"></script>
 <script>
-    const SLIDES = [
-        './slides/slide-02.html',
-        './slides/slide-03.html',
-        './slides/slide-04.html',
-        './slides/slide-05.html',
-        './slides/slide-06.html',
-        './slides/slide-07.html',
-        './slides/slide-08.html',
-        './slides/slide-09.html',
-        './slides/slide-10.html',
-        './slides/slide-11.html',
-        './slides/slide-12.html',
-        './slides/slide-13.html',
-        './slides/slide-14.html',
-        './slides/slide-15.html',
-        './slides/slide-16.html',
-        './slides/slide-17.html',
-        './slides/slide-18.html',
-        './slides/slide-19.html',
-        './slides/slide-20.html',
-        './slides/slide-21.html',
-        './slides/slide-22.html',
-        './slides/slide-23.html',
-        './slides/slide-24.html',
-        './slides/slide-25.html',
-        './slides/slide-26.html',
-        './slides/slide-27.html',
-        './slides/slide-28.html',
-        './slides/slide-29.html',
-        './slides/slide-30.html',
-        './slides/slide-31.html',
-        './slides/slide-32.html',
-        './slides/slide-33.html',
-        './slides/slide-34.html',
-        './slides/slide-35.html',
-        './slides/slide-36.html',
-        './slides/slide-37.html',
-        './slides/slide-38.html',
-        './slides/slide-39.html',
-        './slides/slide-40.html',
-        './slides/slide-41.html',
-        './slides/slide-42.html',
-        './slides/slide-43.html',
-        './slides/slide-44.html',
-        './slides/slide-45.html',
-        './slides/slide-46.html',
-        './slides/slide-47.html',
-        './slides/slide-48.html',
-        './slides/slide-49.html',
-        './slides/slide-50.html',
-        './slides/slide-51.html',
-        './slides/slide-52.html',
-        './slides/slide-53.html',
-    ];
-
-    async function loadSlides() {
-        const container = document.querySelector('.slides');
-        const fragments = await Promise.all(SLIDES.map(url => fetch(url).then(r => r.text())));
-        fragments.forEach(html => container.insertAdjacentHTML('beforeend', html));
-
-        Reveal.initialize({
-            hash: true,
-            slideNumber: "c/t",
-            history: true,
-            mouseWheel: true,
-            transition: 'fade',
-            navigationMode: "linear",
-            plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealSearch, RevealZoom ]
-        });
-    }
-
-    loadSlides();
+    Reveal.initialize({
+        width: 960,
+        height: 540,
+        margin: 0,
+        controls: false,
+        progress: false,
+        hash: true,
+        slideNumber: "c/t",
+        history: true,
+        mouseWheel: true,
+        transition: 'fade',
+        navigationMode: "linear",
+        plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealSearch, RevealZoom ]
+    });
 </script>
 </body>
 </html>
