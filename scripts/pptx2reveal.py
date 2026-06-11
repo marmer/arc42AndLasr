@@ -214,8 +214,11 @@ def css_color(hexv, alpha):
     return f'rgba({r},{g},{b},{alpha:.3f})'
 
 
-def fill_css(fill_el, ctx):
-    """fill_el: a:solidFill / a:gradFill / a:noFill / a:pattFill. -> CSS background or None."""
+def fill_css(fill_el, ctx, w=None, h=None):
+    """fill_el: a:solidFill / a:gradFill / a:noFill / a:pattFill. -> CSS background or None.
+
+    w/h (px) let scaled linear gradients stretch their angle to the shape's
+    aspect ratio the way PowerPoint does (45deg = corner to corner)."""
     if fill_el is None:
         return None
     tag = etree.QName(fill_el).localname
@@ -235,6 +238,9 @@ def fill_css(fill_el, ctx):
         ang = 90.0
         if lin is not None:
             ang = int(lin.get('ang', '0')) / 60000.0
+            if lin.get('scaled') == '1' and w and h:
+                rad = math.radians(ang)
+                ang = math.degrees(math.atan2(h * math.sin(rad), w * math.cos(rad))) % 360
         css_ang = (ang + 90.0) % 360
         stop_s = ', '.join(f'{c} {p:.1f}%' for p, c in stops)
         return f'linear-gradient({css_ang:.1f}deg, {stop_s})'
@@ -854,7 +860,12 @@ class Converter:
         ang = float(shdw.get('dir', '0')) / 60000.0
         dx = dist * math.cos(math.radians(ang))
         dy = dist * math.sin(math.radians(ang))
-        col = css_color(*resolve_color(shdw[0], ctx)) if len(shdw) else 'rgba(0,0,0,.4)'
+        if len(shdw):
+            hexv, alpha = resolve_color(shdw[0], ctx)
+            # CSS shadows draw noticeably heavier than PowerPoint's at equal alpha
+            col = css_color(hexv, alpha * 0.55)
+        else:
+            col = 'rgba(0,0,0,.25)'
         if kind == 'drop':
             return f'filter:drop-shadow({fmt(dx)}px {fmt(dy)}px {fmt(blur / 2)}px {col});'
         return f'box-shadow:{fmt(dx)}px {fmt(dy)}px {fmt(blur)}px {col};'
@@ -928,7 +939,9 @@ class Converter:
                     fill_el = find_fill(cand.find(q('p:spPr')), ctx)
                     if fill_el is not None:
                         break
-        bg = fill_css(fill_el, ctx) if fill_el is not None and etree.QName(fill_el).localname != 'blipFill' else None
+        geo_w, geo_h = emu2px(geo['w']), emu2px(geo['h'])
+        bg = (fill_css(fill_el, ctx, geo_w, geo_h)
+              if fill_el is not None and etree.QName(fill_el).localname != 'blipFill' else None)
 
         # theme style references (p:style) act as defaults
         style_el = sp.find(q('p:style'))
@@ -1410,7 +1423,7 @@ class Converter:
             line_height = max(line_height * (1 - lnspc_red), 0.9)
             line_height = f'{line_height:.3f}'
 
-        def spc_px(tag):
+        def spc_px(tag, font_px):
             el = para_child(ppr, cands, tag)
             if el is None:
                 return 0.0
@@ -1419,12 +1432,9 @@ class Converter:
                 return int(pts.get('val')) / 100 * PT_TO_PX
             pct = el.find(q('a:spcPct'))
             if pct is not None:
-                # percent of largest font in para — approximate with first run size
-                return 0.0
+                return int(pct.get('val')) / 100000 * font_px
             return 0.0
 
-        m_top = spc_px('a:spcBef')
-        m_bot = spc_px('a:spcAft')
         mar_l_px = emu2px(mar_l)
         ind_px = emu2px(indent)
 
@@ -1462,6 +1472,7 @@ class Converter:
             bullet_html = f'<span class="bu" style="{bstyle}">{esc(glyph)}</span>'
 
         run_html = []
+        max_sz_px = 0.0
         for r in runs:
             t = etree.QName(r).localname
             if t == 'br':
@@ -1478,16 +1489,45 @@ class Converter:
             if text == '':
                 continue
             sz = float(run_prop(rpr, run_cands, 'sz', '1800')) / 100 * font_scale
+            max_sz_px = max(max_sz_px, sz * PT_TO_PX)
             bold = run_prop(rpr, run_cands, 'b', '0') == '1'
             ital = run_prop(rpr, run_cands, 'i', '0') == '1'
             under = run_prop(rpr, run_cands, 'u', 'none') != 'none'
             strike = run_prop(rpr, run_cands, 'strike', 'noStrike') != 'noStrike'
             base = run_prop(rpr, run_cands, 'baseline', None)
             spc = run_prop(rpr, run_cands, 'spc', None)
-            fill = run_child(rpr, run_cands, 'a:solidFill')
+            # nearest style level wins, regardless of fill type
+            fill = None
+            levels = ([rpr] if rpr is not None else []) + \
+                     [c.find(q('a:defRPr')) for c in run_cands]
+            for lv in levels:
+                if lv is None:
+                    continue
+                for tag_ in ('solidFill', 'pattFill', 'gradFill'):
+                    el_ = lv.find(q('a:' + tag_))
+                    if el_ is not None:
+                        fill = el_
+                        break
+                if fill is not None:
+                    break
             latin = run_child(rpr, run_cands, 'a:latin')
             font = resolve_font(latin.get('typeface') if latin is not None else None, ctx) or ctx.fonts['minor']
-            color = css_color(*resolve_color(fill[0], ctx)) if fill is not None else self._default_run_color
+            color = None
+            fancy_fill = ''
+            if fill is not None and etree.QName(fill).localname == 'solidFill':
+                color = css_color(*resolve_color(fill[0], ctx))
+            elif fill is not None:
+                grad = fill_css(fill, ctx)
+                if grad:
+                    fancy_fill = (f'background:{grad};-webkit-background-clip:text;'
+                                  f'background-clip:text;color:transparent;')
+            else:
+                color = self._default_run_color
+            outline = run_child(rpr, run_cands, 'a:ln')
+            if outline is not None and outline.find(q('a:solidFill')) is not None:
+                ow = emu2px(float(outline.get('w', '9525')))
+                oc = css_color(*resolve_color(outline.find(q('a:solidFill'))[0], ctx))
+                fancy_fill += f'-webkit-text-stroke:{fmt(max(ow, 0.5))}px {oc};'
 
             st = f'font-size:{fmt(sz * PT_TO_PX)}px;'
             st += f"font-family:'{font}',sans-serif;"
@@ -1504,6 +1544,7 @@ class Converter:
                 st += f'text-decoration:{" ".join(deco)};'
             if color:
                 st += f'color:{color};'
+            st += fancy_fill
             if spc:
                 st += f'letter-spacing:{fmt(float(spc) / 100 * PT_TO_PX)}px;'
             if base:
@@ -1520,10 +1561,17 @@ class Converter:
         if not run_html:
             # empty paragraph keeps its line height
             sz = float((end_rpr.get('sz') if end_rpr is not None else None) or run_prop(None, run_cands, 'sz', '1800')) / 100 * font_scale
+            max_sz_px = sz * PT_TO_PX
             run_html.append(f'<span style="font-size:{fmt(sz * PT_TO_PX)}px;">&nbsp;</span>')
             bullet_html = ''
 
-        pstyle = (f'text-align:{ {"l": "left", "ctr": "center", "r": "right", "just": "justify"}.get(algn, "left") };'
+        m_top = spc_px('a:spcBef', max_sz_px)
+        m_bot = spc_px('a:spcAft', max_sz_px)
+
+        # the <p> needs the paragraph's font size, otherwise the line-box strut
+        # inherits Reveal's much larger base font size
+        pstyle = (f'font-size:{fmt(max_sz_px)}px;'
+                  f'text-align:{ {"l": "left", "ctr": "center", "r": "right", "just": "justify"}.get(algn, "left") };'
                   f'line-height:{line_height};margin:{fmt(m_top)}px 0 {fmt(m_bot)}px 0;')
         if mar_l_px or ind_px:
             pstyle += f'padding-left:{fmt(mar_l_px)}px;text-indent:{fmt(ind_px)}px;'
@@ -1624,10 +1672,7 @@ HTML_TEMPLATE = '''<!doctype html>
 
     <title>arc42 &amp; LASR — Playful system insights for sustainable improvements</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400;1,9..40,700&family=Karla:ital,wght@0,400;0,500;0,700;1,400;1,700&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="fonts/fonts.css">
     <link rel="stylesheet" href="dist/reset.css">
     <link rel="stylesheet" href="dist/reveal.css">
     <link rel="stylesheet" href="dist/theme/white.css">
@@ -1683,6 +1728,9 @@ CUSTOM_CSS = '''/* Generated by scripts/pptx2reveal.py — do not edit manually.
     font-family: 'Karla', sans-serif;
     color: #1B1B1B;
     text-align: left;
+    /* webfont metrics run ~1-2% wider than PowerPoint's; tighten tracking so
+       tightly fitted text boxes wrap exactly like the original */
+    letter-spacing: -0.012em;
 }
 
 .pcanvas .tx p {

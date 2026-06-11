@@ -15,6 +15,9 @@
     font-family: 'Karla', sans-serif;
     color: #1B1B1B;
     text-align: left;
+    /* webfont metrics run ~1-2% wider than PowerPoint's; tighten tracking so
+       tightly fitted text boxes wrap exactly like the original */
+    letter-spacing: -0.012em;
 }
 
 .pcanvas .tx p {
