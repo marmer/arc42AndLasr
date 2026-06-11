@@ -604,7 +604,11 @@ class Converter:
     # -------- animation
 
     def parse_animation(self, slide):
-        """Return {spid: click_index} (1-based click order)."""
+        """Return {spid: (click_index, stagger_step)}.
+
+        click_index is 1-based click order (-> Reveal fragment index).
+        stagger_step reproduces afterEffect chains inside one click as a
+        CSS transition delay."""
         timing = slide.find(q('p:timing'))
         out = {}
         if timing is None:
@@ -621,10 +625,19 @@ class Converter:
         click = 0
         for par in child_lst.findall(q('p:par')):
             click += 1
-            for tgt in par.iter(q('p:spTgt')):
-                spid = tgt.get('spid')
-                if spid is not None:
-                    out.setdefault(spid, click)
+            step = 0
+            first = True
+            for ctn in par.iter(q('p:cTn')):
+                node_type = ctn.get('nodeType')
+                if node_type not in ('clickEffect', 'afterEffect', 'withEffect'):
+                    continue
+                if node_type == 'afterEffect' and not first:
+                    step += 1
+                first = False
+                for tgt in ctn.iter(q('p:spTgt')):
+                    spid = tgt.get('spid')
+                    if spid is not None:
+                        out.setdefault(spid, (click, step))
         return out
 
     # -------- conversion of one slide
@@ -816,7 +829,7 @@ class Converter:
                                    frag if not rotated else None)
         if rotated:
             cls = 'grp' + self.frag_class(frag)
-            style = 'position:absolute;' + self.pos_css(geo_abs)
+            style = 'position:absolute;' + self.pos_css(geo_abs) + self.frag_style(frag)
             return [f'<div class="{cls}" style="{style}"{self.frag_attr(frag)}>\n'
                     + '\n'.join(out) + '\n</div>']
         return out
@@ -843,11 +856,18 @@ class Converter:
     def frag_attr(frag):
         if frag is None:
             return ''
-        return f' data-fragment-index="{frag - 1}"'
+        return f' data-fragment-index="{frag[0] - 1}"'
 
     @staticmethod
     def frag_class(frag):
         return ' fragment' if frag is not None else ''
+
+    @staticmethod
+    def frag_style(frag):
+        """Stagger afterEffect chains that share one click."""
+        if frag is None or frag[1] == 0:
+            return ''
+        return f'transition-delay:{frag[1] * 0.4:.1f}s;'
 
     def shadow_css(self, sp_pr, ctx, kind='box'):
         if sp_pr is None:
@@ -969,8 +989,12 @@ class Converter:
             return []
 
         cls = 'shp' + self.frag_class(frag)
-        style = 'position:absolute;' + self.pos_css(geo)
+        style = 'position:absolute;' + self.pos_css(geo) + self.frag_style(frag)
         style += self.shadow_css(sp_pr, ctx, kind='box' if prst in (None, 'rect', 'roundRect') else 'drop')
+
+        if prst in ('line', 'straightConnector1') and (w < 1 or h < 1):
+            return self.axis_line_div(geo, sp_pr.find(q('a:ln')) if sp_pr is not None else None,
+                                      ctx, cls, frag)
 
         if cust_el is not None or prst in ('leftBrace', 'rightBrace', 'line', 'straightConnector1'):
             svg_inner = self.shape_svg(sp_pr, prst, cust_el, w, h, ctx)
@@ -996,14 +1020,67 @@ class Converter:
         style += border
         return [f'<div class="{cls}" style="{style}"{self.frag_attr(frag)}>{text_html}</div>']
 
-    def shape_svg(self, sp_pr, prst, cust_el, w, h, ctx):
-        ln = sp_pr.find(q('a:ln')) if sp_pr is not None else None
-        stroke = 'none'
-        stroke_w = 1.0
+    _svg_grad_n = 0
+
+    def stroke_paint(self, ln, ctx):
+        """Resolve an a:ln to (svg_stroke, svg_defs)."""
+        stroke, defs = 'none', ''
+        if ln is None:
+            return stroke, defs
+        for ch in ln:
+            t = etree.QName(ch).localname
+            if t == 'solidFill':
+                stroke = css_color(*resolve_color(ch[0], ctx))
+            elif t == 'gradFill':
+                Converter._svg_grad_n += 1
+                gid = f'lngrad{Converter._svg_grad_n}'
+                stops = []
+                for gs in ch.findall(q('a:gsLst') + '/' + q('a:gs')):
+                    pos = int(gs.get('pos')) / 1000
+                    hexv, alpha = resolve_color(gs[0], ctx)
+                    stops.append(f'<stop offset="{pos:.1f}%" stop-color="#{hexv}" '
+                                 f'stop-opacity="{alpha:.3f}"/>')
+                lin = ch.find(q('a:lin'))
+                ang = int(lin.get('ang', '0')) / 60000.0 if lin is not None else 0.0
+                rad = math.radians(ang)
+                x2, y2 = math.cos(rad), math.sin(rad)
+                defs = (f'<defs><linearGradient id="{gid}" x1="0" y1="0" '
+                        f'x2="{abs(x2):.3f}" y2="{abs(y2):.3f}">{"".join(stops)}'
+                        f'</linearGradient></defs>')
+                stroke = f'url(#{gid})'
+        return stroke, defs
+
+    def axis_line_div(self, geo, ln, ctx, cls, frag):
+        """Horizontal/vertical lines as divs — SVG strokes with a degenerate
+        bounding box can't carry gradients and scale badly."""
+        w, h = emu2px(geo['w']), emu2px(geo['h'])
+        stroke_w = emu2px(float(ln.get('w', '9525'))) if ln is not None else 1.0
+        bg = None
         if ln is not None:
             for ch in ln:
-                if etree.QName(ch).localname == 'solidFill':
-                    stroke = css_color(*resolve_color(ch[0], ctx))
+                t = etree.QName(ch).localname
+                if t == 'solidFill':
+                    bg = css_color(*resolve_color(ch[0], ctx))
+                elif t == 'gradFill':
+                    bg = fill_css(ch, ctx, max(w, 1), max(h, 1))
+        if bg is None:
+            bg = '#1B1B1B'
+        g = dict(geo)
+        if w >= h:  # horizontal
+            g['y'] -= stroke_w / 2 * EMU_PER_PX
+            g['h'] = stroke_w * EMU_PER_PX
+        else:
+            g['x'] -= stroke_w / 2 * EMU_PER_PX
+            g['w'] = stroke_w * EMU_PER_PX
+        style = ('position:absolute;' + self.pos_css(g)
+                 + f'background:{bg};' + self.frag_style(frag))
+        return [f'<div class="{cls}" style="{style}"{self.frag_attr(frag)}></div>']
+
+    def shape_svg(self, sp_pr, prst, cust_el, w, h, ctx):
+        ln = sp_pr.find(q('a:ln')) if sp_pr is not None else None
+        stroke_w = 1.0
+        stroke, defs = self.stroke_paint(ln, ctx)
+        if ln is not None:
             stroke_w = emu2px(float(ln.get('w', '9525')))
         fill_el = find_fill(sp_pr, ctx)
         fill = 'none'
@@ -1020,10 +1097,10 @@ class Converter:
                 stroke = '#1B1B1B'
         else:  # line / straightConnector1
             d = f'M 0 0 L {w:.1f} {h:.1f}'
-            if stroke == 'none':
+            if stroke == 'none' and not defs:
                 stroke = '#1B1B1B'
         return (f'<svg width="{fmt(w)}" height="{fmt(h)}" viewBox="0 0 {fmt(w)} {fmt(h)}" '
-                f'style="position:absolute;left:0;top:0;overflow:visible;">'
+                f'style="position:absolute;left:0;top:0;overflow:visible;">{defs}'
                 f'<path d="{d}" fill="{fill}" stroke="{stroke}" stroke-width="{fmt(stroke_w)}" '
                 f'stroke-linecap="round" stroke-linejoin="round"/></svg>')
 
@@ -1037,15 +1114,20 @@ class Converter:
         sp_pr = cxn.find(q('p:spPr'))
         w, h = max(emu2px(geo['w']), 0.1), max(emu2px(geo['h']), 0.1)
         ln = sp_pr.find(q('a:ln'))
-        stroke = '#1B1B1B'
+        w0, h0 = emu2px(geo['w']), emu2px(geo['h'])
+        if (w0 < 1 or h0 < 1) and (ln is None or
+                (ln.find(q('a:headEnd')) is None or ln.find(q('a:headEnd')).get('type', 'none') == 'none') and
+                (ln.find(q('a:tailEnd')) is None or ln.find(q('a:tailEnd')).get('type', 'none') == 'none')):
+            return self.axis_line_div(geo, ln, ctx, 'shp' + self.frag_class(frag), frag)
         stroke_w = 1.5
         head = tail = None
+        stroke, defs = self.stroke_paint(ln, ctx)
+        if stroke == 'none' and not defs:
+            stroke = '#1B1B1B'
         if ln is not None:
             for ch in ln:
                 t = etree.QName(ch).localname
-                if t == 'solidFill':
-                    stroke = css_color(*resolve_color(ch[0], ctx))
-                elif t == 'headEnd':
+                if t == 'headEnd':
                     head = ch.get('type', 'none')
                 elif t == 'tailEnd':
                     tail = ch.get('type', 'none')
@@ -1079,9 +1161,9 @@ class Converter:
         cls = 'shp' + self.frag_class(frag)
         geo2 = dict(geo)
         geo2['flipH'] = geo2['flipV'] = False  # baked into coords
-        style = 'position:absolute;' + self.pos_css(geo2)
+        style = 'position:absolute;' + self.pos_css(geo2) + self.frag_style(frag)
         svg = (f'<svg width="{fmt(w)}" height="{fmt(h)}" viewBox="0 0 {fmt(w)} {fmt(h)}" '
-               f'style="position:absolute;left:0;top:0;overflow:visible;">{inner}</svg>')
+               f'style="position:absolute;left:0;top:0;overflow:visible;">{defs}{inner}</svg>')
         return [f'<div class="{cls}" style="{style}"{self.frag_attr(frag)}>{svg}</div>']
 
     # -------- pictures
@@ -1189,7 +1271,8 @@ class Converter:
 
         shadow = self.shadow_css(sp_pr, ctx, kind='drop')
         cls = 'pic' + self.frag_class(frag)
-        style = 'position:absolute;' + self.pos_css(geo) + shadow + opacity
+        style = ('position:absolute;' + self.pos_css(geo) + shadow + opacity
+                 + self.frag_style(frag))
         return [(f'<div class="{cls}" style="{style}"{self.frag_attr(frag)}>'
                  f'<div style="position:absolute;inset:0;overflow:hidden;{radius}">'
                  f'<img src="img/{fname}" style="{img_style}" alt=""></div></div>')]
@@ -1290,7 +1373,7 @@ class Converter:
                 ci += span
             rows_html.append(f'<tr style="height:{fmt(rh)}px;">{"".join(cells)}</tr>')
         cls = 'tblw' + self.frag_class(frag)
-        style = 'position:absolute;' + self.pos_css(geo)
+        style = 'position:absolute;' + self.pos_css(geo) + self.frag_style(frag)
         colgroup = ''.join(f'<col style="width:{fmt(c)}px;">' for c in cols)
         return [(f'<div class="{cls}" style="{style}"{self.frag_attr(frag)}>'
                  f'<table class="ptbl"><colgroup>{colgroup}</colgroup>{"".join(rows_html)}</table></div>')]

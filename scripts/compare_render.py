@@ -23,7 +23,9 @@ from PIL import Image, ImageChops
 from playwright.sync_api import sync_playwright
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CHROME = '/opt/pw-browsers/chromium-1194/chrome-linux/chrome'
+import glob as _glob
+_chromes = sorted(_glob.glob('/opt/pw-browsers/chromium-*/chrome-linux/chrome'))
+CHROME = _chromes[-1] if _chromes else 'chromium'
 W, H = 960, 540
 
 
@@ -33,6 +35,21 @@ def serve(port):
     httpd = http.server.ThreadingHTTPServer(('127.0.0.1', port), handler)
     threading.Thread(target=httpd.serve_forever, daemon=True).start()
     return httpd
+
+
+def ensure_refs():
+    """Render the reference PDF to work/ref_pdf/pNN.png once."""
+    ref_dir = os.path.join(ROOT, 'work', 'ref_pdf')
+    if os.path.isdir(ref_dir) and os.listdir(ref_dir):
+        return
+    import fitz
+    pdf = os.path.join(ROOT, 'arc42AndLasr_talk - envite_original_rendered.pdf')
+    os.makedirs(ref_dir, exist_ok=True)
+    doc = fitz.open(pdf)
+    for i, page in enumerate(doc, 1):
+        pix = page.get_pixmap(matrix=fitz.Matrix(W / page.rect.width, H / page.rect.height))
+        pix.save(os.path.join(ref_dir, f'p{i:02d}.png'))
+    print(f'rendered {len(doc)} reference pages to {ref_dir}')
 
 
 def main():
@@ -45,6 +62,7 @@ def main():
 
     out_dir = os.path.join(ROOT, 'screenshots', 'compare')
     os.makedirs(out_dir, exist_ok=True)
+    ensure_refs()
     serve(args.port)
 
     with sync_playwright() as p:
@@ -52,6 +70,9 @@ def main():
         page = browser.new_page(viewport={'width': W, 'height': H}, device_scale_factor=1)
         page.goto(f'http://127.0.0.1:{args.port}/index.html')
         page.wait_for_function('window.Reveal && Reveal.isReady()')
+        page.evaluate("Reveal.configure({transition: 'none'})")
+        page.add_style_tag(content='.pcanvas .fragment { transition: none !important; '
+                                   'transition-delay: 0s !important; }')
         page.wait_for_timeout(1500)  # fonts
         total = page.evaluate('Reveal.getTotalSlides()')
         wanted = (sorted(int(s) for s in args.slides.split(',')) if args.slides
