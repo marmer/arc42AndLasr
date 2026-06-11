@@ -24,8 +24,11 @@ generated, pixel-faithful conversion:
 - Contact data on the final slide: e-mail replaced with
   `mariano.mertinat@gmail.com`, QR code regenerated as a clean vCard pointing
   to https://arc42andlasr.marmer.online.
-- Verified in Chromium: slides 1, 10, 29 and 53 match the original PDF pages;
-  no `envite`/`novatec`/conference references remain in `docs/`.
+- Verified in Chromium: all 53 slides were screenshotted at 960x540 and
+  pixel-compared against the cleaned PDF pages — median 1.3% differing
+  pixels, all concentrated on glyph edges (anti-aliasing) plus the reveal.js
+  slide-number overlay; no structural differences. No
+  `envite`/`novatec`/conference references remain in `docs/`.
 
 ## Slides
 
