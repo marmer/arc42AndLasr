@@ -245,6 +245,14 @@ PDF_SLUGS = {
     '51x340': 'thats-it-folks-rings-grey-faded',
 }
 
+# Hand-authored inline SVG illustrations replace the original raster icons/
+# metaphors/figures (unified doodle style; see docs/progress.md). The swap is
+# convention-based: if scripts/illustrations/<slug>.svg exists, it is inlined in
+# place of <img src="img/<slug>.(png|jpg)">. A reused icon keeps one source
+# file, so it stays pixel-identical across slides (no jumps between slides).
+ILLUS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'illustrations')
+_DEDUP_SUFFIX_RE = re.compile(r'-\d+$')
+
 BULLET_CHAR_MAP = {
     ('Wingdings', '§'): '▪',
     ('Wingdings', 'Ø'): '➢',
@@ -688,6 +696,8 @@ class Converter:
         self._used_names = {}     # filename -> content sha1 (collision check)
         self.warnings = []
         self._default_run_color = None
+        self._svg_uid = 0         # unique suffix counter for inlined SVG ids
+        self.svg_used = set()      # slugs replaced by an inline SVG (reporting)
 
         pres = self.pkg.xml('ppt/presentation.xml')
         pres_rels = self.pkg.rels('ppt/presentation.xml')
@@ -1460,6 +1470,9 @@ class Converter:
 
     def emit_pic_html(self, pic, blip_fill, geo, ctx, frag, fname, opacity,
                       from_pdf=False):
+        svg = self.inline_svg(fname, geo, frag, opacity)
+        if svg is not None:
+            return svg
         w, h = emu2px(geo['w']), emu2px(geo['h'])
         # bitmaps lifted from the PDF are already cropped to their placement
         src = None if from_pdf else blip_fill.find(q('a:srcRect'))
@@ -1490,6 +1503,33 @@ class Converter:
         return [(f'<div class="{cls}" style="{style}"{self.frag_attr(frag)}>'
                  f'<div style="position:absolute;inset:0;overflow:hidden;{radius}">'
                  f'<img src="img/{fname}" style="{img_style}" alt=""></div></div>')]
+
+    def inline_svg(self, fname, geo, frag, opacity):
+        """If a hand-authored SVG exists for this image's slug, return it as an
+        inlined, absolutely-positioned doodle (replacing the raster <img>).
+
+        Ids are namespaced per occurrence so the shared kit's filter/pattern
+        ids (#rough, #shadow, #hatch, ...) don't collide across the many inline
+        SVGs on the single-page deck."""
+        stem = _DEDUP_SUFFIX_RE.sub('', os.path.splitext(fname)[0])
+        path = os.path.join(ILLUS_DIR, stem + '.svg')
+        if not os.path.exists(path):
+            return None
+        with open(path, encoding='utf-8') as f:
+            svg = f.read()
+        self._svg_uid += 1
+        suf = f'_i{self._svg_uid}'
+        for i in set(re.findall(r'id="([^"]+)"', svg)):
+            svg = re.sub(r'\bid="' + re.escape(i) + r'"', f'id="{i}{suf}"', svg)
+            svg = svg.replace(f'url(#{i})', f'url(#{i}{suf})')
+            svg = svg.replace(f'href="#{i}"', f'href="#{i}{suf}"')
+        svg = svg.replace('<svg ',
+                          '<svg style="position:absolute;inset:0;width:100%;height:100%" ', 1)
+        self.svg_used.add(stem)
+        cls = 'pic' + self.frag_class(frag)
+        style = ('position:absolute;' + self.pos_css(geo) + opacity
+                 + self.frag_style(frag))
+        return [f'<div class="{cls}" style="{style}"{self.frag_attr(frag)}>{svg}</div>']
 
     def extract_from_pdf(self, geo):
         """Find the bitmap drawn at geo's position on the current PDF page and
@@ -1962,8 +2002,14 @@ class Converter:
         os.makedirs(css_dir, exist_ok=True)
         with open(os.path.join(css_dir, 'custom.css'), 'w') as f:
             f.write(CUSTOM_CSS)
+        # drop raster files whose slug is now drawn by an inline SVG instead
+        for f in os.listdir(self.img_dir):
+            if _DEDUP_SUFFIX_RE.sub('', os.path.splitext(f)[0]) in self.svg_used:
+                os.remove(os.path.join(self.img_dir, f))
         for w in self.warnings:
             print('WARN:', w, file=sys.stderr)
+        if self.svg_used:
+            print(f'inline SVG illustrations: {", ".join(sorted(self.svg_used))}')
         print(f'{page} slides written to {self.out_dir}/slides/ and index.html')
 
 

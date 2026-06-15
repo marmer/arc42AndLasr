@@ -92,9 +92,18 @@ example screenshots on slide 36 (Netflix/DeepL/VPN/privacy/metrics), forms
 (lasr-overview, utility-tree, radar) — these keep their "real-world / data" look.
 
 Style spec:
-- **Production**: AI raster images driven by a *locked* style prompt (generated
-  externally — this repo/env has no image model; the generator only swaps the
-  asset files). Anchor reference: the existing `questions-doodle`.
+- **Production** (revised 2026-06-15): **hand-authored inline SVG**, not AI raster.
+  Each motif is an `.svg` source file inlined into the slide by the generator
+  (same mechanism as the animated title background `_title_bg_svg`, so SMIL/CSS
+  animation runs). Consistency is carried by a **shared SVG style-kit** of
+  `<defs>` (palette vars, a single hand-drawn "rough" displacement filter, a
+  hatch `<pattern>`, a torn-paper sticker frame, a soft drop-shadow filter)
+  reused by every motif. Authored/orchestrated via Opus sub-agents; each result
+  is rendered + screenshotted with Playwright for visual QA. Anchor reference:
+  the existing `questions-doodle`.
+- **Animation**: each motif may carry a *very subtle* idle animation (small
+  amplitude, long ease-in-out loop) — e.g. a gentle bob/sway, a slow blink, a
+  drifting "Zzz". Movements stay barely perceptible, never distracting.
 - **Technique**: hand-drawn marker/doodle.
 - **Line**: variable-width brush-pen outline in near-black `#1B1B1B` (pressure
   taper + slight wobble) with light loose cross-hatching for shading.
@@ -126,11 +135,38 @@ Style spec:
 > logos, no gradients, no photorealism.
 
 **Process**: validate the style on one pilot motif first, then roll out the rest.
-Pilot motif = the sleepy audience (slide 2):
-> [master prompt] — Subject: a small audience of three or four simple doodle
-> figures sitting in a row of chairs facing forward; one figure is yawning with
-> closed eyes and a tiny "Zzz" floating above, the others looking bored —
-> conveying a sleepy, unengaged audience during a talk.
+Pilot motif = the sleepy audience (slide 2). **Pilot approved 2026-06-15** (two
+figures — one yawning, one asleep with drifting "Zzz" — on the torn-paper
+sticker; ink line + teal/blue fills + light hatch shading; subtle idle
+animation). It is the canonical reference: `scripts/illustrations/yawning-person-icon.svg`.
+
+**Style kit + mechanism (implemented 2026-06-15):**
+- Each motif is a standalone `<svg viewBox="0 0 300 300">` in
+  `scripts/illustrations/<slug>.svg`. The generator's `inline_svg()` inlines it
+  in place of `<img src="img/<slug>.png">` whenever such a file exists
+  (convention-based; no per-motif config). Ids are namespaced per occurrence so
+  the shared `rough`/`shadow`/`hatch` defs never collide on the single-page deck.
+  Reused icons stay one source file → pixel-identical across slides. The now-
+  unreferenced raster is dropped from `docs/img/` automatically.
+- Full conventions + the verbatim shared `<defs>` live in
+  `scripts/illustrations/STYLE_KIT.md` (the brief every motif must follow).
+
+**Rollout queue** (distinct in-scope motifs; each becomes a `<slug>.svg`):
+`gear-warning-icon`, `hello-badge`, `questions-doodle` (brush upgrade),
+`tech-network-emblem`, `chess-knight-icon`, `building-block-zoom`,
+`arrows-outward-icon`, `thats-it-folks-rings` (+ `-grey`/`-color`/`-grey-faded`),
+`target-dartboard-icon`, `gears-lock-icon`, `circuit-network-icon`,
+`checklist-gear-icon`, `circuit-checks-icon`, `paper-whirl-icon`,
+`book-magnifier-icon`, `feather-icon`, `person-suit-icon`, `gamepad-icon`,
+`running-person-icon`, `audience-people-icon`, `warning-electric-icon`,
+`document-magnifier-icon`.
+Borderline / decide later (default: leave as-is): `comic-humans-vs-computers`,
+`analyze-improve-cycle`, `privacy-bubbles-blue/green`, `lasr-scenario-cards`.
+Out of scope (stay realistic): screenshots (`netflix-signup`, `deepl-translation`,
+`metrics-to-insight`, `vpn-secure-anonymous`, `encryption-privacy-text`),
+forms (`quality-criteria-form`, `sharpen-results-checklist`,
+`performance-efficiency-card`), diagrams (`lasr-overview*`, `lasr-deepdive-steps`,
+`lasr-plus-radar`, `utility-tree*`), book covers, logos, QRs, photos.
 
 ### Regenerating
 ```bash
