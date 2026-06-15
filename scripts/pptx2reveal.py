@@ -56,7 +56,126 @@ def _make_qr_png():
     return buf.getvalue()
 
 
-REPLACED_MEDIA = {'ppt/media/image80.png': _make_qr_png}
+def _make_title_bg():
+    """Render the title-slide background.
+
+    The original PPTX uses an employer-branded landscape photo. We replace it
+    with a license-free, procedurally drawn golden-hour ridgeline that keeps
+    the same impression (warm wide-open nature, distant haze, two tiny hikers
+    on the ridge evoking the "journey"). Fully generated -> no licensing risk.
+    """
+    import math
+    import random
+    from PIL import ImageDraw, ImageFilter
+
+    W, H = 1280, 720
+    rnd = random.Random(42)
+
+    def lerp(a, b, t):
+        return tuple(int(a[i] + (b[i] - a[i]) * t) for i in range(3))
+
+    img = Image.new('RGB', (W, H))
+    px = img.load()
+    horizon = int(H * 0.60)
+    sky_top, sky_mid, sky_horiz = (150, 178, 196), (210, 214, 202), (248, 226, 176)
+    for y in range(horizon):
+        t = y / horizon
+        c = lerp(sky_top, sky_mid, t / 0.6) if t < 0.6 else lerp(sky_mid, sky_horiz, (t - 0.6) / 0.4)
+        for x in range(W):
+            px[x, y] = c
+    for y in range(horizon, H):
+        for x in range(W):
+            px[x, y] = sky_horiz
+
+    # warm sun glow (upper-right, near horizon)
+    glow = Image.new('L', (W, H), 0)
+    gd = glow.load()
+    sx, sy, R = int(W * 0.73), int(H * 0.50), W * 0.46
+    for y in range(H):
+        for x in range(W):
+            d = math.hypot(x - sx, y - sy) / R
+            if d < 1:
+                gd[x, y] = int(230 * (1 - min(1, d ** 1.4)))
+    img = Image.composite(Image.new('RGB', (W, H), (255, 247, 222)), img, glow)
+
+    # fog sea near the horizon
+    fog = Image.new('L', (W, H), 0)
+    ImageDraw.Draw(fog).rectangle([0, horizon - int(H * 0.06), W, horizon + int(H * 0.05)], fill=255)
+    fog = fog.filter(ImageFilter.GaussianBlur(H * 0.05)).point(lambda v: int(v * 0.85))
+    img = Image.composite(Image.new('RGB', (W, H), (244, 243, 238)), img, fog)
+
+    def ridge(base_t, amp_t, color, alpha, f1, f2, ph):
+        base, amp = int(H * base_t), int(H * amp_t)
+        pts = [(x, base - int(amp * (math.sin(x / W * math.pi * f1 + ph) * 0.6
+                                     + math.sin(x / W * math.pi * f2 + ph * 1.7) * 0.4)))
+               for x in range(0, W + 1, 4)]
+        poly = pts + [(W, H), (0, H)]
+        layer = Image.new('RGBA', (W, H), (0, 0, 0, 0))
+        ImageDraw.Draw(layer).polygon(poly, fill=color + (alpha,))
+        return layer, pts
+
+    for args in [(0.585, 0.05, (150, 168, 180), 200, 3, 7, 0.4),
+                 (0.66, 0.07, (120, 140, 110), 235, 2.2, 5, 1.1),
+                 (0.74, 0.08, (96, 112, 72), 250, 1.7, 4.3, 2.2)]:
+        layer, _ = ridge(*args)
+        img.paste(layer, (0, 0), layer)
+
+    # foreground golden hill with vertical sun-warm gradient
+    fg_base, fg_amp = int(H * 0.80), int(H * 0.13)
+    fpts = [(x, fg_base - int(fg_amp * (math.sin(x / W * math.pi * 1.3 + 0.6) * 0.6
+                                        + math.sin(x / W * math.pi * 3.1 + 1.0) * 0.4)))
+            for x in range(0, W + 1, 4)]
+    fmask = Image.new('L', (W, H), 0)
+    ImageDraw.Draw(fmask).polygon(fpts + [(W, H), (0, H)], fill=255)
+    grad = Image.new('RGB', (W, H))
+    gp = grad.load()
+    top_c, bot_c = (214, 180, 104), (92, 74, 42)
+    for y in range(H):
+        c = lerp(top_c, bot_c, min(1, (y - int(H * 0.66)) / (H * 0.34))) if y > int(H * 0.66) else top_c
+        for x in range(W):
+            gp[x, y] = c
+    img.paste(grad, (0, 0), fmask)
+    rim = Image.new('L', (W, H), 0)
+    rd = ImageDraw.Draw(rim)
+    for x, yy in fpts:
+        rd.line([(x, yy), (x, yy + 3)], fill=int(120 * (0.3 + 0.7 * x / W)), width=3)
+    img = Image.composite(Image.new('RGB', (W, H), (255, 238, 196)), img,
+                          rim.filter(ImageFilter.GaussianBlur(2)))
+
+    # two hiker silhouettes on the foreground ridge (right side)
+    def hiker(cx, s, color=(40, 34, 26)):
+        yb = next((yy for x, yy in fpts if abs(x - cx) < 5), fg_base)
+        d = ImageDraw.Draw(img)
+        d.ellipse([cx - 2 * s, yb - 18 * s, cx + 2 * s, yb - 14 * s], fill=color)
+        for a, b in [((cx, yb - 14 * s), (cx, yb - 5 * s)),
+                     ((cx, yb - 12 * s), (cx - 3 * s, yb - 7 * s)),
+                     ((cx, yb - 12 * s), (cx + 3 * s, yb - 8 * s)),
+                     ((cx, yb - 5 * s), (cx - 2 * s, yb + 1 * s)),
+                     ((cx, yb - 5 * s), (cx + 2 * s, yb + 1 * s))]:
+            d.line([a, b], fill=color, width=max(1, int(2 * s)))
+    hiker(int(W * 0.80), 2.2)
+    hiker(int(W * 0.835), 2.0)
+
+    # vignette, softening and a touch of grain
+    vig = Image.new('L', (W, H), 0)
+    ImageDraw.Draw(vig).ellipse([-W * 0.2, -H * 0.2, W * 1.2, H * 1.2], fill=255)
+    vig = vig.filter(ImageFilter.GaussianBlur(H * 0.15)).point(lambda v: 255 - int((255 - v) * 0.45))
+    img = Image.composite(img, Image.new('RGB', (W, H), (20, 18, 14)), vig)
+    img = img.filter(ImageFilter.GaussianBlur(0.6))
+    # deterministic film grain (seeded so regenerated bytes stay stable)
+    noise = Image.frombytes('L', (W, H), bytes(rnd.getrandbits(8) for _ in range(W * H)))
+    img = Image.composite(img, img.point(lambda v: max(0, v - 6)),
+                          noise.point(lambda v: 30 if v >= 128 else 0))
+
+    buf = io.BytesIO()
+    img.save(buf, 'JPEG', quality=88)
+    return buf.getvalue()
+
+
+REPLACED_MEDIA = {
+    'ppt/media/image80.png': _make_qr_png,
+    'ppt/media/image3.jpeg': _make_title_bg,
+}
 A14_NS = 'http://schemas.microsoft.com/office/drawing/2010/main'
 
 # Descriptive output file names. Keyed by (source basename, variant) for
@@ -1814,6 +1933,9 @@ class Converter:
     # -------- driver
 
     def run(self):
+        # clean previous output so stale/renamed images never linger
+        for f in os.listdir(self.img_dir):
+            os.remove(os.path.join(self.img_dir, f))
         sections = []
         page = 0
         for slide_part in self.slide_parts:
