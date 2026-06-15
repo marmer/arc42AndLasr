@@ -32,7 +32,7 @@ removed. The presentation is now **generated** from the original PPTX by
   wrap exactly like the original.
 - Speaker notes are extracted from the notes slides (nested lists).
 - Image files in `docs/img/` get **descriptive names** (e.g.
-  `lasr-plus-radar.png`, `gamepad-icon.png`, `title-background.jpeg`) via the
+  `lasr-plus-radar.png`, `gamepad-icon.png`, `closing-background.jpeg`) via the
   `MEDIA_SLUGS` (source media) and `PDF_SLUGS` (PDF-extracted icons) tables at
   the top of the generator. Identical content is de-duplicated to one file, so
   an icon reused across slides keeps a single name; the rare distinct image
@@ -41,10 +41,12 @@ removed. The presentation is now **generated** from the original PPTX by
 ### Company/conference reference removal
 - envite logo (`ppt/media/image2.png`) blacklisted everywhere.
 - Title-slide background photo (`ppt/media/image3.jpeg`) was an employer-branded
-  landscape. Replaced via `REPLACED_MEDIA` with a license-free, procedurally
-  drawn golden-hour ridgeline (`_make_title_bg`) that keeps the same impression
-  (warm open nature, distant haze, two tiny hikers for the "journey" motif).
-  Fully generated -> no licensing risk; deterministic (seeded grain).
+  landscape. `render_pic` special-cases it and emits an **inline animated SVG**
+  (`_title_bg_svg`): a license-free, procedurally drawn golden-hour ridgeline
+  (sky/sun/foreground gradients + ridge paths) with two stick figures tossing a
+  ball back and forth (SMIL `animateMotion` on a there-and-back arc). Inline so
+  the animation runs (it would not in an `<img>`-referenced SVG). No raster
+  `title-background.*` file is produced anymore.
   NOTE: the closing-slide background (`image1.jpeg`, a turquoise-river photo) is
   likely also employer imagery — left unchanged for now, replace on request.
 - Tagline "Pioneering IT Sustainability" and all envite/novatec/IT-Tage/
