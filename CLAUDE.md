@@ -38,7 +38,8 @@ python3 scripts/compare_render.py --slides 5,12   # subset
 style inheritance through layout/master/theme, fills, tables, SmartArt,
 connectors, custom geometry) into absolutely positioned HTML on a 960×540
 canvas, converts `p:timing` entrance animations into fragments, extracts
-media into `docs/img/` (content-hash names), pulls backgroundRemoval bitmaps
+media into `docs/img/` (descriptive names via `MEDIA_SLUGS`/`PDF_SLUGS`,
+deduplicated by content), pulls backgroundRemoval bitmaps
 out of the rendered PDF, and filters all banned company/conference references
 (`BANNED_RE`, `BANNED_MEDIA`, `TEXT_REPLACEMENTS` at the top of the script).
 
@@ -59,7 +60,7 @@ render (like LibreOffice) shows the underlying photo through the gradient.
 docs/               ← GitHub Pages root (serves index.html)
   index.html        ← GENERATED presentation (all 53 slides)
   css/custom.css    ← GENERATED base styles
-  img/              ← GENERATED slide media (content-hash file names)
+  img/              ← GENERATED slide media (descriptive file names)
   fonts/            ← self-hosted DM Sans + Karla woff2 + fonts.css
   dist/             ← reveal.js compiled assets
   CNAME             ← GitHub Pages custom domain (maintained by the user)
