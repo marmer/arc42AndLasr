@@ -61,8 +61,9 @@ def _make_title_bg():
 
     The original PPTX uses an employer-branded landscape photo. We replace it
     with a license-free, procedurally drawn golden-hour ridgeline that keeps
-    the same impression (warm wide-open nature, distant haze, two tiny hikers
-    on the ridge evoking the "journey"). Fully generated -> no licensing risk.
+    the same impression (warm wide-open nature, distant haze) and adds two tiny
+    figures playing catch on the ridge — a nod to the "playful" subtitle.
+    Fully generated -> no licensing risk.
     """
     import math
     import random
@@ -142,19 +143,36 @@ def _make_title_bg():
     img = Image.composite(Image.new('RGB', (W, H), (255, 238, 196)), img,
                           rim.filter(ImageFilter.GaussianBlur(2)))
 
-    # two hiker silhouettes on the foreground ridge (right side)
-    def hiker(cx, s, color=(40, 34, 26)):
+    # two stick figures playing catch on the foreground ridge (right side),
+    # a small ball in flight between them — nods to the "playful" subtitle
+    def figure(cx, s, facing, color=(40, 34, 26)):
         yb = next((yy for x, yy in fpts if abs(x - cx) < 5), fg_base)
         d = ImageDraw.Draw(img)
+        w = max(1, int(2 * s))
         d.ellipse([cx - 2 * s, yb - 18 * s, cx + 2 * s, yb - 14 * s], fill=color)
-        for a, b in [((cx, yb - 14 * s), (cx, yb - 5 * s)),
-                     ((cx, yb - 12 * s), (cx - 3 * s, yb - 7 * s)),
-                     ((cx, yb - 12 * s), (cx + 3 * s, yb - 8 * s)),
-                     ((cx, yb - 5 * s), (cx - 2 * s, yb + 1 * s)),
-                     ((cx, yb - 5 * s), (cx + 2 * s, yb + 1 * s))]:
-            d.line([a, b], fill=color, width=max(1, int(2 * s)))
-    hiker(int(W * 0.80), 2.2)
-    hiker(int(W * 0.835), 2.0)
+        segs = [((cx, yb - 14 * s), (cx, yb - 5 * s)),                       # torso
+                ((cx, yb - 5 * s), (cx - 2 * s, yb + 1 * s)),                # legs
+                ((cx, yb - 5 * s), (cx + 2 * s, yb + 1 * s)),
+                ((cx, yb - 13 * s), (cx + 5 * s * facing, yb - 19 * s)),     # throwing/catching arm
+                ((cx, yb - 13 * s), (cx - 3 * s * facing, yb - 8 * s))]      # trailing arm
+        for a, b in segs:
+            d.line([a, b], fill=color, width=w)
+        return (cx + 5 * s * facing, yb - 19 * s)  # hand position
+
+    sL, sR = 2.2, 2.1
+    handL = figure(int(W * 0.80), sL, +1)   # thrower, faces right
+    handR = figure(int(W * 0.852), sR, -1)  # catcher, faces left
+
+    # ball on a parabolic arc between the two hands (caught mid-flight)
+    p0, p2 = handL, handR
+    p1 = ((p0[0] + p2[0]) / 2, min(p0[1], p2[1]) - 15 * (sL + sR) / 2)
+    t = 0.6
+    bx = (1 - t) ** 2 * p0[0] + 2 * (1 - t) * t * p1[0] + t ** 2 * p2[0]
+    by = (1 - t) ** 2 * p0[1] + 2 * (1 - t) * t * p1[1] + t ** 2 * p2[1]
+    br = 2.2 * (sL + sR) / 2
+    d = ImageDraw.Draw(img)
+    d.ellipse([bx - br, by - br, bx + br, by + br],
+              fill=(252, 247, 235), outline=(40, 34, 26), width=1)
 
     # vignette, softening and a touch of grain
     vig = Image.new('L', (W, H), 0)
