@@ -8,9 +8,12 @@ automatically — no other wiring.
 
 ## Hard rules (consistency depends on these)
 
-1. **File = one standalone `<svg>`** with `viewBox="0 0 300 300"`
-   `preserveAspectRatio="xMidYMid meet"` and **no** `width`/`height` attrs
-   (the generator sizes it to the slide footprint).
+1. **File = one standalone `<svg>`** with
+   `xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"`,
+   `viewBox="0 0 300 300"`, `preserveAspectRatio="xMidYMid meet"` and **no**
+   `width`/`height` attrs (the generator sizes it to the slide footprint).
+   Include `xmlns:xlink` so the `xlink:href` in animation elements parses when
+   the file is previewed standalone.
 2. **Copy the shared `<defs>` block verbatim** (below). Keep the ids
    `rough`, `shadow`, `hatch` exactly — the generator namespaces them per
    slide so they never collide.
