@@ -1929,17 +1929,33 @@ class Converter:
         # clean previous output so stale/renamed images never linger
         for f in os.listdir(self.img_dir):
             os.remove(os.path.join(self.img_dir, f))
-        sections = []
+        slides_dir = os.path.join(self.out_dir, 'slides')
+        os.makedirs(slides_dir, exist_ok=True)
+        # remove stale slide files
+        for f in os.listdir(slides_dir):
+            if f.endswith('.html'):
+                os.remove(os.path.join(slides_dir, f))
+        placeholders = []
         page = 0
         for slide_part in self.slide_parts:
             slide = self.pkg.xml(slide_part)
             if slide.get('show') == '0':
                 continue
             page += 1
-            sec = self.convert_slide(slide_part, page)
-            sec = self.resolve_links(sec, slide_part)
-            sections.append(sec)
-        html_out = HTML_TEMPLATE.replace('<!--SLIDES-->', '\n\n'.join(sections))
+            sec_html = self.convert_slide(slide_part, page)
+            sec_html = self.resolve_links(sec_html, slide_part)
+            # extract inner content (between <section ...> and </section>)
+            inner = re.sub(r'^<section[^>]*>\n?', '', sec_html)
+            inner = re.sub(r'\n?</section>$', '', inner)
+            pptx_name = os.path.basename(slide_part)
+            slide_file = pptx_name.replace('.xml', '.html')
+            with open(os.path.join(slides_dir, slide_file), 'w') as f:
+                f.write(inner)
+            placeholders.append(
+                f'        <section data-pptx="{pptx_name}" data-page="{page}"'
+                f' data-src="slides/{slide_file}"></section>'
+            )
+        html_out = HTML_TEMPLATE.replace('<!--SLIDES-->', '\n'.join(placeholders))
         with open(os.path.join(self.out_dir, 'index.html'), 'w') as f:
             f.write(html_out)
         css_dir = os.path.join(self.out_dir, 'css')
@@ -1948,7 +1964,7 @@ class Converter:
             f.write(CUSTOM_CSS)
         for w in self.warnings:
             print('WARN:', w, file=sys.stderr)
-        print(f'{page} slides written to {self.out_dir}/index.html')
+        print(f'{page} slides written to {self.out_dir}/slides/ and index.html')
 
 
 def _ph_type_match(a, b):
@@ -1990,18 +2006,26 @@ HTML_TEMPLATE = '''<!doctype html>
 <script src="dist/plugin/zoom.js"></script>
 <script src="dist/plugin/highlight.js"></script>
 <script>
-    Reveal.initialize({
-        width: 960,
-        height: 540,
-        margin: 0,
-        hash: true,
-        slideNumber: "c/t",
-        history: true,
-        mouseWheel: true,
-        transition: 'fade',
-        navigationMode: "linear",
-        plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealSearch, RevealZoom ]
+// Load external slide HTML before Reveal initialises
+(function() {
+    var sections = document.querySelectorAll('section[data-src]');
+    var pending = sections.length;
+    function done() { if (--pending === 0) initReveal(); }
+    sections.forEach(function(sec) {
+        fetch(sec.getAttribute('data-src'))
+            .then(function(r) { return r.text(); })
+            .then(function(t) { sec.innerHTML = t; done(); })
+            .catch(function() { done(); });
     });
+    function initReveal() {
+        Reveal.initialize({
+            width: 960, height: 540, margin: 0, hash: true,
+            slideNumber: "c/t", history: true, mouseWheel: true,
+            transition: 'fade', navigationMode: "linear",
+            plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealSearch, RevealZoom ]
+        });
+    }
+})();
 </script>
 </body>
 </html>
