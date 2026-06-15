@@ -76,6 +76,62 @@ All 53 slides generated and visually verified against the reference PDF:
       (multi-click: slide 31; single-click stagger groups: 26, 29, 30, 34,
       37, 45, 46, 47, 51)
 
+## Unified illustration style for supporting images — 2026-06-15
+
+Many slides carry supporting images (concept icons, metaphor doodles, people
+scenes) that today come from several different generators and clash stylistically
+(flat teal+black outline icons, soft-3D gamepad, pale monochrome silhouettes,
+one ink doodle). Decision: regenerate them in **one unified hand-drawn doodle
+style**. Worked out interactively; locked spec below.
+
+**In scope** (icon/metaphor/figure images only): slides 2, 3, 10, 11, 14–17,
+19–28, 36, 50, 51, 52, plus the reused gamepad on 34/37/45/46/47 and the
+document-with-magnifier icon. **Out of scope** (stay realistic): the product-
+example screenshots on slide 36 (Netflix/DeepL/VPN/privacy/metrics), forms
+(quality-criteria-form), document/UI content, and the LASR diagrams
+(lasr-overview, utility-tree, radar) — these keep their "real-world / data" look.
+
+Style spec:
+- **Production**: AI raster images driven by a *locked* style prompt (generated
+  externally — this repo/env has no image model; the generator only swaps the
+  asset files). Anchor reference: the existing `questions-doodle`.
+- **Technique**: hand-drawn marker/doodle.
+- **Line**: variable-width brush-pen outline in near-black `#1B1B1B` (pressure
+  taper + slight wobble) with light loose cross-hatching for shading.
+- **Palette**: black line + exactly two accents — teal `#6CCBB2` (primary),
+  sky-blue `#90C5E2` (secondary), plus light tints `#B6E5D9` / `#E0F4EF`.
+  No other hues. White ground. (All drawn from the deck's existing palette.)
+- **Carrier**: each subject sits on a slightly irregular torn-edge **white paper
+  sticker with a soft drop shadow** (the `questions-doodle` treatment), unifying
+  every motif.
+- **Composition**: mixed — simple terms as a single centered object, richer
+  statements as a small scene/vignette.
+- **Figures**: simple gender-neutral doodle figures, minimal facial features
+  (dot eyes, line mouth), never recognizable individuals; one consistent cast.
+- **Integration**: layout may be lightly re-fitted per motif (not a strict 1:1
+  footprint swap); a reused icon stays a single de-duplicated file so it remains
+  pixel-identical across its slides (preserves the "no jumps between slides" rule).
+
+**Locked master style prompt** (English, appended to every motif prompt):
+> Hand-drawn doodle illustration. Variable-width brush-pen ink outline in
+> near-black (#1B1B1B) with natural pressure taper and a slight hand-drawn
+> wobble; light loose cross-hatching for shading. Flat color fills using ONLY
+> teal #6CCBB2 (primary accent) and sky-blue #90C5E2 (secondary accent), plus
+> their light tints #B6E5D9 / #E0F4EF for soft areas — no other hues. Subject
+> rests on a slightly irregular, torn-edge white paper sticker with a soft drop
+> shadow, like a sticker placed on the slide. People are simple, gender-neutral
+> doodle figures with minimal facial features (dot eyes, small line mouth),
+> never recognizable individuals. Friendly, playful, clean. Plain white
+> background, subject centered with generous margin. No text or labels, no brand
+> logos, no gradients, no photorealism.
+
+**Process**: validate the style on one pilot motif first, then roll out the rest.
+Pilot motif = the sleepy audience (slide 2):
+> [master prompt] — Subject: a small audience of three or four simple doodle
+> figures sitting in a row of chairs facing forward; one figure is yawning with
+> closed eyes and a tiny "Zzz" floating above, the others looking bored —
+> conveying a sleepy, unengaged audience during a talk.
+
 ### Regenerating
 ```bash
 pip install -r scripts/requirements.txt
