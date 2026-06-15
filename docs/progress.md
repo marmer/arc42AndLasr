@@ -44,7 +44,8 @@ removed. The presentation is now **generated** from the original PPTX by
   landscape. `render_pic` special-cases it and emits an **inline animated SVG**
   (`_title_bg_svg`): a license-free, procedurally drawn golden-hour ridgeline
   (sky/sun/foreground gradients + ridge paths) with two stick figures tossing a
-  ball back and forth (SMIL `animateMotion` on a there-and-back arc). Inline so
+  ball back and forth (SMIL `animateMotion` on a there-and-back arc); each
+  figure's throwing arm swings up in sync as the ball reaches its hand. Inline so
   the animation runs (it would not in an `<img>`-referenced SVG). No raster
   `title-background.*` file is produced anymore.
   NOTE: the closing-slide background (`image1.jpeg`, a turquoise-river photo) is

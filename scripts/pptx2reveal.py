@@ -91,22 +91,35 @@ def _title_bg_svg(W=960, H=540):
     d_fg = ('M %.1f %.1f ' % fpts[0] + ' '.join('L %.1f %.1f' % p for p in fpts[1:])
             + ' L %d %d L 0 %d Z' % (W, H, H))
 
-    def figure(cx, s, facing):
+    # the throwing arm's hand swings between a raised pose (throw/catch) and a
+    # lowered pose (resting), in sync with the ball. The left figure is raised
+    # when the ball is at its hand (cycle ends t=0/1); the right at t=0.5.
+    EASE = 'calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"'
+
+    def figure(cx, s, facing, raised_first):
         yb = min(fpts, key=lambda p: abs(p[0] - cx))[1]
-        segs = [(cx, yb - 14 * s, cx, yb - 5 * s),                  # torso
-                (cx, yb - 5 * s, cx - 2 * s, yb + 1 * s),           # legs
-                (cx, yb - 5 * s, cx + 2 * s, yb + 1 * s),
-                (cx, yb - 13 * s, cx + 5 * s * facing, yb - 19 * s),  # throwing/catching arm
-                (cx, yb - 13 * s, cx - 3 * s * facing, yb - 8 * s)]   # trailing arm
-        lines = ''.join('<line x1="%.1f" y1="%.1f" x2="%.1f" y2="%.1f"/>' % seg for seg in segs)
+        shoulder = (cx, yb - 13 * s)
+        raised = (cx + 5 * s * facing, yb - 19 * s)   # hand up toward partner
+        lowered = (cx + 4 * s * facing, yb - 9 * s)   # hand relaxed/down
+        static = [(cx, yb - 14 * s, cx, yb - 5 * s),                # torso
+                  (cx, yb - 5 * s, cx - 2 * s, yb + 1 * s),         # legs
+                  (cx, yb - 5 * s, cx + 2 * s, yb + 1 * s),
+                  (cx, yb - 13 * s, cx - 3 * s * facing, yb - 8 * s)]  # trailing arm
+        lines = ''.join('<line x1="%.1f" y1="%.1f" x2="%.1f" y2="%.1f"/>' % seg for seg in static)
+        a, b = (raised, lowered) if raised_first else (lowered, raised)
+        arm = ('<line x1="%.1f" y1="%.1f" x2="%.1f" y2="%.1f">'
+               '<animate attributeName="x2" dur="2.4s" repeatCount="indefinite" %s values="%.1f;%.1f;%.1f"/>'
+               '<animate attributeName="y2" dur="2.4s" repeatCount="indefinite" %s values="%.1f;%.1f;%.1f"/>'
+               '</line>') % (shoulder[0], shoulder[1], a[0], a[1],
+                             EASE, a[0], b[0], a[0], EASE, a[1], b[1], a[1])
         g = ('<g stroke="#28221a" stroke-width="%.2f" stroke-linecap="round" fill="#28221a">'
-             '<circle cx="%.1f" cy="%.1f" r="%.1f"/>%s</g>'
-             % (2 * s, cx, yb - 16 * s, 2 * s, lines))
-        return g, (cx + 5 * s * facing, yb - 19 * s)
+             '<circle cx="%.1f" cy="%.1f" r="%.1f"/>%s%s</g>'
+             % (2 * s, cx, yb - 16 * s, 2 * s, lines, arm))
+        return g, raised
 
     sL, sR = 1.7, 1.6
-    gL, hL = figure(W * 0.80, sL, +1)
-    gR, hR = figure(W * 0.852, sR, -1)
+    gL, hL = figure(W * 0.80, sL, +1, raised_first=True)    # raised at t=0/1
+    gR, hR = figure(W * 0.852, sR, -1, raised_first=False)  # raised at t=0.5
     midx = (hL[0] + hR[0]) / 2
     peak = min(hL[1], hR[1]) - 15 * (sL + sR) / 2
     # there-and-back arc so the ball is tossed L->R then R->L, repeating
