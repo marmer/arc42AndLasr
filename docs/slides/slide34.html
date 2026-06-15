@@ -3,7 +3,98 @@
 <div class="shp" style="position:absolute;left:-2.9px;top:94.1px;width:271.4px;height:8px;background:#6CCBB2;"></div>
 <div class="shp" style="position:absolute;left:860.5px;top:494.7px;width:107.4px;height:3.3px;background:#6CCBB2;"></div>
 <div class="shp" style="position:absolute;left:877.9px;top:504.5px;width:72px;height:28.8px;"><div class="tx" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:3.6px 7.2px 3.6px 7.2px;"><p style="font-size:16px;text-align:right;line-height:1.200;margin:0px 0 0px 0;"><span style="font-size:16px;">&nbsp;</span></p></div></div>
-<div class="pic" style="position:absolute;left:661.4px;top:217.1px;width:212.3px;height:212.3px;filter:drop-shadow(10.4px 10.4px 15.3px rgba(51,51,51,0.358));"><div style="position:absolute;inset:0;overflow:hidden;"><img src="img/audience-people-icon.png" style="position:absolute;left:0;top:0;width:100%;height:100%;" alt=""></div></div>
+<div class="pic" style="position:absolute;left:661.4px;top:217.1px;width:212.3px;height:212.3px;"><svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <!-- ===== shared style kit (keep identical across all motifs) ===== -->
+    <filter id="rough_i16" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.014" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="shadow_i16" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#1b1b1b" flood-opacity="0.16"/>
+    </filter>
+    <pattern id="hatch_i16" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#1b1b1b" stroke-width="1" opacity="0.22"/>
+    </pattern>
+  </defs>
+
+  <!-- torn-paper sticker -->
+  <g filter="url(#shadow_i16)">
+    <path d="M22,30 Q16,16 34,17 L256,13 Q288,12 286,36 L289,250 Q291,272 268,271 L42,274 Q20,276 19,253 Z"
+          fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4" stroke-opacity="0.18" filter="url(#rough_i16)"/>
+  </g>
+
+  <!-- artwork -->
+  <g id="artwork_i16" filter="url(#rough_i16)" fill="none" stroke="#1b1b1b" stroke-width="3"
+     stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- ground line -->
+    <path d="M44,236 L256,236"/>
+
+    <!-- ===== BACK ROW (two figures, slightly smaller, set behind) ===== -->
+
+    <!-- figure C : back-left, blue -->
+    <g>
+      <path d="M76,212 L80,172 Q94,160 108,172 L112,212 Z" fill="#90C5E2"/>
+      <path d="M97,166 Q108,162 108,172 L112,212 L98,212 Z" fill="url(#hatch_i16)" stroke="none"/>
+      <circle cx="94" cy="146" r="14" fill="#ffffff"/>
+      <g stroke-width="2.2">
+        <circle cx="89" cy="145" r="1.4" fill="#1b1b1b" stroke="none"/>
+        <circle cx="99" cy="145" r="1.4" fill="#1b1b1b" stroke="none"/>
+        <path d="M90,153 Q94,155 98,153"/>
+      </g>
+    </g>
+
+    <!-- figure D : back-right, teal tint -->
+    <g>
+      <path d="M192,212 L196,172 Q210,160 224,172 L228,212 Z" fill="#B6E5D9"/>
+      <path d="M213,166 Q224,162 224,172 L228,212 L214,212 Z" fill="url(#hatch_i16)" stroke="none"/>
+      <circle cx="210" cy="146" r="14" fill="#ffffff"/>
+      <g stroke-width="2.2">
+        <circle cx="205" cy="145" r="1.4" fill="#1b1b1b" stroke="none"/>
+        <circle cx="215" cy="145" r="1.4" fill="#1b1b1b" stroke="none"/>
+        <path d="M206,153 Q210,155 214,153"/>
+      </g>
+    </g>
+
+    <!-- ===== FRONT ROW (two figures, full pilot size r=16) ===== -->
+
+    <!-- figure A : front-left, teal -->
+    <g>
+      <path d="M118,236 L122,184 Q140,170 158,184 L162,236 Z" fill="#6CCBB2"/>
+      <path d="M143,178 Q158,174 158,184 L162,236 L145,236 Z" fill="url(#hatch_i16)" stroke="none"/>
+      <path d="M134,184 L134,174 M146,184 L146,174"/>
+      <circle cx="140" cy="154" r="16" fill="#ffffff"/>
+      <g stroke-width="2.2">
+        <circle cx="134" cy="153" r="1.6" fill="#1b1b1b" stroke="none"/>
+        <circle cx="146" cy="153" r="1.6" fill="#1b1b1b" stroke="none"/>
+        <path d="M134,162 Q140,165 146,162"/>
+      </g>
+      <!-- attentive raised arm (hand up) -->
+      <path d="M124,200 Q113,182 124,164"/>
+      <path d="M160,206 L166,216"/>
+    </g>
+
+    <!-- figure B : front-right, blue -->
+    <g>
+      <path d="M150,236 L154,184 Q172,170 190,184 L194,236 Z" fill="#90C5E2"/>
+      <path d="M175,178 Q190,174 190,184 L194,236 L177,236 Z" fill="url(#hatch_i16)" stroke="none"/>
+      <path d="M166,184 L166,174 M178,184 L178,174"/>
+      <circle cx="172" cy="154" r="16" fill="#ffffff"/>
+      <g stroke-width="2.2">
+        <circle cx="166" cy="153" r="1.6" fill="#1b1b1b" stroke="none"/>
+        <circle cx="178" cy="153" r="1.6" fill="#1b1b1b" stroke="none"/>
+        <path d="M166,162 Q172,165 178,162"/>
+      </g>
+      <path d="M156,206 L150,216"/>
+      <path d="M192,206 L198,216"/>
+    </g>
+
+  </g>
+
+  <animateTransform xlink:href="#artwork_i16" attributeName="transform" type="translate" values="0,0;0,1.4;0,0" dur="5.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/>
+</svg>
+</div>
 <div class="shp" style="position:absolute;left:24.9px;top:122.5px;width:915.5px;height:357.8px;"><div class="tx" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-start;padding:4.8px 9.6px 4.8px 9.6px;"><p style="font-size:24px;text-align:left;line-height:1.320;margin:6px 0 0px 0;padding-left:14.2px;text-indent:-14.2px;"><span class="bu" style="display:inline-block;width:14.2px;text-indent:0;color:#6CCBB2;">•</span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;">As </span><span style="font-size:24px;font-family:'Karla',sans-serif;text-decoration:line-through;color:#1B1B1B;">many</span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;"> </span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;">stakeholders</span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;"> </span><span style="font-size:24px;font-family:'Karla',sans-serif;text-decoration:line-through;color:#1B1B1B;">as</span><span style="font-size:24px;font-family:'Karla',sans-serif;text-decoration:line-through;color:#1B1B1B;"> possible</span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;"> – at least </span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;">you</span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;">, </span></p><p style="font-size:24px;text-align:left;line-height:1.320;margin:6px 0 0px 0;padding-left:14.2px;text-indent:-14.2px;"><span style="font-size:24px;">&nbsp;</span></p><p style="font-size:24px;text-align:left;line-height:1.320;margin:6px 0 0px 0;padding-left:14.2px;text-indent:-14.2px;"><span class="bu" style="display:inline-block;width:14.2px;text-indent:0;color:#6CCBB2;">•</span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;">whiteboard</span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;">/</span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;">flipchart</span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;">/</span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;">paper</span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;"> and </span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;">pens</span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;"> – </span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;">or</span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;"> an online </span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;">whiteboard</span></p><p style="font-size:24px;text-align:left;line-height:1.320;margin:6px 0 0px 0;padding-left:14.2px;text-indent:-14.2px;"><span style="font-size:24px;">&nbsp;</span></p><p style="font-size:24px;text-align:left;line-height:1.320;margin:6px 0 0px 0;padding-left:14.2px;text-indent:-14.2px;"><span class="bu" style="display:inline-block;width:14.2px;text-indent:0;color:#6CCBB2;">•</span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;">LASR-card </span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;">set</span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;"> – digital </span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;">version</span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;"> </span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;">is</span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;"> </span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;">free</span></p><p style="font-size:24px;text-align:left;line-height:1.320;margin:6px 0 0px 0;padding-left:14.2px;text-indent:-14.2px;"><span style="font-size:24px;">&nbsp;</span></p><p style="font-size:24px;text-align:left;line-height:1.320;margin:6px 0 0px 0;padding-left:14.2px;text-indent:-14.2px;"><span class="bu" style="display:inline-block;width:14.2px;text-indent:0;color:#6CCBB2;">•</span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;">about</span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;"> 4h per Stakeholder – </span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;">or</span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;"> </span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;">guerilla</span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;"> </span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;">budget</span></p><p style="font-size:24px;text-align:left;line-height:1.320;margin:6px 0 0px 0;padding-left:14.2px;text-indent:-14.2px;"><span style="font-size:24px;">&nbsp;</span></p><p style="font-size:24px;text-align:left;line-height:1.320;margin:6px 0 0px 0;padding-left:14.2px;text-indent:-14.2px;"><span class="bu" style="display:inline-block;width:14.2px;text-indent:0;color:#6CCBB2;">•</span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;">NOTES </span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;">NOTES</span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;"> </span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;">NOTES</span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;"> –</span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;">during</span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;"> </span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;">every</span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;"> </span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;">converations</span><span style="font-size:24px;font-family:'Karla',sans-serif;color:#1B1B1B;">!</span></p><p style="font-size:24px;text-align:left;line-height:1.320;margin:6px 0 0px 0;padding-left:14.2px;text-indent:-14.2px;"><span style="font-size:24px;">&nbsp;</span></p></div></div>
 <div class="shp" style="position:absolute;left:24.9px;top:11.7px;width:853px;height:78.1px;"><div class="tx" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:4.8px 9.6px 4.8px 9.6px;"><p style="font-size:48px;text-align:left;line-height:1.320;margin:0px 0 0px 0;"><span style="font-size:48px;font-family:'DM Sans',sans-serif;font-weight:700;color:#1B1B1B;">LASR Setup</span></p></div></div>
 </div>

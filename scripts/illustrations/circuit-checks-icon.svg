@@ -1,0 +1,95 @@
+<svg viewBox="0 0 300 300" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <!-- ===== shared style kit (keep identical across all motifs) ===== -->
+    <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.014" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#1b1b1b" flood-opacity="0.16"/>
+    </filter>
+    <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#1b1b1b" stroke-width="1" opacity="0.22"/>
+    </pattern>
+  </defs>
+
+  <!-- torn-paper sticker -->
+  <g filter="url(#shadow)">
+    <path d="M22,30 Q16,16 34,17 L256,13 Q288,12 286,36 L289,250 Q291,272 268,271 L42,274 Q20,276 19,253 Z"
+          fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4" stroke-opacity="0.18" filter="url(#rough)"/>
+  </g>
+
+  <!-- artwork -->
+  <g id="artwork" filter="url(#rough)" fill="none" stroke="#1b1b1b" stroke-width="3"
+     stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- ===== circuit traces (ink) radiating from centre hub at 150,145 ===== -->
+    <!-- to top-left checked node -->
+    <path d="M150,145 L88,145 L88,72"/>
+    <!-- to top-right checked node -->
+    <path d="M150,145 L212,145 L212,72"/>
+    <!-- to left checked node -->
+    <path d="M150,145 L72,145 L72,118"/>
+    <!-- to right checked node -->
+    <path d="M150,145 L228,145 L228,118"/>
+    <!-- to bottom-left checked node -->
+    <path d="M150,145 L98,196 L98,236"/>
+    <!-- to bottom-right checked node -->
+    <path d="M150,145 L202,196 L202,236"/>
+
+    <!-- small solder pads / junctions along traces (ink dots) -->
+    <circle cx="88" cy="120" r="3.4" fill="#1b1b1b" stroke="none"/>
+    <circle cx="212" cy="120" r="3.4" fill="#1b1b1b" stroke="none"/>
+    <circle cx="98" cy="145" r="3.4" fill="#1b1b1b" stroke="none"/>
+    <circle cx="202" cy="145" r="3.4" fill="#1b1b1b" stroke="none"/>
+    <circle cx="98" cy="210" r="3.4" fill="#1b1b1b" stroke="none"/>
+    <circle cx="202" cy="210" r="3.4" fill="#1b1b1b" stroke="none"/>
+
+    <!-- ===== outer teal nodes, each with a blue check ===== -->
+    <!-- top-left -->
+    <g>
+      <circle cx="88" cy="58" r="20" fill="#B6E5D9"/>
+      <path d="M82,58 l4,5 8,-11" stroke="#90C5E2" stroke-width="2.2"/>
+    </g>
+    <!-- top-right -->
+    <g>
+      <circle cx="212" cy="58" r="20" fill="#6CCBB2"/>
+      <path d="M211,68 a14,14 0 0 1 -7,-23" fill="url(#hatch)" stroke="none"/>
+      <path d="M206,58 l4,5 8,-11" stroke="#90C5E2" stroke-width="2.2"/>
+    </g>
+    <!-- left -->
+    <g>
+      <circle cx="52" cy="118" r="20" fill="#6CCBB2"/>
+      <path d="M46,118 l4,5 8,-11" stroke="#90C5E2" stroke-width="2.2"/>
+    </g>
+    <!-- right -->
+    <g>
+      <circle cx="248" cy="118" r="20" fill="#B6E5D9"/>
+      <path d="M247,128 a14,14 0 0 1 -7,-23" fill="url(#hatch)" stroke="none"/>
+      <path d="M242,118 l4,5 8,-11" stroke="#90C5E2" stroke-width="2.2"/>
+    </g>
+    <!-- bottom-left -->
+    <g>
+      <circle cx="98" cy="250" r="20" fill="#6CCBB2"/>
+      <path d="M92,250 l4,5 8,-11" stroke="#90C5E2" stroke-width="2.2"/>
+    </g>
+    <!-- bottom-right -->
+    <g>
+      <circle cx="202" cy="250" r="20" fill="#B6E5D9"/>
+      <path d="M201,260 a14,14 0 0 1 -7,-23" fill="url(#hatch)" stroke="none"/>
+      <path d="M196,250 l4,5 8,-11" stroke="#90C5E2" stroke-width="2.2"/>
+    </g>
+
+    <!-- ===== central hub node with the prominent check ===== -->
+    <circle cx="150" cy="145" r="30" fill="#E0F4EF"/>
+    <path d="M168,135 a30,30 0 0 1 -22,40" fill="url(#hatch)" stroke="none"/>
+    <g id="hubcheck" stroke="#90C5E2" stroke-width="3">
+      <path d="M137,146 l9,11 17,-23"/>
+    </g>
+
+  </g>
+
+  <!-- subtle idle: hub check gently pulses opacity -->
+  <animate xlink:href="#hubcheck" attributeName="opacity" values="0.6;1;0.6" dur="4.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/>
+  <animateTransform xlink:href="#artwork" attributeName="transform" type="translate" values="0,0;0,1.2;0,0" dur="6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/>
+</svg>

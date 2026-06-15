@@ -1,0 +1,52 @@
+<svg viewBox="0 0 300 300" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <!-- ===== shared style kit (keep identical across all motifs) ===== -->
+    <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.014" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#1b1b1b" flood-opacity="0.16"/>
+    </filter>
+    <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#1b1b1b" stroke-width="1" opacity="0.22"/>
+    </pattern>
+  </defs>
+
+  <!-- torn-paper sticker -->
+  <g filter="url(#shadow)">
+    <path d="M22,30 Q16,16 34,17 L256,13 Q288,12 286,36 L289,250 Q291,272 268,271 L42,274 Q20,276 19,253 Z"
+          fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4" stroke-opacity="0.18" filter="url(#rough)"/>
+  </g>
+
+  <!-- artwork -->
+  <g id="artwork" filter="url(#rough)" fill="none" stroke="#1b1b1b" stroke-width="3"
+     stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- warning triangle (rounded corners, teal-tint fill) -->
+    <path d="M150,48 Q156,48 159,54 L260,228 Q263,236 254,237 L46,237 Q37,236 41,228 L141,54 Q144,48 150,48 Z"
+          fill="#B6E5D9"/>
+    <!-- inner triangle outline -->
+    <path d="M150,76 L232,219 L68,219 Z" fill="#E0F4EF"/>
+    <!-- hatch shading on lower-right inside the triangle -->
+    <path d="M150,150 L232,219 L150,219 Z" fill="url(#hatch)" stroke="none"/>
+
+    <!-- lightning bolt : the hero element (blue) -->
+    <path d="M166,96 L120,168 L146,168 L132,212 L188,138 L160,138 L178,96 Z"
+          fill="#90C5E2" stroke="#1b1b1b" stroke-width="3"/>
+
+    <!-- electric spark accents flanking the bolt -->
+    <g id="sparks" stroke="#6CCBB2" stroke-width="2.4">
+      <path d="M104,118 l12,4 M108,108 l9,8"/>
+      <path d="M196,176 l-12,-4 M192,186 l-9,-8"/>
+    </g>
+  </g>
+
+  <!-- subtle idle: bolt + sparks gently pulse, whole artwork barely bobs -->
+  <animate xlink:href="#sparks" attributeName="opacity" values="0.35;1;0.35" dur="2.4s"
+           repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1"
+           keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/>
+  <animateTransform xlink:href="#artwork" attributeName="transform" type="translate"
+                    values="0,0;0,1.2;0,0" dur="5.5s" repeatCount="indefinite"
+                    calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/>
+</svg>

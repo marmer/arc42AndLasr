@@ -16,7 +16,83 @@
 <div class="shp" style="position:absolute;left:298.1px;top:344.1px;width:205.7px;height:54px;background:#FFFFFF;border:1px solid #1B1B1B;"><div class="tx" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-start;padding:7.6px 3.8px 7.6px 3.8px;"><p style="font-size:10.7px;text-align:left;line-height:1.200;margin:0px 0 0px 0;"><span style="font-size:10.7px;font-family:'Arial',sans-serif;font-weight:700;color:#1B1B1B;">10. Quality Requirements</span></p><p style="font-size:10.7px;text-align:left;line-height:1.200;margin:0px 0 0px 0;"><span style="font-size:10.7px;font-family:'Arial',sans-serif;color:#1B1B1B;">10.1 Quality Requirements</span></p><p style="font-size:10.7px;text-align:left;line-height:1.200;margin:0px 0 0px 0;"><span style="font-size:10.7px;font-family:'Arial',sans-serif;color:#1B1B1B;">10.2 Quality Scenarios</span></p></div></div>
 <div class="shp" style="position:absolute;left:298.1px;top:398.3px;width:205.7px;height:32px;background:#FFFFFF;border:1px solid #1B1B1B;"><div class="tx" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-start;padding:7.6px 3.8px 11.3px 3.8px;"><p style="font-size:10.7px;text-align:left;line-height:1.200;margin:0px 0 0px 0;"><span style="font-size:10.7px;font-family:'Arial',sans-serif;font-weight:700;color:#1B1B1B;">11. Risks and Technical Debt</span></p></div></div>
 <div class="shp" style="position:absolute;left:298.1px;top:429px;width:205.7px;height:35.8px;background:#FFFFFF;border:1px solid #1B1B1B;"><div class="tx" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-start;padding:11.3px 3.8px 11.3px 3.8px;"><p style="font-size:10.7px;text-align:left;line-height:1.200;margin:0px 0 0px 0;"><span style="font-size:10.7px;font-family:'Arial',sans-serif;font-weight:700;color:#1B1B1B;">12. Glossary</span></p></div></div>
-<div class="pic" style="position:absolute;left:607.6px;top:207.4px;width:332.6px;height:332.6px;filter:drop-shadow(10.4px 10.4px 15.3px rgba(51,51,51,0.358));"><div style="position:absolute;inset:0;overflow:hidden;"><img src="img/circuit-network-icon.png" style="position:absolute;left:0;top:0;width:100%;height:100%;" alt=""></div></div>
+<div class="pic" style="position:absolute;left:607.6px;top:207.4px;width:332.6px;height:332.6px;"><svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <!-- ===== shared style kit (keep identical across all motifs) ===== -->
+    <filter id="rough_i5" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.014" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="shadow_i5" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#1b1b1b" flood-opacity="0.16"/>
+    </filter>
+    <pattern id="hatch_i5" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#1b1b1b" stroke-width="1" opacity="0.22"/>
+    </pattern>
+  </defs>
+
+  <!-- torn-paper sticker -->
+  <g filter="url(#shadow_i5)">
+    <path d="M22,30 Q16,16 34,17 L256,13 Q288,12 286,36 L289,250 Q291,272 268,271 L42,274 Q20,276 19,253 Z"
+          fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4" stroke-opacity="0.18" filter="url(#rough_i5)"/>
+  </g>
+
+  <!-- artwork -->
+  <g id="artwork_i5" filter="url(#rough_i5)" fill="none" stroke="#1b1b1b" stroke-width="3"
+     stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- ===== traces : ink lines radiating from the central chip to peripheral nodes ===== -->
+    <!-- straight spokes -->
+    <path d="M150,128 L150,70"/>
+    <path d="M172,150 L236,150"/>
+    <path d="M150,172 L150,232"/>
+    <path d="M128,150 L66,150"/>
+    <!-- diagonal-ish traces with right-angle circuit kinks -->
+    <path d="M166,135 L196,105 L222,105"/>
+    <path d="M166,165 L196,196 L196,222"/>
+    <path d="M134,165 L102,196 L78,196"/>
+    <path d="M134,135 L104,104 L104,80"/>
+    <!-- secondary short branches -->
+    <path d="M150,70 L120,70"/>
+    <path d="M236,150 L236,124"/>
+    <path d="M150,232 L182,232"/>
+    <path d="M66,150 L66,178"/>
+
+    <!-- ===== peripheral nodes (dots) : filled teal / blue ===== -->
+    <circle id="n1_i5" cx="150" cy="62" r="11" fill="#6CCBB2"/>
+    <circle cx="120" cy="70" r="6" fill="#90C5E2"/>
+    <circle id="n2_i5" cx="244" cy="150" r="11" fill="#90C5E2"/>
+    <circle cx="236" cy="118" r="6" fill="#6CCBB2"/>
+    <circle id="n3_i5" cx="150" cy="240" r="11" fill="#6CCBB2"/>
+    <circle cx="190" cy="232" r="6" fill="#90C5E2"/>
+    <circle id="n4_i5" cx="58" cy="150" r="11" fill="#90C5E2"/>
+    <circle cx="66" cy="184" r="6" fill="#6CCBB2"/>
+    <circle cx="230" cy="99" r="8" fill="#6CCBB2"/>
+    <circle cx="196" cy="230" r="8" fill="#90C5E2"/>
+    <circle cx="70" cy="196" r="8" fill="#6CCBB2"/>
+    <circle cx="104" cy="72" r="8" fill="#90C5E2"/>
+
+    <!-- tiny outline dots for texture -->
+    <circle cx="206" cy="74" r="3.5" stroke-width="2.2"/>
+    <circle cx="226" cy="200" r="3.5" stroke-width="2.2"/>
+    <circle cx="74" cy="118" r="3.5" stroke-width="2.2"/>
+    <circle cx="92" cy="226" r="3.5" stroke-width="2.2"/>
+
+    <!-- ===== central chip / hub node ===== -->
+    <circle cx="150" cy="150" r="24" fill="#B6E5D9"/>
+    <path d="M150,128 a22,22 0 0 1 0,44 Z" fill="url(#hatch_i5)" stroke="none"/>
+    <circle cx="150" cy="150" r="24"/>
+    <circle cx="150" cy="150" r="9" fill="#ffffff"/>
+
+    <!-- gentle node pulses -->
+    <animate xlink:href="#n1_i5" attributeName="opacity" values="1;0.55;1" dur="4.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/>
+    <animate xlink:href="#n3_i5" attributeName="opacity" values="0.6;1;0.6" dur="4.2s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/>
+    <animate xlink:href="#n2_i5" attributeName="opacity" values="1;0.6;1" dur="5.1s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/>
+  </g>
+
+  <animateTransform xlink:href="#artwork_i5" attributeName="transform" type="translate" values="0,0;0,1.4;0,0" dur="5.5s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/>
+</svg>
+</div>
 </div>
 <aside aria-label="speaker notes" class="notes">
 <ul>

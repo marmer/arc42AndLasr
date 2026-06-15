@@ -1,0 +1,106 @@
+<svg viewBox="0 0 300 300" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <!-- ===== shared style kit (keep identical across all motifs) ===== -->
+    <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.014" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#1b1b1b" flood-opacity="0.16"/>
+    </filter>
+    <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#1b1b1b" stroke-width="1" opacity="0.22"/>
+    </pattern>
+  </defs>
+
+  <!-- torn-paper sticker -->
+  <g filter="url(#shadow)">
+    <path d="M22,30 Q16,16 34,17 L256,13 Q288,12 286,36 L289,250 Q291,272 268,271 L42,274 Q20,276 19,253 Z"
+          fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4" stroke-opacity="0.18" filter="url(#rough)"/>
+  </g>
+
+  <!-- artwork -->
+  <g id="artwork" filter="url(#rough)" fill="none" stroke="#1b1b1b" stroke-width="3"
+     stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- ===== central swirl / vortex (documents being pulled in) ===== -->
+    <g>
+      <!-- outer swirl arm (teal) -->
+      <path d="M150,86 Q214,88 214,150 Q214,206 156,206 Q108,206 108,162 Q108,128 144,128 Q172,128 172,154 Q172,174 152,174"
+            stroke="#6CCBB2"/>
+      <!-- inner swirl arm (blue), opposite winding -->
+      <path d="M150,214 Q90,210 90,150 Q90,98 144,98 Q188,98 188,138 Q188,170 154,170 Q130,170 130,148"
+            stroke="#90C5E2" stroke-width="2.4"/>
+      <!-- eye of the whirl -->
+      <path d="M150,142 Q160,142 158,152" stroke="#6CCBB2" stroke-width="2.2"/>
+    </g>
+
+    <!-- ===== fanned sheets of paper around the whirl ===== -->
+
+    <!-- sheet top-right, tilted -->
+    <g transform="rotate(22 218 80)">
+      <rect x="200" y="58" width="36" height="46" rx="3" fill="#ffffff"/>
+      <path d="M236,58 L236,72 L226,72 Z" fill="#E0F4EF"/>
+      <g stroke="#90C5E2" stroke-width="2.2">
+        <path d="M206,72 L228,72 M206,80 L230,80 M206,88 L224,88 M206,96 L228,96"/>
+      </g>
+    </g>
+
+    <!-- sheet right -->
+    <g transform="rotate(-12 246 152)">
+      <rect x="226" y="128" width="38" height="48" rx="3" fill="#E0F4EF"/>
+      <g stroke="#1b1b1b" stroke-width="2.2" opacity="0.7">
+        <path d="M232,140 L256,140 M232,149 L258,149 M232,158 L252,158 M232,167 L256,167"/>
+      </g>
+    </g>
+
+    <!-- sheet bottom-right -->
+    <g transform="rotate(30 196 222)">
+      <rect x="176" y="200" width="40" height="44" rx="3" fill="#ffffff"/>
+      <path d="M216,200 L216,212 L206,212 Z" fill="#B6E5D9"/>
+      <g stroke="#6CCBB2" stroke-width="2.2">
+        <path d="M182,212 L206,212 M182,221 L210,221 M182,230 L200,230"/>
+      </g>
+    </g>
+
+    <!-- sheet bottom-left -->
+    <g transform="rotate(-26 108 220)">
+      <rect x="88" y="198" width="38" height="46" rx="3" fill="#E0F4EF"/>
+      <g stroke="#90C5E2" stroke-width="2.2">
+        <path d="M94,210 L118,210 M94,219 L120,219 M94,228 L112,228 M94,237 L118,237"/>
+      </g>
+    </g>
+
+    <!-- sheet left (overlapping pair with hatch between) -->
+    <g transform="rotate(14 60 150)">
+      <rect x="40" y="126" width="38" height="48" rx="3" fill="#ffffff"/>
+      <rect x="46" y="120" width="38" height="48" rx="3" fill="#B6E5D9"/>
+      <path d="M46,120 L70,120 L46,150 Z" fill="url(#hatch)" stroke="none"/>
+      <g stroke="#6CCBB2" stroke-width="2.2">
+        <path d="M52,134 L76,134 M52,143 L78,143 M52,152 L72,152 M52,161 L76,161"/>
+      </g>
+    </g>
+
+    <!-- top sheet (lifting, animated) -->
+    <g id="topsheet" transform="rotate(-16 132 70)">
+      <rect x="112" y="48" width="40" height="48" rx="3" fill="#ffffff"/>
+      <path d="M152,48 L152,60 L142,60 Z" fill="#E0F4EF"/>
+      <g stroke="#1b1b1b" stroke-width="2.2" opacity="0.7">
+        <path d="M118,62 L142,62 M118,71 L146,71 M118,80 L138,80 M118,89 L144,89"/>
+      </g>
+      <animateTransform attributeName="transform" type="rotate"
+        values="-16 132 70;-19 132 70;-16 132 70" dur="5s"
+        repeatCount="indefinite" calcMode="spline"
+        keyTimes="0;0.5;1" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/>
+    </g>
+
+    <!-- little dust specks pulled into the whirl -->
+    <g stroke-width="2.2" stroke="#90C5E2">
+      <path d="M150,212 l0.5,0"/>
+      <path d="M196,150 l0.5,0"/>
+      <path d="M122,108 l0.5,0"/>
+    </g>
+  </g>
+
+  <animateTransform xlink:href="#artwork" attributeName="transform" type="translate" values="0,0;0,1.3;0,0" dur="5.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/>
+</svg>

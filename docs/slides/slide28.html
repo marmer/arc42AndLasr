@@ -16,7 +16,92 @@
 <div class="shp" style="position:absolute;left:298.1px;top:398.3px;width:205.7px;height:32px;background:transparent;border:1px solid #1B1B1B;"><div class="tx" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-start;padding:7.6px 3.8px 11.3px 3.8px;"><p style="font-size:10.7px;text-align:left;line-height:1.200;margin:0px 0 0px 0;"><span style="font-size:10.7px;font-family:'Arial',sans-serif;font-weight:700;color:#1B1B1B;">11. Risks and Technical Debt</span></p></div></div>
 <div class="shp" style="position:absolute;left:298.1px;top:429px;width:205.7px;height:35.8px;background:linear-gradient(99.9deg, #6CCBB2 40.0%, #90C5E2 100.0%);border:1px solid #1B1B1B;"><div class="tx" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-start;padding:11.3px 3.8px 11.3px 3.8px;"><p style="font-size:10.7px;text-align:left;line-height:1.200;margin:0px 0 0px 0;"><span style="font-size:10.7px;font-family:'Arial',sans-serif;font-weight:700;color:#1B1B1B;">12. Glossary</span></p></div></div>
 <div class="shp" style="position:absolute;left:92.4px;top:114.9px;width:205.7px;height:67px;background:#FFFFFF;border:1px solid #1B1B1B;"><div class="tx" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-start;padding:7.6px 3.8px 7.6px 3.8px;"><p style="font-size:10.7px;text-align:left;line-height:1.200;margin:0px 0 0px 0;"><span style="font-size:10.7px;font-family:'Arial',sans-serif;font-weight:700;color:#1B1B1B;">1. Introduction &amp; Goals</span></p><p style="font-size:10.7px;text-align:left;line-height:1.200;margin:0px 0 0px 0;"><span style="font-size:10.7px;font-family:'Arial',sans-serif;color:#1B1B1B;">1.1 Fundamental requirements</span></p><p style="font-size:10.7px;text-align:left;line-height:1.200;margin:0px 0 0px 0;"><span style="font-size:10.7px;font-family:'Arial',sans-serif;color:#1B1B1B;">1.2 Quality goals</span></p><p style="font-size:10.7px;text-align:left;line-height:1.200;margin:0px 0 0px 0;"><span style="font-size:10.7px;font-family:'Arial',sans-serif;color:#1B1B1B;">1.3 Stakeholder</span></p></div></div>
-<div class="pic" style="position:absolute;left:563.2px;top:202px;width:400.7px;height:400.7px;filter:drop-shadow(10.4px 10.4px 15.3px rgba(51,51,51,0.358));"><div style="position:absolute;inset:0;overflow:hidden;"><img src="img/book-magnifier-icon.png" style="position:absolute;left:0;top:0;width:100%;height:100%;" alt=""></div></div>
+<div class="pic" style="position:absolute;left:563.2px;top:202px;width:400.7px;height:400.7px;"><svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <!-- ===== shared style kit (keep identical across all motifs) ===== -->
+    <filter id="rough_i10" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.014" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="shadow_i10" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#1b1b1b" flood-opacity="0.16"/>
+    </filter>
+    <pattern id="hatch_i10" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#1b1b1b" stroke-width="1" opacity="0.22"/>
+    </pattern>
+  </defs>
+
+  <!-- torn-paper sticker -->
+  <g filter="url(#shadow_i10)">
+    <path d="M22,30 Q16,16 34,17 L256,13 Q288,12 286,36 L289,250 Q291,272 268,271 L42,274 Q20,276 19,253 Z"
+          fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4" stroke-opacity="0.18" filter="url(#rough_i10)"/>
+  </g>
+
+  <!-- artwork -->
+  <g id="artwork_i10" filter="url(#rough_i10)" fill="none" stroke="#1b1b1b" stroke-width="3"
+     stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- ===== open book seen from above, slightly tilted ===== -->
+    <!-- two open pages (white tint) -->
+    <path d="M150,210 L62,196 Q60,118 70,98 Q112,108 150,128 Z" fill="#E0F4EF"/>
+    <path d="M150,210 L238,196 Q240,118 230,98 Q188,108 150,128 Z" fill="#E0F4EF"/>
+    <!-- teal cover peeking under the page block, both sides -->
+    <path d="M62,196 L58,206 Q60,216 72,216 L150,222 L150,210 Z" fill="#6CCBB2"/>
+    <path d="M238,196 L242,206 Q240,216 228,216 L150,222 L150,210 Z" fill="#6CCBB2"/>
+    <!-- spine / center fold -->
+    <path d="M150,128 L150,222"/>
+    <!-- page thickness lines (right side leaves) -->
+    <path d="M238,196 Q236,140 230,104" stroke-width="2.2"/>
+    <path d="M232,198 Q231,144 226,110" stroke-width="2.2"/>
+    <!-- page thickness lines (left side leaves) -->
+    <path d="M62,196 Q64,140 70,104" stroke-width="2.2"/>
+    <path d="M68,198 Q69,144 74,110" stroke-width="2.2"/>
+
+    <!-- hatch shading: underside of right cover -->
+    <path d="M238,196 L242,206 Q240,216 228,216 L150,222 L150,210 Z" fill="url(#hatch_i10)" stroke="none"/>
+
+    <!-- text lines on left page (short ink strokes, NOT letters) -->
+    <g stroke-width="2.2">
+      <path d="M82,138 L132,154"/>
+      <path d="M80,150 L130,166"/>
+      <path d="M78,162 L116,174"/>
+      <path d="M76,174 L110,184"/>
+    </g>
+    <!-- text lines on right page -->
+    <g stroke-width="2.2">
+      <path d="M168,154 L218,138"/>
+      <path d="M170,166 L220,150"/>
+      <path d="M172,178 L210,166"/>
+    </g>
+
+    <!-- bookmark ribbon dangling from spine -->
+    <path d="M150,222 L150,250 L156,244 L162,250 L162,222" fill="#90C5E2"/>
+
+    <!-- ===== magnifying glass over upper-right ===== -->
+    <g id="lens_i10">
+      <!-- handle -->
+      <path d="M228,158 L256,190" stroke-width="6"/>
+      <!-- lens glass: translucent blue tint -->
+      <circle cx="206" cy="132" r="34" fill="#90C5E2" fill-opacity="0.32"/>
+      <!-- lens rim -->
+      <circle cx="206" cy="132" r="34"/>
+      <!-- inner rim highlight -->
+      <circle cx="206" cy="132" r="28" stroke-width="2.2"/>
+      <!-- glint -->
+      <path d="M192,120 Q198,112 208,114" stroke-width="2.2"/>
+      <!-- idle nudge: tiny -->
+      <animateTransform attributeName="transform" type="translate"
+        values="0,0;1.2,-1.2;0,0" dur="5.2s" repeatCount="indefinite"
+        calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/>
+    </g>
+  </g>
+
+  <!-- whole-artwork gentle bob -->
+  <animateTransform xlink:href="#artwork_i10" attributeName="transform" type="translate"
+    values="0,0;0,1.4;0,0" dur="6s" repeatCount="indefinite"
+    calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/>
+</svg>
+</div>
 </div>
 <aside aria-label="speaker notes" class="notes">
 <ul>
