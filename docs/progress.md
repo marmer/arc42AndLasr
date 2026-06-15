@@ -40,6 +40,13 @@ removed. The presentation is now **generated** from the original PPTX by
 
 ### Company/conference reference removal
 - envite logo (`ppt/media/image2.png`) blacklisted everywhere.
+- Title-slide background photo (`ppt/media/image3.jpeg`) was an employer-branded
+  landscape. Replaced via `REPLACED_MEDIA` with a license-free, procedurally
+  drawn golden-hour ridgeline (`_make_title_bg`) that keeps the same impression
+  (warm open nature, distant haze, two tiny hikers for the "journey" motif).
+  Fully generated -> no licensing risk; deterministic (seeded grain).
+  NOTE: the closing-slide background (`image1.jpeg`, a turquoise-river photo) is
+  likely also employer imagery — left unchanged for now, replace on request.
 - Tagline "Pioneering IT Sustainability" and all envite/novatec/IT-Tage/
   decompiled/Software Quality Days texts filtered (slides + notes).
 - Contact slide: `…@envite.de` → `mariano.mertinat@gmail.com`, personal phone
