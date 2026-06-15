@@ -7,3 +7,4 @@ pptx_extracted
 .playwright-mcp
 screenshots/
 work/
+__pycache__/

@@ -31,6 +31,12 @@ removed. The presentation is now **generated** from the original PPTX by
   wider than PowerPoint's rasterizer; this makes tightly autofitted titles
   wrap exactly like the original.
 - Speaker notes are extracted from the notes slides (nested lists).
+- Image files in `docs/img/` get **descriptive names** (e.g.
+  `lasr-plus-radar.png`, `gamepad-icon.png`, `title-background.jpeg`) via the
+  `MEDIA_SLUGS` (source media) and `PDF_SLUGS` (PDF-extracted icons) tables at
+  the top of the generator. Identical content is de-duplicated to one file, so
+  an icon reused across slides keeps a single name; the rare distinct image
+  sharing a slug gets a `-2`/`-3` suffix.
 
 ### Company/conference reference removal
 - envite logo (`ppt/media/image2.png`) blacklisted everywhere.

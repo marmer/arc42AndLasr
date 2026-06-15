@@ -59,6 +59,87 @@ def _make_qr_png():
 REPLACED_MEDIA = {'ppt/media/image80.png': _make_qr_png}
 A14_NS = 'http://schemas.microsoft.com/office/drawing/2010/main'
 
+# Descriptive output file names. Keyed by (source basename, variant) for
+# embedded media; keyed by "<pdfPage>x<xref>" for bitmaps lifted out of the
+# rendered PDF. Identical content is de-duplicated to a single file, so an
+# icon reused on several slides keeps one speaking name; genuinely distinct
+# images that would share a slug get a numeric suffix.
+MEDIA_SLUGS = {
+    ('image3.jpeg', ''): 'title-background',
+    ('image1.jpeg', ''): 'closing-background',
+    ('image79.jpg', ''): 'speaker-portrait',
+    ('image21.png', ''): 'gear-warning-icon',
+    ('image22.png', ''): 'yawning-person-icon',
+    ('image27.png', ''): 'hello-badge',
+    ('image28.jfif', ''): 'linkedin-qr',
+    ('image29.png', ''): 'article-cobol-wanted',
+    ('image30.png', ''): 'article-healthcare-gov',
+    ('image31.png', ''): 'news-prisoners-released',
+    ('image32.png', ''): 'article-ambulance-glitch',
+    ('image33.png', ''): 'comic-humans-vs-computers',
+    ('image34.png', ''): 'questions-doodle',
+    ('image35.png', ''): 'tech-network-emblem',
+    ('image39.png', 'duo296354FFFFFF'): 'chess-knight-icon',
+    ('image40.png', ''): 'building-block-zoom',
+    ('image41.png', 'duo296354FFFFFF'): 'arrows-outward-icon',
+    ('image46.png', ''): 'thats-it-folks-rings',
+    ('image48.png', ''): 'isaqb-logo',
+    ('image51.jpg', ''): 'arc42-by-example-book',
+    ('image52.png', ''): 'arc42-in-aktion-book',
+    ('image58.png', ''): 'lasr-overview',
+    ('image58.png', 'duo6D6D6DFFFFFF'): 'lasr-overview-grey',
+    ('image59.png', ''): 'lasr-deepdive-steps',
+    ('image60.png', ''): 'netflix-signup',
+    ('image61.png', ''): 'deepl-translation',
+    ('image62.png', ''): 'metrics-to-insight',
+    ('image63.png', ''): 'vpn-secure-anonymous',
+    ('image66.png', ''): 'encryption-privacy-text',
+    ('image67.png', ''): 'lasr-plus-radar',
+    ('image68.png', ''): 'sharpen-results-checklist',
+    ('image69.png', ''): 'utility-tree-example',
+    ('image70.png', ''): 'utility-tree-detailed',
+    ('image70.png', 'duo6D6D6DFFFFFF'): 'utility-tree-detailed-grey',
+    ('image72.png', ''): 'quality-criteria-form',
+    ('image73.png', ''): 'performance-efficiency-card',
+    ('image74.png', ''): 'reviewing-software-systems-book-de',
+    ('image75.png', ''): 'analyze-improve-cycle',
+    ('image76.png', ''): 'reviewing-software-systems-book-en',
+    ('image77.png', ''): 'hello-badge',
+    ('image78.png', ''): 'teal-square',
+    ('image80.png', ''): 'contact-vcard-qr',
+}
+PDF_SLUGS = {
+    '14x164': 'target-dartboard-icon',
+    '15x180': 'gears-lock-icon',
+    '16x196': 'circuit-network-icon',
+    '20x272': 'checklist-gear-icon',
+    '21x288': 'circuit-checks-icon',
+    '22x304': 'paper-whirl-icon',
+    '23x320': 'book-magnifier-icon',
+    '25x340': 'thats-it-folks-rings-grey',
+    '26x362': 'feather-icon',
+    '26x364': 'person-suit-icon',
+    '26x366': 'gamepad-icon',
+    '26x368': 'running-person-icon',
+    '27x372': 'audience-people-icon',
+    '28x372': 'audience-people-icon',
+    '31x398': 'privacy-bubbles-blue',
+    '31x400': 'privacy-bubbles-green',
+    '32x398': 'privacy-bubbles-blue',
+    '32x400': 'privacy-bubbles-green',
+    '34x429': 'gamepad-icon',
+    '36x470': 'warning-electric-icon',
+    '36x472': 'document-magnifier-icon',
+    '37x477': 'gamepad-icon',
+    '42x528': 'lasr-scenario-cards',
+    '45x366': 'gamepad-icon',
+    '45x472': 'document-magnifier-icon',
+    '46x366': 'gamepad-icon',
+    '47x366': 'gamepad-icon',
+    '50x723': 'thats-it-folks-rings-color',
+    '51x340': 'thats-it-folks-rings-grey-faded',
+}
+
 BULLET_CHAR_MAP = {
     ('Wingdings', '§'): '▪',
     ('Wingdings', 'Ø'): '➢',
@@ -498,6 +579,8 @@ class Converter:
         self.img_dir = os.path.join(out_dir, 'img')
         os.makedirs(self.img_dir, exist_ok=True)
         self.media_cache = {}     # (part, variant) -> emitted filename
+        self._hash_names = {}     # content sha1 -> emitted filename (dedup)
+        self._used_names = {}     # filename -> content sha1 (collision check)
         self.warnings = []
         self._default_run_color = None
 
@@ -554,6 +637,29 @@ class Converter:
 
     # -------- media
 
+    def _register(self, data, ext, slug):
+        """Write image bytes once and return a stable, speaking file name.
+
+        Identical content is de-duplicated to a single file; if two distinct
+        images map to the same slug, later ones get a -2/-3 suffix.
+        """
+        h = hashlib.sha1(data).hexdigest()
+        if h in self._hash_names:
+            return self._hash_names[h]
+        base = slug if slug else 'm' + h[:10]
+        name = base + ext
+        i = 2
+        while name in self._used_names and self._used_names[name] != h:
+            name = f'{base}-{i}{ext}'
+            i += 1
+        self._used_names[name] = h
+        self._hash_names[h] = name
+        path = os.path.join(self.img_dir, name)
+        if not os.path.exists(path):
+            with open(path, 'wb') as f:
+                f.write(data)
+        return name
+
     def emit_media(self, media_part, variant='', transform=None):
         """Copy media into docs/img (dedup by content hash). transform: callable(Image)->Image."""
         key = (media_part, variant)
@@ -573,12 +679,8 @@ class Converter:
             im.save(buf, 'PNG')
             data = buf.getvalue()
             ext = '.png'
-        h = hashlib.sha1(data).hexdigest()[:10]
-        name = f'm{h}{ext}'
-        path = os.path.join(self.img_dir, name)
-        if not os.path.exists(path):
-            with open(path, 'wb') as f:
-                f.write(data)
+        slug = MEDIA_SLUGS.get((os.path.basename(media_part), variant))
+        name = self._register(data, ext, slug)
         self.media_cache[key] = name
         return name
 
@@ -1313,12 +1415,8 @@ class Converter:
         if smask:
             pix = fitz.Pixmap(pix, fitz.Pixmap(self.pdf, smask))
         data = pix.tobytes('png')
-        h_ = hashlib.sha1(data).hexdigest()[:10]
-        name = f'm{h_}.png'
-        path = os.path.join(self.img_dir, name)
-        if not os.path.exists(path):
-            with open(path, 'wb') as f:
-                f.write(data)
+        slug = PDF_SLUGS.get(f'{self._current_page}x{xref}')
+        name = self._register(data, '.png', slug)
         self._pdf_cache[key] = name
         return name
 
