@@ -56,143 +56,112 @@ def _make_qr_png():
     return buf.getvalue()
 
 
-def _make_title_bg():
-    """Render the title-slide background.
+# the title slide's background photo is employer-branded; replaced (see
+# render_pic) with the inline animated SVG below instead of a raster image
+TITLE_BG_MEDIA = 'ppt/media/image3.jpeg'
 
-    The original PPTX uses an employer-branded landscape photo. We replace it
-    with a license-free, procedurally drawn golden-hour ridgeline that keeps
-    the same impression (warm wide-open nature, distant haze) and adds two tiny
-    figures playing catch on the ridge — a nod to the "playful" subtitle.
-    Fully generated -> no licensing risk.
+
+def _title_bg_svg(W=960, H=540):
+    """Inline animated SVG for the title-slide background.
+
+    License-free, procedurally drawn golden-hour ridgeline that keeps the
+    original photo's impression (warm wide-open nature, distant haze) plus two
+    stick figures tossing a ball back and forth — a nod to the "playful"
+    subtitle. Inline so the SMIL ball animation actually runs (it would not in
+    an <img>-referenced SVG). Fully generated -> no licensing risk.
     """
     import math
-    import random
-    from PIL import ImageDraw, ImageFilter
 
-    W, H = 1280, 720
-    rnd = random.Random(42)
+    def ridge_d(base_t, amp_t, f1, f2, ph):
+        base, amp = H * base_t, H * amp_t
+        pts = [(x, base - amp * (math.sin(x / W * math.pi * f1 + ph) * 0.6
+                                 + math.sin(x / W * math.pi * f2 + ph * 1.7) * 0.4))
+               for x in range(0, W + 1, 8)]
+        d = 'M %.1f %.1f ' % pts[0] + ' '.join('L %.1f %.1f' % p for p in pts[1:])
+        return d + ' L %d %d L 0 %d Z' % (W, H, H), pts
 
-    def lerp(a, b, t):
-        return tuple(int(a[i] + (b[i] - a[i]) * t) for i in range(3))
+    d_far, _ = ridge_d(0.585, 0.05, 3, 7, 0.4)
+    d_mid1, _ = ridge_d(0.66, 0.07, 2.2, 5, 1.1)
+    d_mid2, _ = ridge_d(0.74, 0.08, 1.7, 4.3, 2.2)
 
-    img = Image.new('RGB', (W, H))
-    px = img.load()
-    horizon = int(H * 0.60)
-    sky_top, sky_mid, sky_horiz = (150, 178, 196), (210, 214, 202), (248, 226, 176)
-    for y in range(horizon):
-        t = y / horizon
-        c = lerp(sky_top, sky_mid, t / 0.6) if t < 0.6 else lerp(sky_mid, sky_horiz, (t - 0.6) / 0.4)
-        for x in range(W):
-            px[x, y] = c
-    for y in range(horizon, H):
-        for x in range(W):
-            px[x, y] = sky_horiz
+    fg_base, fg_amp = H * 0.80, H * 0.13
+    fpts = [(x, fg_base - fg_amp * (math.sin(x / W * math.pi * 1.3 + 0.6) * 0.6
+                                    + math.sin(x / W * math.pi * 3.1 + 1.0) * 0.4))
+            for x in range(0, W + 1, 8)]
+    d_fg = ('M %.1f %.1f ' % fpts[0] + ' '.join('L %.1f %.1f' % p for p in fpts[1:])
+            + ' L %d %d L 0 %d Z' % (W, H, H))
 
-    # warm sun glow (upper-right, near horizon)
-    glow = Image.new('L', (W, H), 0)
-    gd = glow.load()
-    sx, sy, R = int(W * 0.73), int(H * 0.50), W * 0.46
-    for y in range(H):
-        for x in range(W):
-            d = math.hypot(x - sx, y - sy) / R
-            if d < 1:
-                gd[x, y] = int(230 * (1 - min(1, d ** 1.4)))
-    img = Image.composite(Image.new('RGB', (W, H), (255, 247, 222)), img, glow)
+    # the throwing arm's hand swings between a raised pose (throw/catch) and a
+    # lowered pose (resting), in sync with the ball. The left figure is raised
+    # when the ball is at its hand (cycle ends t=0/1); the right at t=0.5.
+    EASE = 'calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.6 1;0.4 0 0.6 1"'
 
-    # fog sea near the horizon
-    fog = Image.new('L', (W, H), 0)
-    ImageDraw.Draw(fog).rectangle([0, horizon - int(H * 0.06), W, horizon + int(H * 0.05)], fill=255)
-    fog = fog.filter(ImageFilter.GaussianBlur(H * 0.05)).point(lambda v: int(v * 0.85))
-    img = Image.composite(Image.new('RGB', (W, H), (244, 243, 238)), img, fog)
+    def figure(cx, s, facing, raised_first):
+        yb = min(fpts, key=lambda p: abs(p[0] - cx))[1]
+        shoulder = (cx, yb - 13 * s)
+        raised = (cx + 5 * s * facing, yb - 19 * s)   # hand up toward partner
+        lowered = (cx + 4 * s * facing, yb - 9 * s)   # hand relaxed/down
+        static = [(cx, yb - 14 * s, cx, yb - 5 * s),                # torso
+                  (cx, yb - 5 * s, cx - 2 * s, yb + 1 * s),         # legs
+                  (cx, yb - 5 * s, cx + 2 * s, yb + 1 * s),
+                  (cx, yb - 13 * s, cx - 3 * s * facing, yb - 8 * s)]  # trailing arm
+        lines = ''.join('<line x1="%.1f" y1="%.1f" x2="%.1f" y2="%.1f"/>' % seg for seg in static)
+        a, b = (raised, lowered) if raised_first else (lowered, raised)
+        arm = ('<line x1="%.1f" y1="%.1f" x2="%.1f" y2="%.1f">'
+               '<animate attributeName="x2" dur="2.4s" repeatCount="indefinite" %s values="%.1f;%.1f;%.1f"/>'
+               '<animate attributeName="y2" dur="2.4s" repeatCount="indefinite" %s values="%.1f;%.1f;%.1f"/>'
+               '</line>') % (shoulder[0], shoulder[1], a[0], a[1],
+                             EASE, a[0], b[0], a[0], EASE, a[1], b[1], a[1])
+        g = ('<g stroke="#28221a" stroke-width="%.2f" stroke-linecap="round" fill="#28221a">'
+             '<circle cx="%.1f" cy="%.1f" r="%.1f"/>%s%s</g>'
+             % (2 * s, cx, yb - 16 * s, 2 * s, lines, arm))
+        return g, raised
 
-    def ridge(base_t, amp_t, color, alpha, f1, f2, ph):
-        base, amp = int(H * base_t), int(H * amp_t)
-        pts = [(x, base - int(amp * (math.sin(x / W * math.pi * f1 + ph) * 0.6
-                                     + math.sin(x / W * math.pi * f2 + ph * 1.7) * 0.4)))
-               for x in range(0, W + 1, 4)]
-        poly = pts + [(W, H), (0, H)]
-        layer = Image.new('RGBA', (W, H), (0, 0, 0, 0))
-        ImageDraw.Draw(layer).polygon(poly, fill=color + (alpha,))
-        return layer, pts
-
-    for args in [(0.585, 0.05, (150, 168, 180), 200, 3, 7, 0.4),
-                 (0.66, 0.07, (120, 140, 110), 235, 2.2, 5, 1.1),
-                 (0.74, 0.08, (96, 112, 72), 250, 1.7, 4.3, 2.2)]:
-        layer, _ = ridge(*args)
-        img.paste(layer, (0, 0), layer)
-
-    # foreground golden hill with vertical sun-warm gradient
-    fg_base, fg_amp = int(H * 0.80), int(H * 0.13)
-    fpts = [(x, fg_base - int(fg_amp * (math.sin(x / W * math.pi * 1.3 + 0.6) * 0.6
-                                        + math.sin(x / W * math.pi * 3.1 + 1.0) * 0.4)))
-            for x in range(0, W + 1, 4)]
-    fmask = Image.new('L', (W, H), 0)
-    ImageDraw.Draw(fmask).polygon(fpts + [(W, H), (0, H)], fill=255)
-    grad = Image.new('RGB', (W, H))
-    gp = grad.load()
-    top_c, bot_c = (214, 180, 104), (92, 74, 42)
-    for y in range(H):
-        c = lerp(top_c, bot_c, min(1, (y - int(H * 0.66)) / (H * 0.34))) if y > int(H * 0.66) else top_c
-        for x in range(W):
-            gp[x, y] = c
-    img.paste(grad, (0, 0), fmask)
-    rim = Image.new('L', (W, H), 0)
-    rd = ImageDraw.Draw(rim)
-    for x, yy in fpts:
-        rd.line([(x, yy), (x, yy + 3)], fill=int(120 * (0.3 + 0.7 * x / W)), width=3)
-    img = Image.composite(Image.new('RGB', (W, H), (255, 238, 196)), img,
-                          rim.filter(ImageFilter.GaussianBlur(2)))
-
-    # two stick figures playing catch on the foreground ridge (right side),
-    # a small ball in flight between them — nods to the "playful" subtitle
-    def figure(cx, s, facing, color=(40, 34, 26)):
-        yb = next((yy for x, yy in fpts if abs(x - cx) < 5), fg_base)
-        d = ImageDraw.Draw(img)
-        w = max(1, int(2 * s))
-        d.ellipse([cx - 2 * s, yb - 18 * s, cx + 2 * s, yb - 14 * s], fill=color)
-        segs = [((cx, yb - 14 * s), (cx, yb - 5 * s)),                       # torso
-                ((cx, yb - 5 * s), (cx - 2 * s, yb + 1 * s)),                # legs
-                ((cx, yb - 5 * s), (cx + 2 * s, yb + 1 * s)),
-                ((cx, yb - 13 * s), (cx + 5 * s * facing, yb - 19 * s)),     # throwing/catching arm
-                ((cx, yb - 13 * s), (cx - 3 * s * facing, yb - 8 * s))]      # trailing arm
-        for a, b in segs:
-            d.line([a, b], fill=color, width=w)
-        return (cx + 5 * s * facing, yb - 19 * s)  # hand position
-
-    sL, sR = 2.2, 2.1
-    handL = figure(int(W * 0.80), sL, +1)   # thrower, faces right
-    handR = figure(int(W * 0.852), sR, -1)  # catcher, faces left
-
-    # ball on a parabolic arc between the two hands (caught mid-flight)
-    p0, p2 = handL, handR
-    p1 = ((p0[0] + p2[0]) / 2, min(p0[1], p2[1]) - 15 * (sL + sR) / 2)
-    t = 0.6
-    bx = (1 - t) ** 2 * p0[0] + 2 * (1 - t) * t * p1[0] + t ** 2 * p2[0]
-    by = (1 - t) ** 2 * p0[1] + 2 * (1 - t) * t * p1[1] + t ** 2 * p2[1]
+    sL, sR = 1.7, 1.6
+    gL, hL = figure(W * 0.80, sL, +1, raised_first=True)    # raised at t=0/1
+    gR, hR = figure(W * 0.852, sR, -1, raised_first=False)  # raised at t=0.5
+    midx = (hL[0] + hR[0]) / 2
+    peak = min(hL[1], hR[1]) - 15 * (sL + sR) / 2
+    # there-and-back arc so the ball is tossed L->R then R->L, repeating
+    ball_path = ('M %.1f %.1f Q %.1f %.1f %.1f %.1f Q %.1f %.1f %.1f %.1f'
+                 % (hL[0], hL[1], midx, peak, hR[0], hR[1], midx, peak, hL[0], hL[1]))
     br = 2.2 * (sL + sR) / 2
-    d = ImageDraw.Draw(img)
-    d.ellipse([bx - br, by - br, bx + br, by + br],
-              fill=(252, 247, 235), outline=(40, 34, 26), width=1)
 
-    # vignette, softening and a touch of grain
-    vig = Image.new('L', (W, H), 0)
-    ImageDraw.Draw(vig).ellipse([-W * 0.2, -H * 0.2, W * 1.2, H * 1.2], fill=255)
-    vig = vig.filter(ImageFilter.GaussianBlur(H * 0.15)).point(lambda v: 255 - int((255 - v) * 0.45))
-    img = Image.composite(img, Image.new('RGB', (W, H), (20, 18, 14)), vig)
-    img = img.filter(ImageFilter.GaussianBlur(0.6))
-    # deterministic film grain (seeded so regenerated bytes stay stable)
-    noise = Image.frombytes('L', (W, H), bytes(rnd.getrandbits(8) for _ in range(W * H)))
-    img = Image.composite(img, img.point(lambda v: max(0, v - 6)),
-                          noise.point(lambda v: 30 if v >= 128 else 0))
-
-    buf = io.BytesIO()
-    img.save(buf, 'JPEG', quality=88)
-    return buf.getvalue()
+    return f'''<svg viewBox="0 0 {W} {H}" width="100%" height="100%" preserveAspectRatio="none" \
+xmlns="http://www.w3.org/2000/svg" style="display:block">
+<defs>
+<linearGradient id="tbSky" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="{H * 0.6:.0f}">
+<stop offset="0" stop-color="rgb(150,178,196)"/><stop offset="0.6" stop-color="rgb(210,214,202)"/>
+<stop offset="1" stop-color="rgb(248,226,176)"/></linearGradient>
+<radialGradient id="tbSun" gradientUnits="userSpaceOnUse" cx="{W * 0.73:.0f}" cy="{H * 0.5:.0f}" r="{W * 0.46:.0f}">
+<stop offset="0" stop-color="rgb(255,247,222)" stop-opacity="0.85"/>
+<stop offset="1" stop-color="rgb(255,247,222)" stop-opacity="0"/></radialGradient>
+<linearGradient id="tbFg" gradientUnits="userSpaceOnUse" x1="0" y1="{H * 0.66:.0f}" x2="0" y2="{H}">
+<stop offset="0" stop-color="rgb(214,180,104)"/><stop offset="1" stop-color="rgb(92,74,42)"/></linearGradient>
+<filter id="tbBlur" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDev="13"/></filter>
+<radialGradient id="tbVig" gradientUnits="userSpaceOnUse" cx="{W / 2:.0f}" cy="{H / 2:.0f}" r="{W * 0.62:.0f}">
+<stop offset="0.62" stop-color="#000" stop-opacity="0"/>
+<stop offset="1" stop-color="rgb(20,18,14)" stop-opacity="0.4"/></radialGradient>
+</defs>
+<rect width="{W}" height="{H}" fill="url(#tbSky)"/>
+<rect width="{W}" height="{H}" fill="url(#tbSun)"/>
+<ellipse cx="{W * 0.5:.0f}" cy="{H * 0.6:.0f}" rx="{W * 0.6:.0f}" ry="24" fill="rgb(244,243,238)" \
+opacity="0.7" filter="url(#tbBlur)"/>
+<path d="{d_far}" fill="rgb(150,168,180)" opacity="0.92"/>
+<path d="{d_mid1}" fill="rgb(120,140,110)"/>
+<path d="{d_mid2}" fill="rgb(96,112,72)"/>
+<path d="{d_fg}" fill="url(#tbFg)"/>
+{gL}{gR}
+<circle cx="0" cy="0" r="{br:.1f}" fill="rgb(252,247,235)" stroke="#28221a" stroke-width="0.7">
+<animateMotion dur="2.4s" repeatCount="indefinite" path="{ball_path}" calcMode="spline" \
+keyTimes="0;0.5;1" keyPoints="0;0.5;1" keySplines="0.45 0 0.55 1;0.45 0 0.55 1"/>
+</circle>
+<rect width="{W}" height="{H}" fill="url(#tbVig)"/>
+</svg>'''
 
 
 REPLACED_MEDIA = {
     'ppt/media/image80.png': _make_qr_png,
-    'ppt/media/image3.jpeg': _make_title_bg,
 }
 A14_NS = 'http://schemas.microsoft.com/office/drawing/2010/main'
 
@@ -202,7 +171,6 @@ A14_NS = 'http://schemas.microsoft.com/office/drawing/2010/main'
 # icon reused on several slides keeps one speaking name; genuinely distinct
 # images that would share a slug get a numeric suffix.
 MEDIA_SLUGS = {
-    ('image3.jpeg', ''): 'title-background',
     ('image1.jpeg', ''): 'closing-background',
     ('image79.jpg', ''): 'speaker-portrait',
     ('image21.png', ''): 'gear-warning-icon',
@@ -1438,6 +1406,13 @@ class Converter:
         geo = self.apply_xform(geo, xform)
         if source in ('layout', 'master') and self.off_canvas(geo):
             return []
+
+        # the title-slide background is replaced by an inline animated SVG
+        if media_part == TITLE_BG_MEDIA:
+            cls = 'pic' + self.frag_class(frag)
+            style = 'position:absolute;' + self.pos_css(geo)
+            return [f'<div class="{cls}" style="{style}"{self.frag_attr(frag)}>'
+                    f'{_title_bg_svg()}</div>']
 
         # PowerPoint background removal cannot be recomputed — pull the
         # processed bitmap (incl. baked duotone) out of the rendered PDF
