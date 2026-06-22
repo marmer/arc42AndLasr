@@ -162,6 +162,16 @@ animation). It is the canonical reference: `scripts/illustrations/yawning-person
 `document-magnifier-icon`.
 Borderline / decide later (default: leave as-is): `comic-humans-vs-computers`,
 `analyze-improve-cycle`, `privacy-bubbles-blue/green`, `lasr-scenario-cards`.
+
+**Core rollout DONE (2026-06-15).** All 22 clear in-scope motifs above are
+authored as `scripts/illustrations/<slug>.svg` (Opus sub-agents + main session,
+each screenshot-verified) and live in the deck. Still open (need a decision):
+- `thats-it-folks-rings` closing graphic + its `-color`/`-grey`/`-grey-faded`
+  variants — decorative full-bleed "iris-out" ending; the grey/faded variants
+  conflict with the 2-accent palette (would need an opacity-based "faded"
+  instead of grey).
+- the borderline four (`comic-humans-vs-computers`, `analyze-improve-cycle`,
+  `privacy-bubbles-blue/green`, `lasr-scenario-cards`).
 Out of scope (stay realistic): screenshots (`netflix-signup`, `deepl-translation`,
 `metrics-to-insight`, `vpn-secure-anonymous`, `encryption-privacy-text`),
 forms (`quality-criteria-form`, `sharpen-results-checklist`,
