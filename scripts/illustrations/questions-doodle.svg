@@ -1,0 +1,77 @@
+<svg viewBox="0 0 300 300" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <!-- ===== shared style kit (keep identical across all motifs) ===== -->
+    <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.014" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#1b1b1b" flood-opacity="0.16"/>
+    </filter>
+    <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#1b1b1b" stroke-width="1" opacity="0.22"/>
+    </pattern>
+  </defs>
+
+  <!-- torn-paper sticker -->
+  <g filter="url(#shadow)">
+    <path d="M22,30 Q16,16 34,17 L256,13 Q288,12 286,36 L289,250 Q291,272 268,271 L42,274 Q20,276 19,253 Z"
+          fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4" stroke-opacity="0.18" filter="url(#rough)"/>
+  </g>
+
+  <!-- artwork -->
+  <g id="artwork" filter="url(#rough)" fill="none" stroke="#1b1b1b" stroke-width="3"
+     stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- big central question mark : teal -->
+    <g id="qbig">
+      <!-- hook + stem as a filled glyph -->
+      <path d="M114,108 Q112,78 142,74 Q176,72 178,100 Q179,124 154,134 Q142,140 143,162 L130,162 Q128,134 145,124 Q160,117 160,102 Q159,88 142,89 Q128,90 129,108 Z"
+            fill="#6CCBB2"/>
+      <!-- hatch on shaded side of stem -->
+      <path d="M143,162 Q142,141 153,135 L156,150 L147,162 Z"
+            fill="url(#hatch)" stroke="none"/>
+      <!-- dot -->
+      <circle cx="136" cy="184" r="9" fill="#6CCBB2"/>
+      <animateTransform attributeName="transform" type="translate"
+        values="0,0;0,-1.4;0,0" dur="4.2s" repeatCount="indefinite"
+        calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/>
+    </g>
+
+    <!-- upper-right medium question mark : blue -->
+    <g id="qmed">
+      <path d="M204,84 Q203,66 222,64 Q243,63 244,80 Q245,96 230,101 Q222,104 223,116 L213,116 Q211,98 222,93 Q231,89 231,81 Q230,73 221,74 Q213,75 214,84 Z"
+            fill="#90C5E2"/>
+      <circle cx="217" cy="130" r="6.5" fill="#90C5E2"/>
+      <animateTransform attributeName="transform" type="translate"
+        values="0,0;0,-1.2;0,0" dur="3.6s" begin="-0.9s" repeatCount="indefinite"
+        calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/>
+    </g>
+
+    <!-- lower-left small question mark : blue -->
+    <g id="qsm">
+      <path d="M66,176 Q65,162 80,161 Q96,160 97,173 Q98,185 86,189 Q80,191 81,200 L73,200 Q71,186 80,182 Q87,179 87,173 Q86,167 79,168 Q73,169 74,176 Z"
+            fill="#90C5E2"/>
+      <circle cx="77" cy="212" r="5.5" fill="#90C5E2"/>
+      <animateTransform attributeName="transform" type="translate"
+        values="0,0;0,-1;0,0" dur="4.8s" begin="-2.1s" repeatCount="indefinite"
+        calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/>
+    </g>
+
+    <!-- tiny teal question mark : far right -->
+    <g id="qtiny">
+      <path d="M236,168 Q235,158 246,157 Q258,156 259,166 Q260,174 251,177 Q247,179 248,185 L242,185 Q240,175 247,172 Q252,170 252,166 Q251,161 246,162 Q241,163 242,168 Z"
+            fill="#6CCBB2"/>
+      <circle cx="245" cy="194" r="4" fill="#6CCBB2"/>
+      <animateTransform attributeName="transform" type="translate"
+        values="0,0;0,-1.3;0,0" dur="3.9s" begin="-1.5s" repeatCount="indefinite"
+        calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/>
+    </g>
+
+    <!-- puzzled spark / thought sparkle, upper-left -->
+    <g id="spark" stroke="#1b1b1b" stroke-width="2.2">
+      <path d="M70,86 L70,72 M62,92 L52,86 M80,92 L90,84"/>
+    </g>
+
+  </g>
+</svg>

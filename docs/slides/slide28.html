@@ -19,26 +19,26 @@
 <div class="pic" style="position:absolute;left:563.2px;top:202px;width:400.7px;height:400.7px;"><svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <defs>
     <!-- ===== shared style kit (keep identical across all motifs) ===== -->
-    <filter id="rough_i10" x="-5%" y="-5%" width="110%" height="110%">
+    <filter id="rough_i15" x="-5%" y="-5%" width="110%" height="110%">
       <feTurbulence type="fractalNoise" baseFrequency="0.014" numOctaves="2" seed="7" result="n"/>
       <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
     </filter>
-    <filter id="shadow_i10" x="-20%" y="-20%" width="140%" height="140%">
+    <filter id="shadow_i15" x="-20%" y="-20%" width="140%" height="140%">
       <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#1b1b1b" flood-opacity="0.16"/>
     </filter>
-    <pattern id="hatch_i10" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+    <pattern id="hatch_i15" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
       <line x1="0" y1="0" x2="0" y2="8" stroke="#1b1b1b" stroke-width="1" opacity="0.22"/>
     </pattern>
   </defs>
 
   <!-- torn-paper sticker -->
-  <g filter="url(#shadow_i10)">
+  <g filter="url(#shadow_i15)">
     <path d="M22,30 Q16,16 34,17 L256,13 Q288,12 286,36 L289,250 Q291,272 268,271 L42,274 Q20,276 19,253 Z"
-          fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4" stroke-opacity="0.18" filter="url(#rough_i10)"/>
+          fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4" stroke-opacity="0.18" filter="url(#rough_i15)"/>
   </g>
 
   <!-- artwork -->
-  <g id="artwork_i10" filter="url(#rough_i10)" fill="none" stroke="#1b1b1b" stroke-width="3"
+  <g id="artwork_i15" filter="url(#rough_i15)" fill="none" stroke="#1b1b1b" stroke-width="3"
      stroke-linecap="round" stroke-linejoin="round">
 
     <!-- ===== open book seen from above, slightly tilted ===== -->
@@ -58,7 +58,7 @@
     <path d="M68,198 Q69,144 74,110" stroke-width="2.2"/>
 
     <!-- hatch shading: underside of right cover -->
-    <path d="M238,196 L242,206 Q240,216 228,216 L150,222 L150,210 Z" fill="url(#hatch_i10)" stroke="none"/>
+    <path d="M238,196 L242,206 Q240,216 228,216 L150,222 L150,210 Z" fill="url(#hatch_i15)" stroke="none"/>
 
     <!-- text lines on left page (short ink strokes, NOT letters) -->
     <g stroke-width="2.2">
@@ -78,7 +78,7 @@
     <path d="M150,222 L150,250 L156,244 L162,250 L162,222" fill="#90C5E2"/>
 
     <!-- ===== magnifying glass over upper-right ===== -->
-    <g id="lens_i10">
+    <g id="lens_i15">
       <!-- handle -->
       <path d="M228,158 L256,190" stroke-width="6"/>
       <!-- lens glass: translucent blue tint -->
@@ -97,7 +97,7 @@
   </g>
 
   <!-- whole-artwork gentle bob -->
-  <animateTransform xlink:href="#artwork_i10" attributeName="transform" type="translate"
+  <animateTransform xlink:href="#artwork_i15" attributeName="transform" type="translate"
     values="0,0;0,1.4;0,0" dur="6s" repeatCount="indefinite"
     calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/>
 </svg>

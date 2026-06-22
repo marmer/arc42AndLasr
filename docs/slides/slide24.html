@@ -16,7 +16,68 @@
 <div class="shp" style="position:absolute;left:298.1px;top:398.3px;width:205.7px;height:32px;background:#FFFFFF;border:1px solid #1B1B1B;"><div class="tx" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-start;padding:7.6px 3.8px 11.3px 3.8px;"><p style="font-size:10.7px;text-align:left;line-height:1.200;margin:0px 0 0px 0;"><span style="font-size:10.7px;font-family:'Arial',sans-serif;font-weight:700;color:#1B1B1B;">11. Risks and Technical Debt</span></p></div></div>
 <div class="shp" style="position:absolute;left:298.1px;top:429px;width:205.7px;height:35.8px;background:#FFFFFF;border:1px solid #1B1B1B;"><div class="tx" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-start;padding:11.3px 3.8px 11.3px 3.8px;"><p style="font-size:10.7px;text-align:left;line-height:1.200;margin:0px 0 0px 0;"><span style="font-size:10.7px;font-family:'Arial',sans-serif;font-weight:700;color:#1B1B1B;">12. Glossary</span></p></div></div>
 <div class="shp" style="position:absolute;left:92.4px;top:114.9px;width:205.7px;height:67px;background:#FFFFFF;border:1px solid #1B1B1B;"><div class="tx" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-start;padding:7.6px 3.8px 7.6px 3.8px;"><p style="font-size:10.7px;text-align:left;line-height:1.200;margin:0px 0 0px 0;"><span style="font-size:10.7px;font-family:'Arial',sans-serif;font-weight:700;color:#1B1B1B;">1. Introduction &amp; Goals</span></p><p style="font-size:10.7px;text-align:left;line-height:1.200;margin:0px 0 0px 0;"><span style="font-size:10.7px;font-family:'Arial',sans-serif;color:#1B1B1B;">1.1 Fundamental requirements</span></p><p style="font-size:10.7px;text-align:left;line-height:1.200;margin:0px 0 0px 0;"><span style="font-size:10.7px;font-family:'Arial',sans-serif;color:#1B1B1B;">1.2 Quality goals</span></p><p style="font-size:10.7px;text-align:left;line-height:1.200;margin:0px 0 0px 0;"><span style="font-size:10.7px;font-family:'Arial',sans-serif;color:#1B1B1B;">1.3 Stakeholder</span></p></div></div>
-<div class="pic" style="position:absolute;left:646.3px;top:224.6px;width:257.4px;height:264.6px;"><div style="position:absolute;inset:0;overflow:hidden;"><img src="img/arrows-outward-icon.png" style="position:absolute;left:0;top:0;width:100%;height:100%;" alt=""></div></div>
+<div class="pic" style="position:absolute;left:646.3px;top:224.6px;width:257.4px;height:264.6px;"><svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <!-- ===== shared style kit (keep identical across all motifs) ===== -->
+    <filter id="rough_i11" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.014" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="shadow_i11" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#1b1b1b" flood-opacity="0.16"/>
+    </filter>
+    <pattern id="hatch_i11" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#1b1b1b" stroke-width="1" opacity="0.22"/>
+    </pattern>
+  </defs>
+
+  <!-- torn-paper sticker -->
+  <g filter="url(#shadow_i11)">
+    <path d="M22,30 Q16,16 34,17 L256,13 Q288,12 286,36 L289,250 Q291,272 268,271 L42,274 Q20,276 19,253 Z"
+          fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4" stroke-opacity="0.18" filter="url(#rough_i11)"/>
+  </g>
+
+  <!-- artwork -->
+  <g id="artwork_i11" filter="url(#rough_i11)" fill="none" stroke="#1b1b1b" stroke-width="3"
+     stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- four arrows radiating outward from centre (150,150) -->
+
+    <!-- UP arrow (teal) -->
+    <g class="arr" data-dir="up">
+      <path d="M141,128 L141,72 L131,72 L150,46 L169,72 L159,72 L159,128 Z" fill="#6CCBB2"/>
+      <path d="M150,46 L169,72 L159,72 L159,110 Z" fill="url(#hatch_i11)" stroke="none"/>
+      <animateTransform attributeName="transform" type="translate" values="0,0;0,-1.4;0,0" dur="5.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/>
+    </g>
+
+    <!-- DOWN arrow (blue) -->
+    <g class="arr" data-dir="down">
+      <path d="M141,172 L141,228 L131,228 L150,254 L169,228 L159,228 L159,172 Z" fill="#90C5E2"/>
+      <path d="M150,254 L131,228 L141,228 L141,190 Z" fill="url(#hatch_i11)" stroke="none"/>
+      <animateTransform attributeName="transform" type="translate" values="0,0;0,1.4;0,0" dur="5.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/>
+    </g>
+
+    <!-- LEFT arrow (blue) -->
+    <g class="arr" data-dir="left">
+      <path d="M128,141 L72,141 L72,131 L46,150 L72,169 L72,159 L128,159 Z" fill="#90C5E2"/>
+      <path d="M46,150 L72,169 L72,159 L110,159 Z" fill="url(#hatch_i11)" stroke="none"/>
+      <animateTransform attributeName="transform" type="translate" values="0,0;-1.4,0;0,0" dur="5.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/>
+    </g>
+
+    <!-- RIGHT arrow (teal) -->
+    <g class="arr" data-dir="right">
+      <path d="M172,141 L228,141 L228,131 L254,150 L228,169 L228,159 L172,159 Z" fill="#6CCBB2"/>
+      <path d="M254,150 L228,131 L228,141 L190,141 Z" fill="url(#hatch_i11)" stroke="none"/>
+      <animateTransform attributeName="transform" type="translate" values="0,0;1.4,0;0,0" dur="5.6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/>
+    </g>
+
+    <!-- small centre shape (tint) -->
+    <circle cx="150" cy="150" r="17" fill="#E0F4EF"/>
+    <circle cx="150" cy="150" r="8" fill="#B6E5D9"/>
+
+  </g>
+</svg>
+</div>
 </div>
 <aside aria-label="speaker notes" class="notes">
 <ul>

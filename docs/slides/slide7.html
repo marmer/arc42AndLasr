@@ -1,7 +1,68 @@
 <div class="pcanvas" style="background:#FFFFFF;">
 <div class="shp" style="position:absolute;left:860.5px;top:494.7px;width:107.4px;height:3.3px;background:#6CCBB2;"></div>
 <div class="shp" style="position:absolute;left:877.9px;top:504.5px;width:72px;height:28.8px;"><div class="tx" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:3.6px 7.2px 3.6px 7.2px;"><p style="font-size:16px;text-align:right;line-height:1.200;margin:0px 0 0px 0;"><span style="font-size:16px;">&nbsp;</span></p></div></div>
-<div class="pic" style="position:absolute;left:-23.4px;top:-8.2px;width:988.2px;height:619.9px;"><div style="position:absolute;inset:0;overflow:hidden;"><img src="img/hello-badge.png" style="position:absolute;left:0;top:0;width:100%;height:100%;" alt=""></div></div>
+<div class="pic" style="position:absolute;left:-23.4px;top:-8.2px;width:988.2px;height:619.9px;"><svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <!-- ===== shared style kit (keep identical across all motifs) ===== -->
+    <filter id="rough_i3" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.014" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="shadow_i3" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#1b1b1b" flood-opacity="0.16"/>
+    </filter>
+    <pattern id="hatch_i3" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="8" stroke="#1b1b1b" stroke-width="1" opacity="0.22"/>
+    </pattern>
+  </defs>
+
+  <!-- torn-paper sticker -->
+  <g filter="url(#shadow_i3)">
+    <path d="M22,46 Q16,32 34,33 L256,29 Q288,28 286,52 L289,236 Q291,258 268,257 L42,260 Q20,262 19,239 Z"
+          fill="#ffffff" stroke="#1b1b1b" stroke-width="1.4" stroke-opacity="0.18" filter="url(#rough_i3)"/>
+  </g>
+
+  <!-- artwork -->
+  <g id="artwork_i3" filter="url(#rough_i3)" fill="none" stroke="#1b1b1b" stroke-width="3"
+     stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- badge body (white) -->
+    <rect x="48" y="64" width="204" height="156" rx="18" fill="#ffffff"/>
+
+    <!-- header banner (teal) -->
+    <path d="M48,82 Q48,64 66,64 L234,64 Q252,64 252,82 L252,124 L48,124 Z" fill="#6CCBB2"/>
+    <!-- divider between banner and write-on area -->
+    <path d="M48,124 L252,124"/>
+    <!-- sparse hatch shading on right edge of banner -->
+    <path d="M214,64 L252,64 L252,124 L214,124 Z" fill="url(#hatch_i3)" stroke="none"/>
+
+    <!-- hand-lettered HELLO in the banner (ink, slightly looser weight) -->
+    <g stroke-width="2.2" fill="none">
+      <!-- H -->
+      <path d="M74,82 L74,108 M74,95 L90,95 M90,82 L90,108"/>
+      <!-- E -->
+      <path d="M118,82 L102,82 L102,108 L118,108 M102,95 L114,95"/>
+      <!-- L -->
+      <path d="M130,82 L130,108 L146,108"/>
+      <!-- L -->
+      <path d="M158,82 L158,108 L174,108"/>
+      <!-- O -->
+      <path d="M188,90 Q188,82 198,82 Q208,82 208,95 Q208,108 198,108 Q188,108 188,100 Z"/>
+    </g>
+
+    <!-- write-on area: two blank ruled scribble lines -->
+    <g stroke-width="2.2">
+      <path d="M72,160 Q120,156 160,160 T228,159"/>
+      <path d="M72,190 Q116,186 152,190 T214,188"/>
+    </g>
+
+    <!-- small clip notch at top -->
+    <path d="M132,64 L132,56 Q132,50 140,50 L160,50 Q168,50 168,56 L168,64" fill="#90C5E2"/>
+  </g>
+
+  <animateTransform xlink:href="#artwork_i3" attributeName="transform" type="rotate" values="-0.8 150 150;0.8 150 150;-0.8 150 150" dur="6s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.5;1" keySplines="0.4 0 0.2 1;0.4 0 0.2 1"/>
+</svg>
+</div>
 <div class="pic" style="position:absolute;left:222.2px;top:223.9px;width:239.9px;height:240.4px;"><div style="position:absolute;inset:0;overflow:hidden;"><img src="img/linkedin-qr.jpeg" style="position:absolute;left:-44.4%;top:-96.6%;width:189.6%;height:224.6%;" alt=""></div></div>
 <div class="shp" style="position:absolute;left:283.4px;top:299.4px;width:144.9px;height:77.6px;background:transparent;"><div class="tx" style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-start;padding:0px 0px 0px 0px;"><p style="font-size:64px;text-align:left;line-height:1.200;margin:0px 0 0px 0;"><span style="font-size:64px;font-family:'Verdana',sans-serif;font-weight:700;color:#6CCBB2;">ME</span></p></div></div>
 </div>
