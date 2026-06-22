@@ -160,6 +160,137 @@ keyTimes="0;0.5;1" keyPoints="0;0.5;1" keySplines="0.45 0 0.55 1;0.45 0 0.55 1"/
 </svg>'''
 
 
+# ---------------------------------------------------------------------------
+# Unified illustration style ("arc42 & LASR" icon family).
+#
+# Hand-drawn monoline SVGs that replace selected raster illustrations with one
+# coherent look: dark ink outlines, a dominant mint accent, a subtle tinted
+# wash for depth, and a gentle ambient CSS loop (frozen under
+# prefers-reduced-motion). Each icon is drawn in a convenient local design box
+# and fit-centred into the placement's pixel box; strokes use
+# vector-effect="non-scaling-stroke" so the line weight is a *constant* number
+# of rendered slide pixels (~2px main / ~1.2px detail) regardless of how large
+# the placement is. SVGs are inlined (so the CSS animation runs) and keyed by
+# output slug in SVG_REGISTRY; render_pic emits them in place of the bitmap.
+# ---------------------------------------------------------------------------
+ICON_INK = '#1B1B1B'        # outline ink
+ICON_MINT = '#35977D'       # solid mint accent (the highlighted element)
+ICON_MINT_SOFT = '#6CCBB2'  # lighter mint (washes / secondary)
+ICON_DARK = '#16242e'       # near-navy (mouth interior etc.)
+
+
+def _icon_fit(w, h, dw, dh, pad):
+    """scale+translate mapping a dw×dh design box, fit-centred into w×h px."""
+    s = min(w * (1 - 2 * pad) / dw, h * (1 - 2 * pad) / dh)
+    return s, (w - dw * s) / 2, (h - dh * s) / 2
+
+
+def _icon_open(w, h, cls):
+    return (f'<svg viewBox="0 0 {w:.1f} {h:.1f}" width="100%" height="100%" '
+            f'preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" '
+            f'class="{cls}" style="display:block;overflow:visible">')
+
+
+def _gamepad_svg(w, h):
+    """Monoline game controller: ink outline + mint wash body, solid-mint D-pad,
+    four face buttons that light up in sequence, a small antenna nub. The whole
+    body bobs ~1px. (The recurring 'playful' motif of the talk.)"""
+    s, tx, ty = _icon_fit(w, h, 200.0, 150.0, 0.10)
+    ns = 'vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"'
+    body = ('M55,56 Q100,39 145,56 Q177,64 178,97 Q179,122 156,124 '
+            'Q137,125 129,102 Q115,90 100,90 Q85,90 71,102 '
+            'Q63,125 44,124 Q21,122 22,97 Q23,64 55,56 Z')
+    # D-pad cross (solid mint accent), centred at (62,84)
+    dpad = ('M58,72 H66 V80 H74 V88 H66 V96 H58 V88 H50 V80 H58 Z')
+    # face buttons (diamond) centred at (138,84), r=6
+    btn = [(138, 70), (124, 84), (152, 84), (138, 98)]
+    fills = ''.join(f'<circle class="gp-b gp-b{i+1}" cx="{x}" cy="{y}" r="5.4"/>'
+                    for i, (x, y) in enumerate(btn))
+    rings = ''.join(f'<circle cx="{x}" cy="{y}" r="6" fill="none" stroke="{ICON_INK}" '
+                    f'stroke-width="1.2" {ns}/>' for x, y in btn)
+    dots = ('<circle cx="96" cy="84" r="2.1" fill="%s"/>'
+            '<circle cx="106" cy="84" r="2.1" fill="%s"/>') % (ICON_INK, ICON_INK)
+    style = (
+        '<style>'
+        '.gp .gp-bob{animation:gpbob 5s ease-in-out infinite}'
+        '.gp .gp-b{fill:%s;animation:gpblink 4s ease-in-out infinite}'
+        '.gp .gp-b2{animation-delay:1s}.gp .gp-b3{animation-delay:2s}.gp .gp-b4{animation-delay:3s}'
+        '@keyframes gpbob{0%%,100%%{transform:translateY(0)}50%%{transform:translateY(-1.2px)}}'
+        '@keyframes gpblink{0%%,9%%,100%%{fill-opacity:.18}3%%{fill-opacity:1}}'
+        '@media (prefers-reduced-motion:reduce){.gp *{animation:none!important}.gp .gp-b{fill-opacity:.5}}'
+        '</style>'
+    ) % ICON_MINT
+    return (
+        f'{_icon_open(w, h, "gp")}{style}'
+        f'<g transform="translate({tx:.2f},{ty:.2f}) scale({s:.4f})">'
+        f'<g class="gp-bob">'
+        # antenna nub
+        f'<line x1="100" y1="34" x2="100" y2="52" stroke="{ICON_INK}" stroke-width="2" {ns}/>'
+        f'<circle cx="100" cy="28" r="7" fill="{ICON_MINT_SOFT}" fill-opacity="0.85" '
+        f'stroke="{ICON_INK}" stroke-width="2" {ns}/>'
+        # body
+        f'<path d="{body}" fill="{ICON_MINT_SOFT}" fill-opacity="0.15" '
+        f'stroke="{ICON_INK}" stroke-width="2" {ns}/>'
+        # D-pad
+        f'<path d="{dpad}" fill="{ICON_MINT}" stroke="{ICON_INK}" stroke-width="1.2" {ns}/>'
+        f'{dots}{fills}{rings}'
+        f'</g></g></svg>'
+    )
+
+
+def _yawning_person_svg(w, h):
+    """Monoline bust of a person mid-yawn: closed eyes, open mouth (animated),
+    a hand raised to cover it, mint shirt wash. Chest breathes ~1px; the mouth
+    opens and closes slowly."""
+    s, tx, ty = _icon_fit(w, h, 140.0, 156.0, 0.16)
+    ns = 'vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round"'
+    shirt = ('M20,156 Q18,116 48,110 Q58,107 70,107 Q82,107 92,110 '
+             'Q122,116 120,156 Z')
+    head = '<ellipse cx="70" cy="66" rx="30" ry="35"/>'
+    crown = 'M45,49 Q70,28 95,49 Q70,40 45,49 Z'
+    # closed, relaxed eyes (downward arcs)
+    eyes = (f'<path d="M50,62 Q58,68 66,62" fill="none" stroke="{ICON_INK}" stroke-width="1.2" {ns}/>'
+            f'<path d="M75,62 Q83,68 91,62" fill="none" stroke="{ICON_INK}" stroke-width="1.2" {ns}/>')
+    # open yawning mouth (animated)
+    mouth = (f'<ellipse class="yp-mouth" cx="80" cy="86" rx="8" ry="12" '
+             f'fill="{ICON_DARK}" stroke="{ICON_INK}" stroke-width="1.6" {ns}/>')
+    # raised hand covering the (figure's) left of the mouth, fingers up
+    hand = ('M45,118 L45,95 Q45,86 49,86 Q49,79 52,79 Q55,79 55,87 '
+            'Q55,77 58,77 Q61,77 61,87 Q61,78 64,78 Q67,78 67,88 '
+            'Q67,81 70,81 Q73,81 73,91 Q74,99 69,103 Q63,107 56,106 L52,118 Z')
+    style = (
+        '<style>'
+        '.yp .yp-breathe{animation:ypbreathe 5s ease-in-out infinite}'
+        '.yp .yp-mouth{animation:ypyawn 5s ease-in-out infinite;'
+        'transform-box:fill-box;transform-origin:center}'
+        '@keyframes ypbreathe{0%,100%{transform:translateY(0)}45%{transform:translateY(-1.4px)}}'
+        '@keyframes ypyawn{0%,100%{transform:scaleY(.82)}45%{transform:scaleY(1.06)}}'
+        '@media (prefers-reduced-motion:reduce){.yp *{animation:none!important}'
+        '.yp .yp-mouth{transform:scaleY(.95)}}'
+        '</style>'
+    )
+    return (
+        f'{_icon_open(w, h, "yp")}{style}'
+        f'<g transform="translate({tx:.2f},{ty:.2f}) scale({s:.4f})" '
+        f'fill="none" stroke="{ICON_INK}" stroke-width="2" {ns}>'
+        f'<g class="yp-breathe">'
+        f'<path d="{shirt}" fill="{ICON_MINT_SOFT}" fill-opacity="0.55"/>'
+        f'<line x1="60" y1="118" x2="60" y2="140"/>'
+        f'<line x1="80" y1="118" x2="80" y2="140"/>'
+        f'</g>'
+        # neck
+        f'<path d="M61,100 V112 M79,100 V112" />'
+        # ears
+        f'<circle cx="41" cy="70" r="6" fill="#fff"/><circle cx="99" cy="70" r="6" fill="#fff"/>'
+        # head
+        f'<g fill="#fff">{head}</g>'
+        f'<path d="{crown}" fill="{ICON_MINT}" stroke="none"/>'
+        f'{eyes}{mouth}'
+        f'<path d="{hand}" fill="#fff"/>'
+        f'</g></svg>'
+    )
+
+
 REPLACED_MEDIA = {
     'ppt/media/image80.png': _make_qr_png,
 }
@@ -243,6 +374,17 @@ PDF_SLUGS = {
     '47x366': 'gamepad-icon',
     '50x723': 'thats-it-folks-rings-color',
     '51x340': 'thats-it-folks-rings-grey-faded',
+}
+
+# Output slugs whose bitmap is replaced by a hand-drawn inline SVG (the unified
+# illustration family). Keyed by the slug that the raster *would* have received,
+# so every placement of a reused motif (e.g. the gamepad) gets the same drawing.
+# Each function takes the placement size in rendered px (w, h) -> SVG string.
+SVG_REGISTRY = {
+    'yawning-person-icon': _yawning_person_svg,
+    'gamepad-icon': _gamepad_svg,
+    'gamepad-icon-2': _gamepad_svg,
+    'gamepad-icon-3': _gamepad_svg,
 }
 
 BULLET_CHAR_MAP = {
@@ -1417,7 +1559,11 @@ class Converter:
         # PowerPoint background removal cannot be recomputed — pull the
         # processed bitmap (incl. baked duotone) out of the rendered PDF
         if blip.find(f'.//{{{A14_NS}}}backgroundRemoval') is not None:
-            fname = self.extract_from_pdf(geo)
+            xref, smask = self._pdf_best_xref(geo)
+            slug = PDF_SLUGS.get(f'{self._current_page}x{xref}') if xref else None
+            if slug in SVG_REGISTRY:
+                return self.emit_svg_html(pic, blip_fill, geo, ctx, frag, slug)
+            fname = self.extract_from_pdf(geo, prematch=(xref, smask))
             if fname:
                 return self.emit_pic_html(pic, blip_fill, geo, ctx, frag, fname, '',
                                           from_pdf=True)
@@ -1455,8 +1601,26 @@ class Converter:
             amt = int(alpha_mod.get('amt', '100000')) / 100000
             opacity = f'opacity:{amt:.3f};'
 
+        slug = MEDIA_SLUGS.get((os.path.basename(media_part), variant))
+        if slug in SVG_REGISTRY:
+            return self.emit_svg_html(pic, blip_fill, geo, ctx, frag, slug, opacity)
+
         fname = self.emit_media(media_part, variant, transform)
         return self.emit_pic_html(pic, blip_fill, geo, ctx, frag, fname, opacity)
+
+    def emit_svg_html(self, pic, blip_fill, geo, ctx, frag, slug, opacity=''):
+        """Emit an inline hand-drawn SVG (from SVG_REGISTRY) in place of the
+        bitmap, preserving the placement box, drop-shadow, flips and fragment
+        timing. The SVG is sized to the placement's rendered pixels so its
+        stroke weight stays a constant number of slide pixels."""
+        w, h = emu2px(geo['w']), emu2px(geo['h'])
+        svg = SVG_REGISTRY[slug](w, h)
+        sp_pr = pic.find(q('p:spPr'))
+        shadow = self.shadow_css(sp_pr, ctx, kind='drop')
+        cls = 'pic' + self.frag_class(frag)
+        style = ('position:absolute;' + self.pos_css(geo) + shadow + opacity
+                 + self.frag_style(frag))
+        return [f'<div class="{cls}" style="{style}"{self.frag_attr(frag)}>{svg}</div>']
 
     def emit_pic_html(self, pic, blip_fill, geo, ctx, frag, fname, opacity,
                       from_pdf=False):
@@ -1491,11 +1655,11 @@ class Converter:
                  f'<div style="position:absolute;inset:0;overflow:hidden;{radius}">'
                  f'<img src="img/{fname}" style="{img_style}" alt=""></div></div>')]
 
-    def extract_from_pdf(self, geo):
-        """Find the bitmap drawn at geo's position on the current PDF page and
-        emit it (with its soft-mask alpha) as a PNG. Returns filename or None."""
+    def _pdf_best_xref(self, geo):
+        """Locate the bitmap drawn at geo's position on the current PDF page.
+        Returns (xref, smask) of the best-overlapping image, or (None, None)."""
         if self.pdf is None or self._current_page is None:
-            return None
+            return (None, None)
         page = self.pdf[self._current_page - 1]
         # target rect in PDF points (page is 720x405pt for a 960x540px slide)
         scale = page.rect.width / 960.0
@@ -1514,8 +1678,15 @@ class Converter:
                 if iou > best[0]:
                     best = (iou, img)
         if best[1] is None:
+            return (None, None)
+        return (best[1][0], best[1][1])
+
+    def extract_from_pdf(self, geo, prematch=None):
+        """Find the bitmap drawn at geo's position on the current PDF page and
+        emit it (with its soft-mask alpha) as a PNG. Returns filename or None."""
+        xref, smask = prematch if prematch is not None else self._pdf_best_xref(geo)
+        if xref is None:
             return None
-        xref, smask = best[1][0], best[1][1]
         key = (self._current_page, xref)
         if key in self._pdf_cache:
             return self._pdf_cache[key]

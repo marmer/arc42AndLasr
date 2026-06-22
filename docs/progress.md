@@ -76,6 +76,51 @@ All 53 slides generated and visually verified against the reference PDF:
       (multi-click: slide 31; single-click stagger groups: 26, 29, 30, 34,
       37, 45, 46, 47, 51)
 
+## Unified illustration style — SVG redraw of the metaphor images (2026-06-22)
+
+The raster "metaphor" illustrations (icons that underline the spoken/written
+content) are being replaced by hand-drawn **inline SVGs** in one coherent
+style. Agreed style guide (worked out via a grilling session):
+
+- **Bildsprache:** monoline line-art (open contour drawing), playful, fits
+  DM Sans/Karla.
+- **Strich:** two graduated weights, constant in *rendered slide pixels*
+  (~2px main / ~1.2px detail) via `vector-effect="non-scaling-stroke"`, so the
+  line weight looks identical regardless of placement size; round caps/joins.
+- **Farbe:** dark ink outlines (`#1B1B1B`); **mint dominant** accent
+  (`#35977D`/`#6CCBB2`), other brand accents (amber `#F4AD0E` = warning, blue
+  `#3390C3`, violet `#914ACC`) only where semantically compelling.
+- **Fläche:** outline-dominant + a subtle ~15% mint **wash** for depth (flat,
+  no gradients); full accent fill reserved for the one highlighted element.
+- **Figuren:** detailed monoline people (hinted body/clothing/mimic), a touch
+  more expressive than the title-slide stick figures.
+- **Motiv:** mixed — same subject redrawn by default; reinterpret only where
+  the old image served the message poorly (agreed per slide).
+- **Animation:** gentle ambient CSS loop, very low amplitude, "only where it
+  fits"; `prefers-reduced-motion` freezes it.
+- **Technik:** `SVG_REGISTRY` maps an output *slug* → a draw function
+  `(w_px, h_px) -> svg`; `render_pic` emits the inline SVG (via
+  `emit_svg_html`) instead of the bitmap, keeping the exact placement box,
+  drop-shadow, flips and fragment timing. Reused motifs (gamepad) share one
+  function. Helpers: `_icon_fit`, `_icon_open`, palette consts `ICON_*`.
+- **Verifikation:** these slides now intentionally deviate from the reference
+  PDF; plan is to mask the replaced image's bbox in `compare_render.py` so the
+  rest of each slide still diffs automatically (not yet implemented — pilot was
+  verified by direct screenshot).
+
+**Scope** (display positions 1–53): the icon/metaphor illustrations, the
+"That's-it-folks" rings and the gamepad — NOT the news-article screenshots
+(pos 5–9), diagrams (lasr-overview, utility-tree, scenario-cards), book covers,
+QR codes or the speaker photo.
+
+**Status — pilot (done, awaiting sign-off before rollout):**
+- [x] `yawning-person-icon` (`_yawning_person_svg`) — pos 2; breathing + slow
+      yawn loop.
+- [x] `gamepad-icon` (`_gamepad_svg`) — recurring motif, all 6 placements
+      (pos 26, 34, 37, 45, 46, 47); body bob + sequential button blink.
+- [ ] rollout of the remaining metaphor icons + the rings, plus the
+      compare_render bbox masking.
+
 ### Regenerating
 ```bash
 pip install -r scripts/requirements.txt
