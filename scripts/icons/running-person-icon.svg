@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" role="img" aria-label="running person">
+  <style>
+    .out { fill: none; stroke: #1B1B1B; stroke-width: 14; stroke-linecap: round; stroke-linejoin: round; }
+    .lim { fill: none; stroke: #6CCBB2; stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; }
+    .ink { stroke: #1B1B1B; stroke-width: 4; } .t { fill: #6CCBB2; }
+    .run { transform-box: view-box; transform-origin: 50px 50px; animation: bob .7s ease-in-out infinite; }
+    @keyframes bob { 0%, 100% { transform: translateY(-1.5px); } 50% { transform: translateY(1.5px); } }
+    @media (prefers-reduced-motion: reduce) { .run { animation: none; } }
+  </style>
+  <g class="run">
+    <path class="out" d="M57 36 L44 57 M57 38 L70 47 L65 57 M55 40 L43 42 L37 51 M44 57 L58 68 L64 79 M44 57 L33 67 L27 60"/>
+    <path class="lim" d="M57 36 L44 57 M57 38 L70 47 L65 57 M55 40 L43 42 L37 51 M44 57 L58 68 L64 79 M44 57 L33 67 L27 60"/>
+    <circle class="t ink" cx="64" cy="25" r="9"/>
+  </g>
+</svg>

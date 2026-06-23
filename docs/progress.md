@@ -57,6 +57,50 @@ removed. The presentation is now **generated** from the original PPTX by
   (name, title, gmail, https://marmer.online).
 - The sli.do event QR only appears on a hidden slide and is not exported.
 
+## Icon restyle — flat duotone SVGs — 2026-06-23
+
+The standalone pictogram artwork (the stock-looking icons originally extracted
+from the PDF or baked into the PPTX) was replaced with a single coherent set of
+hand-drawn flat icons. Goal: one consistent visual language, licence-clean
+artwork, crisp at any zoom, and removal of the copyrighted Looney Tunes
+"That's all folks" rings.
+
+**Locked style** (signed off via a 3-icon pilot — gamepad, audience,
+document+magnifier):
+- Flat duotone, *outlined + filled*: uniform dark-ink keyline around flat
+  teal fills, rounded joins/caps, one normalised stroke weight per icon
+  (`stroke-width: 4` on a 100-unit viewBox; finer detail uses ~1.8–3).
+- Palette: ink `#1B1B1B`, brand teal `#6CCBB2`, light teal `#E0F4EF`, white
+  knockout. `#FF0000` reserved for genuine warning subjects only (none used —
+  the gear/electric warnings stay on-brand teal).
+- Transparent, shadowless (the generator drops the `drop-shadow` filter for
+  `.svg` icons), sized to the exact box of the image they replace → no
+  composition shift.
+- **Selective** subtle idle animation, only where the subject implies motion
+  (gears rotate, network/checks pulse, paper whirls, magnifiers scan, runner
+  bobs, bolt flickers, arrows breathe, iris pulses); the rest are static
+  (person, chess knight, target, feather sways gently). Each animation is a
+  CSS `@keyframes` embedded inside the SVG with an internal
+  `@media (prefers-reduced-motion: reduce)` off-switch.
+- Gamepad: a minimal retro rectangular pad was chosen over a dual-grip / rounded
+  variant.
+
+**Mechanism**: sources live in `scripts/icons/<slug>.svg`. The generator
+(`icon_svg()` + `ICON_SVGS`/`ICON_ALIASES`) swaps them in for both the
+PDF-extracted (`extract_from_pdf`) and duotone-`emit_media` paths, keyed by the
+slug each original would have produced. Colour/state variants of one subject
+(e.g. the three ring treatments) alias onto a single drawing.
+
+**Restyled (19 drawings)**: gamepad, audience-people, document-magnifier,
+target-dartboard, gears-lock, circuit-network, checklist-gear, circuit-checks,
+paper-whirl, book-magnifier, feather, person-suit, running-person,
+warning-electric, chess-knight, arrows-outward, gear-warning, yawning-person,
+thats-it-folks-rings (replaces the colour/grey/grey-faded ring variants).
+
+**Deliberately excluded**: `sharpen-results-checklist` (image68) is not a
+pictogram but a full content graphic with real text ("Quality Statement", the
+question prompts, the "Performance Efficiency" card) — left as-is.
+
 ### Verification
 `scripts/compare_render.py` screenshots every slide (headless Chromium,
 960×540, final fragment state) and diffs it against the page of the original

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" role="img" aria-label="book under magnifier">
+  <style>
+    .ink { stroke: #1B1B1B; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+    .page { fill: #E0F4EF; } .lens { fill: #6CCBB2; fill-opacity: .30; }
+    .tl { fill: none; stroke: #6CCBB2; stroke-width: 2.6; stroke-linecap: round; }
+    .mag { animation: scan 4.4s ease-in-out infinite; }
+    @keyframes scan { 0%, 100% { transform: translate(3px, 4px); } 50% { transform: translate(-10px, -8px); } }
+    @media (prefers-reduced-motion: reduce) { .mag { animation: none; transform: none; } }
+  </style>
+  <path class="page ink" d="M50 28 C40 23 25 23 14 28 V70 C25 65 40 65 50 70 Z"/>
+  <path class="page ink" d="M50 28 C60 23 75 23 86 28 V70 C75 65 60 65 50 70 Z"/>
+  <line class="ink" x1="50" y1="28" x2="50" y2="70"/>
+  <path class="tl" d="M20 36 H42 M20 44 H42 M20 52 H40"/>
+  <path class="tl" d="M58 36 H80 M58 44 H80 M58 52 H78"/>
+  <g class="mag">
+    <line class="ink" x1="69" y1="60" x2="82" y2="73"/>
+    <circle class="lens ink" cx="61" cy="52" r="12"/>
+  </g>
+</svg>

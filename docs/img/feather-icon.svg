@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" role="img" aria-label="quill feather">
+  <style>
+    .ink { stroke: #1B1B1B; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+    .t { fill: #6CCBB2; } .lt { fill: #E0F4EF; }
+    .barb { fill: none; stroke: #1B1B1B; stroke-width: 2.4; stroke-linecap: round; }
+    .sway { transform-box: view-box; transform-origin: 26px 82px; animation: sway 5s ease-in-out infinite; }
+    @keyframes sway { 0%, 100% { transform: rotate(-2.5deg); } 50% { transform: rotate(2.5deg); } }
+    @media (prefers-reduced-motion: reduce) { .sway { animation: none; } }
+  </style>
+  <g class="sway">
+    <path class="t ink" d="M74 18 C46 22 30 48 26 82 C54 74 76 54 78 26 C77.5 20 76 18 74 18 Z"/>
+    <path class="lt" d="M74 20 C52 26 38 46 32 70 C32 70 50 40 74 22 Z"/>
+    <path class="ink" style="fill:none" d="M75 20 C54 38 36 60 26 82"/>
+    <path class="barb" d="M52 31 l9 -2 M44 41 l10 -1 M37 51 l11 0 M32 61 l11 2 M28 71 l10 3"/>
+  </g>
+</svg>

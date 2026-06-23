@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" role="img" aria-label="document under magnifier">
+  <style>
+    .ink { stroke: #1B1B1B; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+    .page { fill: #E0F4EF; }
+    .line { fill: #6CCBB2; }
+    .check { fill: none; stroke: #6CCBB2; stroke-width: 3.6; stroke-linecap: round; stroke-linejoin: round; }
+    .lens { fill: #6CCBB2; fill-opacity: .30; }
+    .mag { animation: scan 4.2s ease-in-out infinite; }
+    @keyframes scan { 0%, 100% { transform: translate(2px, 4px); } 50% { transform: translate(-9px, -11px); } }
+    @media (prefers-reduced-motion: reduce) { .mag { animation: none; transform: translate(0,0); } }
+  </style>
+  <!-- page with dog-eared corner -->
+  <path class="page ink" d="M29 16 H52 L64 28 V73 a5 5 0 0 1 -5 5 H29 a5 5 0 0 1 -5 -5 V21 a5 5 0 0 1 5 -5 Z"/>
+  <path d="M52 17 V28 H63 Z" fill="#C5E7DD"/>
+  <path class="ink" style="fill:none" d="M52 17 V27 a1 1 0 0 0 1 1 H63"/>
+  <!-- text lines -->
+  <rect class="line" x="31" y="36" width="22" height="3.4" rx="1.7"/>
+  <rect class="line" x="31" y="44" width="26" height="3.4" rx="1.7"/>
+  <rect class="line" x="31" y="52" width="17" height="3.4" rx="1.7"/>
+  <!-- approval check -->
+  <path class="check" d="M31 64 l4.5 4.5 L44 60"/>
+  <!-- magnifier -->
+  <g class="mag">
+    <line class="ink" x1="67" y1="64" x2="79" y2="76"/>
+    <circle class="lens ink" cx="59" cy="56" r="11"/>
+  </g>
+</svg>

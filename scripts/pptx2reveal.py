@@ -245,6 +245,40 @@ PDF_SLUGS = {
     '51x340': 'thats-it-folks-rings-grey-faded',
 }
 
+# Hand-drawn flat duotone replacements for the icon-style artwork (see
+# scripts/icons/*.svg). These are swapped in for the raster/PDF-extracted
+# originals: licence-clean, crisp at any zoom, and a couple carry a subtle
+# idle animation. ICON_ALIASES folds the colour/state variants of one subject
+# onto a single drawing.
+ICON_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'icons')
+ICON_ALIASES = {
+    'thats-it-folks-rings-color': 'thats-it-folks-rings',
+    'thats-it-folks-rings-grey': 'thats-it-folks-rings',
+    'thats-it-folks-rings-grey-faded': 'thats-it-folks-rings',
+}
+
+
+def _icon_slugs():
+    try:
+        return {os.path.splitext(f)[0] for f in os.listdir(ICON_DIR)
+                if f.endswith('.svg')}
+    except FileNotFoundError:
+        return set()
+
+
+ICON_SVGS = _icon_slugs()
+
+
+def icon_svg(slug):
+    """If slug maps to a hand-drawn icon, return (canonical_slug, bytes)."""
+    if not slug:
+        return None
+    canon = ICON_ALIASES.get(slug, slug)
+    if canon not in ICON_SVGS:
+        return None
+    with open(os.path.join(ICON_DIR, canon + '.svg'), 'rb') as f:
+        return canon, f.read()
+
 BULLET_CHAR_MAP = {
     ('Wingdings', '§'): '▪',
     ('Wingdings', 'Ø'): '➢',
@@ -770,6 +804,12 @@ class Converter:
         key = (media_part, variant)
         if key in self.media_cache:
             return self.media_cache[key]
+        sub = icon_svg(MEDIA_SLUGS.get((os.path.basename(media_part), variant)))
+        if sub is not None:
+            canon, data = sub
+            name = self._register(data, '.svg', canon)
+            self.media_cache[key] = name
+            return name
         if media_part in REPLACED_MEDIA:
             data = REPLACED_MEDIA[media_part]()
         else:
@@ -1483,7 +1523,9 @@ class Converter:
         elif geom_el is not None and geom_el.get('prst') == 'roundRect':
             radius = f'border-radius:{fmt(0.16667 * min(w, h))}px;'
 
-        shadow = self.shadow_css(sp_pr, ctx, kind='drop')
+        # hand-drawn flat icons are intentionally shadowless
+        shadow = ('' if fname.endswith('.svg')
+                  else self.shadow_css(sp_pr, ctx, kind='drop'))
         cls = 'pic' + self.frag_class(frag)
         style = ('position:absolute;' + self.pos_css(geo) + shadow + opacity
                  + self.frag_style(frag))
@@ -1519,6 +1561,13 @@ class Converter:
         key = (self._current_page, xref)
         if key in self._pdf_cache:
             return self._pdf_cache[key]
+        slug = PDF_SLUGS.get(f'{self._current_page}x{xref}')
+        sub = icon_svg(slug)
+        if sub is not None:
+            canon, data = sub
+            name = self._register(data, '.svg', canon)
+            self._pdf_cache[key] = name
+            return name
         pix = fitz.Pixmap(self.pdf, xref)
         if pix.colorspace is None or pix.colorspace.n > 3:
             pix = fitz.Pixmap(fitz.csRGB, pix)
@@ -1527,7 +1576,6 @@ class Converter:
         if smask:
             pix = fitz.Pixmap(pix, fitz.Pixmap(self.pdf, smask))
         data = pix.tobytes('png')
-        slug = PDF_SLUGS.get(f'{self._current_page}x{xref}')
         name = self._register(data, '.png', slug)
         self._pdf_cache[key] = name
         return name

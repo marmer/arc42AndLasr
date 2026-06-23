@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" role="img" aria-label="paperwork in a whirl">
+  <style>
+    .ink { stroke: #1B1B1B; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+    .swirl { fill: none; stroke: #6CCBB2; stroke-width: 7; stroke-linecap: round; }
+    .lt { fill: #E0F4EF; }
+    .whirl { transform-box: view-box; transform-origin: 50px 52px; animation: whirl 14s linear infinite; }
+    @keyframes whirl { to { transform: rotate(-360deg); } }
+    @media (prefers-reduced-motion: reduce) { .whirl { animation: none; } }
+  </style>
+  <g class="whirl">
+    <path class="swirl" d="M12 52 A38 38 0 0 1 88 52 A31 31 0 0 1 26 52 A24 24 0 0 1 74 52 A17 17 0 0 1 40 52 A10 10 0 0 1 60 52"/>
+    <g transform="rotate(-18 12 52)">
+      <rect class="lt ink" x="3" y="42" width="20" height="24" rx="2.5"/>
+      <line class="ink" style="stroke-width:2.6" x1="7" y1="48" x2="19" y2="48"/>
+      <line class="ink" style="stroke-width:2.6" x1="7" y1="53" x2="19" y2="53"/>
+      <line class="ink" style="stroke-width:2.6" x1="7" y1="58" x2="15" y2="58"/>
+    </g>
+  </g>
+</svg>

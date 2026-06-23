@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" role="img" aria-label="connected network">
+  <style>
+    .ink { stroke: #1B1B1B; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+    .wire { fill: none; stroke: #1B1B1B; stroke-width: 3; }
+    .t { fill: #6CCBB2; } .lt { fill: #E0F4EF; }
+    .node { transform-box: fill-box; transform-origin: center; animation: blink 3s ease-in-out infinite; }
+    .n2 { animation-delay: .5s; } .n3 { animation-delay: 1s; } .n4 { animation-delay: 1.5s; }
+    .n5 { animation-delay: 2s; } .n6 { animation-delay: 2.5s; }
+    @keyframes blink { 0%, 100% { fill: #E0F4EF; } 50% { fill: #6CCBB2; } }
+    @media (prefers-reduced-motion: reduce) { .node { animation: none; } }
+  </style>
+  <line class="wire" x1="50" y1="50" x2="85" y2="50"/>
+  <line class="wire" x1="50" y1="50" x2="67.5" y2="80.3"/>
+  <line class="wire" x1="50" y1="50" x2="32.5" y2="80.3"/>
+  <line class="wire" x1="50" y1="50" x2="15" y2="50"/>
+  <line class="wire" x1="50" y1="50" x2="32.5" y2="19.7"/>
+  <line class="wire" x1="50" y1="50" x2="67.5" y2="19.7"/>
+  <circle class="node n1 ink" cx="85"   cy="50"   r="7"/>
+  <circle class="node n2 ink" cx="67.5" cy="80.3" r="7"/>
+  <circle class="node n3 ink" cx="32.5" cy="80.3" r="7"/>
+  <circle class="node n4 ink" cx="15"   cy="50"   r="7"/>
+  <circle class="node n5 ink" cx="32.5" cy="19.7" r="7"/>
+  <circle class="node n6 ink" cx="67.5" cy="19.7" r="7"/>
+  <circle class="t ink" cx="50" cy="50" r="11"/>
+  <circle cx="50" cy="50" r="4" fill="#FFFFFF"/>
+</svg>

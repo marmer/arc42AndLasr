@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" role="img" aria-label="electric power">
+  <style>
+    .ink { stroke: #1B1B1B; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+    .lt { fill: #E0F4EF; } .t { fill: #6CCBB2; }
+    .bolt { animation: flick 3.2s steps(1) infinite; }
+    @keyframes flick { 0%, 86%, 100% { opacity: 1; } 90% { opacity: .45; } 94% { opacity: 1; } 97% { opacity: .55; } }
+    @media (prefers-reduced-motion: reduce) { .bolt { animation: none; } }
+  </style>
+  <rect class="lt ink" x="14" y="14" width="72" height="72" rx="16"/>
+  <path class="bolt t ink" d="M55 18 L30 54 L46 54 L42 82 L70 44 L53 44 L60 18 Z"/>
+</svg>

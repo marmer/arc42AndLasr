@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" role="img" aria-label="dart hitting the bullseye">
+  <style>
+    .ink { stroke: #1B1B1B; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+    .t { fill: #6CCBB2; } .lt { fill: #E0F4EF; } .wt { fill: #FFFFFF; }
+    .flight { fill: #6CCBB2; }
+  </style>
+  <circle class="lt ink" cx="48" cy="52" r="40"/>
+  <circle class="t ink"  cx="48" cy="52" r="28"/>
+  <circle class="wt ink" cx="48" cy="52" r="16"/>
+  <circle class="t ink"  cx="48" cy="52" r="6"/>
+  <!-- dart -->
+  <line class="ink" x1="48" y1="52" x2="86" y2="14"/>
+  <path class="ink" style="fill:none" d="M48 52 l10 -1 M48 52 l1 -10"/>
+  <path class="flight ink" d="M86 14 l8 0 l-2 8 Z"/>
+  <path class="flight ink" d="M86 14 l0 8 l8 -2 Z" style="fill:#1B1B1B"/>
+</svg>

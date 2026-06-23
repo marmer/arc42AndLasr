@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" role="img" aria-label="audience of people">
+  <style>
+    .ink { stroke: #1B1B1B; stroke-width: 4; stroke-linejoin: round; stroke-linecap: round; }
+    .crowd { fill: #E0F4EF; stroke: #1B1B1B; stroke-width: 1.8; stroke-linejoin: round; }
+    .lead { fill: #6CCBB2; }
+    .tie { fill: #FFFFFF; }
+  </style>
+  <defs>
+    <g id="p">
+      <circle cx="0" cy="-4" r="3"/>
+      <path d="M-4.6 5 C-4.6 -1.2 4.6 -1.2 4.6 5 Z"/>
+    </g>
+  </defs>
+  <!-- crowd ring -->
+  <g class="crowd">
+    <use href="#p" transform="translate(85,53)"/>
+    <use href="#p" transform="translate(80,70)"/>
+    <use href="#p" transform="translate(67,83)"/>
+    <use href="#p" transform="translate(50,88)"/>
+    <use href="#p" transform="translate(33,83)"/>
+    <use href="#p" transform="translate(20,70)"/>
+    <use href="#p" transform="translate(15,53)"/>
+    <use href="#p" transform="translate(20,36)"/>
+    <use href="#p" transform="translate(33,23)"/>
+    <use href="#p" transform="translate(67,23)"/>
+    <use href="#p" transform="translate(80,36)"/>
+  </g>
+  <!-- lead figure -->
+  <circle class="lead ink" cx="50" cy="38" r="8"/>
+  <path class="lead ink" d="M35 64 C35 47 65 47 65 64 Z"/>
+  <path class="tie" d="M47 48 H53 L51 60 H49 Z"/>
+</svg>

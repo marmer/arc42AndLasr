@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" role="img" aria-label="person in a suit">
+  <style>
+    .ink { stroke: #1B1B1B; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+    .t { fill: #6CCBB2; } .wt { fill: #FFFFFF; }
+  </style>
+  <circle class="t ink" cx="50" cy="30" r="14"/>
+  <path class="t ink" d="M22 86 C22 54 78 54 78 86 Z"/>
+  <path class="wt" d="M44 50 H56 L52 80 H48 Z"/>
+  <path class="ink" style="fill:none" d="M44 50 L50 57 L56 50"/>
+</svg>

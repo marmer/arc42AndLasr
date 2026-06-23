@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" role="img" aria-label="bored, yawning person">
+  <style>
+    .ink { stroke: #1B1B1B; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+    .t { fill: #6CCBB2; } .wt { fill: #FFFFFF; }
+    .face { fill: none; stroke: #1B1B1B; stroke-width: 3.4; stroke-linecap: round; }
+    .zz { fill: none; stroke: #1B1B1B; stroke-width: 3.4; stroke-linecap: round; stroke-linejoin: round;
+          animation: drift 3.6s ease-in-out infinite; }
+    @keyframes drift { 0% { opacity: .25; transform: translate(-3px, 4px); } 50% { opacity: 1; } 100% { opacity: .25; transform: translate(4px, -6px); } }
+    @media (prefers-reduced-motion: reduce) { .zz { animation: none; opacity: 1; transform: none; } }
+  </style>
+  <circle class="t ink" cx="44" cy="55" r="27"/>
+  <path class="face" d="M31 47 q4 3 8 0"/>
+  <path class="face" d="M49 47 q4 3 8 0"/>
+  <ellipse class="wt ink" cx="44" cy="66" rx="8" ry="10"/>
+  <ellipse class="t ink" cx="22" cy="68" rx="8" ry="6"/>
+  <path class="zz" d="M64 36 H72 L64 44 H72"/>
+  <path class="zz" d="M75 24 H85 L75 34 H85" style="animation-delay:.4s"/>
+  <path class="zz" d="M87 12 H99 L87 23 H99" style="animation-delay:.8s"/>
+</svg>

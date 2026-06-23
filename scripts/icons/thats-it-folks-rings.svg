@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 109 100" preserveAspectRatio="xMidYMid meet" role="img" aria-label="closing iris rings">
+  <style>
+    .ink { stroke: #1B1B1B; stroke-width: 4; }
+    .t { fill: #6CCBB2; } .lt { fill: #E0F4EF; } .wt { fill: #FFFFFF; }
+    .iris { transform-box: view-box; transform-origin: 54.5px 50px; animation: breathe 5s ease-in-out infinite; }
+    @keyframes breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.025); } }
+    @media (prefers-reduced-motion: reduce) { .iris { animation: none; } }
+  </style>
+  <g class="iris">
+    <circle class="t ink"  cx="54.5" cy="50" r="48"/>
+    <circle class="lt ink" cx="54.5" cy="50" r="39"/>
+    <circle class="t ink"  cx="54.5" cy="50" r="30"/>
+    <circle class="wt ink" cx="54.5" cy="50" r="21"/>
+    <circle class="t ink"  cx="54.5" cy="50" r="12"/>
+    <circle class="lt ink" cx="54.5" cy="50" r="4"/>
+  </g>
+</svg>

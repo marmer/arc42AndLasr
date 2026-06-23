@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 100" preserveAspectRatio="xMidYMid meet" role="img" aria-label="verified network nodes">
+  <style>
+    .ink { stroke: #1B1B1B; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+    .wire { fill: none; stroke: #1B1B1B; stroke-width: 3.4; }
+    .t { fill: #6CCBB2; }
+    .ck { fill: none; stroke: #FFFFFF; stroke-width: 3.4; stroke-linecap: round; stroke-linejoin: round; }
+    .pop { transform-box: fill-box; transform-origin: center; animation: pop 3.4s ease-in-out infinite; }
+    .p2 { animation-delay: .7s; } .p3 { animation-delay: 1.4s; } .p4 { animation-delay: 2.1s; }
+    @keyframes pop { 0%, 60%, 100% { transform: scale(1); } 72% { transform: scale(1.12); } }
+    @media (prefers-reduced-motion: reduce) { .pop { animation: none; } }
+  </style>
+  <line class="wire" x1="65" y1="50" x2="24" y2="50"/>
+  <line class="wire" x1="65" y1="50" x2="104" y2="26"/>
+  <line class="wire" x1="65" y1="50" x2="104" y2="74"/>
+  <g class="pop p1"><circle class="t ink" cx="65" cy="50" r="16"/><path class="ck" d="M58 50 l5 5 l9 -10"/></g>
+  <g class="pop p2"><circle class="t ink" cx="24" cy="50" r="11"/><path class="ck" d="M19 50 l3.5 3.5 l6.5 -7"/></g>
+  <g class="pop p3"><circle class="t ink" cx="104" cy="26" r="11"/><path class="ck" d="M99 26 l3.5 3.5 l6.5 -7"/></g>
+  <g class="pop p4"><circle class="t ink" cx="104" cy="74" r="11"/><path class="ck" d="M99 74 l3.5 3.5 l6.5 -7"/></g>
+</svg>
