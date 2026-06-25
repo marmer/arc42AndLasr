@@ -76,6 +76,61 @@ All 53 slides generated and visually verified against the reference PDF:
       (multi-click: slide 31; single-click stagger groups: 26, 29, 30, 34,
       37, 45, 46, 47, 51)
 
+## Unified line-art imagery — style spec (2026-06-25)
+
+Decision to **regenerate the content-supporting slide images as SVG** in one
+unified style (replacing the raster icons/photos lifted from the PPTX/PDF).
+Style agreed via a grilling session + a visual prototype
+(`assets/icons/_prototype.html`, reference SVGs: `gamepad.svg`,
+`gear-warning.svg`, `running-person.svg`).
+
+Agreed style:
+- **Visual language:** line-art, geometrically precise but rounded
+  (`stroke-linecap/linejoin: round`); friendly/playful through the rounding.
+- **Colour:** ink contour `#1B1B1B`; teal `#296354` as a sparing accent on
+  **exactly one** key element per icon ("accent on focus"); a single warm
+  accent `#E0A23C` (amber) used **only** for warning motifs (gear-warning,
+  warning-electric).
+- **Stroke:** visually constant stroke weight across all icons regardless of
+  display size. Implemented via a per-placement `--sw` CSS variable
+  (`stroke-width: var(--sw)`), NOT `vector-effect: non-scaling-stroke` —
+  non-scaling-stroke ignores Reveal's slide scaling and would go hairline on a
+  projector. The generator computes `--sw = target_px * viewBox / displayPx`
+  from each picture's box so the apparent stroke (~2–3 canvas px) is uniform
+  and still scales with the deck.
+- **Depth:** flat, no drop-shadow (the old shadow was a raster artefact),
+  transparent background, no unifying container/chip.
+- **Figures:** one consistent reduced round-line figure system (circle head,
+  clear limbs, uniform proportions; minimal distinguishing detail), echoing the
+  title-SVG stick figures.
+- **Motif fidelity:** same concept redrawn, but the metaphor **may be improved**
+  per slide where the current image carries the message weakly (judge against
+  speaker notes + on-slide text).
+- **Recurring motifs:** one canonical source per motif (gamepad ×5, "that's all
+  folks" rings); mirroring/size/colour variants via transform/CSS, not
+  duplicated files.
+- **Animation:** subtle ambient loop running while the slide is visible
+  (Reveal's fragment fade still handles entrance); `prefers-reduced-motion`
+  respected (animation paused). CSS animations by default, SMIL only where path
+  motion / exact-centre rotation is needed (as in the title ball / cog).
+- **Integration:** SVGs authored as source files under `assets/icons/`, inlined
+  into the generated slide HTML by the generator via the slug mechanism
+  (analogous to the `render_pic` title-SVG special case). Inline ⇒ animations
+  run; source files ⇒ editable + survive regeneration.
+
+Out of scope (stay as-is): real recognition references — actual book covers
+(arc42 by example/in Aktion, "Reviewing software systems" DE/EN), the isaQB
+logo, and QR codes (LinkedIn, vCard). The `lasr-overview` diagrams recurring on
+slides 34/36/37/45/46/47 are also out of scope (only the gamepad +
+document-magnifier on those slides are in scope).
+
+Target slides (NEW numbering): 2, 3, 10, 11, 14–17, 19–28, 36, 50, 51, 52
+(slide 52: only the image shared with the hello-badge slide — to be confirmed
+when reached, since slide 52's `hello-badge` actually matches slide 3, not 51),
+plus the gamepad on 34, 37, 45 (+ document-with-magnifier), 46, 47.
+
+Status: style locked; per-slide implementation pending (PR #12).
+
 ### Regenerating
 ```bash
 pip install -r scripts/requirements.txt
