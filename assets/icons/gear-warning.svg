@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="ico ico-warn" role="img" aria-label="Warnung">
+  <style>
+    .ico-warn{color:#1B1B1B}
+    .ico-warn .ln{fill:none;stroke:currentColor;stroke-width:var(--sw,4);
+      stroke-linecap:round;stroke-linejoin:round}
+    .ico-warn .tri{fill:#fff;stroke:#E0A23C}
+    .ico-warn .amber{stroke:#E0A23C}
+    .ico-warn .dot{fill:#E0A23C;stroke:none}
+    .ico-warn .blink{animation:wBlink 1.8s ease-in-out infinite;
+      transform-box:fill-box;transform-origin:center}
+    @keyframes wBlink{0%,100%{opacity:1}50%{opacity:.5}}
+    @media (prefers-reduced-motion: reduce){.ico-warn .blink{animation:none}}
+  </style>
+  <!-- cog, slow continuous rotation (SMIL keeps the centre exact) -->
+  <g>
+    <g class="ln">
+      <circle cx="40" cy="40" r="19"/>
+      <circle cx="40" cy="40" r="7"/>
+      <path d="M40,21 V13 M40,67 V59 M21,40 H13 M67,40 H59
+               M53.4,26.6 L59,21 M21,59 L26.6,53.4 M53.4,53.4 L59,59 M21,21 L26.6,26.6"/>
+    </g>
+    <animateTransform attributeName="transform" type="rotate"
+        from="0 40 40" to="360 40 40" dur="18s" repeatCount="indefinite"/>
+  </g>
+  <!-- warning badge, gently blinking -->
+  <g class="blink">
+    <path class="ln tri" d="M70,50 L90,86 L50,86 Z"/>
+    <path class="ln amber" d="M70,64 V73"/>
+    <circle class="dot" cx="70" cy="80" r="2.4"/>
+  </g>
+</svg>

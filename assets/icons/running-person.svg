@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="ico ico-runner" role="img" aria-label="Laufende Person">
+  <style>
+    .ico-runner{color:#1B1B1B}
+    .ico-runner .ln{fill:none;stroke:currentColor;stroke-width:var(--sw,4);
+      stroke-linecap:round;stroke-linejoin:round}
+    .ico-runner .speed{stroke:#296354}
+    .ico-runner .fig{animation:rBob 1.3s ease-in-out infinite;
+      transform-box:view-box;transform-origin:54px 50px}
+    .ico-runner .speed{animation:rDash 1.3s linear infinite}
+    @keyframes rBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-2.5px)}}
+    @keyframes rDash{0%{opacity:.25;transform:translateX(3px)}
+      50%{opacity:1;transform:translateX(0)}100%{opacity:.25;transform:translateX(3px)}}
+    @media (prefers-reduced-motion: reduce){
+      .ico-runner .fig,.ico-runner .speed{animation:none}}
+  </style>
+  <!-- teal motion lines: the one accent element -->
+  <g class="ln speed">
+    <path d="M16,40 H30"/>
+    <path d="M12,52 H26"/>
+    <path d="M18,64 H30"/>
+  </g>
+  <g class="fig ln">
+    <circle cx="58" cy="22" r="7"/>
+    <path d="M56,31 L50,55"/>
+    <!-- arms -->
+    <path d="M53,38 L65,42 L70,33"/>
+    <path d="M53,40 L42,46 L37,40"/>
+    <!-- legs -->
+    <path d="M50,55 L62,62 L64,76"/>
+    <path d="M50,55 L42,67 L46,80"/>
+  </g>
+</svg>

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="ico ico-gamepad" role="img" aria-label="Gamepad">
+  <style>
+    .ico-gamepad{color:#1B1B1B}
+    .ico-gamepad .ln{fill:none;stroke:currentColor;stroke-width:var(--sw,4);
+      stroke-linecap:round;stroke-linejoin:round}
+    .ico-gamepad .accent{fill:#296354;stroke:none}
+    .ico-gamepad .bob{animation:gpBob 4s ease-in-out infinite;
+      transform-box:view-box;transform-origin:50px 56px}
+    .ico-gamepad .pulse{animation:gpPulse 2.4s ease-in-out infinite;
+      transform-box:fill-box;transform-origin:center}
+    @keyframes gpBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+    @keyframes gpPulse{0%,100%{transform:scale(1);opacity:.92}50%{transform:scale(1.18);opacity:1}}
+    @media (prefers-reduced-motion: reduce){.ico-gamepad .bob,.ico-gamepad .pulse{animation:none}}
+  </style>
+  <g class="bob">
+    <path class="ln" d="M30,42 C19,42 13,52 15,64 C17,76 27,78 35,71
+       C41,66 59,66 65,71 C73,78 83,76 85,64 C87,52 81,42 70,42
+       C58,42 42,42 30,42 Z"/>
+    <!-- D-pad -->
+    <path class="ln" d="M30,56 H42 M36,50 V62"/>
+    <!-- buttons -->
+    <circle class="ln" cx="66" cy="61" r="3.2"/>
+    <circle class="accent pulse" cx="66" cy="50" r="4.2"/>
+  </g>
+</svg>

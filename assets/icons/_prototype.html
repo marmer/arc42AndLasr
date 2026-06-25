@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8">
+<title>Stil-Prototyp — Line-Art Icons</title>
+<style>
+  body{margin:0;font-family:'DM Sans',system-ui,sans-serif;color:#1B1B1B;background:#fff}
+  h1{font-size:22px;margin:24px 32px 4px}
+  p.sub{margin:0 32px 24px;color:#666;font-size:14px}
+  .grid{display:flex;gap:40px;flex-wrap:wrap;padding:8px 32px 28px;align-items:flex-end}
+  .cell{text-align:center}
+  .cell .lbl{font-size:12px;color:#666;margin-top:8px}
+  .panel{background:linear-gradient(112.5deg,#6CCBB2 25%,#F8FCFB 100%)}
+  .panel .lbl{color:#0c4034}
+  hr{border:0;border-top:1px solid #eee;margin:0 32px}
+  /* per-instance stroke normalisation: target ~3px rendered stroke.
+     sw = 3 * 100 / displayPx   (240->1.25, 120->2.5, 96->3.13) */
+  .s240{width:240px;height:240px;--sw:1.25}
+  .s120{width:120px;height:120px;--sw:2.5}
+</style></head>
+<body>
+<h1>Einheitlicher Line-Art-Stil — Referenz-Prototyp</h1>
+<p class="sub">Anker-Motiv (Gamepad) · Warn-Akzent (Amber) · Figuren-System (Runner). Tinte #1B1B1B · Teal #296354 · Amber #E0A23C · dezente Dauerschleifen · Strichstärke pro Größe normiert (~3px).</p>
+
+<div class="grid">
+  <div class="cell">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="ico ico-gamepad s240" role="img" aria-label="Gamepad">
+      <style>
+        .ico-gamepad{color:#1B1B1B}
+        .ico-gamepad .ln{fill:none;stroke:currentColor;stroke-width:var(--sw,4);stroke-linecap:round;stroke-linejoin:round}
+        .ico-gamepad .accent{fill:#296354;stroke:none}
+        .ico-gamepad .bob{animation:gpBob 4s ease-in-out infinite;transform-box:view-box;transform-origin:50px 56px}
+        .ico-gamepad .pulse{animation:gpPulse 2.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+        @keyframes gpBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+        @keyframes gpPulse{0%,100%{transform:scale(1);opacity:.92}50%{transform:scale(1.18);opacity:1}}
+        @media (prefers-reduced-motion: reduce){.ico-gamepad .bob,.ico-gamepad .pulse{animation:none}}
+      </style>
+      <g class="bob">
+        <path class="ln" d="M30,42 C19,42 13,52 15,64 C17,76 27,78 35,71 C41,66 59,66 65,71 C73,78 83,76 85,64 C87,52 81,42 70,42 C58,42 42,42 30,42 Z"/>
+        <path class="ln" d="M30,56 H42 M36,50 V62"/>
+        <circle class="ln" cx="66" cy="61" r="3.2"/>
+        <circle class="accent pulse" cx="66" cy="50" r="4.2"/>
+      </g>
+    </svg>
+    <div class="lbl">Gamepad — Anker (×5 Folien)</div>
+  </div>
+
+  <div class="cell">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="ico ico-warn s240" role="img" aria-label="Warnung">
+      <style>
+        .ico-warn{color:#1B1B1B}
+        .ico-warn .ln{fill:none;stroke:currentColor;stroke-width:var(--sw,4);stroke-linecap:round;stroke-linejoin:round}
+        .ico-warn .tri{fill:#fff;stroke:#E0A23C}
+        .ico-warn .amber{stroke:#E0A23C}
+        .ico-warn .dot{fill:#E0A23C;stroke:none}
+        .ico-warn .blink{animation:wBlink 1.8s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+        @keyframes wBlink{0%,100%{opacity:1}50%{opacity:.5}}
+        @media (prefers-reduced-motion: reduce){.ico-warn .blink{animation:none}}
+      </style>
+      <g>
+        <g class="ln">
+          <circle cx="40" cy="40" r="19"/>
+          <circle cx="40" cy="40" r="7"/>
+          <path d="M40,21 V13 M40,67 V59 M21,40 H13 M67,40 H59 M53.4,26.6 L59,21 M21,59 L26.6,53.4 M53.4,53.4 L59,59 M21,21 L26.6,26.6"/>
+        </g>
+        <animateTransform attributeName="transform" type="rotate" from="0 40 40" to="360 40 40" dur="18s" repeatCount="indefinite"/>
+      </g>
+      <g class="blink">
+        <path class="ln tri" d="M70,50 L90,86 L50,86 Z"/>
+        <path class="ln amber" d="M70,64 V73"/>
+        <circle class="dot" cx="70" cy="80" r="2.4"/>
+      </g>
+    </svg>
+    <div class="lbl">Zahnrad + Warnung — Amber-Akzent</div>
+  </div>
+
+  <div class="cell">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="ico ico-runner s240" role="img" aria-label="Laufende Person">
+      <style>
+        .ico-runner{color:#1B1B1B}
+        .ico-runner .ln{fill:none;stroke:currentColor;stroke-width:var(--sw,4);stroke-linecap:round;stroke-linejoin:round}
+        .ico-runner .speed{stroke:#296354}
+        .ico-runner .fig{animation:rBob 1.3s ease-in-out infinite;transform-box:view-box;transform-origin:54px 50px}
+        .ico-runner .speed{animation:rDash 1.3s linear infinite}
+        @keyframes rBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-2.5px)}}
+        @keyframes rDash{0%{opacity:.25;transform:translateX(3px)}50%{opacity:1;transform:translateX(0)}100%{opacity:.25;transform:translateX(3px)}}
+        @media (prefers-reduced-motion: reduce){.ico-runner .fig,.ico-runner .speed{animation:none}}
+      </style>
+      <g class="ln speed"><path d="M16,40 H30"/><path d="M12,52 H26"/><path d="M18,64 H30"/></g>
+      <g class="fig ln">
+        <circle cx="58" cy="22" r="7"/>
+        <path d="M56,31 L50,55"/>
+        <path d="M53,38 L65,42 L70,33"/>
+        <path d="M53,40 L42,46 L37,40"/>
+        <path d="M50,55 L62,62 L64,76"/>
+        <path d="M50,55 L42,67 L46,80"/>
+      </g>
+    </svg>
+    <div class="lbl">Figuren-System — 1 Teal-Akzent (Speed)</div>
+  </div>
+</div>
+
+<hr>
+<p class="sub" style="margin-top:20px">Gleiche Icons klein (120&nbsp;px) — Strichstärke bleibt optisch konstant:</p>
+<div class="grid">
+  <div class="cell"><svg viewBox="0 0 100 100" class="ico-gamepad s120"><use href="#"/><g class="bob"><path class="ln" d="M30,42 C19,42 13,52 15,64 C17,76 27,78 35,71 C41,66 59,66 65,71 C73,78 83,76 85,64 C87,52 81,42 70,42 C58,42 42,42 30,42 Z"/><path class="ln" d="M30,56 H42 M36,50 V62"/><circle class="ln" cx="66" cy="61" r="3.2"/><circle class="accent pulse" cx="66" cy="50" r="4.2"/></g></svg></div>
+  <div class="cell"><svg viewBox="0 0 100 100" class="ico-warn s120"><g><g class="ln"><circle cx="40" cy="40" r="19"/><circle cx="40" cy="40" r="7"/><path d="M40,21 V13 M40,67 V59 M21,40 H13 M67,40 H59 M53.4,26.6 L59,21 M21,59 L26.6,53.4 M53.4,53.4 L59,59 M21,21 L26.6,26.6"/></g><animateTransform attributeName="transform" type="rotate" from="0 40 40" to="360 40 40" dur="18s" repeatCount="indefinite"/></g><g class="blink"><path class="ln tri" d="M70,50 L90,86 L50,86 Z"/><path class="ln amber" d="M70,64 V73"/><circle class="dot" cx="70" cy="80" r="2.4"/></g></svg></div>
+  <div class="cell panel" style="padding:16px;border-radius:8px"><svg viewBox="0 0 100 100" class="ico-runner s120"><g class="ln speed"><path d="M16,40 H30"/><path d="M12,52 H26"/><path d="M18,64 H30"/></g><g class="fig ln"><circle cx="58" cy="22" r="7"/><path d="M56,31 L50,55"/><path d="M53,38 L65,42 L70,33"/><path d="M53,40 L42,46 L37,40"/><path d="M50,55 L62,62 L64,76"/><path d="M50,55 L42,67 L46,80"/></g></svg><div class="lbl">auf Mint-Panel</div></div>
+</div>
+</body></html>
