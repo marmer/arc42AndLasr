@@ -86,10 +86,27 @@ def main():
             page.wait_for_timeout(250)
             shot = page.screenshot()
             img = Image.open(io.BytesIO(shot)).convert('RGB')
+            # regions whose bitmap was deliberately replaced by a hand-drawn
+            # inline SVG differ from the PDF by design — mask them out
+            masks = page.evaluate(
+                "Array.from(Reveal.getCurrentSlide()"
+                ".querySelectorAll('[data-svg-replaced]'))"
+                ".map(e => { const r = e.getBoundingClientRect();"
+                " return [r.x, r.y, r.width, r.height]; })")
             ref_path = os.path.join(ROOT, 'work', 'ref_pdf', f'p{n:02d}.png')
             if os.path.exists(ref_path):
                 ref = Image.open(ref_path).convert('RGB').resize((W, H))
-                diff = ImageChops.difference(ref, img)
+                ref_d, img_d = ref, img
+                if masks:
+                    from PIL import ImageDraw
+                    ref_d, img_d = ref.copy(), img.copy()
+                    for im_ in (ref_d, img_d):
+                        d = ImageDraw.Draw(im_)
+                        for x, y, w_, h_ in masks:
+                            d.rectangle([max(0, x), max(0, y),
+                                         min(W, x + w_), min(H, y + h_)],
+                                        fill=(200, 200, 200))
+                diff = ImageChops.difference(ref_d, img_d)
                 hist = diff.convert('L').histogram()
                 sq = sum(v * (i ** 2) for i, v in enumerate(hist))
                 rms = math.sqrt(sq / (W * H))

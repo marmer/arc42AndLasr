@@ -126,3 +126,31 @@ magnifier), 46, 47). All decisions confirmed with the author:
   representative samples: gear-warning, yawning-person, target-dartboard,
   gamepad, thats-it-folks-rings. Mass production of the remaining images
   only after the style tile is approved.
+
+## Unified SVG images — round 2: full production (2026-07-02)
+
+All ~20 images produced in `assets/svg/` (style approved via the round-1
+style tile) and wired into the pipeline:
+
+- `pptx2reveal.py`: `SVG_REPLACEMENTS` maps final `docs/img` names to the
+  SVG sources; `inline_svg()` embeds them into the slide HTML in place of
+  the `<img>` (wrapper carries `data-svg-replaced`). The padded PDF-extract
+  canvases (grey/color rings) are handled by a fit-box that nests the
+  artwork at the original content position. PPTX picture drop-shadows are
+  stripped on replaced images (flat style bans shadows). The replaced PNGs
+  are no longer written to `docs/img/`.
+- `DROPPED_SLIDES`: slide59 (duplicate closing slide the author had removed
+  by hand in commit "Last slide removed") is now skipped by the generator —
+  previously a regeneration would have resurrected it.
+- `compare_render.py` masks the `data-svg-replaced` regions (queried from
+  the live DOM) out of the RMS diff, so the score stays meaningful for
+  text/layout; composites show the real render but diff the masked images.
+- Animations: CSS keyframes/offset-path only. SMIL does not start inside the
+  fetch-injected slide files (the title slide, injected the same way, is the
+  lone exception that works) — the cycle-diagram orbit dot therefore uses
+  CSS `offset-path`. All animations respect `prefers-reduced-motion`.
+- Verified: full `compare_render.py` run + visual review of all 27 affected
+  slides; CSS + title SMIL animations confirmed live in headless Chromium.
+- Known intended deviations vs the PDF: the replaced images themselves
+  (masked), and slide 52's RMS is 0 because the full-slide badge region is
+  masked entirely.

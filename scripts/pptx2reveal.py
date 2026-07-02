@@ -245,6 +245,54 @@ PDF_SLUGS = {
     '51x340': 'thats-it-folks-rings-grey-faded',
 }
 
+# Hand-drawn animated SVG replacements (assets/svg/) for the supporting
+# images, keyed by the *final* docs/img file name (after slug + dedup
+# suffixing). Value: (svg file, optional fit box). The SVG is inlined into
+# the slide HTML (so webfonts + CSS animations apply) inside a wrapper
+# marked data-svg-replaced, which compare_render.py uses to mask the region.
+# The fit box (fractions x0,y0,x1,y1 of the replaced bitmap's canvas) scales
+# the artwork into padded canvases (the PDF-extracted ring bitmaps carry
+# large transparent margins).
+# Slides the author cut from the web deck even though they are visible in
+# the PPTX (slide59: duplicate closing/contact slide, removed in commit
+# "Last slide removed").
+DROPPED_SLIDES = {'slide59.xml'}
+
+SVG_ASSETS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                              '..', 'assets', 'svg')
+SVG_REPLACEMENTS = {
+    'gear-warning-icon.png': ('gear-warning.svg', None),
+    'yawning-person-icon.png': ('yawning-person.svg', None),
+    'hello-badge.png': ('hello-badge.svg', None),
+    'hello-badge-2.png': ('feedback-badge.svg', None),
+    'questions-doodle.png': ('questions-doodle.svg', None),
+    'tech-network-emblem.png': ('tech-network-emblem.svg', None),
+    'target-dartboard-icon.png': ('target-dartboard.svg', None),
+    'gears-lock-icon.png': ('gears-lock.svg', None),
+    'circuit-network-icon.png': ('circuit-network.svg', None),
+    'chess-knight-icon.png': ('chess-knight.svg', None),
+    'arrows-outward-icon.png': ('arrows-outward.svg', None),
+    'checklist-gear-icon.png': ('checklist-gear.svg', None),
+    'circuit-checks-icon.png': ('circuit-checks.svg', None),
+    'paper-whirl-icon.png': ('paper-whirl.svg', None),
+    'book-magnifier-icon.png': ('book-magnifier.svg', None),
+    'thats-it-folks-rings.png': ('thats-it-folks-rings.svg', None),
+    'thats-it-folks-rings-color.png': ('thats-it-folks-rings.svg',
+                                       (0.13, 0.17, 0.88, 0.84)),
+    'thats-it-folks-rings-grey.png': ('thats-it-folks-rings-grey.svg',
+                                      (0.13, 0.17, 0.88, 0.84)),
+    'feather-icon.png': ('feather.svg', None),
+    'person-suit-icon.png': ('person-suit.svg', None),
+    'running-person-icon.png': ('running-person.svg', None),
+    'gamepad-icon.png': ('gamepad.svg', None),
+    'gamepad-icon-2.png': ('gamepad.svg', None),
+    'gamepad-icon-3.png': ('gamepad.svg', None),
+    'audience-people-icon.png': ('audience-people.svg', None),
+    'warning-electric-icon.png': ('warning-electric.svg', None),
+    'document-magnifier-icon.png': ('document-magnifier.svg', None),
+    'analyze-improve-cycle.png': ('analyze-improve-cycle.svg', None),
+}
+
 BULLET_CHAR_MAP = {
     ('Wingdings', '§'): '▪',
     ('Wingdings', 'Ø'): '➢',
@@ -688,6 +736,7 @@ class Converter:
         self._used_names = {}     # filename -> content sha1 (collision check)
         self.warnings = []
         self._default_run_color = None
+        self._svg_cache = {}      # svg asset file -> content
 
         pres = self.pkg.xml('ppt/presentation.xml')
         pres_rels = self.pkg.rels('ppt/presentation.xml')
@@ -1458,6 +1507,34 @@ class Converter:
         fname = self.emit_media(media_part, variant, transform)
         return self.emit_pic_html(pic, blip_fill, geo, ctx, frag, fname, opacity)
 
+    def inline_svg(self, fname, img_style):
+        """Inline the hand-drawn SVG replacing docs/img/<fname>, or None.
+
+        The SVG root gets the same CSS placement the <img> would have had;
+        a fit box rewraps the artwork into the padded canvas of the replaced
+        bitmap so on-slide size and position stay identical."""
+        entry = SVG_REPLACEMENTS.get(fname)
+        if entry is None:
+            return None
+        svg_file, fit = entry
+        if svg_file not in self._svg_cache:
+            with open(os.path.join(SVG_ASSETS_DIR, svg_file)) as f:
+                content = f.read().strip()
+            content = re.sub(r'<\?xml[^>]*\?>\s*', '', content)
+            self._svg_cache[svg_file] = content
+        content = self._svg_cache[svg_file]
+        if fit is not None:
+            m = re.match(r'<svg([^>]*)>(.*)</svg>\s*$', content, re.S)
+            attrs, inner = m.group(1), m.group(2)
+            vb = re.search(r'viewBox="([^"]+)"', attrs).group(1)
+            x0, y0, x1, y1 = fit
+            return (f'<svg viewBox="0 0 100 100" style="{img_style}">'
+                    f'<svg x="{fmt(x0 * 100)}" y="{fmt(y0 * 100)}"'
+                    f' width="{fmt((x1 - x0) * 100)}" height="{fmt((y1 - y0) * 100)}"'
+                    f' viewBox="{vb}" preserveAspectRatio="xMidYMid meet">'
+                    f'{inner}</svg></svg>')
+        return content.replace('<svg ', f'<svg style="{img_style}" ', 1)
+
     def emit_pic_html(self, pic, blip_fill, geo, ctx, frag, fname, opacity,
                       from_pdf=False):
         w, h = emu2px(geo['w']), emu2px(geo['h'])
@@ -1485,6 +1562,15 @@ class Converter:
 
         shadow = self.shadow_css(sp_pr, ctx, kind='drop')
         cls = 'pic' + self.frag_class(frag)
+        svg = self.inline_svg(fname, img_style)
+        if svg is not None:
+            # the flat SVG style bans shadows — drop the PPTX picture shadow
+            style = ('position:absolute;' + self.pos_css(geo) + opacity
+                     + self.frag_style(frag))
+            return [(f'<div class="{cls}" style="{style}"{self.frag_attr(frag)}>'
+                     f'<div data-svg-replaced="{fname}"'
+                     f' style="position:absolute;inset:0;overflow:hidden;{radius}">'
+                     f'{svg}</div></div>')]
         style = ('position:absolute;' + self.pos_css(geo) + shadow + opacity
                  + self.frag_style(frag))
         return [(f'<div class="{cls}" style="{style}"{self.frag_attr(frag)}>'
@@ -1941,6 +2027,8 @@ class Converter:
             slide = self.pkg.xml(slide_part)
             if slide.get('show') == '0':
                 continue
+            if os.path.basename(slide_part) in DROPPED_SLIDES:
+                continue
             page += 1
             sec_html = self.convert_slide(slide_part, page)
             sec_html = self.resolve_links(sec_html, slide_part)
@@ -1962,6 +2050,11 @@ class Converter:
         os.makedirs(css_dir, exist_ok=True)
         with open(os.path.join(css_dir, 'custom.css'), 'w') as f:
             f.write(CUSTOM_CSS)
+        # bitmaps fully replaced by inline SVGs are never referenced
+        for fname in SVG_REPLACEMENTS:
+            path = os.path.join(self.img_dir, fname)
+            if os.path.exists(path):
+                os.remove(path)
         for w in self.warnings:
             print('WARN:', w, file=sys.stderr)
         print(f'{page} slides written to {self.out_dir}/slides/ and index.html')

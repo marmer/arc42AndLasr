@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Person im Anzug">
+  <g stroke="#1B1B1B" stroke-width="3.4" stroke-linejoin="round">
+    <circle cx="50" cy="26.5" r="13.5" fill="#B2E4D7"/>
+    <path d="M25 79 C 25 56 35 47.5 50 47.5 C 65 47.5 75 56 75 79 Z" fill="#6CCBB2"/>
+    <path d="M42 48.5 L 50 60 L 58 48.5 L 54 47.7 L 46 47.7 Z" fill="#FFFFFF" stroke-width="2.6"/>
+    <path d="M50 60 l 3.4 6.5 l -3.4 8.5 l -3.4 -8.5 z" fill="#1B1B1B" stroke-width="2.2"/>
+  </g>
+</svg>

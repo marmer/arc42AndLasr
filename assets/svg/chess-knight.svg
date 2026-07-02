@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 100" role="img" aria-label="Schach-Springer">
+  <style>
+    .ck-s1 { animation: ck-blink 5s ease-in-out infinite; }
+    .ck-s2 { animation: ck-blink 5s ease-in-out 1.6s infinite; }
+    .ck-s3 { animation: ck-blink 5s ease-in-out 3.2s infinite; }
+    @keyframes ck-blink { 0%, 100% { opacity: 0.25; } 50% { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) { .ck-s1, .ck-s2, .ck-s3 { animation: none; opacity: 1; } }
+  </style>
+  <!-- sparks -->
+  <g stroke="#1B1B1B" stroke-width="2.6" stroke-linecap="round">
+    <line class="ck-s1" x1="12" y1="14" x2="17" y2="19"/>
+    <line class="ck-s2" x1="34" y1="6" x2="34" y2="12.5"/>
+    <line class="ck-s3" x1="56" y1="14" x2="51" y2="19"/>
+  </g>
+  <!-- knight -->
+  <path d="M28 78
+           C28 70 30 63 27 57
+           C24.5 51.5 19 49 14.5 42.5
+           L10.5 35
+           Q9 30.5 13.5 29.5
+           L21 28.5
+           Q19.5 24.5 22.5 21
+           L31 12.5
+           L35 18.5
+           Q37.3 17.8 39.5 18.5
+           L44.5 13
+           Q53.5 19 55.5 31
+           Q57.5 46 53 59
+           Q51 68 51 78 Z"
+        fill="#6CCBB2" stroke="#1B1B1B" stroke-width="3.5" stroke-linejoin="round"/>
+  <!-- nostril + eye -->
+  <path d="M13 33.5 q2.6 1.2 5.4 0.6" fill="none" stroke="#1B1B1B" stroke-width="2.4" stroke-linecap="round"/>
+  <circle cx="30" cy="25" r="2.3" fill="#1B1B1B"/>
+  <!-- base -->
+  <g stroke="#1B1B1B" stroke-width="3.2" stroke-linejoin="round">
+    <rect x="18" y="78" width="40" height="8.5" rx="3" fill="#B2E4D7"/>
+    <rect x="12" y="86.5" width="52" height="10" rx="3.5" fill="#B2E4D7"/>
+  </g>
+</svg>

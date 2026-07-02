@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Buch mit Lupe">
+  <style>
+    .bm-lens { animation: bm-drift 8s ease-in-out infinite; }
+    @keyframes bm-drift {
+      0%, 100% { transform: translate(0, 0); }
+      33% { transform: translate(-2.5px, 1.6px); }
+      66% { transform: translate(1.6px, -1.8px); }
+    }
+    @media (prefers-reduced-motion: reduce) { .bm-lens { animation: none; } }
+  </style>
+  <!-- book -->
+  <g stroke="#1B1B1B" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M24 22 a5.5 5.5 0 0 1 5.5 -5.5 H 72 V 55 H 29.5 a5.5 5.5 0 0 0 -5.5 5.5 Z"
+          fill="#6CCBB2"/>
+    <path d="M24 60.5 a5.5 5.5 0 0 1 5.5 -5.5 H 72 V 66 H 29.5 a5.5 5.5 0 0 1 -5.5 -5.5 Z"
+          fill="#FFFFFF"/>
+    <path d="M38 16.5 V 40 l5.5 -4.5 L 49 40 V 16.5" fill="#B2E4D7" stroke-width="2.8"/>
+  </g>
+  <!-- magnifier -->
+  <g class="bm-lens" stroke="#1B1B1B" stroke-linejoin="round" stroke-linecap="round">
+    <line x1="72.5" y1="60.5" x2="81.5" y2="70.5" stroke-width="6.5"/>
+    <circle cx="63" cy="50" r="14" fill="#B2E4D7" fill-opacity="0.75" stroke-width="4"/>
+    <path d="M56.5 46.5 a8 8 0 0 1 5 -3.6" fill="none" stroke="#FFFFFF" stroke-width="2.6"/>
+  </g>
+</svg>

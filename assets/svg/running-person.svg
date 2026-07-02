@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Rennende Person">
+  <style>
+    .rp-l1 { animation: rp-dash 2.4s ease-in-out infinite; }
+    .rp-l2 { animation: rp-dash 2.4s ease-in-out 0.8s infinite; }
+    .rp-l3 { animation: rp-dash 2.4s ease-in-out 1.6s infinite; }
+    @keyframes rp-dash { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) { .rp-l1, .rp-l2, .rp-l3 { animation: none; opacity: 1; } }
+  </style>
+  <!-- speed lines -->
+  <g stroke="#1B1B1B" stroke-width="3" stroke-linecap="round">
+    <line class="rp-l1" x1="22" y1="34" x2="38" y2="34"/>
+    <line class="rp-l2" x1="18" y1="44" x2="34" y2="44"/>
+    <line class="rp-l3" x1="22" y1="54" x2="35" y2="54"/>
+  </g>
+  <!-- runner -->
+  <g fill="#6CCBB2" stroke="#1B1B1B" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round">
+    <circle cx="72" cy="19" r="8.5"/>
+    <!-- torso -->
+    <path d="M63.5 30.5 L 69.5 28 L 60 52 L 52.5 48.5 Z"/>
+    <!-- front arm -->
+    <path d="M65 32 L 79 38 L 76.5 44 L 62.5 38 Z" stroke-width="2.9"/>
+    <!-- back arm -->
+    <path d="M64.5 33 L 51 27.5 L 53 21.8 L 66.5 27 Z" stroke-width="2.9"/>
+    <!-- front leg -->
+    <path d="M60 52 L 76 58 L 82.5 72 L 77 74.8 L 70.5 62.5 L 56 56.5 Z" stroke-width="2.9"/>
+    <!-- back leg -->
+    <path d="M55 50 L 47 61.5 L 35 65.5 L 33.5 59.6 L 43.5 56.5 L 50.5 45.5 Z" stroke-width="2.9"/>
+  </g>
+</svg>
