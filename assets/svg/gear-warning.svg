@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Zahnrad mit Warnzeichen">
+  <style>
+    .gw-gear { animation: gw-spin 36s linear infinite; transform-origin: 50px 50px; }
+    @keyframes gw-spin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { .gw-gear { animation: none; } }
+  </style>
+  <g class="gw-gear" stroke="#1B1B1B" stroke-width="3.5" stroke-linejoin="round">
+    <g fill="#6CCBB2">
+      <rect x="45" y="16" width="10" height="12" rx="3"/>
+      <rect x="45" y="72" width="10" height="12" rx="3"/>
+      <rect x="16" y="45" width="12" height="10" rx="3"/>
+      <rect x="72" y="45" width="12" height="10" rx="3"/>
+      <rect x="45" y="16" width="10" height="12" rx="3" transform="rotate(45 50 50)"/>
+      <rect x="45" y="72" width="10" height="12" rx="3" transform="rotate(45 50 50)"/>
+      <rect x="16" y="45" width="12" height="10" rx="3" transform="rotate(45 50 50)"/>
+      <rect x="72" y="45" width="12" height="10" rx="3" transform="rotate(45 50 50)"/>
+    </g>
+    <circle cx="50" cy="50" r="27" fill="#6CCBB2"/>
+    <circle cx="50" cy="50" r="17.5" fill="#FFFFFF"/>
+  </g>
+  <g stroke="#1B1B1B" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M50 38.5 L61 58 L39 58 Z" fill="#F4AD0E"/>
+    <line x1="50" y1="46.5" x2="50" y2="51.5"/>
+    <circle cx="50" cy="55.2" r="0.4" fill="#1B1B1B"/>
+  </g>
+</svg>
