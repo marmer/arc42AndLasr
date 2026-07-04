@@ -154,3 +154,25 @@ style tile) and wired into the pipeline:
 - Known intended deviations vs the PDF: the replaced images themselves
   (masked), and slide 52's RMS is 0 because the full-slide badge region is
   masked entirely.
+
+## Ink highlights (slide 32) + SVG icon fit boxes (slide 45) — 2026-07-04
+
+- Slide 32 (pptx slide38): the yellow marker highlights on the Threema quote
+  are PowerPoint ink (`p:contentPart` wrapped in `mc:AlternateContent`) —
+  the generator skipped those elements, so the highlights were missing.
+  `walk_shape` now descends into `mc:Fallback` and renders the pre-rendered
+  ink bitmaps (media slugs `marker-*`). Highlighter ink (InkML brush
+  `rasterOp=maskPen`) is rendered with `mix-blend-mode:multiply` so the text
+  stays readable through the marker, matching PowerPoint's blend.
+- The same mechanism surfaced ink on pptx slides 7/58: the smiley face drawn
+  onto the original alien badge artwork. That artwork is redesigned
+  (hello-badge.svg / feedback-badge.svg) without the alien, so those four
+  strokes are intentionally skipped (`SKIPPED_INK_MEDIA`).
+- Slide 45: the document-magnifier and gamepad SVG replacements overlapped —
+  the padded PDF-extract canvases (artwork fills only ~half the bitmap) were
+  filled edge-to-edge by the SVGs. gamepad, warning-electric and
+  document-magnifier now carry fit boxes (square sub-viewports that
+  compensate both the bitmap padding and the SVG's own viewBox margins),
+  restoring the original on-slide artwork size/position. Affected slides
+  (new numbering): 26, 34, 36, 37, 45, 46, 47 — all verified via
+  `compare_render.py` composites.
