@@ -154,3 +154,37 @@ style tile) and wired into the pipeline:
 - Known intended deviations vs the PDF: the replaced images themselves
   (masked), and slide 52's RMS is 0 because the full-slide badge region is
   masked entirely.
+
+## Ink highlights (slide 32) + SVG icon fit boxes (slide 45) — 2026-07-04
+
+- Slide 32 (pptx slide38): the yellow marker highlights on the Threema quote
+  are PowerPoint ink (`p:contentPart` wrapped in `mc:AlternateContent`) —
+  the generator skipped those elements, so the highlights were missing.
+  `walk_shape` now descends into `mc:Fallback` and renders the pre-rendered
+  ink bitmaps (media slugs `marker-*`). Highlighter ink (InkML brush
+  `rasterOp=maskPen`) is rendered with `mix-blend-mode:multiply` so the text
+  stays readable through the marker, matching PowerPoint's blend.
+- The same mechanism surfaced ink on pptx slides 7/58: the smiley face drawn
+  onto the original alien badge artwork. That artwork is redesigned
+  (hello-badge.svg / feedback-badge.svg) without the alien, so those four
+  strokes are intentionally skipped (`SKIPPED_INK_MEDIA`).
+- Slide 45: the document-magnifier and gamepad SVG replacements overlapped —
+  the padded PDF-extract canvases (artwork fills only ~half the bitmap) were
+  filled edge-to-edge by the SVGs. gamepad, warning-electric and
+  document-magnifier now carry fit boxes (square sub-viewports that
+  compensate both the bitmap padding and the SVG's own viewBox margins),
+  restoring the original on-slide artwork size/position. Affected slides
+  (new numbering): 26, 34, 36, 37, 45, 46, 47 — all verified via
+  `compare_render.py` composites.
+
+## Slide 2 icon size + unified gamepad position (2026-07-04)
+
+- Slide 2: gear-warning and yawning-person rendered ~15% larger than the
+  PPTX (their raster originals carry transparent margins the SVGs lack) —
+  both now have fit boxes derived from the bitmaps' alpha bounding boxes.
+- Gamepad marker: the original deck places the "workshop game" gamepad at a
+  different spot on every game slide — mid-left on slide 45, half inside
+  the title bar on 46/47, below the title bar on 34/37. On the author's
+  request the gamepad on 45/46 (and 47, which shares 46's layout — keeping
+  the no-jump rule between consecutive slides) is pinned to the 34/37
+  position via `PIC_POS_OVERRIDES` (a deliberate deviation from the PPTX).

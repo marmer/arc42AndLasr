@@ -28,6 +28,7 @@ NS = {
     'p': 'http://schemas.openxmlformats.org/presentationml/2006/main',
     'r': 'http://schemas.openxmlformats.org/officeDocument/2006/relationships',
     'rel': 'http://schemas.openxmlformats.org/package/2006/relationships',
+    'mc': 'http://schemas.openxmlformats.org/markup-compatibility/2006',
 }
 EMU_PER_PX = 9525.0          # 96 dpi
 PT_TO_PX = 96.0 / 72.0
@@ -212,7 +213,23 @@ MEDIA_SLUGS = {
     ('image77.png', ''): 'hello-badge',
     ('image78.png', ''): 'teal-square',
     ('image80.png', ''): 'contact-vcard-qr',
+    # yellow marker ink strokes (mc:Fallback bitmaps) on the Threema quote
+    ('image450.png', ''): 'marker-no-personal-data',
+    ('image460.png', ''): 'marker-used',
+    ('image470.png', ''): 'marker-anonymously',
+    ('image480.png', ''): 'marker-without',
+    ('image490.png', ''): 'marker-phone-or-email',
+    ('image500.png', ''): 'marker-privacy-by-design',
+    ('image510.png', ''): 'marker-swiss-made',
+    ('image520.png', ''): 'marker-gdpr-compliant',
+    ('image530.png', ''): 'marker-end-to-end-encryption',
 }
+
+# Ink strokes that drew the smiley face onto the original alien badge
+# artwork (slides 7/58) — that artwork is redrawn as hello-badge.svg /
+# feedback-badge.svg without the alien, so the face doodle goes with it.
+SKIPPED_INK_MEDIA = {'ppt/media/image180.png', 'ppt/media/image190.png',
+                     'ppt/media/image200.png', 'ppt/media/image210.png'}
 PDF_SLUGS = {
     '14x164': 'target-dartboard-icon',
     '15x180': 'gears-lock-icon',
@@ -261,8 +278,12 @@ DROPPED_SLIDES = {'slide59.xml'}
 SVG_ASSETS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                               '..', 'assets', 'svg')
 SVG_REPLACEMENTS = {
-    'gear-warning-icon.png': ('gear-warning.svg', None),
-    'yawning-person-icon.png': ('yawning-person.svg', None),
+    # slide 2: fit boxes shrink the artwork to the original bitmap content
+    # size (the raster originals carry transparent margins the SVGs lack)
+    'gear-warning-icon.png': ('gear-warning.svg',
+                              (0.064, 0.038, 0.930, 0.904)),
+    'yawning-person-icon.png': ('yawning-person.svg',
+                                (0.071, -0.076, 0.996, 0.849)),
     'hello-badge.png': ('hello-badge.svg', None),
     'hello-badge-2.png': ('feedback-badge.svg', None),
     'questions-doodle.png': ('questions-doodle.svg', None),
@@ -284,13 +305,31 @@ SVG_REPLACEMENTS = {
     'feather-icon.png': ('feather.svg', None),
     'person-suit-icon.png': ('person-suit.svg', None),
     'running-person-icon.png': ('running-person.svg', None),
-    'gamepad-icon.png': ('gamepad.svg', None),
-    'gamepad-icon-2.png': ('gamepad.svg', None),
-    'gamepad-icon-3.png': ('gamepad.svg', None),
+    # the PDF-extracted gamepad/warning/document bitmaps carry large
+    # transparent margins, so a full-canvas SVG rendered oversized (the two
+    # icons overlapped on slide 45). Each fit box is a square sub-viewport
+    # that puts the SVG artwork (which has its own margins inside the
+    # viewBox) at the position and size of the original bitmap content.
+    'gamepad-icon.png': ('gamepad.svg', (0.177, 0.169, 0.817, 0.809)),
+    'gamepad-icon-2.png': ('gamepad.svg', (0.177, 0.169, 0.817, 0.809)),
+    'gamepad-icon-3.png': ('gamepad.svg', (0.177, 0.169, 0.817, 0.809)),
     'audience-people-icon.png': ('audience-people.svg', None),
-    'warning-electric-icon.png': ('warning-electric.svg', None),
-    'document-magnifier-icon.png': ('document-magnifier.svg', None),
+    'warning-electric-icon.png': ('warning-electric.svg',
+                                  (0.087, 0.058, 0.962, 0.933)),
+    'document-magnifier-icon.png': ('document-magnifier.svg',
+                                    (0.024, -0.005, 0.993, 0.964)),
     'analyze-improve-cycle.png': ('analyze-improve-cycle.svg', None),
+}
+
+# Deliberate position deviations from the PPTX, keyed by
+# (slide xml basename, final docs/img file name) -> (left, top) in px.
+# The gamepad "workshop game" marker sits at a different spot on every
+# game slide in the original deck (mid-left on slide 45, half inside the
+# title bar on 46/47) — pin it to the position it has on slides 34/37.
+PIC_POS_OVERRIDES = {
+    ('slide51.xml', 'gamepad-icon.png'): (698.7, 110.7),
+    ('slide52.xml', 'gamepad-icon.png'): (698.7, 110.7),
+    ('slide53.xml', 'gamepad-icon.png'): (698.7, 110.7),
 }
 
 BULLET_CHAR_MAP = {
@@ -963,6 +1002,32 @@ class Converter:
     def walk_shape(self, el, part, ctx, layout, master, layout_part, master_part,
                    anim, source, xform, frag):
         tag = etree.QName(el).localname
+        if tag == 'AlternateContent':
+            # PowerPoint ink (p:contentPart, e.g. marker highlights) ships a
+            # pre-rendered bitmap inside mc:Fallback — render those pics.
+            # Highlighter ink (rasterOp=maskPen in the InkML brush) blends
+            # with the text underneath instead of covering it.
+            fb = el.find(q('mc:Fallback'))
+            if fb is None:
+                return []
+            blend = ''
+            cp = el.find(q('mc:Choice') + '/' + q('p:contentPart'))
+            if cp is not None:
+                rid = cp.get(q('r:id'))
+                rels = self.pkg.rels(part)
+                if rid in rels and b'maskPen' in self.pkg.read(rels[rid][0]):
+                    blend = 'mix-blend-mode:multiply;'
+            out = []
+            for child in fb:
+                if etree.QName(child).localname == 'pic':
+                    out += self.render_pic(child, part, ctx, source, xform,
+                                           frag, layout, master,
+                                           extra_style=blend)
+                else:
+                    out += self.walk_shape(child, part, ctx, layout, master,
+                                           layout_part, master_part, anim,
+                                           source, xform, frag)
+            return out
         if tag not in ('sp', 'pic', 'grpSp', 'graphicFrame', 'cxnSp'):
             return []
         spid = self._spid(el)
@@ -1425,7 +1490,7 @@ class Converter:
     # -------- pictures
 
     def render_pic(self, pic, part, ctx, source, xform, frag,
-                   layout=None, master=None):
+                   layout=None, master=None, extra_style=''):
         blip_fill = pic.find(q('p:blipFill'))
         blip = blip_fill.find(q('a:blip')) if blip_fill is not None else None
         if blip is None:
@@ -1435,7 +1500,7 @@ class Converter:
         if rid not in rels:
             return []
         media_part = rels[rid][0]
-        if media_part in BANNED_MEDIA:
+        if media_part in BANNED_MEDIA or media_part in SKIPPED_INK_MEDIA:
             return []
         geo = self.get_xfrm(pic)
         if geo is None:
@@ -1468,6 +1533,7 @@ class Converter:
         if blip.find(f'.//{{{A14_NS}}}backgroundRemoval') is not None:
             fname = self.extract_from_pdf(geo)
             if fname:
+                geo = self._apply_pos_override(part, fname, geo)
                 return self.emit_pic_html(pic, blip_fill, geo, ctx, frag, fname, '',
                                           from_pdf=True)
             self.warnings.append(f'backgroundRemoval not matched in PDF for {part} page {self._current_page}')
@@ -1505,7 +1571,18 @@ class Converter:
             opacity = f'opacity:{amt:.3f};'
 
         fname = self.emit_media(media_part, variant, transform)
-        return self.emit_pic_html(pic, blip_fill, geo, ctx, frag, fname, opacity)
+        geo = self._apply_pos_override(part, fname, geo)
+        return self.emit_pic_html(pic, blip_fill, geo, ctx, frag, fname,
+                                  opacity + extra_style)
+
+    @staticmethod
+    def _apply_pos_override(part, fname, geo):
+        override = PIC_POS_OVERRIDES.get((os.path.basename(part), fname))
+        if override is not None:
+            geo = dict(geo)
+            geo['x'] = override[0] * EMU_PER_PX
+            geo['y'] = override[1] * EMU_PER_PX
+        return geo
 
     def inline_svg(self, fname, img_style):
         """Inline the hand-drawn SVG replacing docs/img/<fname>, or None.
