@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 98" role="img" aria-label="Kreislauf: analyze, evaluate, improve">
+  <style>
+    .ai-text { font-family: 'DM Sans', 'Karla', sans-serif; font-weight: 700; }
+    .ai-center { font-family: 'DM Sans', 'Karla', sans-serif; font-weight: 400; }
+    .ai-dot {
+      offset-path: path('M 50 19.25 A 29.75 29.75 0 1 1 50 78.75 A 29.75 29.75 0 1 1 50 19.25 Z');
+      animation: ai-orbit 9s linear infinite;
+    }
+    @keyframes ai-orbit { from { offset-distance: 0%; } to { offset-distance: 100%; } }
+    @media (prefers-reduced-motion: reduce) { .ai-dot { display: none; } }
+  </style>
+  <circle cx="50.0" cy="49.0" r="23.0" fill="#F2F2F2" stroke="#1B1B1B" stroke-width="2.2"/>
+  <path d="M 16.1 46.0 A 34.0 34.0 0 0 1 53.0 15.1 L 53.4 9.7 L 61.1 21.4 L 51.7 29.1 L 52.2 23.6 A 25.5 25.5 0 0 0 24.6 46.8 Z" fill="#6CCBB2" stroke="#1B1B1B" stroke-width="2.6" stroke-linejoin="round"/>
+  <path d="M 69.5 21.1 A 34.0 34.0 0 0 1 77.9 68.5 L 82.4 71.7 L 68.3 72.4 L 66.4 60.5 L 70.9 63.6 A 25.5 25.5 0 0 0 64.6 28.1 Z" fill="#B2E4D7" stroke="#1B1B1B" stroke-width="2.6" stroke-linejoin="round"/>
+  <path d="M 64.4 79.8 A 34.0 34.0 0 0 1 19.2 63.4 L 14.2 65.7 L 20.5 53.1 L 31.9 57.5 L 26.9 59.8 A 25.5 25.5 0 0 0 60.8 72.1 Z" fill="#FFFFFF" stroke="#1B1B1B" stroke-width="2.6" stroke-linejoin="round"/>
+  <circle class="ai-dot" r="2.6" fill="#35977D" stroke="#1B1B1B" stroke-width="1.4"/>
+  <text class="ai-center" x="50.0" y="51.5" text-anchor="middle" font-size="7.2" fill="#3F3F3F">crosscutting</text>
+  <text class="ai-text" x="17" y="21" font-size="9" fill="#1B1B1B" transform="rotate(-42 17 21)" text-anchor="middle">analyze</text>
+  <text class="ai-text" x="86" y="30" font-size="9" fill="#1B1B1B" transform="rotate(52 86 30)" text-anchor="middle">evaluate</text>
+  <text class="ai-text" x="50" y="95.5" font-size="9" fill="#1B1B1B" text-anchor="middle">improve</text>
+</svg>

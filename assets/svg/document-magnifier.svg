@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Dokument mit Lupe">
+  <style>
+    .dm-lens { animation: dm-drift 8s ease-in-out infinite; }
+    @keyframes dm-drift {
+      0%, 100% { transform: translate(0, 0); }
+      33% { transform: translate(-2.2px, 1.6px); }
+      66% { transform: translate(1.6px, -1.8px); }
+    }
+    @media (prefers-reduced-motion: reduce) { .dm-lens { animation: none; } }
+  </style>
+  <!-- document -->
+  <g stroke="#1B1B1B" stroke-width="3.2" stroke-linejoin="round">
+    <path d="M26 10 h30 l10 10 v50 h-40 z" fill="#FFFFFF"/>
+    <path d="M56 10 l10 10 h-10 z" fill="#B2E4D7"/>
+  </g>
+  <g stroke="#1B1B1B" stroke-width="2.4" stroke-linecap="round">
+    <line x1="32" y1="26" x2="60" y2="26"/>
+    <line x1="32" y1="33.5" x2="60" y2="33.5"/>
+    <line x1="32" y1="41" x2="52" y2="41"/>
+    <line x1="32" y1="48.5" x2="45" y2="48.5"/>
+  </g>
+  <line x1="49" y1="48.5" x2="57" y2="48.5" stroke="#F4AD0E" stroke-width="3" stroke-linecap="round"/>
+  <path d="M31 61 l2.4 2.5 l4.8 -5.2" fill="none" stroke="#35977D" stroke-width="2.6"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- magnifier -->
+  <g class="dm-lens" stroke="#1B1B1B" stroke-linejoin="round" stroke-linecap="round">
+    <line x1="63" y1="60" x2="73.5" y2="71.5" stroke-width="6.2"/>
+    <circle cx="53.5" cy="49.5" r="13.5" fill="#B2E4D7" fill-opacity="0.72" stroke-width="4"/>
+    <path d="M47 46 a7.5 7.5 0 0 1 4.8 -3.4" fill="none" stroke="#FFFFFF" stroke-width="2.5"/>
+  </g>
+</svg>

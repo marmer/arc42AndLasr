@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Warndreieck mit Blitz">
+  <style>
+    .we-bolt { animation: we-flicker 5s ease-in-out infinite; }
+    @keyframes we-flicker { 0%, 100% { opacity: 1; } 50% { opacity: 0.55; } }
+    @media (prefers-reduced-motion: reduce) { .we-bolt { animation: none; } }
+  </style>
+  <path d="M50 17 L 84 71 L 16 71 Z" fill="#F4AD0E" stroke="#1B1B1B" stroke-width="3.5"
+        stroke-linejoin="round"/>
+  <path class="we-bolt" d="M53.5 33 L 42 51 L 49 51 L 40.5 64.5 L 57 46 L 50 46 Z"
+        fill="#1B1B1B" stroke="#1B1B1B" stroke-width="1.6" stroke-linejoin="round"/>
+</svg>

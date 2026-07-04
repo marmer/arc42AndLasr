@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Gähnende Person">
+  <style>
+    .yp-fig { animation: yp-breathe 5s ease-in-out infinite; }
+    @keyframes yp-breathe { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1.6px); } }
+    @media (prefers-reduced-motion: reduce) { .yp-fig { animation: none; } }
+  </style>
+  <g class="yp-fig" stroke="#1B1B1B" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M24 93 C24 74 35 66 50 66 C65 66 76 74 76 93 Z" fill="#6CCBB2"/>
+    <circle cx="50" cy="41" r="17.5" fill="#B2E4D7"/>
+    <path d="M37.2 30.5 A17.5 17.5 0 0 1 62.8 30.5 Q50 25.5 37.2 30.5 Z" fill="#1B1B1B" stroke-width="2"/>
+    <path d="M39 40.5 Q42.5 44 46 40.5" fill="none" stroke-width="2.8"/>
+    <path d="M54 40.5 Q57.5 44 61 40.5" fill="none" stroke-width="2.8"/>
+    <ellipse cx="48" cy="49.5" rx="4.2" ry="5" fill="#1B1B1B" stroke-width="2"/>
+    <ellipse cx="52" cy="53.5" rx="5.6" ry="4.4" fill="#6CCBB2" stroke-width="2.8"
+             transform="rotate(-28 52 53.5)"/>
+  </g>
+</svg>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Person umgeben von Publikum">
+  <!-- ring of small figures -->
+  <g stroke="#1B1B1B" stroke-width="1.8" stroke-linejoin="round" fill="#B2E4D7">
+    <g transform="translate(50 12)"><circle r="4"/><path d="M-5.5 15 C-5.5 7.5 -3 5.5 0 5.5 C3 5.5 5.5 7.5 5.5 15 Z"/></g>
+    <g transform="translate(69 17)"><circle r="4"/><path d="M-5.5 15 C-5.5 7.5 -3 5.5 0 5.5 C3 5.5 5.5 7.5 5.5 15 Z"/></g>
+    <g transform="translate(84 30)"><circle r="4"/><path d="M-5.5 15 C-5.5 7.5 -3 5.5 0 5.5 C3 5.5 5.5 7.5 5.5 15 Z"/></g>
+    <g transform="translate(90 48)"><circle r="4"/><path d="M-5.5 15 C-5.5 7.5 -3 5.5 0 5.5 C3 5.5 5.5 7.5 5.5 15 Z"/></g>
+    <g transform="translate(84 66)"><circle r="4"/><path d="M-5.5 15 C-5.5 7.5 -3 5.5 0 5.5 C3 5.5 5.5 7.5 5.5 15 Z"/></g>
+    <g transform="translate(69 79)"><circle r="4"/><path d="M-5.5 15 C-5.5 7.5 -3 5.5 0 5.5 C3 5.5 5.5 7.5 5.5 15 Z"/></g>
+    <g transform="translate(31 79)"><circle r="4"/><path d="M-5.5 15 C-5.5 7.5 -3 5.5 0 5.5 C3 5.5 5.5 7.5 5.5 15 Z"/></g>
+    <g transform="translate(16 66)"><circle r="4"/><path d="M-5.5 15 C-5.5 7.5 -3 5.5 0 5.5 C3 5.5 5.5 7.5 5.5 15 Z"/></g>
+    <g transform="translate(10 48)"><circle r="4"/><path d="M-5.5 15 C-5.5 7.5 -3 5.5 0 5.5 C3 5.5 5.5 7.5 5.5 15 Z"/></g>
+    <g transform="translate(16 30)"><circle r="4"/><path d="M-5.5 15 C-5.5 7.5 -3 5.5 0 5.5 C3 5.5 5.5 7.5 5.5 15 Z"/></g>
+    <g transform="translate(31 17)"><circle r="4"/><path d="M-5.5 15 C-5.5 7.5 -3 5.5 0 5.5 C3 5.5 5.5 7.5 5.5 15 Z"/></g>
+  </g>
+  <!-- central presenter -->
+  <g stroke="#1B1B1B" stroke-width="2.8" stroke-linejoin="round">
+    <circle cx="50" cy="42" r="9.5" fill="#6CCBB2"/>
+    <path d="M33 76 C 33 60 40 55 50 55 C 60 55 67 60 67 76 Z" fill="#6CCBB2"/>
+    <path d="M44.5 55.7 L 50 63.5 L 55.5 55.7 L 52.5 55.2 L 47.5 55.2 Z" fill="#FFFFFF" stroke-width="2.2"/>
+    <path d="M50 63.5 l 2.4 4.6 l -2.4 6 l -2.4 -6 z" fill="#1B1B1B" stroke-width="1.8"/>
+  </g>
+</svg>

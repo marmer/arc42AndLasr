@@ -82,3 +82,75 @@ pip install -r scripts/requirements.txt
 python3 scripts/pptx2reveal.py "arc42AndLasr_talk - envite_original.pptx" docs "arc42AndLasr_talk - envite_original_rendered.pdf"
 python3 scripts/compare_render.py            # visual diff against the PDF
 ```
+
+## Unified SVG image style — decisions (2026-07-02)
+
+Interview-driven style definition for regenerating the supporting images as
+SVGs (affected slides, new deck numbering: 2, 3, 10, 11, 14–17, 19–28, 36,
+50, 51, 52 (badge only) + the gamepad on 34, 37, 45 (incl. document with
+magnifier), 46, 47). All decisions confirmed with the author:
+
+- **Base style**: duotone line style — uniform #1B1B1B outline (~3.5 units on
+  a 100-unit viewBox, round caps/joins), flat fills, no shadows/gradients,
+  geometric construction, shared grid. Everything must stay legible at the
+  smallest on-slide render size (~100px).
+- **Color rule**: fills limited to mint #6CCBB2, pale mint #B2E4D7 and white;
+  amber #F4AD0E reserved for exactly one attention element per image (where
+  meaningful). Blues (#3390C3/#90C5E2) are reserved for the "THAT'S IT
+  FOLKS" rings, which keep the Looney-Tunes homage (incl. text, set in
+  DM Sans 700 as real SVG text) as the single deliberate escape from the
+  mint rule. Grey ring variant derived for slides 25/51.
+- **Motifs stay, style changes**: every image keeps its current motif and its
+  exact bounding box/aspect ratio (no layout shifts). The three gamepad PNG
+  variants collapse into ONE gamepad SVG used on all gamepad slides (the
+  color differences carried no meaning; the mini LASR map already marks the
+  active step). Slide 51: only the grey rings + the analyze/evaluate/improve
+  cycle are redrawn; book covers and iSAQB logo remain untouched (real
+  third-party artifacts). Slide 52: only the feedback badge is redrawn (the
+  same badge motif as slide 3); the LinkedIn QR stays as-is (functional).
+- **Animation**: subtle infinite loops only ("living stills"), 4–8s,
+  max 1–2 animated elements per image, staying static is allowed;
+  `prefers-reduced-motion` disables all loops. No entrance/draw-in
+  animations (they fight Reveal fragments and re-entry).
+- **Integration**: SVGs are hand-maintained source files in `assets/svg/`;
+  the generator gets a replacement table (original media → SVG file) and
+  inlines the SVG content into the slide HTML (like `_title_bg_svg`), so the
+  self-hosted webfonts and CSS animations apply. All ids/classes inside each
+  SVG carry a per-image prefix to avoid collisions once inlined.
+- **Verification**: `compare_render.py` gets an auto-derived mask list
+  (slide → rectangles of replaced images) excluded from the diff, so RMS
+  stays meaningful for text/layout; the new images themselves are reviewed
+  visually.
+- **Process**: style tile first (`assets/svg/preview.html`, built by
+  `assets/svg/build_preview.py`, self-contained with embedded fonts) with 5
+  representative samples: gear-warning, yawning-person, target-dartboard,
+  gamepad, thats-it-folks-rings. Mass production of the remaining images
+  only after the style tile is approved.
+
+## Unified SVG images — round 2: full production (2026-07-02)
+
+All ~20 images produced in `assets/svg/` (style approved via the round-1
+style tile) and wired into the pipeline:
+
+- `pptx2reveal.py`: `SVG_REPLACEMENTS` maps final `docs/img` names to the
+  SVG sources; `inline_svg()` embeds them into the slide HTML in place of
+  the `<img>` (wrapper carries `data-svg-replaced`). The padded PDF-extract
+  canvases (grey/color rings) are handled by a fit-box that nests the
+  artwork at the original content position. PPTX picture drop-shadows are
+  stripped on replaced images (flat style bans shadows). The replaced PNGs
+  are no longer written to `docs/img/`.
+- `DROPPED_SLIDES`: slide59 (duplicate closing slide the author had removed
+  by hand in commit "Last slide removed") is now skipped by the generator —
+  previously a regeneration would have resurrected it.
+- `compare_render.py` masks the `data-svg-replaced` regions (queried from
+  the live DOM) out of the RMS diff, so the score stays meaningful for
+  text/layout; composites show the real render but diff the masked images.
+- Animations: CSS keyframes/offset-path only. SMIL does not start inside the
+  fetch-injected slide files (the title slide, injected the same way, is the
+  lone exception that works) — the cycle-diagram orbit dot therefore uses
+  CSS `offset-path`. All animations respect `prefers-reduced-motion`.
+- Verified: full `compare_render.py` run + visual review of all 27 affected
+  slides; CSS + title SMIL animations confirmed live in headless Chromium.
+- Known intended deviations vs the PDF: the replaced images themselves
+  (masked), and slide 52's RMS is 0 because the full-slide badge region is
+  masked entirely.

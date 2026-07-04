@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Zahnräder mit Vorhängeschloss">
+  <style>
+    .gl-g1 { animation: gl-spin 36s linear infinite; transform-box: fill-box; transform-origin: center; }
+    .gl-g2 { animation: gl-spin 24s linear infinite reverse; transform-box: fill-box; transform-origin: center; }
+    @keyframes gl-spin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { .gl-g1, .gl-g2 { animation: none; } }
+  </style>
+  <!-- big gear top-left -->
+  <g class="gl-g1" stroke="#1B1B1B" stroke-width="3" stroke-linejoin="round">
+    <g fill="#B2E4D7">
+      <rect x="32.5" y="18" width="7" height="8.5" rx="2.2"/>
+      <rect x="32.5" y="45.5" width="7" height="8.5" rx="2.2"/>
+      <rect x="18.2" y="32.5" width="8.5" height="7" rx="2.2"/>
+      <rect x="45.3" y="32.5" width="8.5" height="7" rx="2.2"/>
+      <rect x="32.5" y="18" width="7" height="8.5" rx="2.2" transform="rotate(45 36 36)"/>
+      <rect x="32.5" y="45.5" width="7" height="8.5" rx="2.2" transform="rotate(45 36 36)"/>
+      <rect x="18.2" y="32.5" width="8.5" height="7" rx="2.2" transform="rotate(45 36 36)"/>
+      <rect x="45.3" y="32.5" width="8.5" height="7" rx="2.2" transform="rotate(45 36 36)"/>
+    </g>
+    <circle cx="36" cy="36" r="13" fill="#B2E4D7"/>
+    <circle cx="36" cy="36" r="5.5" fill="#FFFFFF"/>
+  </g>
+  <!-- small gear top-right -->
+  <g class="gl-g2" stroke="#1B1B1B" stroke-width="2.8" stroke-linejoin="round">
+    <g fill="#6CCBB2">
+      <rect x="63.8" y="16.5" width="5.4" height="6.5" rx="1.8"/>
+      <rect x="63.8" y="37" width="5.4" height="6.5" rx="1.8"/>
+      <rect x="53.3" y="27" width="6.5" height="5.4" rx="1.8"/>
+      <rect x="73.2" y="27" width="6.5" height="5.4" rx="1.8"/>
+      <rect x="63.8" y="16.5" width="5.4" height="6.5" rx="1.8" transform="rotate(45 66.5 30)"/>
+      <rect x="63.8" y="37" width="5.4" height="6.5" rx="1.8" transform="rotate(45 66.5 30)"/>
+      <rect x="53.3" y="27" width="6.5" height="5.4" rx="1.8" transform="rotate(45 66.5 30)"/>
+      <rect x="73.2" y="27" width="6.5" height="5.4" rx="1.8" transform="rotate(45 66.5 30)"/>
+    </g>
+    <circle cx="66.5" cy="30" r="9.5" fill="#6CCBB2"/>
+    <circle cx="66.5" cy="30" r="4" fill="#FFFFFF"/>
+  </g>
+  <!-- padlock -->
+  <g stroke="#1B1B1B" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M45 52 v-9 a10.5 10.5 0 0 1 21 0 v9" fill="none" stroke-width="4.2"/>
+    <rect x="38.5" y="52" width="34" height="28" rx="5" fill="#6CCBB2" stroke-width="3.5"/>
+    <circle cx="55.5" cy="63" r="3.6" fill="#F4AD0E" stroke-width="2.6"/>
+    <path d="M55.5 65.5 v7" stroke="#1B1B1B" stroke-width="3.4"/>
+  </g>
+</svg>

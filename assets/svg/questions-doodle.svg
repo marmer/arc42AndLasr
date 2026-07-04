@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 82.9" role="img" aria-label="Großes Fragezeichen mit Blitzen">
+  <style>
+    .qd-mark { animation: qd-rock 7s ease-in-out infinite; transform-origin: 48px 44px; }
+    @keyframes qd-rock { 0%, 100% { transform: rotate(-2.5deg); } 50% { transform: rotate(2.5deg); } }
+    .qd-text { font-family: 'DM Sans', 'Karla', sans-serif; font-weight: 700; paint-order: stroke fill; }
+    @media (prefers-reduced-motion: reduce) { .qd-mark { animation: none; } }
+  </style>
+  <ellipse cx="48" cy="44" rx="37" ry="35" fill="#FFFFFF" stroke="#1B1B1B" stroke-width="3.5"/>
+  <g stroke="#1B1B1B" stroke-width="2.6" fill="none" stroke-linecap="round">
+    <path d="M15 34 q4 -3.5 8 0 t8 0"/>
+    <path d="M13 43 q4 -3.5 8 0 t8 0"/>
+    <path d="M15 52 q4 -3.5 8 0 t8 0"/>
+    <path d="M18 61 q4 -3.5 8 0 t8 0"/>
+    <path d="M65 34 q4 -3.5 8 0 t8 0"/>
+    <path d="M63 43 q4 -3.5 8 0 t8 0"/>
+    <path d="M65 52 q4 -3.5 8 0 t8 0"/>
+    <path d="M62 61 q4 -3.5 8 0 t8 0"/>
+  </g>
+  <g fill="#1B1B1B">
+    <circle cx="26" cy="23" r="1.6"/>
+    <circle cx="72" cy="24" r="1.6"/>
+    <circle cx="30" cy="68" r="1.6"/>
+    <circle cx="68" cy="67" r="1.6"/>
+  </g>
+  <text class="qd-mark qd-text" x="48" y="61" text-anchor="middle" font-size="50"
+        fill="#6CCBB2" stroke="#1B1B1B" stroke-width="2.4">?</text>
+  <g fill="#F4AD0E" stroke="#1B1B1B" stroke-width="2.4" stroke-linejoin="round">
+    <path d="M22 2 L13 16 L18.5 16 L11.5 28 L24 13.5 L18.5 13.5 Z"/>
+    <path d="M83 2 L74 16 L79.5 16 L72.5 28 L85 13.5 L79.5 13.5 Z"/>
+  </g>
+</svg>

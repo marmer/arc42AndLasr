@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 97.3 100" role="img" aria-label="Pfeile nach außen in alle Richtungen">
+  <style>
+    .ao-arrows { animation: ao-breathe 6s ease-in-out infinite; transform-origin: 48.6px 50px; }
+    @keyframes ao-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.035); } }
+    @media (prefers-reduced-motion: reduce) { .ao-arrows { animation: none; } }
+  </style>
+  <g class="ao-arrows">
+    <g fill="#6CCBB2" stroke="#1B1B1B" stroke-width="3" stroke-linejoin="round"
+       transform="translate(48.6 50)">
+      <path transform="rotate(45)" d="M-37 0 L-26 -7.5 L-26 -3.4 L26 -3.4 L26 -7.5 L37 0 L26 7.5 L26 3.4 L-26 3.4 L-26 7.5 Z"/>
+      <path transform="rotate(135)" d="M-37 0 L-26 -7.5 L-26 -3.4 L26 -3.4 L26 -7.5 L37 0 L26 7.5 L26 3.4 L-26 3.4 L-26 7.5 Z"/>
+    </g>
+    <circle cx="48.6" cy="50" r="5" fill="#FFFFFF" stroke="#1B1B1B" stroke-width="3"/>
+  </g>
+  <!-- corner brackets -->
+  <g fill="none" stroke="#1B1B1B" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 15 V 6.5 H 12.5"/>
+    <path d="M84.8 6.5 H 93.3 V 15"/>
+    <path d="M93.3 85 V 93.5 H 84.8"/>
+    <path d="M12.5 93.5 H 4 V 85"/>
+  </g>
+  <g fill="#1B1B1B">
+    <circle cx="48.6" cy="14" r="1.8"/>
+    <circle cx="48.6" cy="86" r="1.8"/>
+    <circle cx="12.6" cy="50" r="1.8"/>
+    <circle cx="84.6" cy="50" r="1.8"/>
+  </g>
+</svg>
