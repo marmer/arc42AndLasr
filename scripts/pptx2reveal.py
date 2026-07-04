@@ -40,6 +40,11 @@ BANNED_RE = re.compile(r'(?i)envite|novatec|it-?tage|decompile|software\s*qualit
 TEXT_REPLACEMENTS = [
     (re.compile(r'(?i)mariano\.mertinat@envite\.de'), 'mariano.mertinat@gmail.com'),
     (re.compile(r'\+49[\s\d]{8,18}'), ''),
+    # author bio updated after the PPTX was written (commits "Revise slide
+    # content and layout in slide1.html" / "Change author description in
+    # slide1.html"); anchored to the exact run texts of the title slide
+    (re.compile(r'^Software-$'), 'Software- and Solution-'),
+    (re.compile(r'^, Consultant, Nerd$'), ', Trainer, Father, Nerd'),
 ]
 # media parts that must never be emitted (company logos)
 BANNED_MEDIA = {'ppt/media/image2.png'}
@@ -323,13 +328,21 @@ SVG_REPLACEMENTS = {
 
 # Deliberate position deviations from the PPTX, keyed by
 # (slide xml basename, final docs/img file name) -> (left, top) in px.
-# The gamepad "workshop game" marker sits at a different spot on every
-# game slide in the original deck (mid-left on slide 45, half inside the
-# title bar on 46/47) — pin it to the position it has on slides 34/37.
+# The gamepad "workshop game" marker pokes half into the title bar on
+# slides 46/47 — pin it to the position it has on slides 34/37. Slide 45's
+# gamepad stays at its PPTX position next to the "Top Down" bullet (an
+# earlier override there was reverted on the author's request).
 PIC_POS_OVERRIDES = {
-    ('slide51.xml', 'gamepad-icon.png'): (698.7, 110.7),
     ('slide52.xml', 'gamepad-icon.png'): (698.7, 110.7),
     ('slide53.xml', 'gamepad-icon.png'): (698.7, 110.7),
+}
+
+# Deliberate z-order deviations from the PPTX, keyed by
+# (slide xml basename, shape name) -> CSS z-index. The closing slide's
+# title hides behind the "THAT'S IT FOLKS" rings in the original deck —
+# lift it above the artwork (author's request).
+SHAPE_Z_OVERRIDES = {
+    ('slide57.xml', 'Textplatzhalter 4'): 1,
 }
 
 BULLET_CHAR_MAP = {
@@ -1312,6 +1325,9 @@ class Converter:
         cls = 'shp' + self.frag_class(frag)
         style = 'position:absolute;' + self.pos_css(geo) + self.frag_style(frag)
         style += self.shadow_css(sp_pr, ctx, kind='box' if prst in (None, 'rect', 'roundRect') else 'drop')
+        z = SHAPE_Z_OVERRIDES.get((os.path.basename(part), self._name(sp)))
+        if z is not None:
+            style += f'z-index:{z};'
 
         if prst in ('line', 'straightConnector1') and (w < 1 or h < 1):
             return self.axis_line_div(geo, sp_pr.find(q('a:ln')) if sp_pr is not None else None,
@@ -2115,7 +2131,7 @@ class Converter:
             pptx_name = os.path.basename(slide_part)
             slide_file = pptx_name.replace('.xml', '.html')
             with open(os.path.join(slides_dir, slide_file), 'w') as f:
-                f.write(inner)
+                f.write(inner if inner.endswith('\n') else inner + '\n')
             placeholders.append(
                 f'        <section data-pptx="{pptx_name}" data-page="{page}"'
                 f' data-src="slides/{slide_file}"></section>'
