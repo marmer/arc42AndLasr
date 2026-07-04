@@ -188,3 +188,19 @@ style tile) and wired into the pipeline:
   request the gamepad on 45/46 (and 47, which shares 46's layout — keeping
   the no-jump rule between consecutive slides) is pinned to the 34/37
   position via `PIC_POS_OVERRIDES` (a deliberate deviation from the PPTX).
+
+## Gamepad revert (slide 45), title z-order (slide 51), slide1 hand edits (2026-07-04)
+
+- Slide 45: the gamepad override from the previous change is reverted on the
+  author's request — it stays at its PPTX position next to the "Top Down"
+  bullet. Slides 46/47 keep the pinned 34/37 position.
+- Slide 51: the closing title "Start doing and keep on learning!" hides
+  behind the "THAT'S IT FOLKS" rings in the original PPTX; a new
+  `SHAPE_Z_OVERRIDES` table lifts it above the artwork (same position).
+- The author's hand edits to the generated slide1.html (commits "Revise
+  slide content and layout in slide1.html" / "Change author description in
+  slide1.html": bio now "Software- and Solution-Architect, Trainer, Father,
+  Nerd") are ported into `TEXT_REPLACEMENTS` (anchored to the exact run
+  texts) so regeneration no longer reverts them. Slide files are now
+  written with a trailing newline (one-time churn across all slides) so
+  editor-saved files stay diff-stable.
