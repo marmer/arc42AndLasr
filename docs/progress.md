@@ -176,3 +176,15 @@ style tile) and wired into the pipeline:
   restoring the original on-slide artwork size/position. Affected slides
   (new numbering): 26, 34, 36, 37, 45, 46, 47 — all verified via
   `compare_render.py` composites.
+
+## Slide 2 icon size + unified gamepad position (2026-07-04)
+
+- Slide 2: gear-warning and yawning-person rendered ~15% larger than the
+  PPTX (their raster originals carry transparent margins the SVGs lack) —
+  both now have fit boxes derived from the bitmaps' alpha bounding boxes.
+- Gamepad marker: the original deck places the "workshop game" gamepad at a
+  different spot on every game slide — mid-left on slide 45, half inside
+  the title bar on 46/47, below the title bar on 34/37. On the author's
+  request the gamepad on 45/46 (and 47, which shares 46's layout — keeping
+  the no-jump rule between consecutive slides) is pinned to the 34/37
+  position via `PIC_POS_OVERRIDES` (a deliberate deviation from the PPTX).

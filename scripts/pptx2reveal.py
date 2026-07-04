@@ -278,8 +278,12 @@ DROPPED_SLIDES = {'slide59.xml'}
 SVG_ASSETS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                               '..', 'assets', 'svg')
 SVG_REPLACEMENTS = {
-    'gear-warning-icon.png': ('gear-warning.svg', None),
-    'yawning-person-icon.png': ('yawning-person.svg', None),
+    # slide 2: fit boxes shrink the artwork to the original bitmap content
+    # size (the raster originals carry transparent margins the SVGs lack)
+    'gear-warning-icon.png': ('gear-warning.svg',
+                              (0.064, 0.038, 0.930, 0.904)),
+    'yawning-person-icon.png': ('yawning-person.svg',
+                                (0.071, -0.076, 0.996, 0.849)),
     'hello-badge.png': ('hello-badge.svg', None),
     'hello-badge-2.png': ('feedback-badge.svg', None),
     'questions-doodle.png': ('questions-doodle.svg', None),
@@ -315,6 +319,17 @@ SVG_REPLACEMENTS = {
     'document-magnifier-icon.png': ('document-magnifier.svg',
                                     (0.024, -0.005, 0.993, 0.964)),
     'analyze-improve-cycle.png': ('analyze-improve-cycle.svg', None),
+}
+
+# Deliberate position deviations from the PPTX, keyed by
+# (slide xml basename, final docs/img file name) -> (left, top) in px.
+# The gamepad "workshop game" marker sits at a different spot on every
+# game slide in the original deck (mid-left on slide 45, half inside the
+# title bar on 46/47) — pin it to the position it has on slides 34/37.
+PIC_POS_OVERRIDES = {
+    ('slide51.xml', 'gamepad-icon.png'): (698.7, 110.7),
+    ('slide52.xml', 'gamepad-icon.png'): (698.7, 110.7),
+    ('slide53.xml', 'gamepad-icon.png'): (698.7, 110.7),
 }
 
 BULLET_CHAR_MAP = {
@@ -1518,6 +1533,7 @@ class Converter:
         if blip.find(f'.//{{{A14_NS}}}backgroundRemoval') is not None:
             fname = self.extract_from_pdf(geo)
             if fname:
+                geo = self._apply_pos_override(part, fname, geo)
                 return self.emit_pic_html(pic, blip_fill, geo, ctx, frag, fname, '',
                                           from_pdf=True)
             self.warnings.append(f'backgroundRemoval not matched in PDF for {part} page {self._current_page}')
@@ -1555,8 +1571,18 @@ class Converter:
             opacity = f'opacity:{amt:.3f};'
 
         fname = self.emit_media(media_part, variant, transform)
+        geo = self._apply_pos_override(part, fname, geo)
         return self.emit_pic_html(pic, blip_fill, geo, ctx, frag, fname,
                                   opacity + extra_style)
+
+    @staticmethod
+    def _apply_pos_override(part, fname, geo):
+        override = PIC_POS_OVERRIDES.get((os.path.basename(part), fname))
+        if override is not None:
+            geo = dict(geo)
+            geo['x'] = override[0] * EMU_PER_PX
+            geo['y'] = override[1] * EMU_PER_PX
+        return geo
 
     def inline_svg(self, fname, img_style):
         """Inline the hand-drawn SVG replacing docs/img/<fname>, or None.
