@@ -267,6 +267,14 @@ PDF_SLUGS = {
     '51x340': 'thats-it-folks-rings-grey-faded',
 }
 
+# Slides the author cut from the web deck even though they are visible in the
+# PPTX. slide59 is the closing contact slide ("That's it folks" + photo,
+# e-mail and vCard QR), dropped in commit "Last slide removed". It is not a
+# duplicate of anything: with it gone, the e-mail address and the vCard QR
+# appear nowhere in the deck and the LinkedIn QR on the final Feedback slide
+# is the only contact channel left — confirmed as intended.
+DROPPED_SLIDES = {'slide59.xml'}
+
 # Hand-drawn animated SVG replacements (assets/svg/) for the supporting
 # images, keyed by the *final* docs/img file name (after slug + dedup
 # suffixing). Value: (svg file, optional fit box). The SVG is inlined into
@@ -275,11 +283,6 @@ PDF_SLUGS = {
 # The fit box (fractions x0,y0,x1,y1 of the replaced bitmap's canvas) scales
 # the artwork into padded canvases (the PDF-extracted ring bitmaps carry
 # large transparent margins).
-# Slides the author cut from the web deck even though they are visible in
-# the PPTX (slide59: duplicate closing/contact slide, removed in commit
-# "Last slide removed").
-DROPPED_SLIDES = {'slide59.xml'}
-
 SVG_ASSETS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                               '..', 'assets', 'svg')
 SVG_REPLACEMENTS = {

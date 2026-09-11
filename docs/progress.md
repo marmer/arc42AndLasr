@@ -63,18 +63,25 @@ removed. The presentation is now **generated** from the original PPTX by
 PowerPoint-rendered PDF; composites land in `screenshots/compare/`.
 
 Remaining known deviations (accepted):
-- Slides 1 and 53: PowerPoint's PDF **export** flattens the white
-  alpha-gradient overlay to near-solid white; on screen PowerPoint (and
-  LibreOffice, pixel-identical to our render) shows the photo through the
-  gradient like our version does.
+- Slide 1: PowerPoint's PDF **export** flattens the white alpha-gradient
+  overlay to near-solid white; on screen PowerPoint (and LibreOffice,
+  pixel-identical to our render) shows the photo through the gradient like
+  our version does. (The second such slide was the closing contact slide,
+  which has since been cut from the deck — see "Deck ends at 52 slides".)
 - Dense 8pt-text slides (arc42 template family) show only rasterizer-level
   text antialiasing differences.
 
-### Slide status (53 visible slides; hidden PPTX slides 2, 3, 4, 6, 18, 30 skipped)
-All 53 slides generated and visually verified against the reference PDF:
-- [x] 1–53: generated, references removed, notes attached, fragments mapped
+### Slide status (52 slides in the deck)
+The PPTX holds 59 slides: 6 are hidden (2, 3, 4, 6, 18, 30) and `slide59.xml`
+is deliberately cut (see "Deck ends at 52 slides"), leaving 52. All of them
+are generated and visually verified against the reference PDF:
+- [x] 1–52: generated, references removed, notes attached, fragments mapped
       (multi-click: slide 31; single-click stagger groups: 26, 29, 30, 34,
       37, 45, 46, 47, 51)
+
+Note: the slide numbers used across this log are **deck page numbers**, which
+shifted by one for nothing (the cut slide was the last one), so page N still
+maps to the same slide as before — only page 53 no longer exists.
 
 ### Regenerating
 ```bash
@@ -204,3 +211,69 @@ style tile) and wired into the pipeline:
   texts) so regeneration no longer reverts them. Slide files are now
   written with a trailing newline (one-time churn across all slides) so
   editor-saved files stay diff-stable.
+
+## Content completeness audit — deck ends at 52 slides (2026-09-11)
+
+Full check of whether the Reveal deck still carries everything from the
+non-hidden PPTX slides. Verified three ways, all independent of the
+generator's own shape traversal so its bugs could not hide in the result:
+
+1. **PPTX → HTML**: every `a:t` run of the 53 non-hidden slides (including
+   grouped shapes, table cells and the SmartArt diagram part) matched against
+   the text of the corresponding `docs/slides/*.html`, whitespace-insensitive
+   because runs are split arbitrarily across `<span>`s.
+2. **Rendered PDF → HTML**: the text layer of each PDF page — i.e. what
+   PowerPoint actually displays — matched the same way.
+3. **Actual visibility**: each slide screenshotted in its final fragment
+   state and every text node hit-tested for clipping at the canvas edge,
+   `display`/`visibility`/`opacity`, transparent text colour and occlusion by
+   another element.
+
+Result: **no content is missing and no text is invisible.** Speaker notes are
+complete on every slide. The visibility pass produced occlusion candidates on
+pages 25, 44, 46, 48, 51 and 52; all were confirmed false positives by
+comparing the render against the PDF page (transparent PNG/SVG overlays sit
+on top of the text and capture `elementFromPoint` without hiding anything).
+On page 46 the title is partly covered by the table — exactly as in the
+original. The only textual difference is the author bio on slide 1, which is
+the intended `TEXT_REPLACEMENTS` edit.
+
+Two things the audit confirmed as deliberate, recorded here because both look
+like defects from the outside:
+
+- **The deck has 52 slides, the PPTX 53 visible ones.** `slide59.xml` (the
+  closing "That's it folks" contact slide with photo, e-mail and vCard QR)
+  was cut by the author in commit "Last slide removed" and is honoured by
+  `DROPPED_SLIDES`. Consequence, confirmed as wanted: the e-mail address and
+  the vCard QR appear **nowhere** in the web deck; the only contact channel
+  is the LinkedIn QR on the final Feedback slide. The `DROPPED_SLIDES`
+  comment calling it a "duplicate" slide was wrong and has been corrected.
+- **Icon colours deviate from the PDF** (e.g. the dark gamepad and the
+  rainbow analyze/improve cycle now render mint). That is the unified SVG
+  image style decided on 2026-07-02, not a rendering fault.
+
+Note for future audits: the toolchain from the Regenerating section has to be
+installed from scratch on a fresh machine, and headless Chromium additionally
+needs `libnspr4`, `libnss3` and `libasound2t64`. Without root these can be
+unpacked into a local sysroot (`apt-get download` + `dpkg -x`) and supplied
+via `LD_LIBRARY_PATH`.
+
+## Finalisation run (2026-09-11)
+
+Toolchain rebuilt from scratch on this machine: the system Python has neither
+`pip` nor `ensurepip`, so pip was bootstrapped via `get-pip.py --user
+--break-system-packages` before installing `scripts/requirements.txt`.
+Playwright's Chromium lives in `~/.cache/ms-playwright/chromium-*/
+chrome-linux64/` here, not in `/opt/pw-browsers/`; `compare_render.py` now
+globs both locations. The missing `libnspr4`/`libnss3`/`libasound2t64` were
+unpacked into a scratch sysroot and supplied via `LD_LIBRARY_PATH`.
+
+Verification: regenerating from the PPTX reproduces the committed
+`docs/index.html`, `docs/slides/*.html`, `docs/css/` and `docs/img/`
+byte-identically. The visual comparison ran over all 52 slides; every slide
+renders. RMS is 0–10 on the text-light slides and 20–42 on the dense ones,
+which is the expected offset from the removed company footer/logo, the
+unified mint SVG icon style and sub-pixel font metrics — spot checks against
+the PDF pages show the layout matching. Slide 1 (rms 63) is the documented
+alpha-gradient export deviation. No banned company or conference reference
+occurs anywhere in `docs/`.

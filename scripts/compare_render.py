@@ -24,7 +24,9 @@ from playwright.sync_api import sync_playwright
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 import glob as _glob
-_chromes = sorted(_glob.glob('/opt/pw-browsers/chromium-*/chrome-linux/chrome'))
+_chromes = sorted(_glob.glob('/opt/pw-browsers/chromium-*/chrome-linux/chrome')
+                  + _glob.glob(os.path.expanduser(
+                      '~/.cache/ms-playwright/chromium-*/chrome-linux*/chrome')))
 CHROME = _chromes[-1] if _chromes else 'chromium'
 W, H = 960, 540
 

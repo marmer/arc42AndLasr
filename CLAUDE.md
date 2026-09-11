@@ -50,15 +50,18 @@ state and writes reference/actual/diff composites to `screenshots/compare/`
 plus an RMS score per slide. Reference pages live in `work/ref_pdf/`
 (rendered once from the original PDF via PyMuPDF at 960×540).
 
-Known accepted deviation: PowerPoint's PDF export flattens white
-alpha-gradient overlays (slides 1 and 53) to near-solid white; the live
-render (like LibreOffice) shows the underlying photo through the gradient.
+Known accepted deviation: PowerPoint's PDF export flattens the white
+alpha-gradient overlay (slide 1) to near-solid white; the live render
+(like LibreOffice) shows the underlying photo through the gradient.
 
 ## Project Structure
 
 ```
 docs/               ← GitHub Pages root (serves index.html)
-  index.html        ← GENERATED presentation (all 53 slides)
+  index.html        ← GENERATED shell: one empty <section> per slide that
+                      lazy-loads its slides/*.html before Reveal initialises
+  slides/*.html     ← GENERATED slide bodies (one file per slide, named
+                      after the source PPTX slide, e.g. slide31.html)
   css/custom.css    ← GENERATED base styles
   img/              ← GENERATED slide media (descriptive file names)
   fonts/            ← self-hosted DM Sans + Karla woff2 + fonts.css
@@ -76,8 +79,12 @@ work/               ← scratch space (gitignored): unzipped pptx, ref renders
 - `Reveal.initialize`: `width: 960, height: 540, margin: 0, hash: true,
   slideNumber: "c/t", history: true, mouseWheel: true, transition: 'fade',
   navigationMode: "linear"`.
-- One top-level `<section>` per PPTX slide, attributes `data-pptx` (source
-  slide xml) and `data-page` (PDF page).
+- One top-level `<section>` per slide, attributes `data-pptx` (source slide
+  xml), `data-page` (PDF page) and `data-src` (the `slides/*.html` body,
+  fetched into the section before `Reveal.initialize` runs).
+- The deck has **52 slides**: the PPTX holds 59, of which 6 are hidden
+  (2, 3, 4, 6, 18, 30) and the closing contact slide `slide59.xml` is
+  deliberately cut from the web deck (`DROPPED_SLIDES`).
 - Shapes are absolutely positioned divs inside `<div class="pcanvas">`;
   fragments carry `data-fragment-index` (one index per PowerPoint click).
 - Speaker notes: `<aside aria-label="speaker notes" class="notes">`.
