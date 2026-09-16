@@ -277,3 +277,13 @@ unified mint SVG icon style and sub-pixel font metrics — spot checks against
 the PDF pages show the layout matching. Slide 1 (rms 63) is the documented
 alpha-gradient export deviation. No banned company or conference reference
 occurs anywhere in `docs/`.
+
+## Conversion closed (2026-09-16)
+
+The user declared the PPTX → Reveal.js conversion finished. From now on only
+the Reveal.js deck under `docs/` is maintained. `docs/index.html`,
+`docs/slides/*.html`, `docs/css/custom.css` and `docs/img/` are hand-edited
+sources; `scripts/pptx2reveal.py` is frozen and must not be re-run, since it
+would overwrite manual changes. `scripts/compare_render.py` remains usable as
+a screenshot tool, but divergence from the original PDF is no longer a defect.
+CLAUDE.md was rewritten accordingly.

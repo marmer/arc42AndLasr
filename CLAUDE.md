@@ -2,76 +2,45 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Project Goal
+## Project status
 
-Convert the arc42 + LASR conference talk (originally in `arc42AndLasr_talk - envite_original.pptx` / `.pdf`) into a **Reveal.js presentation** hosted as a GitHub Page (domain in `docs/CNAME`).
+The PPTX → Reveal.js conversion is **finished**. From now on only the
+Reveal.js deck under `docs/` is looked at and maintained. The PPTX, the
+rendered PDF and `scripts/pptx2reveal.py` are historical artefacts:
+**do not regenerate the deck from them**, and do not use them as the
+reference for "correct" output any more.
 
-Key constraints:
-- **No company references**: remove all mentions of novatec, envite (incl. logo,
-  tagline "Pioneering IT Sustainability", contact data), or any employer.
-- **No specific conference references**: remove IT-Tage, Software Quality Days,
+Consequences:
+- `docs/index.html`, `docs/slides/*.html`, `docs/css/custom.css` and
+  `docs/img/` are now **hand-maintained sources**. Edit them directly.
+- `scripts/pptx2reveal.py` is frozen. Running it would overwrite the
+  hand-made changes.
+- `scripts/compare_render.py` may still be used to screenshot slides for a
+  visual check, but a diff against the old PDF is no longer a defect — the
+  deck is allowed to diverge from the original.
+- Keep tracking decisions in `docs/progress.md`.
+
+Content constraints that still apply:
+- **No company references**: no novatec, envite (incl. logo, tagline
+  "Pioneering IT Sustainability", contact data), or any employer.
+- **No specific conference references**: no IT-Tage, Software Quality Days,
   decompiled, or any named event.
-- The presentation must look and behave as close to the PPTX as possible:
-  exact shape positioning (no visual jumps between slides or animation steps)
-  and PowerPoint click animations rebuilt as Reveal.js fragments.
-- Track decisions in `docs/progress.md`.
-
-## How the presentation is built
-
-`docs/index.html` is **generated — do not edit it by hand.** All rendering
-fixes belong in the generator:
-
-```bash
-pip install -r scripts/requirements.txt
-
-# regenerate docs/index.html, docs/css/custom.css and docs/img/ from the PPTX
-python3 scripts/pptx2reveal.py \
-    "arc42AndLasr_talk - envite_original.pptx" docs \
-    "arc42AndLasr_talk - envite_original_rendered.pdf"
-
-# visual regression: screenshot every slide and diff against the rendered PDF
-python3 scripts/compare_render.py            # all slides
-python3 scripts/compare_render.py --slides 5,12   # subset
-```
-
-`scripts/pptx2reveal.py` translates DrawingML (shape coordinates in EMU,
-style inheritance through layout/master/theme, fills, tables, SmartArt,
-connectors, custom geometry) into absolutely positioned HTML on a 960×540
-canvas, converts `p:timing` entrance animations into fragments, extracts
-media into `docs/img/` (descriptive names via `MEDIA_SLUGS`/`PDF_SLUGS`,
-deduplicated by content), pulls backgroundRemoval bitmaps
-out of the rendered PDF, and filters all banned company/conference references
-(`BANNED_RE`, `BANNED_MEDIA`, `TEXT_REPLACEMENTS` at the top of the script).
-
-`scripts/compare_render.py` serves `docs/`, screenshots each slide with
-headless Chromium (Playwright, executable at
-`/opt/pw-browsers/chromium-*/chrome-linux/chrome`) in its final fragment
-state and writes reference/actual/diff composites to `screenshots/compare/`
-plus an RMS score per slide. Reference pages live in `work/ref_pdf/`
-(rendered once from the original PDF via PyMuPDF at 960×540).
-
-Known accepted deviation: PowerPoint's PDF export flattens the white
-alpha-gradient overlay (slide 1) to near-solid white; the live render
-(like LibreOffice) shows the underlying photo through the gradient.
 
 ## Project Structure
 
 ```
 docs/               ← GitHub Pages root (serves index.html)
-  index.html        ← GENERATED shell: one empty <section> per slide that
-                      lazy-loads its slides/*.html before Reveal initialises
-  slides/*.html     ← GENERATED slide bodies (one file per slide, named
-                      after the source PPTX slide, e.g. slide31.html)
-  css/custom.css    ← GENERATED base styles
-  img/              ← GENERATED slide media (descriptive file names)
+  index.html        ← shell: one <section> per slide that lazy-loads its
+                      slides/*.html before Reveal initialises
+  slides/*.html     ← slide bodies (one file per slide, e.g. slide31.html)
+  css/custom.css    ← base styles
+  img/              ← slide media
   fonts/            ← self-hosted DM Sans + Karla woff2 + fonts.css
   dist/             ← reveal.js compiled assets
   CNAME             ← GitHub Pages custom domain (maintained by the user)
   progress.md       ← decision log (source of truth across sessions)
-scripts/
-  pptx2reveal.py    ← PPTX → Reveal.js generator
-  compare_render.py ← screenshot/diff verification harness
-work/               ← scratch space (gitignored): unzipped pptx, ref renders
+scripts/            ← frozen conversion toolchain (see Project status)
+work/               ← scratch space (gitignored)
 ```
 
 ## Reveal.js Conventions
@@ -81,12 +50,14 @@ work/               ← scratch space (gitignored): unzipped pptx, ref renders
   navigationMode: "linear"`.
 - One top-level `<section>` per slide, attributes `data-pptx` (source slide
   xml), `data-page` (PDF page) and `data-src` (the `slides/*.html` body,
-  fetched into the section before `Reveal.initialize` runs).
-- The deck has **52 slides**: the PPTX holds 59, of which 6 are hidden
-  (2, 3, 4, 6, 18, 30) and the closing contact slide `slide59.xml` is
-  deliberately cut from the web deck (`DROPPED_SLIDES`).
-- Shapes are absolutely positioned divs inside `<div class="pcanvas">`;
-  fragments carry `data-fragment-index` (one index per PowerPoint click).
+  fetched into the section before `Reveal.initialize` runs). The `data-pptx`
+  / `data-page` attributes are provenance only.
+- The deck has **52 slides**. Adding or removing a slide means editing
+  `docs/index.html` and adding/removing the matching `docs/slides/*.html`.
+- Shapes are absolutely positioned divs inside `<div class="pcanvas">` on a
+  960×540 canvas; keep positions stable so there are no visual jumps between
+  slides or fragment steps.
+- Fragments carry `data-fragment-index` (one index per click step).
 - Speaker notes: `<aside aria-label="speaker notes" class="notes">`.
 
 ## Browser / Playwright Screenshots
