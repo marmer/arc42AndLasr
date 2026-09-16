@@ -287,3 +287,17 @@ sources; `scripts/pptx2reveal.py` is frozen and must not be re-run, since it
 would overwrite manual changes. `scripts/compare_render.py` remains usable as
 a screenshot tool, but divergence from the original PDF is no longer a defect.
 CLAUDE.md was rewritten accordingly.
+
+## Inhaltliches Review (2026-09-16)
+
+Vollständiges Review aller 52 Folien inkl. Speaker-Notes. Ergebnis als
+Aufgabenliste in `docs/todo.md` (Punkte A–D); dort wird der Status gepflegt.
+
+Direkt umgesetzt (Abschnitt A1–A6):
+- Tippfehler auf sichtbarem Folientext: Lazyness→Laziness (slide16),
+  converations→conversations + fehlendes Leerzeichen (slide34),
+  Priorize→Prioritize (slide50, slide51), Analyses→Analyze (slide51).
+- Looney-Tunes-Zitat richtiggestellt: „THAT'S IT FOLKS" → „THAT'S ALL FOLKS"
+  auf slide29, slide31, slide56, slide57. Die SVG-`<text>` nutzt
+  `textLength="93" lengthAdjust="spacingAndGlyphs"`, die Breite bleibt also
+  exakt gleich — kein Layout-Versatz trotz eines Zeichens mehr.
