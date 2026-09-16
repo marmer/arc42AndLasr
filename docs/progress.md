@@ -301,3 +301,13 @@ Direkt umgesetzt (Abschnitt A1–A6):
   auf slide29, slide31, slide56, slide57. Die SVG-`<text>` nutzt
   `textLength="93" lengthAdjust="spacingAndGlyphs"`, die Breite bleibt also
   exakt gleich — kein Layout-Versatz trotz eines Zeichens mehr.
+
+Nachtrag (A7–A10):
+- Notes-Tippfehler korrigiert: Steffan→Stefan (slide32), hepls→helps
+  (slide47/48/49), aobut→about (slide12), Rechnical→Technical (slide50),
+  „As much stakeholders"→„As many stakeholders" (slide33/34).
+- Apostrophe vereinheitlicht: das durchgängig falsch verwendete öffnende `‘`
+  wurde zu `’` (u.a. sichtbar auf den THAT'S-ALL-FOLKS-Folien als „THAT‘s").
+  Die deutschen „…“-Anführungszeichen in den DE-Notes bleiben, solange die
+  Notes-Sprache nicht entschieden ist (todo B3).
+- A10 war ein Fehlalarm: im Deck steht bereits „12. Glossary".

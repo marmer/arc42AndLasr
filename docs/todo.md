@@ -10,12 +10,15 @@ Status-Legende: `[ ]` offen · `[x]` erledigt · `[~]` in Arbeit · `[?]` Entsch
 - [x] A5 „Analyses" → „Analyze" (Schrittliste, Folie 45 / `slide51.html`)
 - [x] A6 Looney-Tunes-Zitat korrigiert: „THAT'S IT FOLKS" → „THAT'S ALL FOLKS"
       (Folien 24, 25, 50, 51 / `slide29`, `slide31`, `slide56`, `slide57`)
-- [ ] A7 Notes-Tippfehler: „Steffan Zörner/Steffan Toth" → „Stefan Zörner / Stefan Toth"
-      (`slide32.html`), „hepls" → „helps" (`slide47/48`), „aobut" → „about" (`slide12`),
-      „Rechnical" → „Technical" (`slide50`), „Straftäter"-Note „Gefahr" ok
-- [ ] A8 Notes: „As much stakeholders" → „as many" (`slide33/34`)
-- [ ] A9 Apostrophe vereinheitlichen (`'` / `‘` / `‚` gemischt in Notes und Folientexten)
-- [ ] A10 „Glossar" vs. „Glossary" im arc42-Template-Bild prüfen (nur falls im Bild, sonst hinfällig)
+- [x] A7 Notes-Tippfehler: „Steffan" → „Stefan" (Zörner/Toth, `slide32`), „hepls" → „helps"
+      (`slide47/48/49`), „aobut" → „about" (`slide12`), „Rechnical" → „Technical" (`slide50`)
+- [x] A8 Notes: „As much stakeholders" → „As many stakeholders" (`slide33/34`)
+- [x] A9 Apostrophe vereinheitlicht: falsches öffnendes `‘` → `’` in allen Vorkommen
+      (sichtbarer Folientext „THAT‘s" auf `slide29/31/56` sowie Notes `it‘s`, `ol‘`,
+      `’nen` auf `slide5`). Deutsche Anführungszeichen „…“ in den DE-Notes bewusst belassen
+      (siehe B3).
+- [x] A10 hinfällig: die arc42-Gliederung steht als HTML-Text im Deck und schreibt bereits
+      korrekt „12. Glossary" — das vermeintliche „Glossar" war nur ein Abschneiden im Review-Dump.
 
 ## B. Speaker-Notes
 - [ ] B1 Platzhalter „Notes Notes Notes" durch echte Notizen ersetzen
