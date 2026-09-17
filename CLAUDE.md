@@ -32,7 +32,8 @@ Content constraints that still apply:
 docs/               ← GitHub Pages root (serves index.html)
   index.html        ← shell: one <section> per slide that lazy-loads its
                       slides/*.html before Reveal initialises
-  slides/*.html     ← slide bodies (one file per slide, e.g. slide31.html)
+  slides/*.html     ← slide bodies, named after the deck position
+                      (slide01.html … slide52.html)
   css/custom.css    ← base styles
   img/              ← slide media
   fonts/            ← self-hosted DM Sans + Karla woff2 + fonts.css
@@ -52,8 +53,10 @@ work/               ← scratch space (gitignored)
   xml), `data-page` (PDF page) and `data-src` (the `slides/*.html` body,
   fetched into the section before `Reveal.initialize` runs). The `data-pptx`
   / `data-page` attributes are provenance only.
-- The deck has **52 slides**. Adding or removing a slide means editing
-  `docs/index.html` and adding/removing the matching `docs/slides/*.html`.
+- The deck has **52 slides**, and `docs/slides/slideNN.html` is the NNth
+  slide of the deck (not the source PPTX numbering). Adding or removing a
+  slide means editing `docs/index.html`, adding/removing the matching
+  `docs/slides/*.html` and renumbering the files after it.
 - Shapes are absolutely positioned divs inside `<div class="pcanvas">` on a
   960×540 canvas; keep positions stable so there are no visual jumps between
   slides or fragment steps.

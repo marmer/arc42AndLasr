@@ -311,3 +311,20 @@ Nachtrag (A7–A10):
   Die deutschen „…“-Anführungszeichen in den DE-Notes bleiben, solange die
   Notes-Sprache nicht entschieden ist (todo B3).
 - A10 war ein Fehlalarm: im Deck steht bereits „12. Glossary".
+
+## Slide markup simplified, files renumbered (2026-09-17)
+
+PowerPoint emitted one `<span>` per text run, which made headlines
+ungreppable ("use proven methods" was spread over six tags). Adjacent spans
+sharing a style are now merged, span `font-size` declarations that the
+paragraph already sets are dropped, attribute-less spans are unwrapped, each
+`<p>` sits on one line, and `.tx` blocks containing only an `&nbsp;`
+placeholder were deleted: 1174 spans → 735, 551 KB → 428 KB. Verified by
+comparing the rendered text per slide against the previous revision and by
+screenshotting all 52 slides (initial and final fragment state) — the
+remaining pixel differences are below the noise floor that two runs of the
+unchanged deck already produce from SVG animation phase.
+
+`docs/slides/*.html` is now numbered by deck position (`slide01.html` …
+`slide52.html`) instead of by source PPTX slide; `data-pptx` on each section
+still records the original provenance.
